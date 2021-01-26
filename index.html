@@ -313,30 +313,49 @@
             
                 <div class="postShorten-content">
                     <h3 id="hexo로-블로그-만들기-과정-정리"><a href="#hexo로-블로그-만들기-과정-정리" class="headerlink" title="hexo로 블로그 만들기 과정 정리"></a>hexo로 블로그 만들기 과정 정리</h3><blockquote>
-<p>수업시간에 윈도우에서 git과 hexo를 설치하여..2시간 넘는 시행착오를 겪으며<br>Ubuntu환경에서 새로 해보면서 정리해보려고 한다.</p>
+<p>수업시간에 윈도우에서 git과 hexo를 설치하여.. 2시간 넘는 시행착오를 겪으며<br>Ubuntu환경에서 새로 해보면서 정리해보려고 한다.</p>
 </blockquote>
 <h4 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h4><ol>
-<li>준비환경 만들기(Node.js, hexo, vim, git)</li>
+<li>준비환경 만들기(Node.js, vim, hexo, git)</li>
 <li>hexo설정(github에 배포하기 전에 연동하기)</li>
 <li>새 글 작성</li>
-<li>로컬에서 확인, 빌드, 배포</li>
+<li>빌드, 로컬에서 확인, 배포, 실제 블로그에서 확인</li>
 </ol>
 <h5 id="1-준비환경-만들기"><a href="#1-준비환경-만들기" class="headerlink" title="1. 준비환경 만들기"></a>1. 준비환경 만들기</h5><ul>
 <li>Node.js 설치<ol>
-<li>curl 설치<blockquote>
-<p>Node.js를 url을 통해 다운 받기 위해 필요함</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo apt-get install curl</span><br></pre></td></tr></table></figure></li>
+<li>curl 설치<br>Node.js를 url을 통해 다운 받기 위해 필요함<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo apt-get install curl</span><br></pre></td></tr></table></figure></li>
 <li>curl 설치 확인<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$curl -V</span><br></pre></td></tr></table></figure></li>
 <li>PPA를 이용하여 Node.js 14.x 버전 설치<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$curl -sL http:&#x2F;&#x2F;deb.nodesource.com&#x2F;setup_14.x | sudo -E bash -</span><br><span class="line">$sudo apt-get install -y nodejs</span><br></pre></td></tr></table></figure></li>
 <li>npm을 위한 build-essential 패키지 설치<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo apt-get install build-essential</span><br></pre></td></tr></table></figure></li>
-<li>Node.js와 npm이 잘 설치되었는지 확인<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$node -v</span><br><span class="line">$npm -v</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>Node.js와 npm이 잘 설치되었는지 확인<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$node -v</span><br><span class="line">$npm -v  &#x2F;&#x2F;없으면 설치 ($sudo apt install npm)</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
+<li>vim 설치<br>vi의 호환 텍스트용 편집기로서 자유롭게 편집환경을 변경할 수 있음<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo apt-get install vim</span><br></pre></td></tr></table></figure></li>
+<li>hexo 설치<ol>
+<li>npm명령어를 사용하여 설치(npm 을 통해 hexo-cli 모듈을 global하게 설치한다는 뜻)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install -g hexo-cli</span><br></pre></td></tr></table></figure></li>
+<li>블로그로 사용할 폴더 생성과 접근 후, 초기화에 필요한 패키지 설치<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$hexo init 폴더명</span><br><span class="line">$cd 폴더명</span><br><span class="line">$npm install</span><br></pre></td></tr></table></figure></li>
+<li>로컬서버 띄워보기(ctrl + c로 끄기)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$hexo server</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>git 계정, 빈 repository 생성, set configuration<br>해당 내용은 아래 포스트 확인(추후 업로드 예정)</li>
 </ul>
-<h5 id="2-hexo설정-github에-배포하기-전에-연동하기"><a href="#2-hexo설정-github에-배포하기-전에-연동하기" class="headerlink" title="2. hexo설정(github에 배포하기 전에 연동하기)"></a>2. hexo설정(github에 배포하기 전에 연동하기)</h5><h5 id="3-새-글-작성"><a href="#3-새-글-작성" class="headerlink" title="3. 새 글 작성"></a>3. 새 글 작성</h5><h5 id="4-로컬에서-확인-빌드-배포"><a href="#4-로컬에서-확인-빌드-배포" class="headerlink" title="4. 로컬에서 확인, 빌드, 배포"></a>4. 로컬에서 확인, 빌드, 배포</h5>
+<h5 id="2-hexo설정-github에-배포하기-전에-연동하기"><a href="#2-hexo설정-github에-배포하기-전에-연동하기" class="headerlink" title="2. hexo설정(github에 배포하기 전에 연동하기)"></a>2. hexo설정(github에 배포하기 전에 연동하기)</h5><ul>
+<li>_config.yml을 통해 hexo와 github 연동<br>hexo를 사용하면 별도의 git명령어(add, commit, push) 없이 알아서 github에 업로드를 해줌.    hexo와 github 간의 연결고리가 있어야 하는데 _config.yml을 통해 지정<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$vi _config.yml</span><br><span class="line"># 하단부분으로 이동하여 아래처럼 수정</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: http:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: http:&#x2F;&#x2F;github.com&#x2F;계정이름&#x2F;계정이름.github.io.git</span><br></pre></td></tr></table></figure></li>
+<li>hexo에서 github로 배포할 수 있는 플러그인 설치<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="3-새-글-작성"><a href="#3-새-글-작성" class="headerlink" title="3. 새 글 작성"></a>3. 새 글 작성</h5><p>아래 명령어를 실행하면 ~/source/_post/ 아래에 글제목.md가 생성되고, vim으로 내용을 작성하면 됨.    마크다운 문법은 검색 추천!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$hexo new post 글제목</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-빌드-로컬에서-확인-배포-실제-블로그에서-확인"><a href="#4-빌드-로컬에서-확인-배포-실제-블로그에서-확인" class="headerlink" title="4. 빌드, 로컬에서 확인, 배포, 실제 블로그에서 확인"></a>4. 빌드, 로컬에서 확인, 배포, 실제 블로그에서 확인</h5><ul>
+<li>마크다운으로 작성된 파일을 html파일로 바꿔주기 위해<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$hexo generate 또는 hexo g</span><br><span class="line">$hexo clean &amp;&amp; hexo generate도 가능(캐시파일 등 삭제 후 빌드)</span><br></pre></td></tr></table></figure></li>
+<li>글이 잘 작성되었는지 로컬서버를 띄워 확인<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$hexo server</span><br></pre></td></tr></table></figure></li>
+<li>끝으로 배포! user_name과 password를 입력하면 github에 업로드<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$hexo deploy 또는 hexo d</span><br></pre></td></tr></table></figure></li>
+<li>http://계정명.github.io로 접속하여 확인(업로드까지 2~3분 소요될 수 있음)</li>
+</ul>
+<p>ps. 테마이름: ‘Tranquilpeak’<br>프로필 수정할 때 참고한 블로그: <a target="_blank" rel="noopener" href="https://ujoy7851.github.io/2019/03/24/hexo-theme/">https://ujoy7851.github.io/2019/03/24/hexo-theme/</a><br>마크다운 문법 참고: <a target="_blank" rel="noopener" href="https://gist.github.com/ihoneymon/652be052a0727ad59601">https://gist.github.com/ihoneymon/652be052a0727ad59601</a></p>
+
                     
                         
 
