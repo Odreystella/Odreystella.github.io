@@ -6,22 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>2021.01.27 Task Lists - Dev Odreystella&#39;s Blog</title>
+    <title>Ethiopian multiplication 문제 풀이 - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"Python 강의 관련\n업로드 예정\n그 외\n 블로그에 할 일 업로드\n 2021.01.27 수업 리뷰(+jupyter notebook)\n 블로그에 git 명령어, 사용법 업로드\n github TIL repo에 python 배운내용 업로드(자료형)\n github TIL repo에 ptyhon 배운내용 업로드(Conditional statements)\n github TIL repo에 python 배운내용 업로드(Loop(for, while))\n 영타연습\n Harkerrank 1문제씩\n\n\n\n","dateCreated":"2021-01-27T10:33:59+09:00","dateModified":"2021-01-29T00:34:11+09:00","datePublished":"2021-01-27T10:33:59+09:00","description":"Python 강의 관련\n업로드 예정","headline":"2021.01.27 Task Lists","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/","keywords":"To do list"}</script>
-    <meta name="description" content="Python 강의 관련 업로드 예정">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n문제: 두 수를 받아 왼쪽 수는 2로 나눈 몫만 남기고, 오른쪽 수는 2를 곱한다.    왼쪽 수가 홀수일 경우에만 오른쪽 값을 누적하여 더하고, 왼쪽 수의 2로 나눈 몫이 1이 될 때까지 과정을 반복한다. 결과적으로 오른쪽 수를 모두 더한 값을 출력했을 때 입력받은 두 수를 곱한 값이 나와야 한다.\n\n\n예시) 15, 4라는 숫자가 주어졌을 때,      15, 4   keep       7, 8   keep       3, 16  keep       1, 32  keep결과값은 4+8+16+32 인 60이 됨\n12345678910111213141516171819#Ethiopian multiplicationuser_input &#x3D; input(&quot;Enter two numbers with spaace: &quot;)    #두 숫자를 스페이스로 구분하여 입력받기user_input_list &#x3D; user_input.split(&quot; &quot;)    #split()를 활용하여 스페이스 기준으로 두 수를 나눠 user_input_list라는 변수에 담기 left_num &#x3D; int(user_input_list[0])    #첫 번째수를 left_num라는 변수에 담고, 정수형으로 자료형 바꾸기right_num &#x3D; int(user_input_list[1])    #두 번쨰 수를 right_num라는 변수에 담고, 정수형으로 자료형 바꾸기print(&quot;&lt;expected value&gt; : &quot;, left_num * right_num)print(&quot;left_num,    right_num,    etc&quot;)   final_result &#x3D; []    #right_num의 값을 누적하기 위해 리스트로 변수 만들기 while left_num &gt;&#x3D; 1:    #left_num이 1과 같거나 큰 조건을 만족할 때까지 아래 과정을 반복하기    if left_num % 2 &#x3D;&#x3D; 1:    #left_num이 홀수라면,        final_result.append(right_num)    #right_num을 final_result에 추가하기        print(&quot;&#123;:&gt;7&#125;, &#123;:&gt;7&#125;,      keep&quot;.format(left_num, right_num))    else:    #left_num이 짝수라면, 아무 일도 일어나지 않는다        print(&quot;&#123;:&gt;7&#125;, &#123;:&gt;7&#125;,      pass&quot;.format(left_num, right_num))    left_num &#x2F;&#x2F;&#x3D; 2    #left_num은 2로 나눈 몫만 남긴다    right_num *&#x3D; 2    #right_num은 2를 곱한다print(&quot;final result is &#123;&#125;&quot;.format(sum(final_result)))\n123456789#결과Enter two numbers with space: 14 5&lt;expected value&gt; : 70left_num,    right_num,    etc     14,            5,     pass      7,           10,     keep      3,           20,     keep      1,           40,     keepfinal result is 70\n에러가 났던 부분:\n\nwhile 조건식을 while left_num != 1이라고 하여 left_num이 1일 때, right_num이 final_result에 더해지지 않은 점\n첫 번째 left_num이 홀수 일때와 그 아래로 오는 left_num이 홀수일때를 구분하여 로직을 너무 복잡하게 생각한 점 \n\n","dateCreated":"2021-01-27T11:45:35+09:00","dateModified":"2021-01-29T00:32:31+09:00","datePublished":"2021-01-27T11:45:35+09:00","description":"\n문제: 두 수를 받아 왼쪽 수는 2로 나눈 몫만 남기고, 오른쪽 수는 2를 곱한다.    왼쪽 수가 홀수일 경우에만 오른쪽 값을 누적하여 더하고, 왼쪽 수의 2로 나눈 몫이 1이 될 때까지 과정을 반복한다. 결과적으로 오른쪽 수를 모두 더한 값을 출력했을 때 입력받은 두 수를 곱한 값이 나와야 한다.\n","headline":"Ethiopian multiplication 문제 풀이","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/","keywords":"algorithm, python"}</script>
+    <meta name="description" content="문제: 두 수를 받아 왼쪽 수는 2로 나눈 몫만 남기고, 오른쪽 수는 2를 곱한다.    왼쪽 수가 홀수일 경우에만 오른쪽 값을 누적하여 더하고, 왼쪽 수의 2로 나눈 몫이 1이 될 때까지 과정을 반복한다. 결과적으로 오른쪽 수를 모두 더한 값을 출력했을 때 입력받은 두 수를 곱한 값이 나와야 한다.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="2021.01.27 Task Lists">
-<meta property="og:url" content="https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/index.html">
+<meta property="og:title" content="Ethiopian multiplication 문제 풀이">
+<meta property="og:url" content="https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
-<meta property="og:description" content="Python 강의 관련 업로드 예정">
+<meta property="og:description" content="문제: 두 수를 받아 왼쪽 수는 2로 나눈 몫만 남기고, 오른쪽 수는 2를 곱한다.    왼쪽 수가 홀수일 경우에만 오른쪽 값을 누적하여 더하고, 왼쪽 수의 2로 나눈 몫이 1이 될 때까지 과정을 반복한다. 결과적으로 오른쪽 수를 모두 더한 값을 출력했을 때 입력받은 두 수를 곱한 값이 나와야 한다.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-01-27T01:33:59.000Z">
-<meta property="article:modified_time" content="2021-01-28T15:34:11.996Z">
-<meta property="article:tag" content="To do list">
+<meta property="article:published_time" content="2021-01-27T02:45:35.000Z">
+<meta property="article:modified_time" content="2021-01-28T15:32:31.737Z">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
     
     
@@ -296,12 +297,12 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            2021.01.27 Task Lists
+            Ethiopian multiplication 문제 풀이
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-01-27T10:33:59+09:00">
+    <time datetime="2021-01-27T11:45:35+09:00">
 	
 		    Jan 27, 2021
     	
@@ -315,19 +316,17 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="Python-강의-관련"><a href="#Python-강의-관련" class="headerlink" title="Python 강의 관련"></a>Python 강의 관련</h2><ul>
-<li>업로드 예정<a id="more"></a>
-<h2 id="그-외"><a href="#그-외" class="headerlink" title="그 외"></a>그 외</h2><ul>
-<li><input checked="" disabled="" type="checkbox"> 블로그에 할 일 업로드</li>
-<li><input disabled="" type="checkbox"> 2021.01.27 수업 리뷰(+jupyter notebook)</li>
-<li><input disabled="" type="checkbox"> 블로그에 git 명령어, 사용법 업로드</li>
-<li><input disabled="" type="checkbox"> github TIL repo에 python 배운내용 업로드(자료형)</li>
-<li><input disabled="" type="checkbox"> github TIL repo에 ptyhon 배운내용 업로드(Conditional statements)</li>
-<li><input disabled="" type="checkbox"> github TIL repo에 python 배운내용 업로드(Loop(for, while))</li>
-<li><input checked="" disabled="" type="checkbox"> 영타연습</li>
-<li><input disabled="" type="checkbox"> Harkerrank 1문제씩</li>
-</ul>
-</li>
+            <blockquote>
+<p>문제: 두 수를 받아 왼쪽 수는 2로 나눈 몫만 남기고, 오른쪽 수는 2를 곱한다.    왼쪽 수가 홀수일 경우에만 오른쪽 값을 누적하여 더하고, 왼쪽 수의 2로 나눈 몫이 1이 될 때까지 과정을 반복한다. 결과적으로 오른쪽 수를 모두 더한 값을 출력했을 때 입력받은 두 수를 곱한 값이 나와야 한다.</p>
+</blockquote>
+<a id="more"></a>
+<p>예시) 15, 4라는 숫자가 주어졌을 때,<br>      15, 4   keep<br>       7, 8   keep<br>       3, 16  keep<br>       1, 32  keep<br>결과값은 4+8+16+32 인 60이 됨</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#Ethiopian multiplication</span><br><span class="line"></span><br><span class="line">user_input &#x3D; input(&quot;Enter two numbers with spaace: &quot;)    #두 숫자를 스페이스로 구분하여 입력받기</span><br><span class="line">user_input_list &#x3D; user_input.split(&quot; &quot;)    #split()를 활용하여 스페이스 기준으로 두 수를 나눠 user_input_list라는 변수에 담기 </span><br><span class="line">left_num &#x3D; int(user_input_list[0])    #첫 번째수를 left_num라는 변수에 담고, 정수형으로 자료형 바꾸기</span><br><span class="line">right_num &#x3D; int(user_input_list[1])    #두 번쨰 수를 right_num라는 변수에 담고, 정수형으로 자료형 바꾸기</span><br><span class="line">print(&quot;&lt;expected value&gt; : &quot;, left_num * right_num)</span><br><span class="line">print(&quot;left_num,    right_num,    etc&quot;)   </span><br><span class="line">final_result &#x3D; []    #right_num의 값을 누적하기 위해 리스트로 변수 만들기 </span><br><span class="line"></span><br><span class="line">while left_num &gt;&#x3D; 1:    #left_num이 1과 같거나 큰 조건을 만족할 때까지 아래 과정을 반복하기</span><br><span class="line">    if left_num % 2 &#x3D;&#x3D; 1:    #left_num이 홀수라면,</span><br><span class="line">        final_result.append(right_num)    #right_num을 final_result에 추가하기</span><br><span class="line">        print(&quot;&#123;:&gt;7&#125;, &#123;:&gt;7&#125;,      keep&quot;.format(left_num, right_num))</span><br><span class="line">    else:    #left_num이 짝수라면, 아무 일도 일어나지 않는다</span><br><span class="line">        print(&quot;&#123;:&gt;7&#125;, &#123;:&gt;7&#125;,      pass&quot;.format(left_num, right_num))</span><br><span class="line">    left_num &#x2F;&#x2F;&#x3D; 2    #left_num은 2로 나눈 몫만 남긴다</span><br><span class="line">    right_num *&#x3D; 2    #right_num은 2를 곱한다</span><br><span class="line">print(&quot;final result is &#123;&#125;&quot;.format(sum(final_result)))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#결과</span><br><span class="line">Enter two numbers with space: 14 5</span><br><span class="line">&lt;expected value&gt; : 70</span><br><span class="line">left_num,    right_num,    etc</span><br><span class="line">     14,            5,     pass</span><br><span class="line">      7,           10,     keep</span><br><span class="line">      3,           20,     keep</span><br><span class="line">      1,           40,     keep</span><br><span class="line">final result is 70</span><br></pre></td></tr></table></figure>
+<p>에러가 났던 부분:</p>
+<ul>
+<li>while 조건식을 while left_num != 1이라고 하여 left_num이 1일 때, right_num이 final_result에 더해지지 않은 점</li>
+<li>첫 번째 left_num이 홀수 일때와 그 아래로 오는 left_num이 홀수일때를 구분하여 로직을 너무 복잡하게 생각한 점 </li>
 </ul>
 
             
@@ -340,7 +339,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/To-do-list/" rel="tag">To do list</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/algorithm/" rel="tag">algorithm</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/python/" rel="tag">python</a>
 
             </div>
         
@@ -350,14 +349,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"
-                    data-tooltip="Ethiopian multiplication 문제 풀이"
-                    aria-label="PREVIOUS: Ethiopian multiplication 문제 풀이"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -367,9 +363,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/01/26/2021-01-26-Task-Lists/"
-                    data-tooltip="2021.01.26 Task Lists"
-                    aria-label="NEXT: 2021.01.26 Task Lists"
+                    href="/2021/01/27/2021-01-27-Task-Lists/"
+                    data-tooltip="2021.01.27 Task Lists"
+                    aria-label="NEXT: 2021.01.27 Task Lists"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -394,7 +390,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -407,7 +403,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -420,7 +416,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -465,14 +461,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"
-                    data-tooltip="Ethiopian multiplication 문제 풀이"
-                    aria-label="PREVIOUS: Ethiopian multiplication 문제 풀이"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -482,9 +475,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/01/26/2021-01-26-Task-Lists/"
-                    data-tooltip="2021.01.26 Task Lists"
-                    aria-label="NEXT: 2021.01.26 Task Lists"
+                    href="/2021/01/27/2021-01-27-Task-Lists/"
+                    data-tooltip="2021.01.27 Task Lists"
+                    aria-label="NEXT: 2021.01.27 Task Lists"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -509,7 +502,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -522,7 +515,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -535,7 +528,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -569,7 +562,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -582,7 +575,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -595,7 +588,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2021/01/27/2021-01-27-Task-Lists/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2021/01/27/Ethiopian-multiplication-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
