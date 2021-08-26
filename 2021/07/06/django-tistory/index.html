@@ -6,22 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>2021.02.15 Task Lists - Dev Odreystella&#39;s Blog</title>
+    <title>PEP 8 - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"Python 강의 관련\n 데코레이터 관련 Do it yourself 풀기  \n\n\n\n그 외\n 영타연습\n Weekly test 준비\n 2021.02.15 수업 리뷰(+jupyter notebook), git commit\n 블랙잭 게임 관련 절차, 클래스 구현 문제 재도전!\n\n","dateCreated":"2021-02-15T18:12:29+09:00","dateModified":"2021-02-23T10:19:11+09:00","datePublished":"2021-02-15T18:12:29+09:00","description":"Python 강의 관련\n 데코레이터 관련 Do it yourself 풀기","headline":"2021.02.15 Task Lists","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/","keywords":"To do list"}</script>
-    <meta name="description" content="Python 강의 관련  데코레이터 관련 Do it yourself 풀기">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nPEP 8 -&gt; Python Enhance Proposal(파이썬 개선 제안서)\n\n\n들여쓰기(Indentation)\n공백 4칸 권장\ncf. 파이썬에서는 space와 tab를 혼용해서 쓰지 못함\n\n\n한 줄에 최대 79자까지\n최상위 함수와 클래스 정의는 2줄씩 띄워 사용하기\nimport는 항상 소스코드 맨 위에 써야하면 분리해서 작성하기\nGood) import sys\nGood) import os\nBad)   import sys, os\n\n\n\nPEP 20, PEP 3156flake 8\n파이썬 패키지 중 하나\n해당하는 파이썬 파일이나 특정 파이썬 코드의 스타일을 검사해주는 도구\n$ pip3 install flake8\n\npython2 vs, python3\npython3 \n\n모든 변수가 객체(object)\nprint() - 함수로 바뀜\n\n\npython2\n\nprint “hello” \n\n\n\nDB 모델링\nPrimaryKey(기본키, pk)\n테이블에 저장된 각각의 데이터를 유일하게 구분하는 키\n즉, 데이터베이스 테이블에 각 행의 식별 기준인 기본키가 필요함\nDjango에는 기본키로 id가 디폴트로 지정되어 있다.\nid = models.AutoField(primary_key=True)\n\n\nForeignKey(외래키, fk)\n각 테이블 간에 연결을 위해서 특정 테이블에서 다른 테이블을 참조하는 기본키를 말함\n\n\n\nDjango FieldType\n모든 필드타입 클래스들은 추상 클래스 Field 클래스의 파생 클래스\n\n\nCharField(max_length=64)\nTextField\nIntegerField\nFloatField\nBooleanField\nDateTimeField\nFileField\nEmailField(Email Validator 사용)\nImageField(FileField의 파생클래스)\nDecimalField\nAutoField\nDateField(auto_now=False, auto_now_add=False, **options) - auto_now : 데이터가 저장될 때(update), auto_now_add(create)\n\n","dateCreated":"2021-07-06T19:46:40+09:00","dateModified":"2021-08-26T23:33:23+09:00","datePublished":"2021-07-06T19:46:40+09:00","description":"\nPEP 8 -&gt; Python Enhance Proposal(파이썬 개선 제안서)","headline":"PEP 8","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/07/06/django-tistory/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/07/06/django-tistory/","keywords":"python, PEP8"}</script>
+    <meta name="description" content="PEP 8 -&gt; Python Enhance Proposal(파이썬 개선 제안서)">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="2021.02.15 Task Lists">
-<meta property="og:url" content="https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/index.html">
+<meta property="og:title" content="PEP 8">
+<meta property="og:url" content="https://odreystella.github.io/2021/07/06/django-tistory/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
-<meta property="og:description" content="Python 강의 관련  데코레이터 관련 Do it yourself 풀기">
+<meta property="og:description" content="PEP 8 -&gt; Python Enhance Proposal(파이썬 개선 제안서)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-15T09:12:29.000Z">
-<meta property="article:modified_time" content="2021-02-23T01:19:11.338Z">
-<meta property="article:tag" content="To do list">
+<meta property="article:published_time" content="2021-07-06T10:46:40.000Z">
+<meta property="article:modified_time" content="2021-08-26T14:33:23.906Z">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="PEP8">
 <meta name="twitter:card" content="summary">
     
     
@@ -296,20 +297,20 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            2021.02.15 Task Lists
+            PEP 8
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-02-15T18:12:29+09:00">
+    <time datetime="2021-07-06T19:46:40+09:00">
 	
-		    Feb 15, 2021
+		    Jul 06, 2021
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/Todo-List/">Todo List</a>
+    <a class="category-link" href="/categories/Programming-Languages/">Programming Languages</a>, <a class="category-link" href="/categories/Programming-Languages/Python/">Python</a>
 
 
     
@@ -321,16 +322,71 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="Python-강의-관련"><a href="#Python-강의-관련" class="headerlink" title="Python 강의 관련"></a>Python 강의 관련</h2><ul>
-<li><input checked="" disabled="" type="checkbox"> 데코레이터 관련 Do it yourself 풀기  <a id="more"></a>
+            <h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#PEP-8-gt-Python-Enhance-Proposal-%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B0%9C%EC%84%A0-%EC%A0%9C%EC%95%88%EC%84%9C"><span class="toc-text">PEP 8 -&gt; Python Enhance Proposal(파이썬 개선 제안서)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PEP-20-PEP-3156"><span class="toc-text">PEP 20, PEP 3156</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flake-8"><span class="toc-text">flake 8</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python2-vs-python3"><span class="toc-text">python2 vs, python3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DB-%EB%AA%A8%EB%8D%B8%EB%A7%81"><span class="toc-text">DB 모델링</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Django-FieldType"><span class="toc-text">Django FieldType</span></a></li></ol>
+<h3 id="PEP-8-gt-Python-Enhance-Proposal-파이썬-개선-제안서"><a href="#PEP-8-gt-Python-Enhance-Proposal-파이썬-개선-제안서" class="headerlink" title="PEP 8 -&gt; Python Enhance Proposal(파이썬 개선 제안서)"></a>PEP 8 -&gt; Python Enhance Proposal(파이썬 개선 제안서)</h3><a id="more"></a>
 
+<ul>
+<li>들여쓰기(Indentation)<ul>
+<li>공백 4칸 권장</li>
+<li>cf. 파이썬에서는 space와 tab를 혼용해서 쓰지 못함</li>
+</ul>
+</li>
+<li>한 줄에 최대 79자까지</li>
+<li>최상위 함수와 클래스 정의는 2줄씩 띄워 사용하기</li>
+<li>import는 항상 소스코드 맨 위에 써야하면 분리해서 작성하기<ul>
+<li>Good) import sys</li>
+<li>Good) import os</li>
+<li>Bad)   import sys, os</li>
+</ul>
 </li>
 </ul>
-<h2 id="그-외"><a href="#그-외" class="headerlink" title="그 외"></a>그 외</h2><ul>
-<li><input checked="" disabled="" type="checkbox"> 영타연습</li>
-<li><input checked="" disabled="" type="checkbox"> Weekly test 준비</li>
-<li><input checked="" disabled="" type="checkbox"> 2021.02.15 수업 리뷰(+jupyter notebook), git commit</li>
-<li><input disabled="" type="checkbox"> 블랙잭 게임 관련 절차, 클래스 구현 문제 재도전!</li>
+<h3 id="PEP-20-PEP-3156"><a href="#PEP-20-PEP-3156" class="headerlink" title="PEP 20, PEP 3156"></a>PEP 20, PEP 3156</h3><h3 id="flake-8"><a href="#flake-8" class="headerlink" title="flake 8"></a>flake 8</h3><ul>
+<li>파이썬 패키지 중 하나</li>
+<li>해당하는 파이썬 파일이나 특정 파이썬 코드의 스타일을 검사해주는 도구</li>
+<li>$ pip3 install flake8</li>
+</ul>
+<h3 id="python2-vs-python3"><a href="#python2-vs-python3" class="headerlink" title="python2 vs, python3"></a>python2 vs, python3</h3><ul>
+<li><p>python3 </p>
+<ul>
+<li>모든 변수가 객체(object)</li>
+<li>print() - 함수로 바뀜</li>
+</ul>
+</li>
+<li><p>python2</p>
+<ul>
+<li>print “hello” </li>
+</ul>
+</li>
+</ul>
+<h3 id="DB-모델링"><a href="#DB-모델링" class="headerlink" title="DB 모델링"></a>DB 모델링</h3><ul>
+<li>PrimaryKey(기본키, pk)<ul>
+<li>테이블에 저장된 각각의 데이터를 유일하게 구분하는 키</li>
+<li>즉, 데이터베이스 테이블에 각 행의 식별 기준인 기본키가 필요함</li>
+<li>Django에는 기본키로 id가 디폴트로 지정되어 있다.</li>
+<li>id = models.AutoField(primary_key=True)</li>
+</ul>
+</li>
+<li>ForeignKey(외래키, fk)<ul>
+<li>각 테이블 간에 연결을 위해서 특정 테이블에서 다른 테이블을 참조하는 기본키를 말함</li>
+</ul>
+</li>
+</ul>
+<h3 id="Django-FieldType"><a href="#Django-FieldType" class="headerlink" title="Django FieldType"></a>Django FieldType</h3><blockquote>
+<p>모든 필드타입 클래스들은 추상 클래스 Field 클래스의 파생 클래스</p>
+</blockquote>
+<ul>
+<li>CharField(max_length=64)</li>
+<li>TextField</li>
+<li>IntegerField</li>
+<li>FloatField</li>
+<li>BooleanField</li>
+<li>DateTimeField</li>
+<li>FileField</li>
+<li>EmailField(Email Validator 사용)</li>
+<li>ImageField(FileField의 파생클래스)</li>
+<li>DecimalField</li>
+<li>AutoField</li>
+<li>DateField(auto_now=False, auto_now_add=False, **options) - auto_now : 데이터가 저장될 때(update), auto_now_add(create)</li>
 </ul>
 
             
@@ -343,7 +399,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/To-do-list/" rel="tag">To do list</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/PEP8/" rel="tag">PEP8</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/python/" rel="tag">python</a>
 
             </div>
         
@@ -353,11 +409,14 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a
-                        class="post-action-btn btn btn--disabled"
-                        aria-hidden="true"
-                    >
-                        
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/08/09/OS_01_%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C_%EA%B0%9C%EC%9A%94/"
+                    data-tooltip="OS)[반효경교수님 강의]운영체제 개요"
+                    aria-label="PREVIOUS: OS)[반효경교수님 강의]운영체제 개요"
+                >
+                    
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -367,9 +426,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/10/2021-02-11-14-Task-Lists/"
-                    data-tooltip="2021.02.11~14 Task Lists(설날)"
-                    aria-label="NEXT: 2021.02.11~14 Task Lists(설날)"
+                    href="/2021/02/09/cowork-with-git/"
+                    data-tooltip="Cowork with git"
+                    aria-label="NEXT: Cowork with git"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -394,7 +453,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/07/06/django-tistory/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -407,7 +466,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/07/06/django-tistory/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -420,7 +479,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/07/06/django-tistory/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -433,7 +492,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
@@ -465,11 +524,14 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a
-                        class="post-action-btn btn btn--disabled"
-                        aria-hidden="true"
-                    >
-                        
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/08/09/OS_01_%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C_%EA%B0%9C%EC%9A%94/"
+                    data-tooltip="OS)[반효경교수님 강의]운영체제 개요"
+                    aria-label="PREVIOUS: OS)[반효경교수님 강의]운영체제 개요"
+                >
+                    
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -479,9 +541,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/02/10/2021-02-11-14-Task-Lists/"
-                    data-tooltip="2021.02.11~14 Task Lists(설날)"
-                    aria-label="NEXT: 2021.02.11~14 Task Lists(설날)"
+                    href="/2021/02/09/cowork-with-git/"
+                    data-tooltip="Cowork with git"
+                    aria-label="NEXT: Cowork with git"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -506,7 +568,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/07/06/django-tistory/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -519,7 +581,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/07/06/django-tistory/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -532,7 +594,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/07/06/django-tistory/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -545,7 +607,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
@@ -566,7 +628,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/07/06/django-tistory/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -579,7 +641,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/07/06/django-tistory/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -592,7 +654,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2021/02/15/2021-02-15-Task-Lists/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2021/07/06/django-tistory/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
