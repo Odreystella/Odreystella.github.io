@@ -1,0 +1,691 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Dev Odreystella&#39;s Blog">
+    <title>OS)[반효경교수님 강의]프로세스 - Dev Odreystella&#39;s Blog</title>
+    <meta name="author" content="">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n반효경 교수님 OS 3차시 강의 노트 정리\n\n\n\n\n\n강의 목차\n운영체제 개요\n컴퓨터 시스템의 구조\n프로세스 관리\nCPU 스케줄링\n병행 제어\n데드락\n메모리 관리\n가상 메모리\n파일 시스템\n입출력 시스템\n디스크 관리\n\n프로세스?\n실행중인 프로그램\n\n프로세스의 문맥(context)?\n\n프로세스 상태(OS의 상태 아님)\nPCB(Process Control Block)\n문맥 교환(Context Switch)\n\n스케줄러\n\n프로세스 생성 방법프로세스 종료 방법프로세스 생성, 종료와 관련된 시스템 콜Interprocess Communication(프로세스 간 협력 매커니즘)출처\nhttps://core.ewha.ac.kr/publicview/C0101020140311132925816476?vmode=f\n\n","dateCreated":"2021-08-18T13:30:57+09:00","dateModified":"2021-10-25T13:53:39+09:00","datePublished":"2021-08-18T13:30:57+09:00","description":"\n반효경 교수님 OS 3차시 강의 노트 정리\n","headline":"OS)[반효경교수님 강의]프로세스","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/","keywords":"OS"}</script>
+    <meta name="description" content="반효경 교수님 OS 3차시 강의 노트 정리">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="OS)[반효경교수님 강의]프로세스">
+<meta property="og:url" content="https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/index.html">
+<meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
+<meta property="og:description" content="반효경 교수님 OS 3차시 강의 노트 정리">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_sync.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_storage.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_memory_load.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_k.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_program.png">
+<meta property="article:published_time" content="2021-08-18T04:30:57.000Z">
+<meta property="article:modified_time" content="2021-10-25T04:53:39.712Z">
+<meta property="article:tag" content="OS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://odreystella.github.io/images/os/os_sync.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://odreystella.github.io/assets/images/profile.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-s9cubcvh9guwrlo0a7unmtmxvwii0oase98xnhhysjkyxhquqqkxkrhfbdfm.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Dev Odreystella&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name"></h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Odreystella</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            OS)[반효경교수님 강의]프로세스
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2021-08-18T13:30:57+09:00">
+	
+		    Aug 18, 2021
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Computer-Science/">Computer Science</a>, <a class="category-link" href="/categories/Computer-Science/OS/">OS</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <blockquote>
+<p>반효경 교수님 OS 3차시 강의 노트 정리</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EA%B0%95%EC%9D%98-%EB%AA%A9%EC%B0%A8"><span class="toc-text">강의 목차</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4"><span class="toc-text">프로세스?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%9D%98-%EB%AC%B8%EB%A7%A5-context"><span class="toc-text">프로세스의 문맥(context)?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%83%81%ED%83%9C-OS%EC%9D%98-%EC%83%81%ED%83%9C-%EC%95%84%EB%8B%98"><span class="toc-text">프로세스 상태(OS의 상태 아님)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#PCB-Process-Control-Block"><span class="toc-text">PCB(Process Control Block)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B8%EB%A7%A5-%EA%B5%90%ED%99%98-Context-Switch"><span class="toc-text">문맥 교환(Context Switch)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%8A%A4%EC%BC%80%EC%A4%84%EB%9F%AC"><span class="toc-text">스케줄러</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%83%9D%EC%84%B1-%EB%B0%A9%EB%B2%95"><span class="toc-text">프로세스 생성 방법</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%A2%85%EB%A3%8C-%EB%B0%A9%EB%B2%95"><span class="toc-text">프로세스 종료 방법</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%83%9D%EC%84%B1-%EC%A2%85%EB%A3%8C%EC%99%80-%EA%B4%80%EB%A0%A8%EB%90%9C-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C"><span class="toc-text">프로세스 생성, 종료와 관련된 시스템 콜</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Interprocess-Communication-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EA%B0%84-%ED%98%91%EB%A0%A5-%EB%A7%A4%EC%BB%A4%EB%8B%88%EC%A6%98"><span class="toc-text">Interprocess Communication(프로세스 간 협력 매커니즘)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol>
+
+<h5 id="강의-목차"><a href="#강의-목차" class="headerlink" title="강의 목차"></a>강의 목차</h5><ol>
+<li>운영체제 개요</li>
+<li>컴퓨터 시스템의 구조</li>
+<li>프로세스 관리</li>
+<li>CPU 스케줄링</li>
+<li>병행 제어</li>
+<li>데드락</li>
+<li>메모리 관리</li>
+<li>가상 메모리</li>
+<li>파일 시스템</li>
+<li>입출력 시스템</li>
+<li>디스크 관리</li>
+</ol>
+<h5 id="프로세스"><a href="#프로세스" class="headerlink" title="프로세스?"></a>프로세스?</h5><ul>
+<li>실행중인 프로그램</li>
+</ul>
+<h5 id="프로세스의-문맥-context"><a href="#프로세스의-문맥-context" class="headerlink" title="프로세스의 문맥(context)?"></a>프로세스의 문맥(context)?</h5><img src="/images/os/os_sync.png" width="350px" height="300px"/>
+
+<h5 id="프로세스-상태-OS의-상태-아님"><a href="#프로세스-상태-OS의-상태-아님" class="headerlink" title="프로세스 상태(OS의 상태 아님)"></a>프로세스 상태(OS의 상태 아님)</h5><p><img src="/images/os/os_storage.png" width="350px" height="300px"/><br/></p>
+<h5 id="PCB-Process-Control-Block"><a href="#PCB-Process-Control-Block" class="headerlink" title="PCB(Process Control Block)"></a>PCB(Process Control Block)</h5><p><img src="/images/os/os_memory_load.png" width="350px" height="300px"/><br/></p>
+<h5 id="문맥-교환-Context-Switch"><a href="#문맥-교환-Context-Switch" class="headerlink" title="문맥 교환(Context Switch)"></a>문맥 교환(Context Switch)</h5><img src="/images/os/os_k.png" width="350px" height="300px" />
+
+<h5 id="스케줄러"><a href="#스케줄러" class="headerlink" title="스케줄러"></a>스케줄러</h5><img src="/images/os/os_program.png" width="350px" height="300px" />
+
+<h5 id="프로세스-생성-방법"><a href="#프로세스-생성-방법" class="headerlink" title="프로세스 생성 방법"></a>프로세스 생성 방법</h5><h5 id="프로세스-종료-방법"><a href="#프로세스-종료-방법" class="headerlink" title="프로세스 종료 방법"></a>프로세스 종료 방법</h5><h5 id="프로세스-생성-종료와-관련된-시스템-콜"><a href="#프로세스-생성-종료와-관련된-시스템-콜" class="headerlink" title="프로세스 생성, 종료와 관련된 시스템 콜"></a>프로세스 생성, 종료와 관련된 시스템 콜</h5><h5 id="Interprocess-Communication-프로세스-간-협력-매커니즘"><a href="#Interprocess-Communication-프로세스-간-협력-매커니즘" class="headerlink" title="Interprocess Communication(프로세스 간 협력 매커니즘)"></a>Interprocess Communication(프로세스 간 협력 매커니즘)</h5><h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://core.ewha.ac.kr/publicview/C0101020140311132925816476?vmode=f">https://core.ewha.ac.kr/publicview/C0101020140311132925816476?vmode=f</a></li>
+</ul>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/OS/" rel="tag">OS</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/08/30/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%95%EB%A0%AC_K%EB%B2%88%EC%A7%B8_%EC%88%98/"
+                    data-tooltip="알고리즘)[프로그래머스]정렬 - K번째 수"
+                    aria-label="PREVIOUS: 알고리즘)[프로그래머스]정렬 - K번째 수"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/08/12/OS_02_%EC%BB%B4%ED%93%A8%ED%84%B0_%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98_%EA%B5%AC%EC%A1%B02/"
+                    data-tooltip="OS)[반효경교수님 강의]컴퓨터 시스템의 구조 2편"
+                    aria-label="NEXT: OS)[반효경교수님 강의]컴퓨터 시스템의 구조 2편"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 null. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/08/30/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%95%EB%A0%AC_K%EB%B2%88%EC%A7%B8_%EC%88%98/"
+                    data-tooltip="알고리즘)[프로그래머스]정렬 - K번째 수"
+                    aria-label="PREVIOUS: 알고리즘)[프로그래머스]정렬 - K번째 수"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2021/08/12/OS_02_%EC%BB%B4%ED%93%A8%ED%84%B0_%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98_%EA%B5%AC%EC%A1%B02/"
+                    data-tooltip="OS)[반효경교수님 강의]컴퓨터 시스템의 구조 2편"
+                    aria-label="NEXT: OS)[반효경교수님 강의]컴퓨터 시스템의 구조 2편"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name"></h4>
+        
+            <div id="about-card-bio"><p>Odreystella</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-buvapuslwfowfkx0w6qhxphbbnwhqezkrxx1dd6puligsitecubmpci0a9cf.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
