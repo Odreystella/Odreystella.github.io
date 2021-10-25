@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n반효경 교수님 OS 3차시 강의 노트 정리\n\n\n\n\n\n강의 목차\n운영체제 개요\n컴퓨터 시스템의 구조\n프로세스 관리\nCPU 스케줄링\n병행 제어\n데드락\n메모리 관리\n가상 메모리\n파일 시스템\n입출력 시스템\n디스크 관리\n\n프로세스?\n실행중인 프로그램\n\n프로세스의 문맥(context)?\n\n프로세스 상태(OS의 상태 아님)\nPCB(Process Control Block)\n문맥 교환(Context Switch)\n\n스케줄러\n\n프로세스 생성 방법프로세스 종료 방법프로세스 생성, 종료와 관련된 시스템 콜Interprocess Communication(프로세스 간 협력 매커니즘)출처\nhttps://core.ewha.ac.kr/publicview/C0101020140311132925816476?vmode=f\n\n","dateCreated":"2021-08-18T13:30:57+09:00","dateModified":"2021-10-25T13:53:39+09:00","datePublished":"2021-08-18T13:30:57+09:00","description":"\n반효경 교수님 OS 3차시 강의 노트 정리\n","headline":"OS)[반효경교수님 강의]프로세스","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/","keywords":"OS"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n반효경 교수님 OS 3차시 강의 노트 정리\n\n\n\n\n\n강의 목차\n운영체제 개요\n컴퓨터 시스템의 구조\n프로세스 관리\nCPU 스케줄링\n병행 제어\n데드락\n메모리 관리\n가상 메모리\n파일 시스템\n입출력 시스템\n디스크 관리\n\n프로세스?\n실행중인 프로그램\n\n프로세스의 문맥(context)?\n\n\n특정 시점을 봤을 때 해당 프로세스가 어디까지 수행을 했는지 나타내는 하드웨어 문맥\n아래 세가지로 문맥을 알 수 있음\nProgram Counter(PC), 각종 register     ← CPU 관련\n프로세스 주소 공간(code, data, stack)    ← 메모리 관련(논리적인 메모리 위)\n프로세스 관련 커널 자료 구조(PCB, Kernel stack)     ← 커널 관련(물리적인 메모리 위)\n\n\nPC가 프로세스 A의 code에서 어느 부분을 가르키고 있는지, stack에는 어떤 애들이 쌓여있고, data에는 어떤 값이 있는지, 레지스터에 어떤 값을 넣어놓고 어떤 instruction까지 실행했는지, 시스템콜 했을 때 PC가 커널의 code에서 어디를 가르키고 있는지, A의 커널 스택은 어떤 애들이 쌓여 있고, A의 PCB에는 어떤 값이 있는 지  등을 모두 알아야지 프로세스의 현 상태를 나타낼 수 있음\n\n프로세스 상태(OS의 상태 아님)\n>> New → Ready → Running → Ready or Blocked → Running → 반복 → Terminated \n\n\nRunning : CPU를 잡고 instruction 수행중인 상태\nReady : CPU를 기다리는 상태(메모리 등 다른 조건을 모두 만족한 상태)\nBlocked(wait) : CPU를 주어도 당장 instruction을 수행할 수 없는 상태프로세스가 요청한 I/O 작업등이 완료되면 ready 상태가 됨ex) 디스크에서 파일을 읽어와야 하는 경우\nSuspended(spopped) : 프로세스가 중기스케줄러에 의해 메모리를 뺏겨서 프로세스 수행이 정지된 상태 또는 사용자가 프로그램을 일시 정지 시킨 경우(ctrl + Z)blocked 상태와 다르게 외부(사용자)에서 재개시켜줘야 active 됨ex) 메모리에 너무 많은 프로세스가 올라와 있는 경우\nNew : 프로세스가 생성중인 상태\nTerminated : 수행이 끝난 상태\n\n\n큐에서 기다리는걸 교수님은 놀이공원에 비유하심..ㅎㅎㅎㅎ 모든 자원들이 놀지 않는 메카니즘ㅎ\n\n\n\n>> suspended가 추가된 프로세스의 상태도\n\n\nRunning(user mode) : 프로세스가 CPU를 가지고 있으면서 본인의 코드를 실행하고 있는 상태\nRunning(monitor mode) : 현재 실행중인 프로세스에 의해 OS 코드가 실행되고 있는 상태. CPU의 제어권이 OS에게 있지만 프로세스 입장에서는 여전히 running 상태라고 간주함\n\n\n\n\nPCB(Process Control Block)\nOS가 각 프로세스를 관리하기 위해 프로세스 당 유지하는 정보\n\n\n(1) OS가 관리상 사용하는 정보\n\nProcess state(ready, running, blocked), Process ID\nscheduling information, priority   \n\n\n(2) CPU 수행 관련 하드웨어 값   \n\nPC, registers   \n\n\n(3) 메모리 관련   \n\ncode, data, stack 의 위치 정보   \n\n\n(4) 파일 관련   \n\n오픈하는 파일 정보\n\n\n\n문맥 교환(Context Switch)\nCPU를 한 프로세스에서 다른 프로세스로 넘겨주는 과정넘길 때 1) OS는 CPU를 사용하고 있던 A프로세스 상태를 그 프로세스의 PCB에 저장 2) CPU를 새롭게 얻는 프로세스의 상태를 B프로세스의 PCB에서 읽어옴\n현재 실행중인 프로세스의 상태 정보인 CPU의 PC, registers, memory map의 값은 커널 주소공간의 data내의 해당 PCB에 저장!!\n\ncf) user mode → (시스템콜이나 하드웨어 인터럽트 발생) → kernel mode → user mode 모드가 바뀌는데 CPU 문맥정도만 저장됨, 문맥교환 발생하지 않음   \n문맥교환은 프로세스 간(타이머 인터럽트, I/O 요청 시스템콜)에서 발생함!\n\n스케줄러\nLong-term Scheduler(장기 스케줄러 or job scheduler)\n다음번에 어떤 프로세스한테 메모리를 줄지 결정\n프로세스가 생성(new)되서 ready queue로 보내는 과정을 관리하는 스케줄러임\n메모리에 몇개의 프로세스로 올려놓을지 관리함 ← degree of multiprogramming 제어\n시분할 시스템에서는 보통 장기 스케줄러가 없고 중기 스케줄러가 제어함, 무조건 프로세스 생성되면 ready queue로 감\n\n\nShort-term Scheduler(단기 스케줄러 or CPU scheduler)\n짧은 시간 단위(ms)로 스케줄이 이루어짐\n다음번에 어떤 프로세스한테 CPU를 줄지(running) 결정\n\n\nMedium-term Scheduler(중기 스케줄러 or Swapper)\n메모리에 너무 많은 프로그램이 동시에 올라가 있으면 프로세스를 통째로 디스크로 쫒아내서 degree of multiprogramming을 제어 → 시스템 성능 향상에 기여\n어떤 프로세스의 메모리를 뺏을지 결정\n중기 스케줄러때문에 suspended(stopped)라는 프로세스 상태가 추가됨i\n\n\n\n프로세스 생성 방법\nOS가 부모 프로세스(1개)의 주소공간, PC register을 복제하여 여러개의 자식 프로세스를 생성함\n주소 공간 복제(binary and OS data)하여 주소 공간 할당하면 자식프로세스 생성 ← fork() 시스템 콜\n부모 프로세스가 가르키는 PC 그 위에 새로운 프로그램을 메모리에 올림 ← exec() 시스템콜cf) 복제하고 새로운 프로그램을 올리지 않을 수도 있고, 복제하지 않고 새로운 프로그램 올릴 수도 있음cf) Copy-on-write(COW) 기법 : 자식 프로세스가 부모프로세스를 처음부터 복제하지 않고, 공유할 수 있는 부분은 공유하다가 write가 발생하면 그때 필요한 부분을 복제하는 것\n\n\n프로세스의 계층 구조(트리) 형성\n프로세스가 실행되기 위해서 자원을 필요로 함\n운영체제로부터 받거나\n부모 프로세스와 공유(원칙은 별개의 프로세스이기 때문에 일반적으로 공유하지 않음)\n\n\n\n프로세스 종료 방법\n자식 프로세스가 종료된 후에 부모 프로세스가 종료됨\n\n\n자발적으로 종료될 때 ←exit()  시스템콜\n자식 프로세스가 종료될 때 부모에게 데이터를 넘김(wait() 시스템콜) → OS에게 각종 자원들 반납\n\n\n비자발적으로 종료될 때← abort() 시스템콜\n부모 프로세스가 강제종료시킬 때(자식이 할당 자원의 한계치를 넘거나, 자식에게 할당된 태스크가 더 이상 필요하지 않을 때)\n부모프로세스가 종료될 때(손자, 자손 프로세스 단계적으로 종료시킨 후 부모프로세스 종료)\n사용자가 kill, break, ctrl + C를 눌렀을 때\n\n\n\n프로세스 생성, 종료와 관련된 시스템 콜\nfork() : 부모 프로세스의 fork() 리턴값은 양수, 자식 프로세스의 fork()리턴값은 0 으로 부모와 자식을 구별하고, 자식에게 다른 일을 시킬 수 있음\nexec() : exec()가 실행되면 아예 새로운 프로세스로 바뀜, 이전의 코드로 돌아갈 수 없고 새로운 프로세스의 main함수부터 실행되고 종료됨\nwait() : 부모 프로세스가 자식 프로세스를 생성하고 wait() 시스템콜 하는데, 자식 프로세스가 종료될 때까지 blocked 상태가 됨, 자식 프로세스가 종료되면 ready 상태가 됨12345678910111213# 자식이 종료될때까지 부모가 기다리는 (wait) 모델main &#123;  int childPID;  s1;  childPID = fork();              # 부모 프로세스 복제하여 자식 프로세스 생성  if(childPID == 0)               # 자식 프로세스인 경우    &lt; code for child process &gt;    # 코드 실행  else &#123;                          # 부모 프로세스인 경우    wait();                       # 자식 프로세스가 종료될 때까지 blocked 상태  &#125;  s2;                             # 자식 프로세스가 종료되면 실행됨&#125;\nexit() : 프로세스를 종료시킬때 호출하는 시스템콜, 명시적으로 넣어줘도 되고, 넣어주지 않으면 main함수가 리턴되는 위치에 컴파일러가 넣어줌\n\nInterprocess Communication(프로세스 간 협력 매커니즘)\n메시지를 전달하는 방법(message passing) : 커널을 통해 메시지 전달1-1) Direct Communication : 통신하려는 프로세스의 이름을 명시적으로 표시하여 직접 전달1-2) Indirect Communication : mailbox(or port)를 통해 무작위로 메시지 간접 전달\n주소 공간을 공유하는 방법(shared memory) : 서로 다른 프로세스이지만 시스템콜을 통해 일부 주소 공간을 공유함\n\n\n\n\ncf) 스레드는 하나의 프로세스 내에서 주소 공간을 공유하기 때문에 스레드간 협력도 가능함\n\ncf) 프로세스는 독립적임. 각자의 주소 공간을 가지고 있어서 다른 프로세스의 주소공간을 보지 못함\n\n\n출처\nhttps://core.ewha.ac.kr/publicview/C0101020140318134023355997?vmode=f\nhttps://core.ewha.ac.kr/publicview/C0101020140321144554159683?vmode=f\nhttps://core.ewha.ac.kr/publicview/C0101020140325134428879622?vmode=f\n\n","dateCreated":"2021-08-18T13:30:57+09:00","dateModified":"2021-10-25T16:57:14+09:00","datePublished":"2021-08-18T13:30:57+09:00","description":"\n반효경 교수님 OS 3차시 강의 노트 정리\n","headline":"OS)[반효경교수님 강의]프로세스","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/08/18/OS_03_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/","keywords":"OS"}</script>
     <meta name="description" content="반효경 교수님 OS 3차시 강의 노트 정리">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="OS)[반효경교수님 강의]프로세스">
@@ -19,16 +19,18 @@
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
 <meta property="og:description" content="반효경 교수님 OS 3차시 강의 노트 정리">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://odreystella.github.io/images/os/os_sync.png">
-<meta property="og:image" content="https://odreystella.github.io/images/os/os_storage.png">
-<meta property="og:image" content="https://odreystella.github.io/images/os/os_memory_load.png">
-<meta property="og:image" content="https://odreystella.github.io/images/os/os_k.png">
-<meta property="og:image" content="https://odreystella.github.io/images/os/os_program.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_process.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_process_state.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_process_state_2.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_process_state_3.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_pcb.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_process.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_IPC.png">
 <meta property="article:published_time" content="2021-08-18T04:30:57.000Z">
-<meta property="article:modified_time" content="2021-10-25T04:53:39.712Z">
+<meta property="article:modified_time" content="2021-10-25T07:57:14.010Z">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://odreystella.github.io/images/os/os_sync.png">
+<meta name="twitter:image" content="https://odreystella.github.io/images/os/os_process.png">
     
     
         
@@ -350,16 +352,146 @@
 <h5 id="프로세스"><a href="#프로세스" class="headerlink" title="프로세스?"></a>프로세스?</h5><ul>
 <li>실행중인 프로그램</li>
 </ul>
-<h5 id="프로세스의-문맥-context"><a href="#프로세스의-문맥-context" class="headerlink" title="프로세스의 문맥(context)?"></a>프로세스의 문맥(context)?</h5><img src="/images/os/os_sync.png" width="350px" height="300px"/>
+<h5 id="프로세스의-문맥-context"><a href="#프로세스의-문맥-context" class="headerlink" title="프로세스의 문맥(context)?"></a>프로세스의 문맥(context)?</h5><img src="/images/os/os_process.png" width="350px" height="300px"/>
 
-<h5 id="프로세스-상태-OS의-상태-아님"><a href="#프로세스-상태-OS의-상태-아님" class="headerlink" title="프로세스 상태(OS의 상태 아님)"></a>프로세스 상태(OS의 상태 아님)</h5><p><img src="/images/os/os_storage.png" width="350px" height="300px"/><br/></p>
-<h5 id="PCB-Process-Control-Block"><a href="#PCB-Process-Control-Block" class="headerlink" title="PCB(Process Control Block)"></a>PCB(Process Control Block)</h5><p><img src="/images/os/os_memory_load.png" width="350px" height="300px"/><br/></p>
-<h5 id="문맥-교환-Context-Switch"><a href="#문맥-교환-Context-Switch" class="headerlink" title="문맥 교환(Context Switch)"></a>문맥 교환(Context Switch)</h5><img src="/images/os/os_k.png" width="350px" height="300px" />
+<ul>
+<li>특정 시점을 봤을 때 해당 프로세스가 어디까지 수행을 했는지 나타내는 하드웨어 문맥</li>
+<li>아래 세가지로 문맥을 알 수 있음<ol>
+<li>Program Counter(PC), 각종 register     ← CPU 관련</li>
+<li>프로세스 주소 공간(code, data, stack)    ← 메모리 관련(논리적인 메모리 위)</li>
+<li>프로세스 관련 커널 자료 구조(PCB, Kernel stack)     ← 커널 관련(물리적인 메모리 위)</li>
+</ol>
+</li>
+<li>PC가 프로세스 A의 code에서 어느 부분을 가르키고 있는지, stack에는 어떤 애들이 쌓여있고, data에는 어떤 값이 있는지, 레지스터에 어떤 값을 넣어놓고 어떤 instruction까지 실행했는지, 시스템콜 했을 때 PC가 커널의 code에서 어디를 가르키고 있는지, A의 커널 스택은 어떤 애들이 쌓여 있고, A의 PCB에는 어떤 값이 있는 지  등을 모두 알아야지 프로세스의 현 상태를 나타낼 수 있음</li>
+</ul>
+<h5 id="프로세스-상태-OS의-상태-아님"><a href="#프로세스-상태-OS의-상태-아님" class="headerlink" title="프로세스 상태(OS의 상태 아님)"></a>프로세스 상태(OS의 상태 아님)</h5><img src="/images/os/os_process_state.png" width="350px" height="300px"/>
+>> New → Ready → Running → Ready or Blocked → Running → 반복 → Terminated 
 
-<h5 id="스케줄러"><a href="#스케줄러" class="headerlink" title="스케줄러"></a>스케줄러</h5><img src="/images/os/os_program.png" width="350px" height="300px" />
+<ul>
+<li>Running : CPU를 잡고 instruction 수행중인 상태</li>
+<li>Ready : CPU를 기다리는 상태(메모리 등 다른 조건을 모두 만족한 상태)</li>
+<li>Blocked(wait) : CPU를 주어도 당장 instruction을 수행할 수 없는 상태<br>프로세스가 요청한 I/O 작업등이 완료되면 ready 상태가 됨<br>ex) 디스크에서 파일을 읽어와야 하는 경우</li>
+<li>Suspended(spopped) : 프로세스가 중기스케줄러에 의해 메모리를 뺏겨서 프로세스 수행이 정지된 상태 또는 사용자가 프로그램을 일시 정지 시킨 경우(ctrl + Z)<br>blocked 상태와 다르게 외부(사용자)에서 재개시켜줘야 active 됨<br>ex) 메모리에 너무 많은 프로세스가 올라와 있는 경우</li>
+<li>New : 프로세스가 생성중인 상태</li>
+<li>Terminated : 수행이 끝난 상태</li>
+</ul>
+<img src="/images/os/os_process_state_2.png" width="350px" height="300px"/>
+큐에서 기다리는걸 교수님은 놀이공원에 비유하심..ㅎㅎㅎㅎ 모든 자원들이 놀지 않는 메카니즘ㅎ
+<br/>
 
-<h5 id="프로세스-생성-방법"><a href="#프로세스-생성-방법" class="headerlink" title="프로세스 생성 방법"></a>프로세스 생성 방법</h5><h5 id="프로세스-종료-방법"><a href="#프로세스-종료-방법" class="headerlink" title="프로세스 종료 방법"></a>프로세스 종료 방법</h5><h5 id="프로세스-생성-종료와-관련된-시스템-콜"><a href="#프로세스-생성-종료와-관련된-시스템-콜" class="headerlink" title="프로세스 생성, 종료와 관련된 시스템 콜"></a>프로세스 생성, 종료와 관련된 시스템 콜</h5><h5 id="Interprocess-Communication-프로세스-간-협력-매커니즘"><a href="#Interprocess-Communication-프로세스-간-협력-매커니즘" class="headerlink" title="Interprocess Communication(프로세스 간 협력 매커니즘)"></a>Interprocess Communication(프로세스 간 협력 매커니즘)</h5><h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
-<li><a target="_blank" rel="noopener" href="https://core.ewha.ac.kr/publicview/C0101020140311132925816476?vmode=f">https://core.ewha.ac.kr/publicview/C0101020140311132925816476?vmode=f</a></li>
+<img src="/images/os/os_process_state_3.png" width="350px" height="300px"/>
+>> suspended가 추가된 프로세스의 상태도
+
+<ul>
+<li>Running(user mode) : 프로세스가 CPU를 가지고 있으면서 본인의 코드를 실행하고 있는 상태</li>
+<li>Running(monitor mode) : 현재 실행중인 프로세스에 의해 OS 코드가 실행되고 있는 상태. CPU의 제어권이 OS에게 있지만 프로세스 입장에서는 여전히 running 상태라고 간주함<br/>
+
+
+</li>
+</ul>
+<h5 id="PCB-Process-Control-Block"><a href="#PCB-Process-Control-Block" class="headerlink" title="PCB(Process Control Block)"></a>PCB(Process Control Block)</h5><ul>
+<li><p>OS가 각 프로세스를 관리하기 위해 프로세스 당 유지하는 정보</p>
+<img src="/images/os/os_pcb.png" width="350px" height="300px"/>
+</li>
+<li><p>(1) OS가 관리상 사용하는 정보</p>
+<ul>
+<li>Process state(ready, running, blocked), Process ID</li>
+<li>scheduling information, priority   </li>
+</ul>
+</li>
+<li><p>(2) CPU 수행 관련 하드웨어 값   </p>
+<ul>
+<li>PC, registers   </li>
+</ul>
+</li>
+<li><p>(3) 메모리 관련   </p>
+<ul>
+<li>code, data, stack 의 위치 정보   </li>
+</ul>
+</li>
+<li><p>(4) 파일 관련   </p>
+<ul>
+<li>오픈하는 파일 정보</li>
+</ul>
+</li>
+</ul>
+<h5 id="문맥-교환-Context-Switch"><a href="#문맥-교환-Context-Switch" class="headerlink" title="문맥 교환(Context Switch)"></a>문맥 교환(Context Switch)</h5><ul>
+<li>CPU를 한 프로세스에서 다른 프로세스로 넘겨주는 과정<br>넘길 때 1) OS는 CPU를 사용하고 있던 A프로세스 상태를 그 프로세스의 PCB에 저장 2) CPU를 새롭게 얻는 프로세스의 상태를 B프로세스의 PCB에서 읽어옴</li>
+<li><strong>현재 실행중인 프로세스의 상태 정보인 CPU의 PC, registers, memory map의 값은 커널 주소공간의 data내의 해당 PCB에 저장!!</strong></li>
+<li><img src="/images/os/os_process.png" width="350px" height="300px" />
+cf) user mode → (시스템콜이나 하드웨어 인터럽트 발생) → kernel mode → user mode 모드가 바뀌는데 CPU 문맥정도만 저장됨, 문맥교환 발생하지 않음   </li>
+<li><strong>문맥교환은 프로세스 간(타이머 인터럽트, I/O 요청 시스템콜)에서 발생함!</strong></li>
+</ul>
+<h5 id="스케줄러"><a href="#스케줄러" class="headerlink" title="스케줄러"></a>스케줄러</h5><ol>
+<li><strong>Long-term Scheduler(장기 스케줄러 or job scheduler)</strong><ul>
+<li>다음번에 어떤 프로세스한테 메모리를 줄지 결정</li>
+<li>프로세스가 생성(new)되서 ready queue로 보내는 과정을 관리하는 스케줄러임</li>
+<li>메모리에 몇개의 프로세스로 올려놓을지 관리함 ← degree of multiprogramming 제어</li>
+<li>시분할 시스템에서는 보통 장기 스케줄러가 없고 중기 스케줄러가 제어함, 무조건 프로세스 생성되면 ready queue로 감</li>
+</ul>
+</li>
+<li><strong>Short-term Scheduler(단기 스케줄러 or CPU scheduler)</strong><ul>
+<li>짧은 시간 단위(ms)로 스케줄이 이루어짐</li>
+<li>다음번에 어떤 프로세스한테 CPU를 줄지(running) 결정</li>
+</ul>
+</li>
+<li><strong>Medium-term Scheduler(중기 스케줄러 or Swapper)</strong><ul>
+<li>메모리에 너무 많은 프로그램이 동시에 올라가 있으면 프로세스를 통째로 디스크로 쫒아내서 degree of multiprogramming을 제어 → 시스템 성능 향상에 기여</li>
+<li>어떤 프로세스의 메모리를 뺏을지 결정</li>
+<li>중기 스케줄러때문에 suspended(stopped)라는 프로세스 상태가 추가됨i</li>
+</ul>
+</li>
+</ol>
+<h5 id="프로세스-생성-방법"><a href="#프로세스-생성-방법" class="headerlink" title="프로세스 생성 방법"></a>프로세스 생성 방법</h5><ul>
+<li>OS가 부모 프로세스(1개)의 주소공간, PC register을 복제하여 여러개의 자식 프로세스를 생성함<ol>
+<li>주소 공간 복제(binary and OS data)하여 주소 공간 할당하면 자식프로세스 생성 ← fork() 시스템 콜</li>
+<li>부모 프로세스가 가르키는 PC 그 위에 새로운 프로그램을 메모리에 올림 ← exec() 시스템콜<br>cf) 복제하고 새로운 프로그램을 올리지 않을 수도 있고, 복제하지 않고 새로운 프로그램 올릴 수도 있음<br>cf) Copy-on-write(COW) 기법 : 자식 프로세스가 부모프로세스를 처음부터 복제하지 않고, 공유할 수 있는 부분은 공유하다가 write가 발생하면 그때 필요한 부분을 복제하는 것</li>
+</ol>
+</li>
+<li>프로세스의 계층 구조(트리) 형성</li>
+<li>프로세스가 실행되기 위해서 자원을 필요로 함<ol>
+<li>운영체제로부터 받거나</li>
+<li>부모 프로세스와 공유(원칙은 별개의 프로세스이기 때문에 일반적으로 공유하지 않음)</li>
+</ol>
+</li>
+</ul>
+<h5 id="프로세스-종료-방법"><a href="#프로세스-종료-방법" class="headerlink" title="프로세스 종료 방법"></a>프로세스 종료 방법</h5><ul>
+<li>자식 프로세스가 종료된 후에 부모 프로세스가 종료됨</li>
+</ul>
+<ol>
+<li>자발적으로 종료될 때 ←exit()  시스템콜<ul>
+<li>자식 프로세스가 종료될 때 부모에게 데이터를 넘김(wait() 시스템콜) → OS에게 각종 자원들 반납</li>
+</ul>
+</li>
+<li>비자발적으로 종료될 때← abort() 시스템콜<ul>
+<li>부모 프로세스가 강제종료시킬 때(자식이 할당 자원의 한계치를 넘거나, 자식에게 할당된 태스크가 더 이상 필요하지 않을 때)</li>
+<li>부모프로세스가 종료될 때(손자, 자손 프로세스 단계적으로 종료시킨 후 부모프로세스 종료)</li>
+<li>사용자가 kill, break, ctrl + C를 눌렀을 때</li>
+</ul>
+</li>
+</ol>
+<h5 id="프로세스-생성-종료와-관련된-시스템-콜"><a href="#프로세스-생성-종료와-관련된-시스템-콜" class="headerlink" title="프로세스 생성, 종료와 관련된 시스템 콜"></a>프로세스 생성, 종료와 관련된 시스템 콜</h5><ul>
+<li>fork() : 부모 프로세스의 fork() 리턴값은 양수, 자식 프로세스의 fork()리턴값은 0 으로 부모와 자식을 구별하고, 자식에게 다른 일을 시킬 수 있음</li>
+<li>exec() : exec()가 실행되면 아예 새로운 프로세스로 바뀜, 이전의 코드로 돌아갈 수 없고 새로운 프로세스의 main함수부터 실행되고 종료됨</li>
+<li>wait() : 부모 프로세스가 자식 프로세스를 생성하고 wait() 시스템콜 하는데, 자식 프로세스가 종료될 때까지 blocked 상태가 됨, 자식 프로세스가 종료되면 ready 상태가 됨<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 자식이 종료될때까지 부모가 기다리는 (wait) 모델</span><br><span class="line"></span><br><span class="line">main &#123;</span><br><span class="line">  <span class="keyword">int</span> childPID;</span><br><span class="line">  s1;</span><br><span class="line">  childPID = fork();              # 부모 프로세스 복제하여 자식 프로세스 생성</span><br><span class="line">  <span class="keyword">if</span>(childPID == <span class="number">0</span>)               # 자식 프로세스인 경우</span><br><span class="line">    &lt; code <span class="keyword">for</span> child process &gt;    # 코드 실행</span><br><span class="line">  <span class="keyword">else</span> &#123;                          # 부모 프로세스인 경우</span><br><span class="line">    wait();                       # 자식 프로세스가 종료될 때까지 blocked 상태</span><br><span class="line">  &#125;</span><br><span class="line">  s2;                             # 자식 프로세스가 종료되면 실행됨</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>exit() : 프로세스를 종료시킬때 호출하는 시스템콜, 명시적으로 넣어줘도 되고, 넣어주지 않으면 main함수가 리턴되는 위치에 컴파일러가 넣어줌</li>
+</ul>
+<h5 id="Interprocess-Communication-프로세스-간-협력-매커니즘"><a href="#Interprocess-Communication-프로세스-간-협력-매커니즘" class="headerlink" title="Interprocess Communication(프로세스 간 협력 매커니즘)"></a>Interprocess Communication(프로세스 간 협력 매커니즘)</h5><ol>
+<li>메시지를 전달하는 방법(message passing) : 커널을 통해 메시지 전달<br>1-1) Direct Communication : 통신하려는 프로세스의 이름을 명시적으로 표시하여 직접 전달<br>1-2) Indirect Communication : mailbox(or port)를 통해 무작위로 메시지 간접 전달</li>
+<li>주소 공간을 공유하는 방법(shared memory) : 서로 다른 프로세스이지만 시스템콜을 통해 일부 주소 공간을 공유함</li>
+</ol>
+<ul>
+<li><img src="/images/os/os_IPC.png" width="350px" height="300px"/>
+</li>
+<li><p>cf) 스레드는 하나의 프로세스 내에서 주소 공간을 공유하기 때문에 스레드간 협력도 가능함</p>
+</li>
+<li><p>cf) 프로세스는 독립적임. 각자의 주소 공간을 가지고 있어서 다른 프로세스의 주소공간을 보지 못함</p>
+</li>
+</ul>
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://core.ewha.ac.kr/publicview/C0101020140318134023355997?vmode=f">https://core.ewha.ac.kr/publicview/C0101020140318134023355997?vmode=f</a></li>
+<li><a target="_blank" rel="noopener" href="https://core.ewha.ac.kr/publicview/C0101020140321144554159683?vmode=f">https://core.ewha.ac.kr/publicview/C0101020140321144554159683?vmode=f</a></li>
+<li><a target="_blank" rel="noopener" href="https://core.ewha.ac.kr/publicview/C0101020140325134428879622?vmode=f">https://core.ewha.ac.kr/publicview/C0101020140325134428879622?vmode=f</a></li>
 </ul>
 
             
