@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n2차 과제를 마치며…\n\n\n\n \n\n2차 과제의 요구사항을 간략하게 정리해보자어떻게 과제를 해나갔는가어려웠던 점은?무엇을 느끼고 무엇을 배웠나3차 과제는 어떻게 하고 싶은가","dateCreated":"2021-11-06T09:40:57+09:00","dateModified":"2021-11-06T09:03:13+09:00","datePublished":"2021-11-06T09:40:57+09:00","description":"\n2차 과제를 마치며…\n","headline":"Pre_Onboarding)2차 기업과제 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/06/Pre_Onboarding_02_2%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/06/Pre_Onboarding_02_2%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, 프레시코드"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n2차 과제를 마치며…\n\n\n\n \n\n과제의 선택권목요일 세션이 끝나고, 2차 과제에 대한 설명을 들었다. 원래는 마피아컴퍼니 과제를 팀원 모두가 참여하고, 프레시코드 과제는 두 팀으로 나누어서 진행하는 것이었는데, 둘 중 하나의 과제만 제출하는 것으로 변경되었다. \n우리는 변경사항을 듣기 전에 모르는 기술스택에 대해 미리 공부하기 위해, FastAPI나 Django에서 Neo4J를 어떻게 사용하는지, 그래프 DB는 무엇인지 각자 공부를 하고 있었다(마피아컴퍼니의 과제 요구사항 중 Neo4J DB를 사용하는 것이 필수였다). 구글링 하면서도 그래프DB에 대한 개념이 어려워서 멘붕이었는데, 선택권이 주어져서 다행이었다. 우리는 일단 프레시코드의 과제를 제출하기로 결정했다.  \n그 다음으로, 우리는 어떤 프레임워크를 사용할지 의견을 나눴다. 그냥 쉽게 우리가 잘 아는 Django를 사용하면 됐었는데, FastAPI에 대해 알게 되니 새로운 프레임워크를 써보는 것도 재밌을 것 같다는 의견이 나왔다. 그렇게 우리는 앞날을 모른 채 신나게투표를 했다.ㅋㅋㅋ flask, fastAPI, DRF, Django 중 DRF가 가장 많은 득표수를 얻고 우리는 DRF에 대해서 공부했다.    \n2차 과제의 요구사항을 간략하게 정리해보자과제의 기한과 요구사항은 다음과 같았다.\n\n기한: 21/11/4 17:00 ~ 11/6 10:00 (약 1.5일)\n개발 요구사항:\nDB: RDBMS 사용\n로그인 기능\nJWT 인증 방식 구현\n\n\n상품 관리 기능\n상품 CRUD API 구현\n사용자는 상품 조회, admin 권한을 가진 사용자만 상품 추가/수정/삭제 가능\n상품 전체목록 조회시, 페이징 처리\n\n\n적절한 Error Handling   \n유닛테스트 구현\n\n\n\n어떻게 과제를 해나갔는가우리는 먼저 목요일 밤까지 프레임워크 결정, 업무 분배, 초기 셋팅, 모델링을 하는데 시간을 할애했다.금요일날엔 12시에 만나 스터디룸을 잡고 models.py를 작성하고 마이그레이션을 했다.그 후, 로그인 기능에 2명, 상품관리 기능에 3명으로 팀을 나눴기 때문에 페어프로그래밍을 진행했다. 나는 jwt 인증 방식을 구현해 보고 싶어서 로그인 기능을 맡아서, DRF에서는 어떻게 구현할 수 있는지 팀원과 레퍼런스를 찾아봤다. DRF에서는 simple jwt를 사용하면 get_token이라는 메서드로 토큰을 알아서 만들어주는 것 같았다. 여러 코드를 참고하며 일단 postman을 돌려봤는데 잘 되지 않았고, 상품 관리 기능 팀도 DRF가 처음이다 보니 serializer를 쓰는 과정에서 에러가 잘 해결되지 않는 상황이었다. 이때 시간은 오후 5시었다.   \nDRF에 대한 충분한 지식 없이 구글링하면서 구현하다 보니 새로운 내용을 배우는건 좋았는데 기한 안에 과제를 마무리해서 내는 것이 더 중요하다 보니 우리는 다시 Django로 돌아오게 되었다. 각자 맡은 기능을 구현하고 도커로 배포까지 하고 헤어지는것이 목표였는데 error handling, 테스트 코드 짜는 과정에서 시간이 오래 걸리다보니 우리는 다같이 밤을 새게 되었다.   \n어려웠던 점은?프리온보딩 전에는 팀 프로젝트 경험이 없다보니 개인적으로 가장 어려운 부분은 협업하는 일이었다. 열심히 하겠다는 의미로 팀장을 자처했는데, 체계적으로 이끌지 못하는 것 같아서 팀원들한테 미안한 마음이 크다. 또한, 팀으로 하기 때문에 맡은 부분에 대해 시간이 너무 길어지면 다른 팀원들도 같이 시간적인 피해를 보게 되는데 2번의 프로젝트를 진행했으니 3차때는 밤을 새지 않기 위해 좀 더 시간 활용을 잘 해야할것 같다. \n무엇을 느끼고 무엇을 배웠나프로젝트 중간에 시간 부족으로 장고 프레임워크로 돌아오긴 했지만, DRF를 쓰기로 했을 때 공식문서를 보면서 어떻게 사용하는지 찾아보고 구현해보는 부분은 좋았다. 잘 되지는 않았지만..ㅎㅎ 프리온보딩에 참여하지 못했다면 장고 프레임워크만 사용할 줄 알았을텐데, 짧은 시간안에 다양한 프레임워크, DB를 사용하라는 과제가 주어지니 공식문서를 봤을 때 두려움이 덜한것 같다.  \n3차 과제는 어떻게 하고 싶은가가장 큰 목표는 의사결정을 빨리 하고 밤을 새지 않는 것이다.. \n","dateCreated":"2021-11-06T09:40:57+09:00","dateModified":"2021-11-11T13:09:01+09:00","datePublished":"2021-11-06T09:40:57+09:00","description":"\n2차 과제를 마치며…\n","headline":"Pre_Onboarding)2차 기업과제 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/06/Pre_Onboarding_02_2%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/06/Pre_Onboarding_02_2%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, 프레시코드"}</script>
     <meta name="description" content="2차 과제를 마치며…">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Pre_Onboarding)2차 기업과제 회고">
@@ -20,7 +20,7 @@
 <meta property="og:description" content="2차 과제를 마치며…">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-06T00:40:57.000Z">
-<meta property="article:modified_time" content="2021-11-06T00:03:13.973Z">
+<meta property="article:modified_time" content="2021-11-11T04:09:01.776Z">
 <meta property="article:tag" content="위코드">
 <meta property="article:tag" content="원티드">
 <meta property="article:tag" content="프레시코드">
@@ -328,9 +328,37 @@
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%9D%84-%EA%B0%84%EB%9E%B5%ED%95%98%EA%B2%8C-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90"><span class="toc-text">2차 과제의 요구사항을 간략하게 정리해보자</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%ED%95%B4%EB%82%98%EA%B0%94%EB%8A%94%EA%B0%80"><span class="toc-text">어떻게 과제를 해나갔는가</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%A0%A4%EC%9B%A0%EB%8D%98-%EC%A0%90%EC%9D%80"><span class="toc-text">어려웠던 점은?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B4%EC%97%87%EC%9D%84-%EB%8A%90%EB%81%BC%EA%B3%A0-%EB%AC%B4%EC%97%87%EC%9D%84-%EB%B0%B0%EC%9B%A0%EB%82%98"><span class="toc-text">무엇을 느끼고 무엇을 배웠나</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%98%EA%B3%A0-%EC%8B%B6%EC%9D%80%EA%B0%80"><span class="toc-text">3차 과제는 어떻게 하고 싶은가</span></a></li></ol> 
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%84%A0%ED%83%9D%EA%B6%8C"><span class="toc-text">과제의 선택권</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%9D%84-%EA%B0%84%EB%9E%B5%ED%95%98%EA%B2%8C-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90"><span class="toc-text">2차 과제의 요구사항을 간략하게 정리해보자</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%ED%95%B4%EB%82%98%EA%B0%94%EB%8A%94%EA%B0%80"><span class="toc-text">어떻게 과제를 해나갔는가</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%A0%A4%EC%9B%A0%EB%8D%98-%EC%A0%90%EC%9D%80"><span class="toc-text">어려웠던 점은?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B4%EC%97%87%EC%9D%84-%EB%8A%90%EB%81%BC%EA%B3%A0-%EB%AC%B4%EC%97%87%EC%9D%84-%EB%B0%B0%EC%9B%A0%EB%82%98"><span class="toc-text">무엇을 느끼고 무엇을 배웠나</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%98%EA%B3%A0-%EC%8B%B6%EC%9D%80%EA%B0%80"><span class="toc-text">3차 과제는 어떻게 하고 싶은가</span></a></li></ol> 
 
-<h5 id="2차-과제의-요구사항을-간략하게-정리해보자"><a href="#2차-과제의-요구사항을-간략하게-정리해보자" class="headerlink" title="2차 과제의 요구사항을 간략하게 정리해보자"></a>2차 과제의 요구사항을 간략하게 정리해보자</h5><h5 id="어떻게-과제를-해나갔는가"><a href="#어떻게-과제를-해나갔는가" class="headerlink" title="어떻게 과제를 해나갔는가"></a>어떻게 과제를 해나갔는가</h5><h5 id="어려웠던-점은"><a href="#어려웠던-점은" class="headerlink" title="어려웠던 점은?"></a>어려웠던 점은?</h5><h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><h5 id="3차-과제는-어떻게-하고-싶은가"><a href="#3차-과제는-어떻게-하고-싶은가" class="headerlink" title="3차 과제는 어떻게 하고 싶은가"></a>3차 과제는 어떻게 하고 싶은가</h5>
+<h5 id="과제의-선택권"><a href="#과제의-선택권" class="headerlink" title="과제의 선택권"></a>과제의 선택권</h5><p>목요일 세션이 끝나고, 2차 과제에 대한 설명을 들었다. 원래는 마피아컴퍼니 과제를 팀원 모두가 참여하고, 프레시코드 과제는 두 팀으로 나누어서 진행하는 것이었는데, 둘 중 하나의 과제만 제출하는 것으로 변경되었다. </p>
+<p>우리는 변경사항을 듣기 전에 모르는 기술스택에 대해 미리 공부하기 위해, FastAPI나 Django에서 Neo4J를 어떻게 사용하는지, 그래프 DB는 무엇인지 각자 공부를 하고 있었다(마피아컴퍼니의 과제 요구사항 중 Neo4J DB를 사용하는 것이 필수였다). 구글링 하면서도 그래프DB에 대한 개념이 어려워서 멘붕이었는데, 선택권이 주어져서 다행이었다. 우리는 일단 프레시코드의 과제를 제출하기로 결정했다.  </p>
+<p>그 다음으로, 우리는 어떤 프레임워크를 사용할지 의견을 나눴다. 그냥 쉽게 우리가 잘 아는 Django를 사용하면 됐었는데, FastAPI에 대해 알게 되니 새로운 프레임워크를 써보는 것도 재밌을 것 같다는 의견이 나왔다. 그렇게 우리는 앞날을 모른 채 신나게투표를 했다.ㅋㅋㅋ flask, fastAPI, DRF, Django 중 DRF가 가장 많은 득표수를 얻고 우리는 DRF에 대해서 공부했다.    </p>
+<h5 id="2차-과제의-요구사항을-간략하게-정리해보자"><a href="#2차-과제의-요구사항을-간략하게-정리해보자" class="headerlink" title="2차 과제의 요구사항을 간략하게 정리해보자"></a>2차 과제의 요구사항을 간략하게 정리해보자</h5><p>과제의 기한과 요구사항은 다음과 같았다.</p>
+<ul>
+<li>기한: 21/11/4 17:00 ~ 11/6 10:00 (약 1.5일)</li>
+<li>개발 요구사항:<ul>
+<li>DB: RDBMS 사용</li>
+<li>로그인 기능<ul>
+<li>JWT 인증 방식 구현</li>
+</ul>
+</li>
+<li>상품 관리 기능<ul>
+<li>상품 CRUD API 구현</li>
+<li>사용자는 상품 조회, admin 권한을 가진 사용자만 상품 추가/수정/삭제 가능</li>
+<li>상품 전체목록 조회시, 페이징 처리</li>
+</ul>
+</li>
+<li>적절한 Error Handling   </li>
+<li>유닛테스트 구현</li>
+</ul>
+</li>
+</ul>
+<h5 id="어떻게-과제를-해나갔는가"><a href="#어떻게-과제를-해나갔는가" class="headerlink" title="어떻게 과제를 해나갔는가"></a>어떻게 과제를 해나갔는가</h5><p>우리는 먼저 목요일 밤까지 프레임워크 결정, 업무 분배, 초기 셋팅, 모델링을 하는데 시간을 할애했다.<br>금요일날엔 12시에 만나 스터디룸을 잡고 models.py를 작성하고 마이그레이션을 했다.그 후, 로그인 기능에 2명, 상품관리 기능에 3명으로 팀을 나눴기 때문에 페어프로그래밍을 진행했다. 나는 jwt 인증 방식을 구현해 보고 싶어서 로그인 기능을 맡아서, DRF에서는 어떻게 구현할 수 있는지 팀원과 레퍼런스를 찾아봤다. DRF에서는 simple jwt를 사용하면 get_token이라는 메서드로 토큰을 알아서 만들어주는 것 같았다. 여러 코드를 참고하며 일단 postman을 돌려봤는데 잘 되지 않았고, 상품 관리 기능 팀도 DRF가 처음이다 보니 serializer를 쓰는 과정에서 에러가 잘 해결되지 않는 상황이었다. 이때 시간은 오후 5시었다.   </p>
+<p>DRF에 대한 충분한 지식 없이 구글링하면서 구현하다 보니 새로운 내용을 배우는건 좋았는데 기한 안에 과제를 마무리해서 내는 것이 더 중요하다 보니 우리는 다시 Django로 돌아오게 되었다. 각자 맡은 기능을 구현하고 도커로 배포까지 하고 헤어지는것이 목표였는데 error handling, 테스트 코드 짜는 과정에서 시간이 오래 걸리다보니 우리는 다같이 밤을 새게 되었다.   </p>
+<h5 id="어려웠던-점은"><a href="#어려웠던-점은" class="headerlink" title="어려웠던 점은?"></a>어려웠던 점은?</h5><p>프리온보딩 전에는 팀 프로젝트 경험이 없다보니 개인적으로 가장 어려운 부분은 협업하는 일이었다. 열심히 하겠다는 의미로 팀장을 자처했는데, 체계적으로 이끌지 못하는 것 같아서 팀원들한테 미안한 마음이 크다. 또한, 팀으로 하기 때문에 맡은 부분에 대해 시간이 너무 길어지면 다른 팀원들도 같이 시간적인 피해를 보게 되는데 2번의 프로젝트를 진행했으니 3차때는 밤을 새지 않기 위해 좀 더 시간 활용을 잘 해야할것 같다. </p>
+<h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><p>프로젝트 중간에 시간 부족으로 장고 프레임워크로 돌아오긴 했지만, DRF를 쓰기로 했을 때 공식문서를 보면서 어떻게 사용하는지 찾아보고 구현해보는 부분은 좋았다. 잘 되지는 않았지만..ㅎㅎ 프리온보딩에 참여하지 못했다면 장고 프레임워크만 사용할 줄 알았을텐데, 짧은 시간안에 다양한 프레임워크, DB를 사용하라는 과제가 주어지니 공식문서를 봤을 때 두려움이 덜한것 같다.  </p>
+<h5 id="3차-과제는-어떻게-하고-싶은가"><a href="#3차-과제는-어떻게-하고-싶은가" class="headerlink" title="3차 과제는 어떻게 하고 싶은가"></a>3차 과제는 어떻게 하고 싶은가</h5><p>가장 큰 목표는 의사결정을 빨리 하고 밤을 새지 않는 것이다.. </p>
+
             
 
 
