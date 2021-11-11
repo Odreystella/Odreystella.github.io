@@ -6,15 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>OS)[반효경교수님 강의]CPU 스케줄링 - Dev Odreystella&#39;s Blog</title>
+    <title>OS) [반효경교수님 강의]CPU 스케줄링 - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n반효경 교수님 OS 4차시 강의 노트 정리\n\n\n\n\n\n강의 목차\n운영체제 개요\n컴퓨터 시스템의 구조\n프로세스 관리\nCPU 스케줄링\n프로세스 동기화\n데드락\n메모리 관리\n가상 메모리\n파일 시스템\n입출력 시스템\n디스크 관리\n\nCPU burst ? I/O burst?\nCPU burst : CPU만 연속적으로 쓰면서 instruction을 실행하는 일련의 단계\nI/O burst : I/O를 실행하고 있는 단계\n프로그램이 실행된다는 것은 CPU burst와 I/O burst를 반복하는 것\n사용자 인터랙션이 많으면 당연하게 I/O burst가 많이 일어남\n\nCPU-bound process? I/O-bound process?\nI/O-bound process : \nCPU는 짧게 쓰고 중간에 I/O가 끼어드는 빈도가 많은 프로그램.\nCPU burst는 짧지만 빈번하게 발생\n사용자에게 빠른 응답을 제공해야 하기 때문에 CPU스케줄링이 중요함\n\n\nCPU-bound job : \nCPU만 오래 쓰는 프로그램(계산 위주)\nCPU burst는 길고 드물게 발생\n\n\n\nCPU Scheduler &amp; Dispatcher (OS의 코드, 하드웨어X)\nCPU Scheduler : Ready 상태의 프로세스 중에 어떤 프로세스에게 CPU를 줄 지 결정함\n\nDispatcher : CPU Scheduler이 선택한 프로세스에게 CPU를 줌이 과정이 context switch임(현재 실행중인 프로세스의 컨텍스트를 저장하고, 넘겨줄 프로세스의 컨텍스트를 셋팅하는 것)\n\nCPU 스케줄링이 필요한 경우 : 프로세스의 상태 변화가 생겼을 때\n\nRunning → Blocked (ex. I/O 요청하는 시스템콜)\nRunning → Ready (ex. 할당시간 만료로 타이머 인터럽트 발생)\nBlocked → Ready (ex. I/O 완료 후 device controller가 인터럽트, 일반적으로 I/O완료 후 해당 프로세스가 실행되지 않지만 우선순위가 높은 프로세스라면 바로 CPU를 얻음)\n프로세스 종료된 경우\n\n** 1), 4)의 경우, CPU를 쓰지 않아서 자진 반납하는 스케줄링(=nonpreemptive, 비선점형)** 2), 3)의 경우, CPU를 강제로 빼앗는 스케줄링(=preemptive, 선점형) ← 보통 많이 쓰임\n\n\n스케줄링 알고리즘 성능 척도\n시스템 관점에서의 성능 척도\nCPU utilization(이용률) : 전체 시간 중에서 CPU가 사용된 시간의 비율\nThroughput(처리량) : 주어진 시간동안(단위 시간) 몇개의 일을 완료했는지\n\n\n프로그램 관점에서의 성능 척도\nTurnaround time(소요시간, 반환시간) : CPU를 쓰기 위해 ready 큐에서 기다리고, 사용하고,  I/O하기 위해 반납하기까지 걸리는 모든 시간\nWaiting Time(대기 시간) : ready 큐에서 CPU를 얻기 위해 기다리는 시간을 모두 합한 시간(선점형 같은 겨우 CPU를 뺐겼다 사용했다를 반복하기 때문)\nResponse time(응답 시간) : ready 큐에 들어와서 처음으로 CPU를 얻기까지 걸리는 시간\n\n\n\n스케줄링 알고리즘 종류(단일 CPU)\n비선점형 방식과 선점형 방식으로 나뉨\n\n\nFCFS(First-Come First-Served)\nnonpreemptive\n먼저 큐에 들어온 프로세스에게 CPU를 줌\n문제점 : 먼저 들어온 프로세스가 CPU를 오래 쓴다면 기다려야함. 평균 waiting time 증가먼저 들어온 프로세스가 CPU를 짧게 쓴다면 평균 waiting time 감소, 첫번째 프로세스에 영향 큼\n화장실 스케줄링ㅋㅋㅋㅋ\n\n\nSJF(Shortest-Job-First) - 우선순위 스케줄링의 일좀\nCPU burst time이 가장 짧은 프로세스에 CPU를 줌, 평균 waiting time이 가장 짧음\nnonpreemptive : 지금 running중인 프로세스보다 더 짧게 CPU를 쓰는 프로세스가 와도 기다려야 함\npreemptive : 지금 running중인 프로세스보다 더 짧게 CPU를 쓰는 프로세스가 오면 CPU를 뺏어서 넘겨줌, 평균 waiting time이 가장 짧음, Shortest-Remaining-Time-First(SRTF)라고도 부름\n문제점 : starvation 발생(CPU burst time이 긴 프로세스), CPU burst time 예측 불가(exponential averaging 사용해서 추정)\n\n\nPriority Scheduling : 높은 우선순위를 가진 프로세스에 CPU 할당\n우선순위를 정의하는 방법은 다양함(CPU 사용 시간 등)\nnonpreemptive : 지금 running중인 프로세스보다 더 높은 우선순위를 가진 프로세스가 와도 기다려야 함\npreemptive : 지금 running중인 프로세스보다 더 높은 우선순위를 가진 프로세스가 오면 CPU를 뺏어서 넘겨줌\n문제점 : starvation 발생(우선순위가 낮은 프로세스)\n해결 : aging(노화), 오래 기다리면 우선순위를 높여주는 방법\n\n\nRound Robin(RR) \npreemptive\n각 프로세스는 동일한 크기의 할당 시간(time quantum)을 가짐\n할당 시간이 끝나면 CPU를 뺏기고 ready 큐 맨 뒤로 가서 기다림\nresponse time이 빠름\n적당한 time quantum을 가져야 함(10~100ms)\ntime quantum 이 길면 → FCFS\ntime quantum 이 짧으면 → context switch 오버헤드가 커짐\n일반적으로 SJF보다 평균 처리량이 길지만 response time은 더 짧음\n\n\nMultilevel Queue\nready 큐를 여러개로 분할하는 방법으로 각 큐에서 어떤 스케줄링을 할지, 어떤 큐에 먼저 CPU를 줄지 정의\n우선순위가 높은 프로세스에게 CPU 사용권을 많이 주는 방식\nex) foreground(interactive)                                 - RR 사용   background(batch - no human interaction)  - FCFS 사용   → 큐에 대한 스케줄링으로 우선순위 스케줄링(기아 발생), Time slice(80%, 20% 등) \n아래 그림처럼 여러개의 큐가 있고, 큐에 우선순위가 있음\n문제점 : 우선순위가 낮은 큐는 기아 발생할 수 있음 \n\n\n\nMultilevel Feedback Queue\nQueue의 수, 각 큐의 스케줄링 알고리즘, 프로세스를 상위 큐로 보내는 기준, 프로세스를 하위 큐로 보내는 기준, 처음 프로세스가 들어갈 때 어느 큐로 들어갈지 등을 정의해야 함\nCPU 사용시간이 짧은 프로세스한테 CPU를 많이 주는 방식\n일반적으로 처음 들어오는 프로세스는 우선순위가 가장 높은 큐에 배치, 우선순위가 높은 큐는 RR(time quantum = 8) 스케줄링 → 할당시간이 끝날 때마다 하위 큐로 강등되고, 할당시간안에 끝나면 프로세스가 큐에서 빠져나감\n아래 그림처럼 프로세스가 다른 큐로 이동할 수 있음 \n\n\n\n\n\n\nReal-Time Scheduling\nHard real-time-task : 정해진 시간 안에 반드시 끝내도록 스케줄링해야함\nSoft real-time task : 일반 프로세스에 비해 높은 우선순위를 갖도록 함, 데드라인이 꼭 지켜지지는 않음\n\nThread Scheduling\nLocal Scheduling : \nUser level thread\n사용자 프로세스가 직접 스레드를 관리, OS는 스레드의 존재를 모르기 때문에 해당 프로세스에게 CPU를 줄지 말지 결정함\n해당 프로세스에 CPU가 넘어오면 어떤 스레드에게 CPU를 줄지는 프로세스가 결정함\n\n\nGlobal Scheduling :  \nKernel level thread\nOS가 스레드의 존재를 이미 알고 있기 때문에 프로세스 스케줄링 하듯이 어떤 스레드에게 CPU를 줄지 결정함\n\n\n\n스케줄링 알고리즘 평가 방법\nQueueing models(이론적인 방법): 확률분포로 주어지는 큐에 도착하는 arrival rate와 service rate등을 통해 성능 척도를 계산함\nImplementation &amp; Measurement: 실제 시스템(리눅스 등)에 알고리즘을 구현하여 프로그램을 직접 돌려보면서 어떤 알고리즘이 프로세스를 더 빨리 처리하는지  알고리즘 성능을 비교함\nSimulation: 알고리즘을 모의 프로그램으로 작성 후 trace(실제 시스템에서 얻어진 CPU 사용패턴 or 임의로 만든 데이터)를 입력하여 결과 비교출처\n\n\nhttps://core.ewha.ac.kr/publicview/C0101020140325134428879622?vmode=f\nhttps://core.ewha.ac.kr/publicview/C0101020140328151311578473?vmode=f\nhttps://core.ewha.ac.kr/publicview/C0101020140401134252676046?vmode=f\n\n","dateCreated":"2021-08-27T17:30:57+09:00","dateModified":"2021-10-30T02:23:46+09:00","datePublished":"2021-08-27T17:30:57+09:00","description":"\n반효경 교수님 OS 4차시 강의 노트 정리\n","headline":"OS)[반효경교수님 강의]CPU 스케줄링","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/08/27/OS_04_CPU_%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/08/27/OS_04_CPU_%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81/","keywords":"OS"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n반효경 교수님 OS 4차시 강의 노트 정리\n\n\n\n\n\n강의 목차\n운영체제 개요\n컴퓨터 시스템의 구조\n프로세스 관리\nCPU 스케줄링\n프로세스 동기화\n데드락\n메모리 관리\n가상 메모리\n파일 시스템\n입출력 시스템\n디스크 관리\n\nCPU burst ? I/O burst?\nCPU burst : CPU만 연속적으로 쓰면서 instruction을 실행하는 일련의 단계\nI/O burst : I/O를 실행하고 있는 단계\n프로그램이 실행된다는 것은 CPU burst와 I/O burst를 반복하는 것\n사용자 인터랙션이 많으면 당연하게 I/O burst가 많이 일어남\n\nCPU-bound process? I/O-bound process?\nI/O-bound process : \nCPU는 짧게 쓰고 중간에 I/O가 끼어드는 빈도가 많은 프로그램.\nCPU burst는 짧지만 빈번하게 발생\n사용자에게 빠른 응답을 제공해야 하기 때문에 CPU스케줄링이 중요함\n\n\nCPU-bound job : \nCPU만 오래 쓰는 프로그램(계산 위주)\nCPU burst는 길고 드물게 발생\n\n\n\nCPU Scheduler &amp; Dispatcher (OS의 코드, 하드웨어X)\nCPU Scheduler : Ready 상태의 프로세스 중에 어떤 프로세스에게 CPU를 줄 지 결정함\n\nDispatcher : CPU Scheduler이 선택한 프로세스에게 CPU를 줌이 과정이 context switch임(현재 실행중인 프로세스의 컨텍스트를 저장하고, 넘겨줄 프로세스의 컨텍스트를 셋팅하는 것)\n\nCPU 스케줄링이 필요한 경우 : 프로세스의 상태 변화가 생겼을 때\n\nRunning → Blocked (ex. I/O 요청하는 시스템콜)\nRunning → Ready (ex. 할당시간 만료로 타이머 인터럽트 발생)\nBlocked → Ready (ex. I/O 완료 후 device controller가 인터럽트, 일반적으로 I/O완료 후 해당 프로세스가 실행되지 않지만 우선순위가 높은 프로세스라면 바로 CPU를 얻음)\n프로세스 종료된 경우\n\n** 1), 4)의 경우, CPU를 쓰지 않아서 자진 반납하는 스케줄링(=nonpreemptive, 비선점형)** 2), 3)의 경우, CPU를 강제로 빼앗는 스케줄링(=preemptive, 선점형) ← 보통 많이 쓰임\n\n\n스케줄링 알고리즘 성능 척도\n시스템 관점에서의 성능 척도\nCPU utilization(이용률) : 전체 시간 중에서 CPU가 사용된 시간의 비율\nThroughput(처리량) : 주어진 시간동안(단위 시간) 몇개의 일을 완료했는지\n\n\n프로그램 관점에서의 성능 척도\nTurnaround time(소요시간, 반환시간) : CPU를 쓰기 위해 ready 큐에서 기다리고, 사용하고,  I/O하기 위해 반납하기까지 걸리는 모든 시간\nWaiting Time(대기 시간) : ready 큐에서 CPU를 얻기 위해 기다리는 시간을 모두 합한 시간(선점형 같은 겨우 CPU를 뺐겼다 사용했다를 반복하기 때문)\nResponse time(응답 시간) : ready 큐에 들어와서 처음으로 CPU를 얻기까지 걸리는 시간\n\n\n\n스케줄링 알고리즘 종류(단일 CPU)\n비선점형 방식과 선점형 방식으로 나뉨\n\n\nFCFS(First-Come First-Served)\nnonpreemptive\n먼저 큐에 들어온 프로세스에게 CPU를 줌\n문제점 : 먼저 들어온 프로세스가 CPU를 오래 쓴다면 기다려야함. 평균 waiting time 증가먼저 들어온 프로세스가 CPU를 짧게 쓴다면 평균 waiting time 감소, 첫번째 프로세스에 영향 큼\n화장실 스케줄링ㅋㅋㅋㅋ\n\n\nSJF(Shortest-Job-First) - 우선순위 스케줄링의 일좀\nCPU burst time이 가장 짧은 프로세스에 CPU를 줌, 평균 waiting time이 가장 짧음\nnonpreemptive : 지금 running중인 프로세스보다 더 짧게 CPU를 쓰는 프로세스가 와도 기다려야 함\npreemptive : 지금 running중인 프로세스보다 더 짧게 CPU를 쓰는 프로세스가 오면 CPU를 뺏어서 넘겨줌, 평균 waiting time이 가장 짧음, Shortest-Remaining-Time-First(SRTF)라고도 부름\n문제점 : starvation 발생(CPU burst time이 긴 프로세스), CPU burst time 예측 불가(exponential averaging 사용해서 추정)\n\n\nPriority Scheduling : 높은 우선순위를 가진 프로세스에 CPU 할당\n우선순위를 정의하는 방법은 다양함(CPU 사용 시간 등)\nnonpreemptive : 지금 running중인 프로세스보다 더 높은 우선순위를 가진 프로세스가 와도 기다려야 함\npreemptive : 지금 running중인 프로세스보다 더 높은 우선순위를 가진 프로세스가 오면 CPU를 뺏어서 넘겨줌\n문제점 : starvation 발생(우선순위가 낮은 프로세스)\n해결 : aging(노화), 오래 기다리면 우선순위를 높여주는 방법\n\n\nRound Robin(RR) \npreemptive\n각 프로세스는 동일한 크기의 할당 시간(time quantum)을 가짐\n할당 시간이 끝나면 CPU를 뺏기고 ready 큐 맨 뒤로 가서 기다림\nresponse time이 빠름\n적당한 time quantum을 가져야 함(10~100ms)\ntime quantum 이 길면 → FCFS\ntime quantum 이 짧으면 → context switch 오버헤드가 커짐\n일반적으로 SJF보다 평균 처리량이 길지만 response time은 더 짧음\n\n\nMultilevel Queue\nready 큐를 여러개로 분할하는 방법으로 각 큐에서 어떤 스케줄링을 할지, 어떤 큐에 먼저 CPU를 줄지 정의\n우선순위가 높은 프로세스에게 CPU 사용권을 많이 주는 방식\nex) foreground(interactive)                                 - RR 사용   background(batch - no human interaction)  - FCFS 사용   → 큐에 대한 스케줄링으로 우선순위 스케줄링(기아 발생), Time slice(80%, 20% 등) \n아래 그림처럼 여러개의 큐가 있고, 큐에 우선순위가 있음\n문제점 : 우선순위가 낮은 큐는 기아 발생할 수 있음 \n\n\n\nMultilevel Feedback Queue\nQueue의 수, 각 큐의 스케줄링 알고리즘, 프로세스를 상위 큐로 보내는 기준, 프로세스를 하위 큐로 보내는 기준, 처음 프로세스가 들어갈 때 어느 큐로 들어갈지 등을 정의해야 함\nCPU 사용시간이 짧은 프로세스한테 CPU를 많이 주는 방식\n일반적으로 처음 들어오는 프로세스는 우선순위가 가장 높은 큐에 배치, 우선순위가 높은 큐는 RR(time quantum = 8) 스케줄링 → 할당시간이 끝날 때마다 하위 큐로 강등되고, 할당시간안에 끝나면 프로세스가 큐에서 빠져나감\n아래 그림처럼 프로세스가 다른 큐로 이동할 수 있음 \n\n\n\n\n\n\nReal-Time Scheduling\nHard real-time-task : 정해진 시간 안에 반드시 끝내도록 스케줄링해야함\nSoft real-time task : 일반 프로세스에 비해 높은 우선순위를 갖도록 함, 데드라인이 꼭 지켜지지는 않음\n\nThread Scheduling\nLocal Scheduling : \nUser level thread\n사용자 프로세스가 직접 스레드를 관리, OS는 스레드의 존재를 모르기 때문에 해당 프로세스에게 CPU를 줄지 말지 결정함\n해당 프로세스에 CPU가 넘어오면 어떤 스레드에게 CPU를 줄지는 프로세스가 결정함\n\n\nGlobal Scheduling :  \nKernel level thread\nOS가 스레드의 존재를 이미 알고 있기 때문에 프로세스 스케줄링 하듯이 어떤 스레드에게 CPU를 줄지 결정함\n\n\n\n스케줄링 알고리즘 평가 방법\nQueueing models(이론적인 방법): 확률분포로 주어지는 큐에 도착하는 arrival rate와 service rate등을 통해 성능 척도를 계산함\nImplementation &amp; Measurement: 실제 시스템(리눅스 등)에 알고리즘을 구현하여 프로그램을 직접 돌려보면서 어떤 알고리즘이 프로세스를 더 빨리 처리하는지  알고리즘 성능을 비교함\nSimulation: 알고리즘을 모의 프로그램으로 작성 후 trace(실제 시스템에서 얻어진 CPU 사용패턴 or 임의로 만든 데이터)를 입력하여 결과 비교출처\n\n\nhttps://core.ewha.ac.kr/publicview/C0101020140325134428879622?vmode=f\nhttps://core.ewha.ac.kr/publicview/C0101020140328151311578473?vmode=f\nhttps://core.ewha.ac.kr/publicview/C0101020140401134252676046?vmode=f\n\n","dateCreated":"2021-08-27T17:30:57+09:00","dateModified":"2021-11-11T13:30:43+09:00","datePublished":"2021-08-27T17:30:57+09:00","description":"\n반효경 교수님 OS 4차시 강의 노트 정리\n","headline":"OS) [반효경교수님 강의]CPU 스케줄링","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/08/27/OS_04_CPU_%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/08/27/OS_04_CPU_%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81/","keywords":"OS"}</script>
     <meta name="description" content="반효경 교수님 OS 4차시 강의 노트 정리">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="OS)[반효경교수님 강의]CPU 스케줄링">
+<meta property="og:title" content="OS) [반효경교수님 강의]CPU 스케줄링">
 <meta property="og:url" content="https://odreystella.github.io/2021/08/27/OS_04_CPU_%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
 <meta property="og:description" content="반효경 교수님 OS 4차시 강의 노트 정리">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://odreystella.github.io/images/os/os_multilevel_queue.png">
 <meta property="og:image" content="https://odreystella.github.io/images/os/os_multilevel_feedback_queue.png">
 <meta property="article:published_time" content="2021-08-27T08:30:57.000Z">
-<meta property="article:modified_time" content="2021-10-29T17:23:46.607Z">
+<meta property="article:modified_time" content="2021-11-11T04:30:43.898Z">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://odreystella.github.io/images/os/os_multilevel_queue.png">
@@ -299,7 +299,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            OS)[반효경교수님 강의]CPU 스케줄링
+            OS) [반효경교수님 강의]CPU 스케줄링
         </h1>
     
     
@@ -500,8 +500,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/08/30/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%95%EB%A0%AC_K%EB%B2%88%EC%A7%B8_%EC%88%98/"
-                    data-tooltip="알고리즘)[프로그래머스]정렬 - K번째 수"
-                    aria-label="PREVIOUS: 알고리즘)[프로그래머스]정렬 - K번째 수"
+                    data-tooltip="알고리즘) [프로그래머스]정렬 - K번째 수"
+                    aria-label="PREVIOUS: 알고리즘) [프로그래머스]정렬 - K번째 수"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -514,8 +514,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/08/18/OS_03_%EC%8A%A4%EB%A0%88%EB%93%9C/"
-                    data-tooltip="OS)[반효경교수님 강의]스레드"
-                    aria-label="NEXT: OS)[반효경교수님 강의]스레드"
+                    data-tooltip="OS) [반효경교수님 강의]스레드"
+                    aria-label="NEXT: OS) [반효경교수님 강의]스레드"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -615,8 +615,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/08/30/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%95%EB%A0%AC_K%EB%B2%88%EC%A7%B8_%EC%88%98/"
-                    data-tooltip="알고리즘)[프로그래머스]정렬 - K번째 수"
-                    aria-label="PREVIOUS: 알고리즘)[프로그래머스]정렬 - K번째 수"
+                    data-tooltip="알고리즘) [프로그래머스]정렬 - K번째 수"
+                    aria-label="PREVIOUS: 알고리즘) [프로그래머스]정렬 - K번째 수"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -629,8 +629,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/08/18/OS_03_%EC%8A%A4%EB%A0%88%EB%93%9C/"
-                    data-tooltip="OS)[반효경교수님 강의]스레드"
-                    aria-label="NEXT: OS)[반효경교수님 강의]스레드"
+                    data-tooltip="OS) [반효경교수님 강의]스레드"
+                    aria-label="NEXT: OS) [반효경교수님 강의]스레드"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>

@@ -6,15 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>알고리즘)[프로그래머스]정렬 - K번째 수 - Dev Odreystella&#39;s Blog</title>
+    <title>알고리즘) [프로그래머스]정렬 - K번째 수 - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n정렬 - K번째 수 문제 풀이\n\n\n\n\n\nChallenge문제 설명배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.\n예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면\n\narray의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.\n1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.\n2에서 나온 배열의 3번째 숫자는 5입니다.배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를 배열에 담아 return 하도록 solution 함수를 작성해주세요.\n\n제한사항\narray의 길이는 1 이상 100 이하입니다.\narray의 각 원소는 1 이상 100 이하입니다.\ncommands의 길이는 1 이상 50 이하입니다.\ncommands의 각 원소는 길이가 3입니다.\n\n입출력 예\n\n\narray\ncommands\nreturn\n\n\n\n[1, 5, 2, 6, 3, 7, 4]\n[[2, 5, 3], [4, 4, 1], [5, 6, 3]]\n[5, 6, 3]\n\n\n입출력 예 설명[1, 5, 2, 6, 3, 7, 4]를 2번째부터 5번째까지 자른 후 정렬합니다. [2, 3, 5, 6]의 세 번째 숫자는 5입니다.[1, 5, 2, 6, 3, 7, 4]를 4번째부터 4번째까지 자른 후 정렬합니다. [6]의 첫 번째 숫자는 6입니다.[1, 5, 2, 6, 3, 7, 4]를 1번째부터 7번째까지 자릅니다. [1, 2, 3, 4, 5, 6, 7]의 세 번째 숫자는 3입니다.\nSolutionon my own(ver.1)1234567def solution(array, commands):    answer = []    for command in commands:        new_array = array[command[0]-1:command[1]]        new_array.sort()        answer.append(new_array[command[2]-1])    return answer\n결과(ver.1)\n\n풀이 방법\ncommands가 여러개니 for문을 사용한다.\ncommands의 원소(command)에 접근하면서 array를 인덱스 command[0]-1 부터 인덱스 command[1]까지 자르고 자른 array를 new_array에 담는다.\nnew_array를 정렬한다.\nnew_array에서 인덱스 command[2]-1 번째 원소를 answer에 추가한다. \n\non my own(ver.2)12def solution(array, commands):    return [sorted(array[command[0]-1:command[1]])[command[2]-1] for command in commands]\n결과(ver.2)\n\nBest Code12def solution(array, commands):    return list(map(lambda command:sorted(array[command[0]-1:command[1]])[command[2]-1], commands))\n결과(Best Code)\n\n배운 점\nfor문을 쓸 일이 있을 때는 map을 떠올리자.\n어떤 작업을 반복해야 한다면 lambda로 만들어보자.\nlist(map(lambda 함수, 이터러블 중 시퀀스 객체(e.g., list, str, tuple, range)) 구조 기억하기.\nsort()는 원본 배열 자체를 정렬하고, None을 리턴한다.즉, new_array = array.sort()하면 new_array에는 None가 담긴다.\nsorted()는 원본을 훼손하지 않고, 정렬한 새로운 배열을 리턴한다.\nlist의 경우, 속도는 sort()가 sorted()보다 빠르다고 한다.sorted()는 복사본을 만들기 때문, 미세한 차이지만 sort()쓴 ver.1코드에서 0.01ms걸리는 케이스가 더 적게 나온다..ㅋ\nsort()는 list 자료형만 쓸 수 있고, sorted()는 tuple, dict, str, set 등 이터러블 객체라면 모두 사용 가능하다.\n이터러블 객체 : list, tuple, range, str, dict, set시퀀스 객체 : list, tuple, range, str\n\n출처\nhttps://programmers.co.kr/learn/courses/30/lessons/42748 - 프로그래머스 김\nhttps://sikaleo.tistory.com/61 - 이터러블 vs. 이터레이터\nhttps://velog.io/@sparkbosing/Python-sort%EC%99%80-sorted-%EC%B0%A8%EC%9D%B4 - sort() vs. sorted()\nhttps://security-nanglam.tistory.com/376 - sort() vs. sorted()\nhttps://velog.io/@asas33/python-%EB%AC%B8%EC%9E%90%EC%97%B4-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%A0%95%EB%A0%AC - list.sort(), sorted()\n\n","dateCreated":"2021-08-30T15:59:35+09:00","dateModified":"2021-09-01T19:50:11+09:00","datePublished":"2021-08-30T15:59:35+09:00","description":"\n정렬 - K번째 수 문제 풀이\n","headline":"알고리즘)[프로그래머스]정렬 - K번째 수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/08/30/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%95%EB%A0%AC_K%EB%B2%88%EC%A7%B8_%EC%88%98/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/08/30/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%95%EB%A0%AC_K%EB%B2%88%EC%A7%B8_%EC%88%98/","keywords":"algorithm, python, programmers"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n정렬 - K번째 수 문제 풀이\n\n\n\n\n\nChallenge문제 설명배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.\n예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면\n\narray의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.\n1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.\n2에서 나온 배열의 3번째 숫자는 5입니다.배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를 배열에 담아 return 하도록 solution 함수를 작성해주세요.\n\n제한사항\narray의 길이는 1 이상 100 이하입니다.\narray의 각 원소는 1 이상 100 이하입니다.\ncommands의 길이는 1 이상 50 이하입니다.\ncommands의 각 원소는 길이가 3입니다.\n\n입출력 예\n\n\narray\ncommands\nreturn\n\n\n\n[1, 5, 2, 6, 3, 7, 4]\n[[2, 5, 3], [4, 4, 1], [5, 6, 3]]\n[5, 6, 3]\n\n\n입출력 예 설명[1, 5, 2, 6, 3, 7, 4]를 2번째부터 5번째까지 자른 후 정렬합니다. [2, 3, 5, 6]의 세 번째 숫자는 5입니다.[1, 5, 2, 6, 3, 7, 4]를 4번째부터 4번째까지 자른 후 정렬합니다. [6]의 첫 번째 숫자는 6입니다.[1, 5, 2, 6, 3, 7, 4]를 1번째부터 7번째까지 자릅니다. [1, 2, 3, 4, 5, 6, 7]의 세 번째 숫자는 3입니다.\nSolutionon my own(ver.1)1234567def solution(array, commands):    answer = []    for command in commands:        new_array = array[command[0]-1:command[1]]        new_array.sort()        answer.append(new_array[command[2]-1])    return answer\n결과(ver.1)\n\n풀이 방법\ncommands가 여러개니 for문을 사용한다.\ncommands의 원소(command)에 접근하면서 array를 인덱스 command[0]-1 부터 인덱스 command[1]까지 자르고 자른 array를 new_array에 담는다.\nnew_array를 정렬한다.\nnew_array에서 인덱스 command[2]-1 번째 원소를 answer에 추가한다. \n\non my own(ver.2)12def solution(array, commands):    return [sorted(array[command[0]-1:command[1]])[command[2]-1] for command in commands]\n결과(ver.2)\n\nBest Code12def solution(array, commands):    return list(map(lambda command:sorted(array[command[0]-1:command[1]])[command[2]-1], commands))\n결과(Best Code)\n\n배운 점\nfor문을 쓸 일이 있을 때는 map을 떠올리자.\n어떤 작업을 반복해야 한다면 lambda로 만들어보자.\nlist(map(lambda 함수, 이터러블 중 시퀀스 객체(e.g., list, str, tuple, range)) 구조 기억하기.\nsort()는 원본 배열 자체를 정렬하고, None을 리턴한다.즉, new_array = array.sort()하면 new_array에는 None가 담긴다.\nsorted()는 원본을 훼손하지 않고, 정렬한 새로운 배열을 리턴한다.\nlist의 경우, 속도는 sort()가 sorted()보다 빠르다고 한다.sorted()는 복사본을 만들기 때문, 미세한 차이지만 sort()쓴 ver.1코드에서 0.01ms걸리는 케이스가 더 적게 나온다..ㅋ\nsort()는 list 자료형만 쓸 수 있고, sorted()는 tuple, dict, str, set 등 이터러블 객체라면 모두 사용 가능하다.\n이터러블 객체 : list, tuple, range, str, dict, set시퀀스 객체 : list, tuple, range, str\n\n출처\nhttps://programmers.co.kr/learn/courses/30/lessons/42748 - 프로그래머스 김\nhttps://sikaleo.tistory.com/61 - 이터러블 vs. 이터레이터\nhttps://velog.io/@sparkbosing/Python-sort%EC%99%80-sorted-%EC%B0%A8%EC%9D%B4 - sort() vs. sorted()\nhttps://security-nanglam.tistory.com/376 - sort() vs. sorted()\nhttps://velog.io/@asas33/python-%EB%AC%B8%EC%9E%90%EC%97%B4-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%A0%95%EB%A0%AC - list.sort(), sorted()\n\n","dateCreated":"2021-08-30T15:59:35+09:00","dateModified":"2021-11-11T13:29:13+09:00","datePublished":"2021-08-30T15:59:35+09:00","description":"\n정렬 - K번째 수 문제 풀이\n","headline":"알고리즘) [프로그래머스]정렬 - K번째 수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/08/30/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%95%EB%A0%AC_K%EB%B2%88%EC%A7%B8_%EC%88%98/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/08/30/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%95%EB%A0%AC_K%EB%B2%88%EC%A7%B8_%EC%88%98/","keywords":"algorithm, python, programmers"}</script>
     <meta name="description" content="정렬 - K번째 수 문제 풀이">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="알고리즘)[프로그래머스]정렬 - K번째 수">
+<meta property="og:title" content="알고리즘) [프로그래머스]정렬 - K번째 수">
 <meta property="og:url" content="https://odreystella.github.io/2021/08/30/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%A0%95%EB%A0%AC_K%EB%B2%88%EC%A7%B8_%EC%88%98/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
 <meta property="og:description" content="정렬 - K번째 수 문제 풀이">
@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://odreystella.github.io/images/algorithm/정렬_k_02.png">
 <meta property="og:image" content="https://odreystella.github.io/images/algorithm/정렬_k_03.png">
 <meta property="article:published_time" content="2021-08-30T06:59:35.000Z">
-<meta property="article:modified_time" content="2021-09-01T10:50:11.458Z">
+<meta property="article:modified_time" content="2021-11-11T04:29:13.959Z">
 <meta property="article:tag" content="algorithm">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="programmers">
@@ -302,7 +302,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            알고리즘)[프로그래머스]정렬 - K번째 수
+            알고리즘) [프로그래머스]정렬 - K번째 수
         </h1>
     
     
@@ -419,8 +419,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/09/01/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EA%B0%80%EC%9E%A5_%ED%81%B0_%EC%88%98/"
-                    data-tooltip="알고리즘)[프로그래머스]정렬 - 가장 큰 수"
-                    aria-label="PREVIOUS: 알고리즘)[프로그래머스]정렬 - 가장 큰 수"
+                    data-tooltip="알고리즘) [프로그래머스]정렬 - 가장 큰 수"
+                    aria-label="PREVIOUS: 알고리즘) [프로그래머스]정렬 - 가장 큰 수"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -433,8 +433,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/08/27/OS_04_CPU_%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81/"
-                    data-tooltip="OS)[반효경교수님 강의]CPU 스케줄링"
-                    aria-label="NEXT: OS)[반효경교수님 강의]CPU 스케줄링"
+                    data-tooltip="OS) [반효경교수님 강의]CPU 스케줄링"
+                    aria-label="NEXT: OS) [반효경교수님 강의]CPU 스케줄링"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -534,8 +534,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/09/01/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EA%B0%80%EC%9E%A5_%ED%81%B0_%EC%88%98/"
-                    data-tooltip="알고리즘)[프로그래머스]정렬 - 가장 큰 수"
-                    aria-label="PREVIOUS: 알고리즘)[프로그래머스]정렬 - 가장 큰 수"
+                    data-tooltip="알고리즘) [프로그래머스]정렬 - 가장 큰 수"
+                    aria-label="PREVIOUS: 알고리즘) [프로그래머스]정렬 - 가장 큰 수"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -548,8 +548,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/08/27/OS_04_CPU_%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81/"
-                    data-tooltip="OS)[반효경교수님 강의]CPU 스케줄링"
-                    aria-label="NEXT: OS)[반효경교수님 강의]CPU 스케줄링"
+                    data-tooltip="OS) [반효경교수님 강의]CPU 스케줄링"
+                    aria-label="NEXT: OS) [반효경교수님 강의]CPU 스케줄링"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>

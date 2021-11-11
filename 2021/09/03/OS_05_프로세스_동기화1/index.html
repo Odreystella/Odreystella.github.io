@@ -6,22 +6,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>OS)[반효경교수님 강의]프로세스 동기화 1편 - Dev Odreystella&#39;s Blog</title>
+    <title>OS) [반효경교수님 강의]프로세스 동기화 1편 - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n반효경 교수님 OS 5차시 강의 노트 정리\n\n\n\n\n\n강의 목차\n운영체제 개요\n컴퓨터 시스템의 구조\n프로세스 관리\nCPU 스케줄링\n프로세스 동기화\n데드락\n메모리 관리\n가상 메모리\n파일 시스템\n입출력 시스템\n디스크 관리\n\n경쟁 상태(Race Condition)\n\n\n프로세스 동기화 (Process Synchronization) 문제임계 영역(The Critical-Section) 문제출처\nhttps://core.ewha.ac.kr/publicview/C0101020140401134252676046?vmode=f\n\n","dateCreated":"2021-09-03T13:30:57+09:00","dateModified":"2021-10-25T17:56:49+09:00","datePublished":"2021-09-03T13:30:57+09:00","description":"\n반효경 교수님 OS 5차시 강의 노트 정리\n","headline":"OS)[반효경교수님 강의]프로세스 동기화 1편","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/09/03/OS_05_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%EB%8F%99%EA%B8%B0%ED%99%941/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/09/03/OS_05_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%EB%8F%99%EA%B8%B0%ED%99%941/","keywords":"OS"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n반효경 교수님 OS 5차시 강의 노트 정리\n\n\n\n\n\n강의 목차\n운영체제 개요\n컴퓨터 시스템의 구조\n프로세스 관리\nCPU 스케줄링\n프로세스 동기화\n데드락\n메모리 관리\n가상 메모리\n파일 시스템\n입출력 시스템\n디스크 관리\n\n경쟁 상태(Race Condition)\n\n\n프로세스 동기화 (Process Synchronization) 문제임계 영역(The Critical-Section) 문제출처\nhttps://core.ewha.ac.kr/publicview/C0101020140401134252676046?vmode=f\n\n","dateCreated":"2021-09-03T13:30:57+09:00","dateModified":"2021-11-11T13:30:58+09:00","datePublished":"2021-09-03T13:30:57+09:00","description":"\n반효경 교수님 OS 5차시 강의 노트 정리\n","headline":"OS) [반효경교수님 강의]프로세스 동기화 1편","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/09/03/OS_05_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%EB%8F%99%EA%B8%B0%ED%99%941/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/09/03/OS_05_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%EB%8F%99%EA%B8%B0%ED%99%941/","keywords":"OS"}</script>
     <meta name="description" content="반효경 교수님 OS 5차시 강의 노트 정리">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="OS)[반효경교수님 강의]프로세스 동기화 1편">
+<meta property="og:title" content="OS) [반효경교수님 강의]프로세스 동기화 1편">
 <meta property="og:url" content="https://odreystella.github.io/2021/09/03/OS_05_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%EB%8F%99%EA%B8%B0%ED%99%941/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
 <meta property="og:description" content="반효경 교수님 OS 5차시 강의 노트 정리">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://odreystella.github.io/images/os/os_thread.png">
 <meta property="article:published_time" content="2021-09-03T04:30:57.000Z">
-<meta property="article:modified_time" content="2021-10-25T08:56:49.161Z">
+<meta property="article:modified_time" content="2021-11-11T04:30:58.286Z">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://odreystella.github.io/images/os/os_thread.png">
@@ -298,7 +298,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            OS)[반효경교수님 강의]프로세스 동기화 1편
+            OS) [반효경교수님 강의]프로세스 동기화 1편
         </h1>
     
     
@@ -374,8 +374,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/11/03/TIL_01_django_swagger/"
-                    data-tooltip="TIL)1 django swagger(drf-yasg)"
-                    aria-label="PREVIOUS: TIL)1 django swagger(drf-yasg)"
+                    data-tooltip="TIL) 1 django swagger(drf-yasg)"
+                    aria-label="PREVIOUS: TIL) 1 django swagger(drf-yasg)"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -388,8 +388,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/09/01/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EA%B0%80%EC%9E%A5_%ED%81%B0_%EC%88%98/"
-                    data-tooltip="알고리즘)[프로그래머스]정렬 - 가장 큰 수"
-                    aria-label="NEXT: 알고리즘)[프로그래머스]정렬 - 가장 큰 수"
+                    data-tooltip="알고리즘) [프로그래머스]정렬 - 가장 큰 수"
+                    aria-label="NEXT: 알고리즘) [프로그래머스]정렬 - 가장 큰 수"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -489,8 +489,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/11/03/TIL_01_django_swagger/"
-                    data-tooltip="TIL)1 django swagger(drf-yasg)"
-                    aria-label="PREVIOUS: TIL)1 django swagger(drf-yasg)"
+                    data-tooltip="TIL) 1 django swagger(drf-yasg)"
+                    aria-label="PREVIOUS: TIL) 1 django swagger(drf-yasg)"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -503,8 +503,8 @@
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
                     href="/2021/09/01/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EA%B0%80%EC%9E%A5_%ED%81%B0_%EC%88%98/"
-                    data-tooltip="알고리즘)[프로그래머스]정렬 - 가장 큰 수"
-                    aria-label="NEXT: 알고리즘)[프로그래머스]정렬 - 가장 큰 수"
+                    data-tooltip="알고리즘) [프로그래머스]정렬 - 가장 큰 수"
+                    aria-label="NEXT: 알고리즘) [프로그래머스]정렬 - 가장 큰 수"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>

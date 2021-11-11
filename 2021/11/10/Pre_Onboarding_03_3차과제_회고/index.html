@@ -6,25 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>Git) git을 강제 pull한 이유 - Dev Odreystella&#39;s Blog</title>
+    <title>Pre_Onboarding) 3차 기업과제 회고 - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nThere isn’t anything to compare..!의 에러가 난다면..\n\n\n\n \n\n에러 화면\n이게 머선일..!\n요건 구글에서 가져온 이미지이다. 나같은 경우는 develop 브랜치를 딴 후, default 브랜치인 main 브랜치에 풀리퀘를 보내려고 했을 때 이런 화면이 떴었다.\n\n위와 같은 에러가 생긴 과정보통은 로컬에 프로젝트를 파고, 레포를 파서 둘이 연동시켰었다.그런데 이번에는 레포를 먼저 만들고, 다른 팀원의 레포에서 git clone해서 로컬에 프로젝트를 판 상황이었다. 기존에 있던 git log 내역을 지우고 새로 만든 레포로 리모트 설정을 해주면 되겠다 싶어서, .git을 지우고 git init을 하고 리모트 설정을 했다.리드미파일만 생성한 채 main 브랜치에 푸시를 했고, develop 브랜치를 따서 과제가 끝나면 마지막에 main 브랜치로 풀리퀘를 보낼 생각이었다.분명히 main과 develop의 변경사항이 다르기 때문에 풀리퀘를 보낼 수 있을 것이라고 생각했는데, 두 브랜치의 커밋 히스토리가 다르다는 이유로 보낼수가 없었다. \n에러의 원인에러메시지로 검색을 해보니, git과 연결된 폴더의 파일을 싹 바꿔버린 경우, main브랜치와 새로 바뀔 파일들이 같은 히스토리를 사용하지 않는다. 즉, 부모가 다르기 때문에 비교가 안된다는 것이었다. 또한 처음에 다른 팀원의 레포에서 git clone를 한후 remote를 해제하지 않았고, git init을 하면 master 브랜치가 default 브랜치로 생성되는데 main으로 이름을 바꾸지 않은것도 문제가 되었던것 같다.\n해결 방법이럴 때는 덮어버릴 브랜치(나같은 경우 main)로 와서 –allow-unrelated-histories 플래그를 써서 강제로 develop 브랜치를 pull 하는 방법이 있다.\n1git pull orgin (branchname) --allow-unrelated-histories\n충돌이 나는 부분은 해결하고, 푸시를 하면 된다!git은 참 좋지만 너무 어렵다..ㅜㅜ\n출처\nhttps://skyksit.tistory.com/entry/fatal-refusing-to-merge-unrelated-histories\n\n","dateCreated":"2021-11-03T23:50:57+09:00","dateModified":"2021-11-11T13:27:36+09:00","datePublished":"2021-11-03T23:50:57+09:00","description":"\nThere isn’t anything to compare..!의 에러가 난다면..\n","headline":"Git) git을 강제 pull한 이유","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/","keywords":"git"}</script>
-    <meta name="description" content="There isn’t anything to compare..!의 에러가 난다면..">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n3차 과제를 마치며…\n\n\n\n \n\n과제의 선택권3차 과제의 요구사항을 간략하게 정리해보자과제의 기한과 요구사항은 다음과 같았다.\n\n기한: 21/11/4 17:00 ~ 11/6 10:00 (약 1.5일)\n개발 요구사항:\nDB: RDBMS 사용\n로그인 기능\nJWT 인증 방식 구현\n\n\n상품 관리 기능\n상품 CRUD API 구현\n사용자는 상품 조회, admin 권한을 가진 사용자만 상품 추가/수정/삭제 가능\n상품 전체목록 조회시, 페이징 처리\n\n\n적절한 Error Handling   \n유닛테스트 구현\n\n\n\n어떻게 과제를 해나갔는가어려웠던 점은?무엇을 느끼고 무엇을 배웠나3차 과제는 어떻게 하고 싶은가가장 큰 목표는 의사결정을 빨리 하고 밤을 새지 않는 것이다.. \n","dateCreated":"2021-11-10T19:40:57+09:00","dateModified":"2021-11-11T13:26:31+09:00","datePublished":"2021-11-10T19:40:57+09:00","description":"\n3차 과제를 마치며…\n","headline":"Pre_Onboarding) 3차 기업과제 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, 원티드랩"}</script>
+    <meta name="description" content="3차 과제를 마치며…">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Git) git을 강제 pull한 이유">
-<meta property="og:url" content="https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/index.html">
+<meta property="og:title" content="Pre_Onboarding) 3차 기업과제 회고">
+<meta property="og:url" content="https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
-<meta property="og:description" content="There isn’t anything to compare..!의 에러가 난다면..">
+<meta property="og:description" content="3차 과제를 마치며…">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://odreystella.github.io/images/git/git_issue.png">
-<meta property="article:published_time" content="2021-11-03T14:50:57.000Z">
-<meta property="article:modified_time" content="2021-11-11T04:27:36.480Z">
-<meta property="article:tag" content="git">
+<meta property="article:published_time" content="2021-11-10T10:40:57.000Z">
+<meta property="article:modified_time" content="2021-11-11T04:26:31.433Z">
+<meta property="article:tag" content="위코드">
+<meta property="article:tag" content="원티드">
+<meta property="article:tag" content="원티드랩">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://odreystella.github.io/images/git/git_issue.png">
     
     
         
@@ -298,20 +298,20 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            Git) git을 강제 pull한 이유
+            Pre_Onboarding) 3차 기업과제 회고
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-11-03T23:50:57+09:00">
+    <time datetime="2021-11-10T19:40:57+09:00">
 	
-		    Nov 03, 2021
+		    Nov 10, 2021
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/Study/">Study</a>, <a class="category-link" href="/categories/Study/Git/">Git</a>
+    <a class="category-link" href="/categories/Pre-Onboarding/">Pre_Onboarding</a>
 
 
     
@@ -324,24 +324,33 @@
     <div class="post-content markdown">
         <div class="main-content-wrap">
             <blockquote>
-<p>There isn’t anything to compare..!의 에러가 난다면..</p>
+<p>3차 과제를 마치며…</p>
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%97%90%EB%9F%AC-%ED%99%94%EB%A9%B4"><span class="toc-text">에러 화면</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%9C%84%EC%99%80-%EA%B0%99%EC%9D%80-%EC%97%90%EB%9F%AC%EA%B0%80-%EC%83%9D%EA%B8%B4-%EA%B3%BC%EC%A0%95"><span class="toc-text">위와 같은 에러가 생긴 과정</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%97%90%EB%9F%AC%EC%9D%98-%EC%9B%90%EC%9D%B8"><span class="toc-text">에러의 원인</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95"><span class="toc-text">해결 방법</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol> 
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%84%A0%ED%83%9D%EA%B6%8C"><span class="toc-text">과제의 선택권</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%9D%84-%EA%B0%84%EB%9E%B5%ED%95%98%EA%B2%8C-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90"><span class="toc-text">3차 과제의 요구사항을 간략하게 정리해보자</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%ED%95%B4%EB%82%98%EA%B0%94%EB%8A%94%EA%B0%80"><span class="toc-text">어떻게 과제를 해나갔는가</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%A0%A4%EC%9B%A0%EB%8D%98-%EC%A0%90%EC%9D%80"><span class="toc-text">어려웠던 점은?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B4%EC%97%87%EC%9D%84-%EB%8A%90%EB%81%BC%EA%B3%A0-%EB%AC%B4%EC%97%87%EC%9D%84-%EB%B0%B0%EC%9B%A0%EB%82%98"><span class="toc-text">무엇을 느끼고 무엇을 배웠나</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%98%EA%B3%A0-%EC%8B%B6%EC%9D%80%EA%B0%80"><span class="toc-text">3차 과제는 어떻게 하고 싶은가</span></a></li></ol> 
 
-<h5 id="에러-화면"><a href="#에러-화면" class="headerlink" title="에러 화면"></a>에러 화면</h5><img src="/images/git/git_issue.png" width="350px" height="300px"/>
-이게 머선일..!
-요건 구글에서 가져온 이미지이다. 나같은 경우는 develop 브랜치를 딴 후, default 브랜치인 main 브랜치에 풀리퀘를 보내려고 했을 때 이런 화면이 떴었다.
-
-<h5 id="위와-같은-에러가-생긴-과정"><a href="#위와-같은-에러가-생긴-과정" class="headerlink" title="위와 같은 에러가 생긴 과정"></a>위와 같은 에러가 생긴 과정</h5><p>보통은 로컬에 프로젝트를 파고, 레포를 파서 둘이 연동시켰었다.<br>그런데 이번에는 레포를 먼저 만들고, 다른 팀원의 레포에서 git clone해서 로컬에 프로젝트를 판 상황이었다. 기존에 있던 git log 내역을 지우고 새로 만든 레포로 리모트 설정을 해주면 되겠다 싶어서, .git을 지우고 git init을 하고 리모트 설정을 했다.<br>리드미파일만 생성한 채 main 브랜치에 푸시를 했고, develop 브랜치를 따서 과제가 끝나면 마지막에 main 브랜치로 풀리퀘를 보낼 생각이었다.<br>분명히 main과 develop의 변경사항이 다르기 때문에 풀리퀘를 보낼 수 있을 것이라고 생각했는데, 두 브랜치의 커밋 히스토리가 다르다는 이유로 보낼수가 없었다. </p>
-<h5 id="에러의-원인"><a href="#에러의-원인" class="headerlink" title="에러의 원인"></a>에러의 원인</h5><p>에러메시지로 검색을 해보니, git과 연결된 폴더의 파일을 싹 바꿔버린 경우, main브랜치와 새로 바뀔 파일들이 같은 히스토리를 사용하지 않는다. 즉, 부모가 다르기 때문에 비교가 안된다는 것이었다. 또한 처음에 다른 팀원의 레포에서 git clone를 한후 remote를 해제하지 않았고, git init을 하면 master 브랜치가 default 브랜치로 생성되는데 main으로 이름을 바꾸지 않은것도 문제가 되었던것 같다.</p>
-<h5 id="해결-방법"><a href="#해결-방법" class="headerlink" title="해결 방법"></a>해결 방법</h5><p>이럴 때는 덮어버릴 브랜치(나같은 경우 main)로 와서 –allow-unrelated-histories 플래그를 써서 강제로 develop 브랜치를 pull 하는 방법이 있다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull orgin (branchname) --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
-<p>충돌이 나는 부분은 해결하고, 푸시를 하면 된다!<br>git은 참 좋지만 너무 어렵다..ㅜㅜ</p>
-<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
-<li><a target="_blank" rel="noopener" href="https://skyksit.tistory.com/entry/fatal-refusing-to-merge-unrelated-histories">https://skyksit.tistory.com/entry/fatal-refusing-to-merge-unrelated-histories</a></li>
+<h5 id="과제의-선택권"><a href="#과제의-선택권" class="headerlink" title="과제의 선택권"></a>과제의 선택권</h5><h5 id="3차-과제의-요구사항을-간략하게-정리해보자"><a href="#3차-과제의-요구사항을-간략하게-정리해보자" class="headerlink" title="3차 과제의 요구사항을 간략하게 정리해보자"></a>3차 과제의 요구사항을 간략하게 정리해보자</h5><p>과제의 기한과 요구사항은 다음과 같았다.</p>
+<ul>
+<li>기한: 21/11/4 17:00 ~ 11/6 10:00 (약 1.5일)</li>
+<li>개발 요구사항:<ul>
+<li>DB: RDBMS 사용</li>
+<li>로그인 기능<ul>
+<li>JWT 인증 방식 구현</li>
 </ul>
+</li>
+<li>상품 관리 기능<ul>
+<li>상품 CRUD API 구현</li>
+<li>사용자는 상품 조회, admin 권한을 가진 사용자만 상품 추가/수정/삭제 가능</li>
+<li>상품 전체목록 조회시, 페이징 처리</li>
+</ul>
+</li>
+<li>적절한 Error Handling   </li>
+<li>유닛테스트 구현</li>
+</ul>
+</li>
+</ul>
+<h5 id="어떻게-과제를-해나갔는가"><a href="#어떻게-과제를-해나갔는가" class="headerlink" title="어떻게 과제를 해나갔는가"></a>어떻게 과제를 해나갔는가</h5><h5 id="어려웠던-점은"><a href="#어려웠던-점은" class="headerlink" title="어려웠던 점은?"></a>어려웠던 점은?</h5><h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><h5 id="3차-과제는-어떻게-하고-싶은가"><a href="#3차-과제는-어떻게-하고-싶은가" class="headerlink" title="3차 과제는 어떻게 하고 싶은가"></a>3차 과제는 어떻게 하고 싶은가</h5><p>가장 큰 목표는 의사결정을 빨리 하고 밤을 새지 않는 것이다.. </p>
 
             
 
@@ -353,7 +362,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/git/" rel="tag">git</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/%EC%9B%90%ED%8B%B0%EB%93%9C/" rel="tag">원티드</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/%EC%9B%90%ED%8B%B0%EB%93%9C%EB%9E%A9/" rel="tag">원티드랩</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/%EC%9C%84%EC%BD%94%EB%93%9C/" rel="tag">위코드</a>
 
             </div>
         
@@ -366,9 +375,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/11/06/Pre_Onboarding_02_2%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
-                    data-tooltip="Pre_Onboarding) 2차 기업과제 회고"
-                    aria-label="PREVIOUS: Pre_Onboarding) 2차 기업과제 회고"
+                    href="/2021/11/11/TIL_03_Flask_Framework_vs._Django_Framework/"
+                    data-tooltip="TIL) 3 Flask Framework vs. Django Framework"
+                    aria-label="PREVIOUS: TIL) 3 Flask Framework vs. Django Framework"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -380,9 +389,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/11/03/Pre_Onboarding_01_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
-                    data-tooltip="Pre_Onboarding) 1차 기업과제 회고"
-                    aria-label="NEXT: Pre_Onboarding) 1차 기업과제 회고"
+                    href="/2021/11/08/git_fork_vs._clone/"
+                    data-tooltip="Git) fork와 clone의 차이"
+                    aria-label="NEXT: Git) fork와 clone의 차이"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -407,7 +416,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -420,7 +429,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -433,7 +442,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -481,9 +490,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/11/06/Pre_Onboarding_02_2%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
-                    data-tooltip="Pre_Onboarding) 2차 기업과제 회고"
-                    aria-label="PREVIOUS: Pre_Onboarding) 2차 기업과제 회고"
+                    href="/2021/11/11/TIL_03_Flask_Framework_vs._Django_Framework/"
+                    data-tooltip="TIL) 3 Flask Framework vs. Django Framework"
+                    aria-label="PREVIOUS: TIL) 3 Flask Framework vs. Django Framework"
                 >
                     
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -495,9 +504,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/11/03/Pre_Onboarding_01_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
-                    data-tooltip="Pre_Onboarding) 1차 기업과제 회고"
-                    aria-label="NEXT: Pre_Onboarding) 1차 기업과제 회고"
+                    href="/2021/11/08/git_fork_vs._clone/"
+                    data-tooltip="Git) fork와 clone의 차이"
+                    aria-label="NEXT: Git) fork와 clone의 차이"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -522,7 +531,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -535,7 +544,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -548,7 +557,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -582,7 +591,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -595,7 +604,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -608,7 +617,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/03/git_%EA%B0%95%EC%A0%9Cpull/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/10/Pre_Onboarding_03_3%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
