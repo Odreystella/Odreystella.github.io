@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n반효경 교수님 OS 5차시 강의 노트 정리\n\n\n\n\n\n강의 목차\n운영체제 개요\n컴퓨터 시스템의 구조\n프로세스 관리\nCPU 스케줄링\n프로세스 동기화\n데드락\n메모리 관리\n가상 메모리\n파일 시스템\n입출력 시스템\n디스크 관리\n\n경쟁 상태(Race Condition)\n\n\n프로세스 동기화 (Process Synchronization) 문제임계 영역(The Critical-Section) 문제출처\nhttps://core.ewha.ac.kr/publicview/C0101020140401134252676046?vmode=f\n\n","dateCreated":"2021-09-03T13:30:57+09:00","dateModified":"2021-11-11T13:30:58+09:00","datePublished":"2021-09-03T13:30:57+09:00","description":"\n반효경 교수님 OS 5차시 강의 노트 정리\n","headline":"OS) [반효경교수님 강의]프로세스 동기화 1편","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/09/03/OS_05_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%EB%8F%99%EA%B8%B0%ED%99%941/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/09/03/OS_05_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%EB%8F%99%EA%B8%B0%ED%99%941/","keywords":"OS"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n반효경 교수님 OS 5차시 강의 노트 정리\n\n\n\n\n\n강의 목차\n운영체제 개요\n컴퓨터 시스템의 구조\n프로세스 관리\nCPU 스케줄링\n프로세스 동기화\n데드락\n메모리 관리\n가상 메모리\n파일 시스템\n입출력 시스템\n디스크 관리\n\n경쟁 상태(Race Condition)\n여러 프로세스들이 동시에 공유 데이터를 접근하는 상황\n마지막에 공유 데이터를 다룬 프로세스에 의해 데이터의 최종 연산 결과가 달라짐\nRace Condition을 막기 위해 동시에 실행하는 프로세스 간에 동기화가 잘 되어야 함\n\n경쟁 상태가 발생하는 상황\n커널 수행 중 인터럽트 발생하여 인터럽트 처리루틴이 수행되는 경우\n\n문제점 : 양쪽 다 커널 코드이므로 커널 주소 공간 공유\n\n해결 : 커널 수행이 끝난 후 인터럽트 처리루틴이 수행되게 함 ← interrupt enable/disable \n\n\n\n\n\n프로세스 A가 시스템콜을 하여 커널 모드로 수행중인데 context switch가 일어나는 경우\n\n프로세스는 독립적인 주소공간을 가지고 있기 때문에 context switch한다고 문제가 발생하지 않음. 시스템콜을 하면 커널 주소 공간의 데이터에 접근하게 되는데 이때 문제가 생기는 것임.\n문제점 : 프로세스 B로 CPU가 넘어가서 같은 데이터에 접근하여 연산하고, 프로세스 A로 넘어왔을 때 얘가 기억하는 context는 프로세스 B가 변경한 데이터가 반영이 안되어 있음\n해결 : 프로세스가 커널 모드를 수행중일때는 타이머 인터럽트가 들어와도 CPU를 뺏지 않고, 유저모드로 돌아왔을 때 preempt(선점) ← interrupt enable/disable \n\n\n\n\n멀티프로세서 시스템의 경우\n\n문제점 : 여러개의 CPU가 동시에 커널 내부에 있는 공유 데이터에 접근함\n해결1 : 하나의 CPU가 데이터에 접근할 때 lock을 걸어두고 데이터 변경 후 저장하고 unlock  ← 개별 데이터에 lock \n해결2 : 매 순간 하나의 CPU만 커널에 접근하게 함 ← 커널 전체에 lock, 비효율적\n\n\n\n\n주소 공간을 공유하는 프로세스 간의 경우\n\n\n프로세스 동기화 (Process Synchronization) 문제\n공유 데이터에 동시에 접근하여 데이터의 불일치 문제가 발생하는 상황\n일관성을 유지하기 위해 공유 데이터를 접근하는 프로세스간에 실행 순서를 정해주는 매커니즘 필요\n\n임계 영역(The Critical-Section) 문제\n각 프로세스의 code 영역에서 공유 데이터에 접근하는 코드를 말함\n\n해결 : 하나의 프로세스가 임계 영역에 있을 때 다른 모든 프로세스는 접근할 수 없게 함\n\n출처\nhttps://core.ewha.ac.kr/publicview/C0101020140401134252676046?vmode=f\n\n","dateCreated":"2021-09-03T13:30:57+09:00","dateModified":"2021-12-07T18:13:40+09:00","datePublished":"2021-09-03T13:30:57+09:00","description":"\n반효경 교수님 OS 5차시 강의 노트 정리\n","headline":"OS) [반효경교수님 강의]프로세스 동기화 1편","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/09/03/OS_05_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%EB%8F%99%EA%B8%B0%ED%99%941/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/09/03/OS_05_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%EB%8F%99%EA%B8%B0%ED%99%941/","keywords":"OS"}</script>
     <meta name="description" content="반효경 교수님 OS 5차시 강의 노트 정리">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="OS) [반효경교수님 강의]프로세스 동기화 1편">
@@ -19,12 +19,15 @@
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
 <meta property="og:description" content="반효경 교수님 OS 5차시 강의 노트 정리">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://odreystella.github.io/images/os/os_thread.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_race_condition1.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_race_condition2.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_race_condition3.png">
+<meta property="og:image" content="https://odreystella.github.io/images/os/os_critical_section.png">
 <meta property="article:published_time" content="2021-09-03T04:30:57.000Z">
-<meta property="article:modified_time" content="2021-11-11T04:30:58.286Z">
+<meta property="article:modified_time" content="2021-12-07T09:13:40.670Z">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://odreystella.github.io/images/os/os_thread.png">
+<meta name="twitter:image" content="https://odreystella.github.io/images/os/os_race_condition1.png">
     
     
         
@@ -328,7 +331,7 @@
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EA%B0%95%EC%9D%98-%EB%AA%A9%EC%B0%A8"><span class="toc-text">강의 목차</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EA%B2%BD%EC%9F%81-%EC%83%81%ED%83%9C-Race-Condition"><span class="toc-text">경쟁 상태(Race Condition)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%8F%99%EA%B8%B0%ED%99%94-Process-Synchronization-%EB%AC%B8%EC%A0%9C"><span class="toc-text">프로세스 동기화 (Process Synchronization) 문제</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%9E%84%EA%B3%84-%EC%98%81%EC%97%AD-The-Critical-Section-%EB%AC%B8%EC%A0%9C"><span class="toc-text">임계 영역(The Critical-Section) 문제</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol>
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EA%B0%95%EC%9D%98-%EB%AA%A9%EC%B0%A8"><span class="toc-text">강의 목차</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EA%B2%BD%EC%9F%81-%EC%83%81%ED%83%9C-Race-Condition"><span class="toc-text">경쟁 상태(Race Condition)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EA%B2%BD%EC%9F%81-%EC%83%81%ED%83%9C%EA%B0%80-%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94-%EC%83%81%ED%99%A9"><span class="toc-text">경쟁 상태가 발생하는 상황</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%8F%99%EA%B8%B0%ED%99%94-Process-Synchronization-%EB%AC%B8%EC%A0%9C"><span class="toc-text">프로세스 동기화 (Process Synchronization) 문제</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%9E%84%EA%B3%84-%EC%98%81%EC%97%AD-The-Critical-Section-%EB%AC%B8%EC%A0%9C"><span class="toc-text">임계 영역(The Critical-Section) 문제</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol>
 
 <h5 id="강의-목차"><a href="#강의-목차" class="headerlink" title="강의 목차"></a>강의 목차</h5><ol>
 <li>운영체제 개요</li>
@@ -343,10 +346,53 @@
 <li>입출력 시스템</li>
 <li>디스크 관리</li>
 </ol>
-<h5 id="경쟁-상태-Race-Condition"><a href="#경쟁-상태-Race-Condition" class="headerlink" title="경쟁 상태(Race Condition)"></a>경쟁 상태(Race Condition)</h5><img src="/images/os/os_thread.png" width="350px" height="300px" />
-
-
-<h5 id="프로세스-동기화-Process-Synchronization-문제"><a href="#프로세스-동기화-Process-Synchronization-문제" class="headerlink" title="프로세스 동기화 (Process Synchronization) 문제"></a>프로세스 동기화 (Process Synchronization) 문제</h5><h5 id="임계-영역-The-Critical-Section-문제"><a href="#임계-영역-The-Critical-Section-문제" class="headerlink" title="임계 영역(The Critical-Section) 문제"></a>임계 영역(The Critical-Section) 문제</h5><h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<h5 id="경쟁-상태-Race-Condition"><a href="#경쟁-상태-Race-Condition" class="headerlink" title="경쟁 상태(Race Condition)"></a>경쟁 상태(Race Condition)</h5><ul>
+<li>여러 프로세스들이 <strong>동시에 공유 데이터를 접근</strong>하는 상황</li>
+<li>마지막에 공유 데이터를 다룬 프로세스에 의해 데이터의 최종 연산 결과가 달라짐</li>
+<li>Race Condition을 막기 위해 동시에 실행하는 프로세스 간에 동기화가 잘 되어야 함</li>
+</ul>
+<h5 id="경쟁-상태가-발생하는-상황"><a href="#경쟁-상태가-발생하는-상황" class="headerlink" title="경쟁 상태가 발생하는 상황"></a>경쟁 상태가 발생하는 상황</h5><ol>
+<li><p>커널 수행 중 인터럽트 발생하여 인터럽트 처리루틴이 수행되는 경우</p>
+<ul>
+<li><p>문제점 : 양쪽 다 커널 코드이므로 커널 주소 공간 공유</p>
+</li>
+<li><p>해결 : 커널 수행이 끝난 후 인터럽트 처리루틴이 수행되게 함 ← interrupt enable/disable </p>
+</li>
+<li><img src="/images/os/os_race_condition1.png" width="350px" height="300px" />
+</li>
+</ul>
+</li>
+<li><p>프로세스 A가 시스템콜을 하여 커널 모드로 수행중인데 context switch가 일어나는 경우</p>
+<ul>
+<li>프로세스는 독립적인 주소공간을 가지고 있기 때문에 context switch한다고 문제가 발생하지 않음. 시스템콜을 하면 커널 주소 공간의 데이터에 접근하게 되는데 이때 문제가 생기는 것임.</li>
+<li>문제점 : 프로세스 B로 CPU가 넘어가서 같은 데이터에 접근하여 연산하고, 프로세스 A로 넘어왔을 때 얘가 기억하는 context는 프로세스 B가 변경한 데이터가 반영이 안되어 있음</li>
+<li>해결 : 프로세스가 커널 모드를 수행중일때는 타이머 인터럽트가 들어와도 CPU를 뺏지 않고, 유저모드로 돌아왔을 때 preempt(선점) ← interrupt enable/disable </li>
+<li><img src="/images/os/os_race_condition2.png" width="350px" height="300px" />
+</li>
+</ul>
+</li>
+<li><p>멀티프로세서 시스템의 경우</p>
+<ul>
+<li>문제점 : 여러개의 CPU가 동시에 커널 내부에 있는 공유 데이터에 접근함</li>
+<li>해결1 : 하나의 CPU가 데이터에 접근할 때 lock을 걸어두고 데이터 변경 후 저장하고 unlock  ← 개별 데이터에 lock </li>
+<li>해결2 : 매 순간 하나의 CPU만 커널에 접근하게 함 ← 커널 전체에 lock, 비효율적</li>
+<li><img src="/images/os/os_race_condition3.png" width="350px" height="300px" />
+</li>
+</ul>
+</li>
+<li><p>주소 공간을 공유하는 프로세스 간의 경우</p>
+</li>
+</ol>
+<h5 id="프로세스-동기화-Process-Synchronization-문제"><a href="#프로세스-동기화-Process-Synchronization-문제" class="headerlink" title="프로세스 동기화 (Process Synchronization) 문제"></a>프로세스 동기화 (Process Synchronization) 문제</h5><ul>
+<li>공유 데이터에 동시에 접근하여 <strong>데이터의 불일치 문제</strong>가 발생하는 상황</li>
+<li>일관성을 유지하기 위해 공유 데이터를 접근하는 프로세스간에 실행 순서를 정해주는 매커니즘 필요</li>
+</ul>
+<h5 id="임계-영역-The-Critical-Section-문제"><a href="#임계-영역-The-Critical-Section-문제" class="headerlink" title="임계 영역(The Critical-Section) 문제"></a>임계 영역(The Critical-Section) 문제</h5><ul>
+<li>각 프로세스의 code 영역에서 공유 데이터에 접근하는 코드를 말함</li>
+<li><img src="/images/os/os_critical_section.png" width="350px" height="300px" /></li>
+<li>해결 : 하나의 프로세스가 임계 영역에 있을 때 다른 모든 프로세스는 접근할 수 없게 함</li>
+</ul>
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
 <li><a target="_blank" rel="noopener" href="https://core.ewha.ac.kr/publicview/C0101020140401134252676046?vmode=f">https://core.ewha.ac.kr/publicview/C0101020140401134252676046?vmode=f</a></li>
 </ul>
 
