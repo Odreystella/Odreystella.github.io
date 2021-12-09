@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nfork와 clone의 차이를 알아보자\n\n\n\n \n\ngit fork란?git clone란?출처\n\n\n","dateCreated":"2021-11-08T01:50:57+09:00","dateModified":"2021-11-11T13:27:03+09:00","datePublished":"2021-11-08T01:50:57+09:00","description":"\nfork와 clone의 차이를 알아보자\n","headline":"Git) fork와 clone의 차이","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/08/git_fork_vs._clone/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/08/git_fork_vs._clone/","keywords":"git"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nfork와 clone의 차이를 알아보자\n\n\n\n \n\ngit fork와 git clone의 차이점\n저장 장소\n\nForking을 하면 Github 계정에 원본 레포지토리(upstream repository)의 복사본을 생성한다.\nCloning을 하면 내 로컬 컴퓨터에 원본 레포지토리의 복사본을 생성한다. Forking을 하고 Cloning하거나 Github에 새로운 레포지토리를 만들고 Cloning를 하는 방법이 있다.\n\n\n원본 저장소와의 병합\n\nForking을 하면 변경 사항에 대해 원격 저장소(원본 레포지토리)로 pull request 를 보내, 요청이 받아들여질 경우 병합된다.\nCloning하여 생성된 로컬 저장소를 git remote add 하여 내 Github의 원격 저장소와 연결한다면, 변경 사항을 직접 내 저장소에 push 할 수 있다. 원격 저장소가 다르다면 pull request를 보내게 된다.\n\n\n명령어 유무\n\nForking은 개념이고 Cloning은 프로세스이다.\nForking은 관련된 명령이 없고, Cloning는 git clone 명령을 통해 이루어진다.\n\n\n\nGithub에서 fork 및 clone를 사용한 프로세스 흐름\nForking 후 Git Repo 복제\n\n\n\n1단계: fork하면 내 Github 계정에 레포지토리 복제\n2단계: git clone하여 로컬 컴퓨터에 복제(원격저장소는 fork된 저장소와 연결)\n3단계: 변경 사항은 내 저장소에 push\n4단계: fork한 원본 레포지토리로 pull request\n\n\nForking 없이 Git Repo 복제\n\n\n\n1단계: 내 Github 계정에 새 레포지토리 생성\n2단계: git clone하여 로컬 컴퓨터에 복제(git remote add하여 원격저장소와 연결)\n3단계: 변경 사항은 내 저장소에 push\n\n\n\n출처\nhttps://dejavuhyo.github.io/posts/difference-between-git-clone-and-git-fork/\n\n","dateCreated":"2021-11-08T01:50:57+09:00","dateModified":"2021-12-10T01:31:32+09:00","datePublished":"2021-11-08T01:50:57+09:00","description":"\nfork와 clone의 차이를 알아보자\n","headline":"Git) fork와 clone의 차이","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/08/git_fork_vs._clone/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/08/git_fork_vs._clone/","keywords":"git"}</script>
     <meta name="description" content="fork와 clone의 차이를 알아보자">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Git) fork와 clone의 차이">
@@ -19,10 +19,13 @@
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
 <meta property="og:description" content="fork와 clone의 차이를 알아보자">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://odreystella.github.io/images/git/git-fork.png">
+<meta property="og:image" content="https://odreystella.github.io/images/git/git-clone.png">
 <meta property="article:published_time" content="2021-11-07T16:50:57.000Z">
-<meta property="article:modified_time" content="2021-11-11T04:27:03.149Z">
+<meta property="article:modified_time" content="2021-12-09T16:31:32.291Z">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://odreystella.github.io/images/git/git-fork.png">
     
     
         
@@ -326,10 +329,51 @@
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#git-fork%EB%9E%80"><span class="toc-text">git fork란?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#git-clone%EB%9E%80"><span class="toc-text">git clone란?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol> 
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#git-fork%EC%99%80-git-clone%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90"><span class="toc-text">git fork와 git clone의 차이점</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Github%EC%97%90%EC%84%9C-fork-%EB%B0%8F-clone%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%9C-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%ED%9D%90%EB%A6%84"><span class="toc-text">Github에서 fork 및 clone를 사용한 프로세스 흐름</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol> 
 
-<h5 id="git-fork란"><a href="#git-fork란" class="headerlink" title="git fork란?"></a>git fork란?</h5><h5 id="git-clone란"><a href="#git-clone란" class="headerlink" title="git clone란?"></a>git clone란?</h5><h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
-<li><a href=""></a></li>
+<h5 id="git-fork와-git-clone의-차이점"><a href="#git-fork와-git-clone의-차이점" class="headerlink" title="git fork와 git clone의 차이점"></a>git fork와 git clone의 차이점</h5><ol>
+<li><p>저장 장소</p>
+<ul>
+<li>Forking을 하면 <strong>Github 계정</strong>에 원본 레포지토리(upstream repository)의 복사본을 생성한다.</li>
+<li>Cloning을 하면 내 <strong>로컬 컴퓨터</strong>에 원본 레포지토리의 복사본을 생성한다. Forking을 하고 Cloning하거나 Github에 새로운 레포지토리를 만들고 Cloning를 하는 방법이 있다.</li>
+</ul>
+</li>
+<li><p>원본 저장소와의 병합</p>
+<ul>
+<li>Forking을 하면 변경 사항에 대해 원격 저장소(원본 레포지토리)로 <strong>pull request</strong> 를 보내, 요청이 받아들여질 경우 병합된다.</li>
+<li>Cloning하여 생성된 로컬 저장소를 git remote add 하여 내 Github의 원격 저장소와 연결한다면, 변경 사항을 직접 내 저장소에 <strong>push</strong> 할 수 있다. 원격 저장소가 다르다면 pull request를 보내게 된다.</li>
+</ul>
+</li>
+<li><p>명령어 유무</p>
+<ul>
+<li>Forking은 개념이고 Cloning은 프로세스이다.</li>
+<li>Forking은 관련된 명령이 없고, Cloning는 git clone 명령을 통해 이루어진다.</li>
+</ul>
+</li>
+</ol>
+<h5 id="Github에서-fork-및-clone를-사용한-프로세스-흐름"><a href="#Github에서-fork-및-clone를-사용한-프로세스-흐름" class="headerlink" title="Github에서 fork 및 clone를 사용한 프로세스 흐름"></a>Github에서 fork 및 clone를 사용한 프로세스 흐름</h5><ol>
+<li><p>Forking 후 Git Repo 복제</p>
+<img src="/images/git/git-fork.png" height="600px" />
+
+<ul>
+<li>1단계: fork하면 내 Github 계정에 레포지토리 복제</li>
+<li>2단계: git clone하여 로컬 컴퓨터에 복제(원격저장소는 fork된 저장소와 연결)</li>
+<li>3단계: 변경 사항은 내 저장소에 push</li>
+<li>4단계: fork한 원본 레포지토리로 pull request</li>
+</ul>
+</li>
+<li><p>Forking 없이 Git Repo 복제</p>
+<img src="/images/git/git-clone.png" />
+
+<ul>
+<li>1단계: 내 Github 계정에 새 레포지토리 생성</li>
+<li>2단계: git clone하여 로컬 컴퓨터에 복제(git remote add하여 원격저장소와 연결)</li>
+<li>3단계: 변경 사항은 내 저장소에 push</li>
+</ul>
+</li>
+</ol>
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://dejavuhyo.github.io/posts/difference-between-git-clone-and-git-fork/">https://dejavuhyo.github.io/posts/difference-between-git-clone-and-git-fork/</a></li>
 </ul>
 
             
