@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>TIL) 5 Transaction 란? - Dev Odreystella&#39;s Blog</title>
+    <title>TIL) 5 트랜잭션이란? - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nTransaction 란?\n\n\n\n \n\nTransaction 개념Transaction 사용 방법출처\nhttps://brownbears.tistory.com/181\nhttps://brownbears.tistory.com/573\n\n","dateCreated":"2021-11-13T17:40:57+09:00","dateModified":"2021-12-24T16:30:52+09:00","datePublished":"2021-11-13T17:40:57+09:00","description":"\nTransaction 란?\n","headline":"TIL) 5 Transaction 란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/13/TIL_05_Transaction/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/13/TIL_05_Transaction/","keywords":"위코드, 원티드, 8percent"}</script>
-    <meta name="description" content="Transaction 란?">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n트랜잭션에 대해 알아보자\n\n\n\n \n\n트랜잭션 개념\n데이터베이스 관리 시스템에서 상호작용의 단위를 의미한다.\n데이터베이스 내에서 삽입, 수정 및 삭제를 진행할 때 한꺼번에 수행되어야 할 일련의 연산들이다.\n일련의 연산들이 전부 성공하거나 전부 실패되거나 둘 중 하나의 작업을 수행한다.\n전부 성공한 경우에는 COMMIT을 호출해 작업 결과를 데이터베이스에 반영하고, 취소가 되거나 문제가 발생한 경우에는 ROLLBACK을 호출해 작업결과를 모두 취소하여 데이터베이스에 영향을 주지 않는다.\n\n트랜잭션 성질 ACID\n원자성(Atomicity)\n\n분리할 수 없는 하나의 단위로 작업은 모두 완료되거나 모두 취소되어야 한다.\n예를 들어, 이체 과정 중에 트랜잭션이 실패하게 되어 예금이 사라지는 경우가 발생해서는 안되기 때문에 DBMS는 완료되지 않은 트랜잭션의 중간 상태를 데이터베이스에 반영해서는 안된다.\n\n\n일관성(Consistency)\n\n사용되는 모든 데이터는 일관되어야 한다.\n성공적으로 수행된 트랜잭션은 정당한 데이터들만을 데이터베이스에 반영해야 한다.\n\n\n격리성(Isolation)\n\n접근하고 있는 데이터는 다른 트랜잭션으로부터 격리되어야 한다.\n여러 트랜잭션이 동시에 수행되더라도 각각의 트랜잭션은 다른 트랜잭션의 수행에 영향받지 않고 독립적으로 수행되어야 한다. \n이러한 성질을 보장할 수 있는 가장 쉬운 방법은 모든 트랜잭션을 순차적으로 수행하는 것이다.\n\n\n영속성(Durability)\n\n트랜잭션이 정상 종료되면 그 결과는 시스템에 영구적으로 적용되어야 한다.\n트랜잭션이 성공적으로 완료되어 COMMIT되고 나면, 해당 트랜잭션에 의한 모든 변경은 향후에 어떤 소프트웨어나 하드웨어 장애가 발생되더라도 보존되어야 한다.\n\n\n\nDjango의 트랜잭션\nDjango는 auto commit을 기본값으로 제공한다.\n트랜잭션 성공 시, 자동으로 DB에 commit, 실패 시, 자동으로 rollback 처리한다.\nauto commit를 제공하지 않으면 개발자가 직접 commit or rollback을 진행해야 하는데 이러한 작업의 번거로움을 줄여준다.\n\nDjango에서 트랜잭션 사용 방법\n먼저 django.db에서 transaction을 임포트한다.\n\n\n데코레이터 사용1234@transaction.atomic()def test():    Student.objects.filter(id=1).update(name=&quot;KIM&quot;)    Member.objects.filter(name=&quot;KIM&quot;).update(mileage=10000)\nwith 구문 사용123with transaction.atomic():    Student.objects.filter(id=1).update(name=&quot;KIM&quot;)    Member.objects.filter(name=&quot;KIM&quot;).update(mileage=1000)\n\n\nautomic()은 보통 2개 이상의 쿼리를 실행하여 이를 모두 성공 또는 실패로 처리해야 할 때 사용한다.\nwith 구문에서 try ~ except 구문을 사용한다면 with 구문보다 바깥에 작성해야 함. 주의사항 참고\n더 자세한 내용은 공식문서 참고\n\n출처\n트랜잭션, REDO와 UNDO 개념\nDjango 트랜잭션\n\n","dateCreated":"2021-11-13T17:40:57+09:00","dateModified":"2021-12-31T18:14:31+09:00","datePublished":"2021-11-13T17:40:57+09:00","description":"\n트랜잭션에 대해 알아보자\n","headline":"TIL) 5 트랜잭션이란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/13/TIL_05_Transaction/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/13/TIL_05_Transaction/","keywords":"위코드, 원티드, 8percent"}</script>
+    <meta name="description" content="트랜잭션에 대해 알아보자">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="TIL) 5 Transaction 란?">
+<meta property="og:title" content="TIL) 5 트랜잭션이란?">
 <meta property="og:url" content="https://odreystella.github.io/2021/11/13/TIL_05_Transaction/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
-<meta property="og:description" content="Transaction 란?">
+<meta property="og:description" content="트랜잭션에 대해 알아보자">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-13T08:40:57.000Z">
-<meta property="article:modified_time" content="2021-12-24T07:30:52.440Z">
+<meta property="article:modified_time" content="2021-12-31T09:14:31.851Z">
 <meta property="article:tag" content="위코드">
 <meta property="article:tag" content="원티드">
 <meta property="article:tag" content="8percent">
@@ -298,7 +298,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            TIL) 5 Transaction 란?
+            TIL) 5 트랜잭션이란?
         </h1>
     
     
@@ -324,15 +324,65 @@
     <div class="post-content markdown">
         <div class="main-content-wrap">
             <blockquote>
-<p>Transaction 란?</p>
+<p>트랜잭션에 대해 알아보자</p>
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Transaction-%EA%B0%9C%EB%85%90"><span class="toc-text">Transaction 개념</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Transaction-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95"><span class="toc-text">Transaction 사용 방법</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol> 
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EA%B0%9C%EB%85%90"><span class="toc-text">트랜잭션 개념</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%84%B1%EC%A7%88-ACID"><span class="toc-text">트랜잭션 성질 ACID</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Django%EC%9D%98-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98"><span class="toc-text">Django의 트랜잭션</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Django%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95"><span class="toc-text">Django에서 트랜잭션 사용 방법</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol> 
 
-<h5 id="Transaction-개념"><a href="#Transaction-개념" class="headerlink" title="Transaction 개념"></a>Transaction 개념</h5><h5 id="Transaction-사용-방법"><a href="#Transaction-사용-방법" class="headerlink" title="Transaction 사용 방법"></a>Transaction 사용 방법</h5><h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
-<li><a target="_blank" rel="noopener" href="https://brownbears.tistory.com/181">https://brownbears.tistory.com/181</a></li>
-<li><a target="_blank" rel="noopener" href="https://brownbears.tistory.com/573">https://brownbears.tistory.com/573</a></li>
+<h5 id="트랜잭션-개념"><a href="#트랜잭션-개념" class="headerlink" title="트랜잭션 개념"></a>트랜잭션 개념</h5><ul>
+<li>데이터베이스 관리 시스템에서 상호작용의 단위를 의미한다.</li>
+<li>데이터베이스 내에서 <strong>삽입, 수정 및 삭제를 진행할 때 한꺼번에 수행되어야 할 일련의 연산</strong>들이다.</li>
+<li>일련의 연산들이 <strong>전부 성공</strong>하거나 <strong>전부 실패</strong>되거나 둘 중 하나의 작업을 수행한다.</li>
+<li>전부 성공한 경우에는 <strong>COMMIT</strong>을 호출해 작업 결과를 데이터베이스에 반영하고, 취소가 되거나 문제가 발생한 경우에는 <strong>ROLLBACK</strong>을 호출해 작업결과를 모두 취소하여 데이터베이스에 영향을 주지 않는다.</li>
+</ul>
+<h5 id="트랜잭션-성질-ACID"><a href="#트랜잭션-성질-ACID" class="headerlink" title="트랜잭션 성질 ACID"></a>트랜잭션 성질 ACID</h5><ol>
+<li><p>원자성(Atomicity)</p>
+<ul>
+<li><strong>분리할 수 없는 하나의 단위로 작업은 모두 완료되거나 모두 취소되어야 한다.</strong></li>
+<li>예를 들어, 이체 과정 중에 트랜잭션이 실패하게 되어 예금이 사라지는 경우가 발생해서는 안되기 때문에 DBMS는 완료되지 않은 트랜잭션의 중간 상태를 데이터베이스에 반영해서는 안된다.</li>
+</ul>
+</li>
+<li><p>일관성(Consistency)</p>
+<ul>
+<li><strong>사용되는 모든 데이터는 일관되어야 한다.</strong></li>
+<li>성공적으로 수행된 트랜잭션은 정당한 데이터들만을 데이터베이스에 반영해야 한다.</li>
+</ul>
+</li>
+<li><p>격리성(Isolation)</p>
+<ul>
+<li><strong>접근하고 있는 데이터는 다른 트랜잭션으로부터 격리되어야 한다.</strong></li>
+<li>여러 트랜잭션이 동시에 수행되더라도 각각의 트랜잭션은 다른 트랜잭션의 수행에 영향받지 않고 독립적으로 수행되어야 한다. </li>
+<li>이러한 성질을 보장할 수 있는 가장 쉬운 방법은 모든 트랜잭션을 순차적으로 수행하는 것이다.</li>
+</ul>
+</li>
+<li><p>영속성(Durability)</p>
+<ul>
+<li><strong>트랜잭션이 정상 종료되면 그 결과는 시스템에 영구적으로 적용되어야 한다.</strong></li>
+<li>트랜잭션이 성공적으로 완료되어 COMMIT되고 나면, 해당 트랜잭션에 의한 모든 변경은 향후에 어떤 소프트웨어나 하드웨어 장애가 발생되더라도 보존되어야 한다.</li>
+</ul>
+</li>
+</ol>
+<h5 id="Django의-트랜잭션"><a href="#Django의-트랜잭션" class="headerlink" title="Django의 트랜잭션"></a>Django의 트랜잭션</h5><ul>
+<li>Django는 auto commit을 기본값으로 제공한다.</li>
+<li>트랜잭션 성공 시, 자동으로 DB에 commit, 실패 시, 자동으로 rollback 처리한다.</li>
+<li>auto commit를 제공하지 않으면 개발자가 직접 commit or rollback을 진행해야 하는데 이러한 작업의 번거로움을 줄여준다.</li>
+</ul>
+<h5 id="Django에서-트랜잭션-사용-방법"><a href="#Django에서-트랜잭션-사용-방법" class="headerlink" title="Django에서 트랜잭션 사용 방법"></a>Django에서 트랜잭션 사용 방법</h5><ul>
+<li>먼저 django.db에서 transaction을 임포트한다.</li>
+</ul>
+<ol>
+<li>데코레이터 사용<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@transaction.atomic()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>():</span></span><br><span class="line">    Student.objects.<span class="built_in">filter</span>(<span class="built_in">id</span>=<span class="number">1</span>).update(name=<span class="string">&quot;KIM&quot;</span>)</span><br><span class="line">    Member.objects.<span class="built_in">filter</span>(name=<span class="string">&quot;KIM&quot;</span>).update(mileage=<span class="number">10000</span>)</span><br></pre></td></tr></table></figure></li>
+<li>with 구문 사용<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> transaction.atomic():</span><br><span class="line">    Student.objects.<span class="built_in">filter</span>(<span class="built_in">id</span>=<span class="number">1</span>).update(name=<span class="string">&quot;KIM&quot;</span>)</span><br><span class="line">    Member.objects.<span class="built_in">filter</span>(name=<span class="string">&quot;KIM&quot;</span>).update(mileage=<span class="number">1000</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>automic()은 보통 2개 이상의 쿼리를 실행하여 이를 모두 성공 또는 실패로 처리해야 할 때 사용한다.</li>
+<li>with 구문에서 try ~ except 구문을 사용한다면 with 구문보다 바깥에 작성해야 함. <a target="_blank" rel="noopener" href="https://lee-seul.github.io/django/2019/02/02/django-transactionmanagementerror.html">주의사항 참고</a></li>
+<li>더 자세한 내용은 <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/3.2/topics/db/transactions/">공식문서 참고</a></li>
+</ul>
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://brownbears.tistory.com/181">트랜잭션, REDO와 UNDO 개념</a></li>
+<li><a target="_blank" rel="noopener" href="https://brownbears.tistory.com/573">Django 트랜잭션</a></li>
 </ul>
 
             
