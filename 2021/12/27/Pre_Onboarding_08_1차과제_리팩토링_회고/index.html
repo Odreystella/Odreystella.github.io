@@ -6,24 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>Pre_Onboarding) 6차 기업과제 회고 - Dev Odreystella&#39;s Blog</title>
+    <title>Pre_Onboarding) 1차 기업과제 리팩토링 회고 - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n6차 과제를 마치며…\n\n\n\n \n\n6차 과제의 요구사항을 간략하게 정리해보자과제의 기한과 요구사항은 다음과 같았다.\n\n기한: 21/11/18 17:00 ~ 11/22 10:00 (약 3.5일)\n주요 평가 사항\n주어진 정보를 기술적으로 설계하고 구현할 수 있는 역량\n확장성을 고려한 시스템 설계 및 구현\n\n\n개발 요구사항:\n사용자의 이용 정보에 따라 요금을 계산해주는 API \n지역별 다양한 요금제 적용\n할인 조건(예. 파킹존에 반납하는 경우 요금의 30% 할인 등)\n벌금 조건(예. 사용자가 지역 바깥에 반납한 경우 거리에 비례하는 벌금 부과 등)\n예외 사항(예. 킥보드가 고장나서 이용하지 못하는 경우 등)\n\n\n기능을 유지한 채 새로운 할인이나 벌금 조건이 쉽게 추가될 수 있게 개선하기 \n\n\n\n어떻게 과제를 해나갔는가\n첫날은 팀의 루틴대로 진행, 모델링까지\n둘째날도 모델링때문에 중간에 다시 온라인으로 회의해서 수정\n벌금 추가/변경, 특정 지역에 벌금 추가/삭제 기능 구현 \n\n어려웠던 점은?\n확장성을 고려한 모델링\n요구사항만 보고 설계하는 능력\n\n무엇을 느끼고 무엇을 배웠나7차 과제는 어떻게 하고 싶은가","dateCreated":"2021-11-22T13:20:34+09:00","dateModified":"2021-12-25T15:56:42+09:00","datePublished":"2021-11-22T13:20:34+09:00","description":"\n6차 과제를 마치며…\n","headline":"Pre_Onboarding) 6차 기업과제 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, deer"}</script>
-    <meta name="description" content="6차 과제를 마치며…">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n1차 과제 리팩토링을 마치며…\n\n\n\n \n\n1차 과제 리팩토링을 진행하게 된 계기1차 과제의 요구사항을 다시 한번 간략하게 정리해보자과제의 기한과 요구사항은 다음과 같았다.\n\n기한: 21/11/22 16:00 ~ 11/29 10:00 (약 7일)\n개발 요구사항:\n선호 기술 스택: Express/Nest JS or Spring Framework\nDB: RDBMS 사용\nREST API 기능\n사용자 생성 API\nID/Password로 사용자 생성\n인증 토큰 발급\n\n\n사용자가 소유한 타이어 정보를 저장하는 API\n인증된 사용자만 호출\n한번에 최대 5명까지의 사용자에 대한 요청이 가능하게 구현\n\n\n사용자가 소유한 타이어 정보 조회 API\n\n\nORM 사용\n제시한 응답 코드 사용 \n가능하다면 docker 사용\n\n\n\n어떻게 과제를 해나갔는가\n팀과제의 루틴대로 초기환경 셋팅, 프로젝트 이슈 작성, 모델링, 마이그레이션 먼저\n개인과제여도 branch 전략으로 진행\n사용자 생성 API부터 구현, 하나의 기능 -&gt; 테스트코드 까지 작성하여 PR\n\n어려웠던 점은?\n요구사항 대로 모델링 짜는 부분\n카닥의 API 호출해서 사용하는 부분, 테스트하는 방법 - 테스트 모킹\n\n무엇을 느끼고 무엇을 배웠나\n재밌다\n협업 경험 -&gt; 사람들과 소통하는 방법, 의도를 명확하게 전달해야 함을 배움\n온라인 환경에서 협업하는 것 익숙\ngit 병합 전략 Rebase, Squash에 익숙\n유닛테스트 코드 작성에 익숙\n배포 경험\nAPI 문서 작성(postman, swagger)\nPR 올리면 코드리뷰\n새로운 프레임워크flask, 새로운 ORM sqlalchemy 경험\ndjango로 rest api 구현 익숙 \n\n","dateCreated":"2021-12-27T15:20:34+09:00","dateModified":"2022-01-02T16:02:38+09:00","datePublished":"2021-12-27T15:20:34+09:00","description":"\n1차 과제 리팩토링을 마치며…\n","headline":"Pre_Onboarding) 1차 기업과제 리팩토링 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, 에이모"}</script>
+    <meta name="description" content="1차 과제 리팩토링을 마치며…">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Pre_Onboarding) 6차 기업과제 회고">
-<meta property="og:url" content="https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/index.html">
+<meta property="og:title" content="Pre_Onboarding) 1차 기업과제 리팩토링 회고">
+<meta property="og:url" content="https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
-<meta property="og:description" content="6차 과제를 마치며…">
+<meta property="og:description" content="1차 과제 리팩토링을 마치며…">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-11-22T04:20:34.000Z">
-<meta property="article:modified_time" content="2021-12-25T06:56:42.248Z">
+<meta property="article:published_time" content="2021-12-27T06:20:34.000Z">
+<meta property="article:modified_time" content="2022-01-02T07:02:38.456Z">
 <meta property="article:tag" content="위코드">
 <meta property="article:tag" content="원티드">
-<meta property="article:tag" content="deer">
+<meta property="article:tag" content="에이모">
 <meta name="twitter:card" content="summary">
     
     
@@ -298,14 +298,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            Pre_Onboarding) 6차 기업과제 회고
+            Pre_Onboarding) 1차 기업과제 리팩토링 회고
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-11-22T13:20:34+09:00">
+    <time datetime="2021-12-27T15:20:34+09:00">
 	
-		    Nov 22, 2021
+		    Dec 27, 2021
     	
     </time>
     
@@ -324,42 +324,60 @@
     <div class="post-content markdown">
         <div class="main-content-wrap">
             <blockquote>
-<p>6차 과제를 마치며…</p>
+<p>1차 과제 리팩토링을 마치며…</p>
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#6%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%9D%84-%EA%B0%84%EB%9E%B5%ED%95%98%EA%B2%8C-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90"><span class="toc-text">6차 과제의 요구사항을 간략하게 정리해보자</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%ED%95%B4%EB%82%98%EA%B0%94%EB%8A%94%EA%B0%80"><span class="toc-text">어떻게 과제를 해나갔는가</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%A0%A4%EC%9B%A0%EB%8D%98-%EC%A0%90%EC%9D%80"><span class="toc-text">어려웠던 점은?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B4%EC%97%87%EC%9D%84-%EB%8A%90%EB%81%BC%EA%B3%A0-%EB%AC%B4%EC%97%87%EC%9D%84-%EB%B0%B0%EC%9B%A0%EB%82%98"><span class="toc-text">무엇을 느끼고 무엇을 배웠나</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%98%EA%B3%A0-%EC%8B%B6%EC%9D%80%EA%B0%80"><span class="toc-text">7차 과제는 어떻게 하고 싶은가</span></a></li></ol> 
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%EC%B0%A8-%EA%B3%BC%EC%A0%9C-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%EC%9D%84-%EC%A7%84%ED%96%89%ED%95%98%EA%B2%8C-%EB%90%9C-%EA%B3%84%EA%B8%B0"><span class="toc-text">1차 과제 리팩토링을 진행하게 된 계기</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%9D%84-%EB%8B%A4%EC%8B%9C-%ED%95%9C%EB%B2%88-%EA%B0%84%EB%9E%B5%ED%95%98%EA%B2%8C-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90"><span class="toc-text">1차 과제의 요구사항을 다시 한번 간략하게 정리해보자</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%ED%95%B4%EB%82%98%EA%B0%94%EB%8A%94%EA%B0%80"><span class="toc-text">어떻게 과제를 해나갔는가</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%A0%A4%EC%9B%A0%EB%8D%98-%EC%A0%90%EC%9D%80"><span class="toc-text">어려웠던 점은?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B4%EC%97%87%EC%9D%84-%EB%8A%90%EB%81%BC%EA%B3%A0-%EB%AC%B4%EC%97%87%EC%9D%84-%EB%B0%B0%EC%9B%A0%EB%82%98"><span class="toc-text">무엇을 느끼고 무엇을 배웠나</span></a></li></ol> 
 
-<h5 id="6차-과제의-요구사항을-간략하게-정리해보자"><a href="#6차-과제의-요구사항을-간략하게-정리해보자" class="headerlink" title="6차 과제의 요구사항을 간략하게 정리해보자"></a>6차 과제의 요구사항을 간략하게 정리해보자</h5><p>과제의 기한과 요구사항은 다음과 같았다.</p>
+<h5 id="1차-과제-리팩토링을-진행하게-된-계기"><a href="#1차-과제-리팩토링을-진행하게-된-계기" class="headerlink" title="1차 과제 리팩토링을 진행하게 된 계기"></a>1차 과제 리팩토링을 진행하게 된 계기</h5><h5 id="1차-과제의-요구사항을-다시-한번-간략하게-정리해보자"><a href="#1차-과제의-요구사항을-다시-한번-간략하게-정리해보자" class="headerlink" title="1차 과제의 요구사항을 다시 한번 간략하게 정리해보자"></a>1차 과제의 요구사항을 다시 한번 간략하게 정리해보자</h5><p>과제의 기한과 요구사항은 다음과 같았다.</p>
 <ul>
-<li>기한: 21/11/18 17:00 ~ 11/22 10:00 (약 3.5일)</li>
-<li>주요 평가 사항<ul>
-<li>주어진 정보를 기술적으로 설계하고 구현할 수 있는 역량</li>
-<li>확장성을 고려한 시스템 설계 및 구현</li>
-</ul>
-</li>
+<li>기한: 21/11/22 16:00 ~ 11/29 10:00 (약 7일)</li>
 <li>개발 요구사항:<ul>
-<li>사용자의 이용 정보에 따라 요금을 계산해주는 API <ul>
-<li>지역별 다양한 요금제 적용</li>
-<li>할인 조건(예. 파킹존에 반납하는 경우 요금의 30% 할인 등)</li>
-<li>벌금 조건(예. 사용자가 지역 바깥에 반납한 경우 거리에 비례하는 벌금 부과 등)</li>
-<li>예외 사항(예. 킥보드가 고장나서 이용하지 못하는 경우 등)</li>
+<li>선호 기술 스택: Express/Nest JS or Spring Framework</li>
+<li>DB: RDBMS 사용</li>
+<li>REST API 기능<ul>
+<li>사용자 생성 API<ul>
+<li>ID/Password로 사용자 생성</li>
+<li>인증 토큰 발급</li>
 </ul>
 </li>
-<li>기능을 유지한 채 새로운 할인이나 벌금 조건이 쉽게 추가될 수 있게 개선하기 </li>
+<li>사용자가 소유한 타이어 정보를 저장하는 API<ul>
+<li>인증된 사용자만 호출</li>
+<li>한번에 최대 5명까지의 사용자에 대한 요청이 가능하게 구현</li>
+</ul>
+</li>
+<li>사용자가 소유한 타이어 정보 조회 API</li>
+</ul>
+</li>
+<li>ORM 사용</li>
+<li>제시한 응답 코드 사용 </li>
+<li>가능하다면 docker 사용</li>
 </ul>
 </li>
 </ul>
 <h5 id="어떻게-과제를-해나갔는가"><a href="#어떻게-과제를-해나갔는가" class="headerlink" title="어떻게 과제를 해나갔는가"></a>어떻게 과제를 해나갔는가</h5><ul>
-<li>첫날은 팀의 루틴대로 진행, 모델링까지</li>
-<li>둘째날도 모델링때문에 중간에 다시 온라인으로 회의해서 수정</li>
-<li>벌금 추가/변경, 특정 지역에 벌금 추가/삭제 기능 구현 </li>
+<li>팀과제의 루틴대로 초기환경 셋팅, 프로젝트 이슈 작성, 모델링, 마이그레이션 먼저</li>
+<li>개인과제여도 branch 전략으로 진행</li>
+<li>사용자 생성 API부터 구현, 하나의 기능 -&gt; 테스트코드 까지 작성하여 PR</li>
 </ul>
 <h5 id="어려웠던-점은"><a href="#어려웠던-점은" class="headerlink" title="어려웠던 점은?"></a>어려웠던 점은?</h5><ul>
-<li>확장성을 고려한 모델링</li>
-<li>요구사항만 보고 설계하는 능력</li>
+<li>요구사항 대로 모델링 짜는 부분</li>
+<li>카닥의 API 호출해서 사용하는 부분, 테스트하는 방법 - 테스트 모킹</li>
 </ul>
-<h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><h5 id="7차-과제는-어떻게-하고-싶은가"><a href="#7차-과제는-어떻게-하고-싶은가" class="headerlink" title="7차 과제는 어떻게 하고 싶은가"></a>7차 과제는 어떻게 하고 싶은가</h5>
+<h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><ul>
+<li>재밌다</li>
+<li>협업 경험 -&gt; 사람들과 소통하는 방법, 의도를 명확하게 전달해야 함을 배움</li>
+<li>온라인 환경에서 협업하는 것 익숙</li>
+<li>git 병합 전략 Rebase, Squash에 익숙</li>
+<li>유닛테스트 코드 작성에 익숙</li>
+<li>배포 경험</li>
+<li>API 문서 작성(postman, swagger)</li>
+<li>PR 올리면 코드리뷰</li>
+<li>새로운 프레임워크flask, 새로운 ORM sqlalchemy 경험</li>
+<li>django로 rest api 구현 익숙 </li>
+</ul>
+
             
 
 
@@ -370,7 +388,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/deer/" rel="tag">deer</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/%EC%9B%90%ED%8B%B0%EB%93%9C/" rel="tag">원티드</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/%EC%9C%84%EC%BD%94%EB%93%9C/" rel="tag">위코드</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/%EC%97%90%EC%9D%B4%EB%AA%A8/" rel="tag">에이모</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/%EC%9B%90%ED%8B%B0%EB%93%9C/" rel="tag">원티드</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/%EC%9C%84%EC%BD%94%EB%93%9C/" rel="tag">위코드</a>
 
             </div>
         
@@ -380,14 +398,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/11/22/TIL_07_%EC%BF%BC%EB%A6%AC_%EC%B5%9C%EC%A0%81%ED%99%94/"
-                    data-tooltip="TIL) 7 Django ORM과 쿼리 최적화 방법"
-                    aria-label="PREVIOUS: TIL) 7 Django ORM과 쿼리 최적화 방법"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -397,9 +412,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/11/17/TIL_06_Batch_Task/"
-                    data-tooltip="TIL) 6 Batch Task 란?"
-                    aria-label="NEXT: TIL) 6 Batch Task 란?"
+                    href="/2021/11/29/TIL_08_%ED%85%8C%EC%8A%A4%ED%8A%B8_%EB%AA%A8%ED%82%B9/"
+                    data-tooltip="TIL) 8 테스트 모킹이란?"
+                    aria-label="NEXT: TIL) 8 테스트 모킹이란?"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -424,7 +439,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -437,7 +452,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -450,7 +465,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -495,14 +510,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/11/22/TIL_07_%EC%BF%BC%EB%A6%AC_%EC%B5%9C%EC%A0%81%ED%99%94/"
-                    data-tooltip="TIL) 7 Django ORM과 쿼리 최적화 방법"
-                    aria-label="PREVIOUS: TIL) 7 Django ORM과 쿼리 최적화 방법"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -512,9 +524,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2021/11/17/TIL_06_Batch_Task/"
-                    data-tooltip="TIL) 6 Batch Task 란?"
-                    aria-label="NEXT: TIL) 6 Batch Task 란?"
+                    href="/2021/11/29/TIL_08_%ED%85%8C%EC%8A%A4%ED%8A%B8_%EB%AA%A8%ED%82%B9/"
+                    data-tooltip="TIL) 8 테스트 모킹이란?"
+                    aria-label="NEXT: TIL) 8 테스트 모킹이란?"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -539,7 +551,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -552,7 +564,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -565,7 +577,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -599,7 +611,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -612,7 +624,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -625,7 +637,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/22/Pre_Onboarding_06_6%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
