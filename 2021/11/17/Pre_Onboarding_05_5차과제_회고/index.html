@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n5차 과제를 마치며…\n\n\n\n \n\n5차 과제의 요구사항을 간략하게 정리해보자과제의 기한과 요구사항은 다음과 같았다.\n\n기한: 21/11/15 16:00 ~ 11/17 10:00 (약 1.5일)\n개발 요구사항:\nDB: SQLite \nREST API 기능\n임상정보를 수집하는 batch task\n수집한 임상정보에 대한 API\n수집한 임상정보 리스트 API\n최근 일주일내에 업데이트된 임상 정보 리스트\npagination 기능  \n\n\n\n\nORM 필수 사용\n가산점 부분\nTest 구현\n배포하여 웹에서 사용할 수 있도록 제공\n임상정보 검색 API \n\n\n\n\n\n어떻게 과제를 해나갔는가\n첫날은 우리의 루틴대로\n기능 분배해서 둘째날부터 구현, 나는 수집한 임상정보에 대한 API\ngit rebase, squash 전략으로 협업\n\n어려웠던 점은?\nPR에 대해 코드리뷰를 받고, 내 코드 한줄 한줄에 대해 사용 이유를 정확하게 얘기할 수 있어야 함\n\n무엇을 느끼고 무엇을 배웠나\n코드 한줄의 명확한 의미, 불필요한 코드는 작성할 필요 없음\n내 코드가 merge 되기까지 오래 걸림, 더 꼼꼼하게 코드 작성 필요\n\n6차 과제는 어떻게 하고 싶은가","dateCreated":"2021-11-17T19:20:57+09:00","dateModified":"2021-12-25T15:52:13+09:00","datePublished":"2021-11-17T19:20:57+09:00","description":"\n5차 과제를 마치며…\n","headline":"Pre_Onboarding) 5차 기업과제 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/17/Pre_Onboarding_05_5%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/17/Pre_Onboarding_05_5%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, humanscape"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n5차 과제를 마치며…\n\n\n\n \n\n5차 과제의 요구사항을 간략하게 정리해보자과제의 기한과 요구사항은 다음과 같았다.\n\n기한: 21/11/15 16:00 ~ 11/17 10:00 (약 1.5일)\n개발 요구사항:\nDB: SQLite \nREST API 기능\n임상정보를 수집하는 batch task\n수집한 임상정보에 대한 API\n수집한 임상정보 리스트 API\n최근 일주일내에 업데이트된 임상 정보 리스트\npagination 기능  \n\n\n\n\nORM 필수 사용\n가산점 부분\nTest 구현\n배포하여 웹에서 사용할 수 있도록 제공\n임상정보 검색 API \n\n\n\n\n\n어떻게 과제를 해나갔는가이번 과제도 팀원 한명이 개인사정으로 참여하지 못하게 되어 4명이 되었고, 첫날은 우리의 루틴대로 프로젝트 이슈 작성, 초기환경 셋팅, 모델링, 마이그레이션까지 진행했다. 보통은 모델링에서 시간이 오래 걸리는데, 이번에는 OpenAPI로부터 데이터를 수집하는 것이어서 쉽게 모델링을 마칠 수 있었다. 구현해야 할 REST API는 총 3개여서 batch task를 두명이 맡기로 하고 나는 상대적으로 난이도가 낮은 임상정보 상세 내용을 보여주는 API를 맡기로 했다.\n어려웠던 점은?난이도가 낮은 API를 구현했기에 코드를 짜는 부분에서 어려운 점은 없었지만, 그 외 부분에서 두가지 어려움이 있었다.\n첫번째로 git rebase, squash 전략으로 브랜치를 병합하는 부분이었다.git rebase하는 부분은 좀 익숙해졌다고 생각했는데, main이 변경되고 충돌이 났을 때 해결해서 다시 rebase하는 과정이 익숙하지 않았다. 충돌난 부분을 수정한 후에는 그 파일을 add만 했어야 했는데, add하고 바로 commit하는게 익숙해 나도 모르게 commit을 해버려서 commit이 너무 많이 생겨 당황스러웠었다ㅋㅋ 이 부분은 팀원의 도움을 받아 해결했고, 전반적인 흐름을 다시 익혔다. 진땀났던 순간이었다ㅜㅜ\n두번째로 PR을 날리고 내 코드가 main에 병합되기까지 시간이 오래 걸린 부분이었다.4번의 과제를 수행하고 나니 우리는 PR에 다른 사람들 코드를 보며 코드리뷰를 남길 수 있는 여유가 생겼다. 나는 코드리뷰를 남길 여유는 안되서 받기만 했지만..ㅎurl을 앱 이름과 맞추는것, Github에 코드를 올릴 때 마지막에 블랭크 라인을 추가해야 하는 것, django ORM 중 exists() 사용에 대한 리뷰를 받았는데 코드리뷰 자체도 처음이라 코드에 리뷰가 달렸다는 사실만으로 긴장되고 떨렸었다. 사실 이때 exits()를 어떨때 써야하는지 잘 모르고 뭔가 쓰는게 멋있어 보여서 작성했던 부분이었는데 사용 이유에 대해서 설명을 잘 못해서 스스로가 부끄러웠다.\n무엇을 느끼고 무엇을 배웠나내가 짠 코드 한줄 한줄에 대해 명확한 이유를 알아야 불필요한 코드를 작성하지 않게 된다는 것을 정말 마음 속 깊이 느꼈다. 코드 한줄이 성능을 바꿀 수 있어서 더 꼼꼼하게 코드를 작성해야겠다고 생각했다. 그리고 Github에서 파일 끝에 개행 문자를 넣어햐 하는 부분도 새롭게 알게 됬는데 이유는 여기를 참고하면 될 것 같다. 나는 vscode에서 Insert Final Newline이 되게 셋팅해놨다!\n6차 과제는 어떻게 하고 싶은가이제 팀 과제도 얼마 남지 않은것 같은데 남은 과제 동안 지금까지 배웠던 부분을 잘 적용해서 마무리하고 싶다. 어떤 에러도 막을 수 있는 빈틈없는 코드와 단위 테스트, 브랜치 병합, 팀원간의 의사소통까지 더 잘 해서 우수 팀 과제에 뽑히고 싶다. \n","dateCreated":"2021-11-17T19:20:57+09:00","dateModified":"2022-01-05T16:01:05+09:00","datePublished":"2021-11-17T19:20:57+09:00","description":"\n5차 과제를 마치며…\n","headline":"Pre_Onboarding) 5차 기업과제 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/17/Pre_Onboarding_05_5%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/17/Pre_Onboarding_05_5%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, humanscape"}</script>
     <meta name="description" content="5차 과제를 마치며…">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Pre_Onboarding) 5차 기업과제 회고">
@@ -20,7 +20,7 @@
 <meta property="og:description" content="5차 과제를 마치며…">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-17T10:20:57.000Z">
-<meta property="article:modified_time" content="2021-12-25T06:52:13.134Z">
+<meta property="article:modified_time" content="2022-01-05T07:01:05.012Z">
 <meta property="article:tag" content="위코드">
 <meta property="article:tag" content="원티드">
 <meta property="article:tag" content="humanscape">
@@ -355,19 +355,13 @@
 </ul>
 </li>
 </ul>
-<h5 id="어떻게-과제를-해나갔는가"><a href="#어떻게-과제를-해나갔는가" class="headerlink" title="어떻게 과제를 해나갔는가"></a>어떻게 과제를 해나갔는가</h5><ul>
-<li>첫날은 우리의 루틴대로</li>
-<li>기능 분배해서 둘째날부터 구현, 나는 수집한 임상정보에 대한 API</li>
-<li>git rebase, squash 전략으로 협업</li>
-</ul>
-<h5 id="어려웠던-점은"><a href="#어려웠던-점은" class="headerlink" title="어려웠던 점은?"></a>어려웠던 점은?</h5><ul>
-<li>PR에 대해 코드리뷰를 받고, 내 코드 한줄 한줄에 대해 사용 이유를 정확하게 얘기할 수 있어야 함</li>
-</ul>
-<h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><ul>
-<li>코드 한줄의 명확한 의미, 불필요한 코드는 작성할 필요 없음</li>
-<li>내 코드가 merge 되기까지 오래 걸림, 더 꼼꼼하게 코드 작성 필요</li>
-</ul>
-<h5 id="6차-과제는-어떻게-하고-싶은가"><a href="#6차-과제는-어떻게-하고-싶은가" class="headerlink" title="6차 과제는 어떻게 하고 싶은가"></a>6차 과제는 어떻게 하고 싶은가</h5>
+<h5 id="어떻게-과제를-해나갔는가"><a href="#어떻게-과제를-해나갔는가" class="headerlink" title="어떻게 과제를 해나갔는가"></a>어떻게 과제를 해나갔는가</h5><p>이번 과제도 팀원 한명이 개인사정으로 참여하지 못하게 되어 4명이 되었고, 첫날은 우리의 루틴대로 프로젝트 이슈 작성, 초기환경 셋팅, 모델링, 마이그레이션까지 진행했다. 보통은 모델링에서 시간이 오래 걸리는데, 이번에는 OpenAPI로부터 데이터를 수집하는 것이어서 쉽게 모델링을 마칠 수 있었다. 구현해야 할 REST API는 총 3개여서 batch task를 두명이 맡기로 하고 나는 상대적으로 난이도가 낮은 임상정보 상세 내용을 보여주는 API를 맡기로 했다.</p>
+<h5 id="어려웠던-점은"><a href="#어려웠던-점은" class="headerlink" title="어려웠던 점은?"></a>어려웠던 점은?</h5><p>난이도가 낮은 API를 구현했기에 코드를 짜는 부분에서 어려운 점은 없었지만, 그 외 부분에서 두가지 어려움이 있었다.</p>
+<p>첫번째로 <code>git rebase</code>, <code>squash</code> 전략으로 브랜치를 병합하는 부분이었다.<br><code>git rebase</code>하는 부분은 좀 익숙해졌다고 생각했는데, <code>main</code>이 변경되고 충돌이 났을 때 해결해서 다시 <code>rebase</code>하는 과정이 익숙하지 않았다. 충돌난 부분을 수정한 후에는 그 파일을 <code>add</code>만 했어야 했는데, <code>add</code>하고 바로 <code>commit</code>하는게 익숙해 나도 모르게 <code>commit</code>을 해버려서 <code>commit</code>이 너무 많이 생겨 당황스러웠었다ㅋㅋ 이 부분은 팀원의 도움을 받아 해결했고, 전반적인 흐름을 다시 익혔다. 진땀났던 순간이었다ㅜㅜ</p>
+<p>두번째로 PR을 날리고 내 코드가 <code>main</code>에 병합되기까지 시간이 오래 걸린 부분이었다.<br>4번의 과제를 수행하고 나니 우리는 PR에 다른 사람들 코드를 보며 코드리뷰를 남길 수 있는 여유가 생겼다. 나는 코드리뷰를 남길 여유는 안되서 받기만 했지만..ㅎ<br>url을 앱 이름과 맞추는것, Github에 코드를 올릴 때 마지막에 블랭크 라인을 추가해야 하는 것, django ORM 중 <code>exists()</code> 사용에 대한 리뷰를 받았는데 코드리뷰 자체도 처음이라 코드에 리뷰가 달렸다는 사실만으로 긴장되고 떨렸었다. 사실 이때 <code>exits()</code>를 어떨때 써야하는지 잘 모르고 뭔가 쓰는게 멋있어 보여서 작성했던 부분이었는데 사용 이유에 대해서 설명을 잘 못해서 스스로가 부끄러웠다.</p>
+<h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><p>내가 짠 코드 한줄 한줄에 대해 명확한 이유를 알아야 불필요한 코드를 작성하지 않게 된다는 것을 정말 마음 속 깊이 느꼈다. 코드 한줄이 성능을 바꿀 수 있어서 더 꼼꼼하게 코드를 작성해야겠다고 생각했다. 그리고 Github에서 파일 끝에 개행 문자를 넣어햐 하는 부분도 새롭게 알게 됬는데 이유는 <a target="_blank" rel="noopener" href="https://minz.dev/19">여기</a>를 참고하면 될 것 같다. 나는 <code>vscode</code>에서 <code>Insert Final Newline</code>이 되게 셋팅해놨다!</p>
+<h5 id="6차-과제는-어떻게-하고-싶은가"><a href="#6차-과제는-어떻게-하고-싶은가" class="headerlink" title="6차 과제는 어떻게 하고 싶은가"></a>6차 과제는 어떻게 하고 싶은가</h5><p>이제 팀 과제도 얼마 남지 않은것 같은데 남은 과제 동안 지금까지 배웠던 부분을 잘 적용해서 마무리하고 싶다. 어떤 에러도 막을 수 있는 빈틈없는 코드와 단위 테스트, 브랜치 병합, 팀원간의 의사소통까지 더 잘 해서 우수 팀 과제에 뽑히고 싶다. </p>
+
             
 
 
