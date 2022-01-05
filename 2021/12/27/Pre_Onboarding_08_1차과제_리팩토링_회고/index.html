@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n1차 과제 리팩토링을 마치며…\n\n\n\n \n\n1차 과제 리팩토링을 진행하게 된 계기1차 과제의 요구사항을 다시 한번 간략하게 정리해보자과제의 기한과 요구사항은 다음과 같았다.\n\n기한: 21/11/22 16:00 ~ 11/29 10:00 (약 7일)\n개발 요구사항:\n선호 기술 스택: Express/Nest JS or Spring Framework\nDB: RDBMS 사용\nREST API 기능\n사용자 생성 API\nID/Password로 사용자 생성\n인증 토큰 발급\n\n\n사용자가 소유한 타이어 정보를 저장하는 API\n인증된 사용자만 호출\n한번에 최대 5명까지의 사용자에 대한 요청이 가능하게 구현\n\n\n사용자가 소유한 타이어 정보 조회 API\n\n\nORM 사용\n제시한 응답 코드 사용 \n가능하다면 docker 사용\n\n\n\n어떻게 과제를 해나갔는가\n팀과제의 루틴대로 초기환경 셋팅, 프로젝트 이슈 작성, 모델링, 마이그레이션 먼저\n개인과제여도 branch 전략으로 진행\n사용자 생성 API부터 구현, 하나의 기능 -&gt; 테스트코드 까지 작성하여 PR\n\n어려웠던 점은?\n요구사항 대로 모델링 짜는 부분\n카닥의 API 호출해서 사용하는 부분, 테스트하는 방법 - 테스트 모킹\n\n무엇을 느끼고 무엇을 배웠나\n재밌다\n협업 경험 -&gt; 사람들과 소통하는 방법, 의도를 명확하게 전달해야 함을 배움\n온라인 환경에서 협업하는 것 익숙\ngit 병합 전략 Rebase, Squash에 익숙\n유닛테스트 코드 작성에 익숙\n배포 경험\nAPI 문서 작성(postman, swagger)\nPR 올리면 코드리뷰\n새로운 프레임워크flask, 새로운 ORM sqlalchemy 경험\ndjango로 rest api 구현 익숙 \n\n","dateCreated":"2021-12-27T15:20:34+09:00","dateModified":"2022-01-02T16:02:38+09:00","datePublished":"2021-12-27T15:20:34+09:00","description":"\n1차 과제 리팩토링을 마치며…\n","headline":"Pre_Onboarding) 1차 기업과제 리팩토링 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, 에이모"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n1차 과제 리팩토링을 마치며…\n\n\n\n \n\n1차 과제 리팩토링을 진행하게 된 계기1차 과제의 요구사항을 다시 한번 간략하게 정리해보자과제의 기한과 요구사항은 다음과 같았다.\n\n기한: 21/11/1 16:00 ~ 11/3 10:00 (약 1.5일)\n개발 요구사항:\nDB: mongodb 사용\nREST API 기능\n원티드 지원 과제 내용 포함(게시판 CRUD API)\n게시글 카테고리\n게시글 검색\n대댓글(1depth)\n대댓글 pagination\n\n\n게시글 읽힘 수\n같은 User가 게시글을 읽는 경우 count 수 증가하면 안 됨\n\n\n\n\n유닛테스트 구현\n1000만건 이상의 데이터를 넣고 성능테스트 진행 결과 필요\n\n\n\n어떻게 과제를 해나갔는가\n페어프로그래밍으로 진행\n잘 안되었던 대댓글 부터 구현, 검색은 Request body -&gt; 쿼리 파라미터로 수정(스웨거 사용방법 몰라서 안되었던거), 테스트코드 안되던거 수정  \n도커로 배포\n\n어려웠던 점은?\n스웨거에서 쿼리 파라미터 사용하는 부분\n\n무엇을 느끼고 무엇을 배웠나\n처음 과제가 주어졌던 한달 전 보다 코드가 눈에 더 잘 들어옴\n에러가 발생해도 구글링해서 전보다 더 잘 해결할 수 있음\n자신감이 생김\n\n","dateCreated":"2021-12-27T15:20:34+09:00","dateModified":"2022-01-05T16:30:19+09:00","datePublished":"2021-12-27T15:20:34+09:00","description":"\n1차 과제 리팩토링을 마치며…\n","headline":"Pre_Onboarding) 1차 기업과제 리팩토링 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, 에이모"}</script>
     <meta name="description" content="1차 과제 리팩토링을 마치며…">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Pre_Onboarding) 1차 기업과제 리팩토링 회고">
@@ -20,7 +20,7 @@
 <meta property="og:description" content="1차 과제 리팩토링을 마치며…">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-27T06:20:34.000Z">
-<meta property="article:modified_time" content="2022-01-02T07:02:38.456Z">
+<meta property="article:modified_time" content="2022-01-05T07:30:19.555Z">
 <meta property="article:tag" content="위코드">
 <meta property="article:tag" content="원티드">
 <meta property="article:tag" content="에이모">
@@ -332,50 +332,40 @@
 
 <h5 id="1차-과제-리팩토링을-진행하게-된-계기"><a href="#1차-과제-리팩토링을-진행하게-된-계기" class="headerlink" title="1차 과제 리팩토링을 진행하게 된 계기"></a>1차 과제 리팩토링을 진행하게 된 계기</h5><h5 id="1차-과제의-요구사항을-다시-한번-간략하게-정리해보자"><a href="#1차-과제의-요구사항을-다시-한번-간략하게-정리해보자" class="headerlink" title="1차 과제의 요구사항을 다시 한번 간략하게 정리해보자"></a>1차 과제의 요구사항을 다시 한번 간략하게 정리해보자</h5><p>과제의 기한과 요구사항은 다음과 같았다.</p>
 <ul>
-<li>기한: 21/11/22 16:00 ~ 11/29 10:00 (약 7일)</li>
+<li>기한: 21/11/1 16:00 ~ 11/3 10:00 (약 1.5일)</li>
 <li>개발 요구사항:<ul>
-<li>선호 기술 스택: Express/Nest JS or Spring Framework</li>
-<li>DB: RDBMS 사용</li>
+<li>DB: mongodb 사용</li>
 <li>REST API 기능<ul>
-<li>사용자 생성 API<ul>
-<li>ID/Password로 사용자 생성</li>
-<li>인증 토큰 발급</li>
+<li>원티드 지원 과제 내용 포함(게시판 CRUD API)</li>
+<li>게시글 카테고리</li>
+<li>게시글 검색</li>
+<li>대댓글(1depth)<ul>
+<li>대댓글 pagination</li>
 </ul>
 </li>
-<li>사용자가 소유한 타이어 정보를 저장하는 API<ul>
-<li>인증된 사용자만 호출</li>
-<li>한번에 최대 5명까지의 사용자에 대한 요청이 가능하게 구현</li>
+<li>게시글 읽힘 수<ul>
+<li>같은 User가 게시글을 읽는 경우 count 수 증가하면 안 됨</li>
 </ul>
 </li>
-<li>사용자가 소유한 타이어 정보 조회 API</li>
 </ul>
 </li>
-<li>ORM 사용</li>
-<li>제시한 응답 코드 사용 </li>
-<li>가능하다면 docker 사용</li>
+<li>유닛테스트 구현</li>
+<li>1000만건 이상의 데이터를 넣고 성능테스트 진행 결과 필요</li>
 </ul>
 </li>
 </ul>
 <h5 id="어떻게-과제를-해나갔는가"><a href="#어떻게-과제를-해나갔는가" class="headerlink" title="어떻게 과제를 해나갔는가"></a>어떻게 과제를 해나갔는가</h5><ul>
-<li>팀과제의 루틴대로 초기환경 셋팅, 프로젝트 이슈 작성, 모델링, 마이그레이션 먼저</li>
-<li>개인과제여도 branch 전략으로 진행</li>
-<li>사용자 생성 API부터 구현, 하나의 기능 -&gt; 테스트코드 까지 작성하여 PR</li>
+<li>페어프로그래밍으로 진행</li>
+<li>잘 안되었던 대댓글 부터 구현, 검색은 Request body -&gt; 쿼리 파라미터로 수정(스웨거 사용방법 몰라서 안되었던거), 테스트코드 안되던거 수정  </li>
+<li>도커로 배포</li>
 </ul>
 <h5 id="어려웠던-점은"><a href="#어려웠던-점은" class="headerlink" title="어려웠던 점은?"></a>어려웠던 점은?</h5><ul>
-<li>요구사항 대로 모델링 짜는 부분</li>
-<li>카닥의 API 호출해서 사용하는 부분, 테스트하는 방법 - 테스트 모킹</li>
+<li>스웨거에서 쿼리 파라미터 사용하는 부분</li>
 </ul>
 <h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><ul>
-<li>재밌다</li>
-<li>협업 경험 -&gt; 사람들과 소통하는 방법, 의도를 명확하게 전달해야 함을 배움</li>
-<li>온라인 환경에서 협업하는 것 익숙</li>
-<li>git 병합 전략 Rebase, Squash에 익숙</li>
-<li>유닛테스트 코드 작성에 익숙</li>
-<li>배포 경험</li>
-<li>API 문서 작성(postman, swagger)</li>
-<li>PR 올리면 코드리뷰</li>
-<li>새로운 프레임워크flask, 새로운 ORM sqlalchemy 경험</li>
-<li>django로 rest api 구현 익숙 </li>
+<li>처음 과제가 주어졌던 한달 전 보다 코드가 눈에 더 잘 들어옴</li>
+<li>에러가 발생해도 구글링해서 전보다 더 잘 해결할 수 있음</li>
+<li>자신감이 생김</li>
 </ul>
 
             
