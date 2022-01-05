@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n7차 과제를 마치며…\n\n\n\n \n\n7차 과제의 요구사항을 간략하게 정리해보자과제의 기한과 요구사항은 다음과 같았다.\n\n기한: 21/11/22 16:00 ~ 11/29 10:00 (약 7일)\n개발 요구사항:\n선호 기술 스택: Express/Nest JS or Spring Framework\nDB: RDBMS 사용\nREST API 기능\n사용자 생성 API\nID/Password로 사용자 생성\n인증 토큰 발급\n\n\n사용자가 소유한 타이어 정보를 저장하는 API\n인증된 사용자만 호출\n한번에 최대 5명까지의 사용자에 대한 요청이 가능하게 구현\n\n\n사용자가 소유한 타이어 정보 조회 API\n\n\nORM 사용\n제시한 응답 코드 사용 \n가능하다면 docker 사용\n\n\n\n어떻게 과제를 해나갔는가\n팀과제의 루틴대로 초기환경 셋팅, 프로젝트 이슈 작성, 모델링, 마이그레이션 먼저\n개인과제여도 branch 전략으로 진행\n사용자 생성 API부터 구현, 하나의 기능 -&gt; 테스트코드 까지 작성하여 PR\n\n어려웠던 점은?\n요구사항 대로 모델링 짜는 부분\n카닥의 API 호출해서 사용하는 부분, 테스트하는 방법 - 테스트 모킹\n\n무엇을 느끼고 무엇을 배웠나\n재밌다\n\n마지막 과제를 하고 난 소감\n협업 경험 -&gt; 사람들과 소통하는 방법, 의도를 명확하게 전달해야 함을 배움\n온라인 환경에서 협업하는 것 익숙\ngit 병합 전략 Rebase, Squash에 익숙\n유닛테스트 코드 작성에 익숙\n배포 경험\nAPI 문서 작성(postman, swagger)\nPR 올리면 코드리뷰\n새로운 프레임워크flask, 새로운 ORM sqlalchemy 경험\ndjango로 rest api 구현 익숙 \n\n","dateCreated":"2021-11-29T14:20:34+09:00","dateModified":"2021-12-27T15:59:51+09:00","datePublished":"2021-11-29T14:20:34+09:00","description":"\n7차 과제를 마치며…\n","headline":"Pre_Onboarding) 7차 기업과제 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/29/Pre_Onboarding_07_7%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/29/Pre_Onboarding_07_7%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, cardoc"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n7차 과제를 마치며…\n\n\n\n \n\n7차 과제의 요구사항을 간략하게 정리해보자과제의 기한과 요구사항은 다음과 같았다.\n\n기한: 21/11/22 16:00 ~ 11/29 10:00 (약 7일)\n개발 요구사항:\n선호 기술 스택: Express/Nest JS or Spring Framework\nDB: RDBMS 사용\nREST API 기능\n사용자 생성 API\nID/Password로 사용자 생성\n인증 토큰 발급\n\n\n사용자가 소유한 타이어 정보를 저장하는 API\n인증된 사용자만 호출\n한번에 최대 5명까지의 사용자에 대한 요청이 가능하게 구현\n\n\n사용자가 소유한 타이어 정보 조회 API\n\n\nORM 사용\n제시한 응답 코드 사용 \n가능하다면 docker 사용\n\n\n\n어떻게 과제를 해나갔는가팀 과제때 했던 루틴대로 둘째날까지는 초기환경 셋팅, 프로젝트 이슈 작성, 모델링, 마이그레이션을 진행했다. 개인 과제여도 git rebase 브랜치 병합 전략에 조금 더 익숙해지기 위해 git rebase 전략으로 코드를 병합했다. PR을 올려도 코드를 리뷰해줄 팀원들이 없어서 외로웠지만 한편으론 편하긴 했다. 그래도 코드리뷰를 받으면서 새롭게 알게되는 부분들이 훨씬 많아서 힘들긴해도 팀플이 더 좋긴 하다ㅋㅋ\nFramework와 DB는 익숙한 Django와 in memory인 SQLite을 사용하기로 결정했고, 구현해야 할 REST API는 총 3개여서 사용자 생성 API부터 개발하기 시작했다. PR은 단위테스트를 진행 한 후에 보냈다.  \n어려웠던 점은?여전히 모델링은 어렵다…몇년차 개발자가 되어야 모델링을 잘 짠다고 자신있게 말할 수 있게될 지 궁금하다 ㅎㅎ 사용자가 소유한 타이어 정보를 저장하는 API 때문에 실제 카닥의 API를 호출해서 데이터를 받았는데, 이 내용을 보고 테이블과 필드명을 짰다. 가장 고민이 되었던 부분은 타이어가 앞, 뒤 두개인데 정규화를 해서 테이블을 나눌지 하나의 테이블로 만들고 name이라는 필드로 앞, 뒤를 구분할지였다. 결국엔 하나의 테이블로 만들긴 했는데 실무에서는 어떻게 설계했는지 궁금하다.\n두번째는 사용자가 소유한 타이어 정보를 저장하는 API를 만들 때, 코드가 너무 길어졌는데 이 부분을 어떻게 재사용 가능한 코드로 쪼갤지가 어려웠다. 구현할 때는 크게 생각을 못했는데 한참 지나고 보니 코드가 지저분해 보였다. 외부 API로부터 데이터를 받아오는 부분을 따로 빼도 괜찮을 것 같다는 생각이 드는데 나중에 리팩토링 해봐야겠다.\n무엇을 느끼고 무엇을 배웠나일단 API를 만드는 일은 재밌다. 200코드를 받았을 때의 그 쾌감이란…ㅎㅎ 물론 잘 안될때는 힘들지만 재미를 느끼는 부분이 더 크다. 과제가 끝나고 다른 팀원과 얘기를 하면서 알게 되었는데 외부 API에 의존하는 API일 경우 단위테스트 할 때 Mocking 기법을 사용해야 한다는 것이었다. 과제를 제출할 당시에는 시간이 없어서 수정하지 못했지만 팀원이 참고했던 자료를 공유해줘서 리팩토링 해봐야될 것 같다. (실제로 Mocking을 공부하고 리팩토링 했다!)\n마지막 과제 또는 프리온보딩을 무사히 마친 소감내 생애 가장 길었던 한달이 아니었나 싶을 정도로 팀 과제를 할때는 시간 압박과 온라인 상에서의 협업으로 정신적, 체력적으로 많이 힘들었었다. 이런게 협업이구나 싶을 정도로 우리가 만든 컨벤션을 잘 지키고 그 외적으로 커밋 메시지, PR 메시지, 에러 메시지 등 신경써야 하는 부분들이 많다는 것을 배웠다. 협업 경험이 가장 필요하다고 생각했을 시점에 떨어질거라고 생각했던 프리온보딩 선발과제가 통과되서 이 기회를 잘 활용해야 겠다는 마음가짐으로 참여했는데, 힘들어도 포기하지 않고 마칠 수 있어서 스스로가 뿌듯했다. 이 코스에 참여할 수 있어서 정말 정말 감사했다. \n이 경험으로 배운 점은 정말 많다. 열거해 보자면..\n\n자신감이 생겼다.\n온라인 환경에서 협업하는 것에 익숙해졌다.\nDjango로 REST API를 구현하는데 익숙해졌다.\nUnit Test, Mocking을 활용해서 테스트 코드를 작성하는데 익숙해졌다.\ngit 브랜치 병합 전략으로 Rebase, Squash를 할 수있다.\nPR을 올려서 코드리뷰를 경험해봤다.\nAWS EC2를 사용하여 7번의 배포 경험이 있다.\nPostman, Swagger를 사용해서 API를 테스트하고 문서를 만드는데 익숙해졌다.\n새로운 프레임워크 flask, 새로운 ORM Sqlalchemy를 사용해보면서 새로운 기술에 대해 두려움이 줄었고, 공식 문서 보는데 익숙해졌다.\n사람들과 소통하는 방법, 의견을 명확하게 전달해야 하는 것을 배웠다.\n\n이 정도로 정리할 수 있을 것 같다. 소중한 경험을 바탕으로 얼른 현업에서 멋진 개발자로 일하고 싶다:D\n","dateCreated":"2021-11-29T14:20:34+09:00","dateModified":"2022-01-06T01:37:02+09:00","datePublished":"2021-11-29T14:20:34+09:00","description":"\n7차 과제를 마치며…\n","headline":"Pre_Onboarding) 7차 기업과제 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/29/Pre_Onboarding_07_7%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/29/Pre_Onboarding_07_7%EC%B0%A8%EA%B3%BC%EC%A0%9C_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, cardoc"}</script>
     <meta name="description" content="7차 과제를 마치며…">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Pre_Onboarding) 7차 기업과제 회고">
@@ -20,7 +20,7 @@
 <meta property="og:description" content="7차 과제를 마치며…">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-29T05:20:34.000Z">
-<meta property="article:modified_time" content="2021-12-27T06:59:51.789Z">
+<meta property="article:modified_time" content="2022-01-05T16:37:02.206Z">
 <meta property="article:tag" content="위코드">
 <meta property="article:tag" content="원티드">
 <meta property="article:tag" content="cardoc">
@@ -328,7 +328,7 @@
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#7%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%9D%84-%EA%B0%84%EB%9E%B5%ED%95%98%EA%B2%8C-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90"><span class="toc-text">7차 과제의 요구사항을 간략하게 정리해보자</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%ED%95%B4%EB%82%98%EA%B0%94%EB%8A%94%EA%B0%80"><span class="toc-text">어떻게 과제를 해나갔는가</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%A0%A4%EC%9B%A0%EB%8D%98-%EC%A0%90%EC%9D%80"><span class="toc-text">어려웠던 점은?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B4%EC%97%87%EC%9D%84-%EB%8A%90%EB%81%BC%EA%B3%A0-%EB%AC%B4%EC%97%87%EC%9D%84-%EB%B0%B0%EC%9B%A0%EB%82%98"><span class="toc-text">무엇을 느끼고 무엇을 배웠나</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%A7%88%EC%A7%80%EB%A7%89-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%ED%95%98%EA%B3%A0-%EB%82%9C-%EC%86%8C%EA%B0%90"><span class="toc-text">마지막 과제를 하고 난 소감</span></a></li></ol> 
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#7%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%9D%84-%EA%B0%84%EB%9E%B5%ED%95%98%EA%B2%8C-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90"><span class="toc-text">7차 과제의 요구사항을 간략하게 정리해보자</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%ED%95%B4%EB%82%98%EA%B0%94%EB%8A%94%EA%B0%80"><span class="toc-text">어떻게 과제를 해나갔는가</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%A0%A4%EC%9B%A0%EB%8D%98-%EC%A0%90%EC%9D%80"><span class="toc-text">어려웠던 점은?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B4%EC%97%87%EC%9D%84-%EB%8A%90%EB%81%BC%EA%B3%A0-%EB%AC%B4%EC%97%87%EC%9D%84-%EB%B0%B0%EC%9B%A0%EB%82%98"><span class="toc-text">무엇을 느끼고 무엇을 배웠나</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%A7%88%EC%A7%80%EB%A7%89-%EA%B3%BC%EC%A0%9C-%EB%98%90%EB%8A%94-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9%EC%9D%84-%EB%AC%B4%EC%82%AC%ED%9E%88-%EB%A7%88%EC%B9%9C-%EC%86%8C%EA%B0%90"><span class="toc-text">마지막 과제 또는 프리온보딩을 무사히 마친 소감</span></a></li></ol> 
 
 <h5 id="7차-과제의-요구사항을-간략하게-정리해보자"><a href="#7차-과제의-요구사항을-간략하게-정리해보자" class="headerlink" title="7차 과제의 요구사항을 간략하게 정리해보자"></a>7차 과제의 요구사항을 간략하게 정리해보자</h5><p>과제의 기한과 요구사항은 다음과 같았다.</p>
 <ul>
@@ -356,29 +356,26 @@
 </ul>
 </li>
 </ul>
-<h5 id="어떻게-과제를-해나갔는가"><a href="#어떻게-과제를-해나갔는가" class="headerlink" title="어떻게 과제를 해나갔는가"></a>어떻게 과제를 해나갔는가</h5><ul>
-<li>팀과제의 루틴대로 초기환경 셋팅, 프로젝트 이슈 작성, 모델링, 마이그레이션 먼저</li>
-<li>개인과제여도 branch 전략으로 진행</li>
-<li>사용자 생성 API부터 구현, 하나의 기능 -&gt; 테스트코드 까지 작성하여 PR</li>
+<h5 id="어떻게-과제를-해나갔는가"><a href="#어떻게-과제를-해나갔는가" class="headerlink" title="어떻게 과제를 해나갔는가"></a>어떻게 과제를 해나갔는가</h5><p>팀 과제때 했던 루틴대로 둘째날까지는 초기환경 셋팅, 프로젝트 이슈 작성, 모델링, 마이그레이션을 진행했다. 개인 과제여도 <code>git rebase</code> 브랜치 병합 전략에 조금 더 익숙해지기 위해 <code>git rebase</code> 전략으로 코드를 병합했다. PR을 올려도 코드를 리뷰해줄 팀원들이 없어서 외로웠지만 한편으론 편하긴 했다. 그래도 코드리뷰를 받으면서 새롭게 알게되는 부분들이 훨씬 많아서 힘들긴해도 팀플이 더 좋긴 하다ㅋㅋ</p>
+<p>Framework와 DB는 익숙한 Django와 in memory인 SQLite을 사용하기로 결정했고, 구현해야 할 REST API는 총 3개여서 사용자 생성 API부터 개발하기 시작했다. PR은 단위테스트를 진행 한 후에 보냈다.  </p>
+<h5 id="어려웠던-점은"><a href="#어려웠던-점은" class="headerlink" title="어려웠던 점은?"></a>어려웠던 점은?</h5><p>여전히 모델링은 어렵다…몇년차 개발자가 되어야 모델링을 잘 짠다고 자신있게 말할 수 있게될 지 궁금하다 ㅎㅎ 사용자가 소유한 타이어 정보를 저장하는 API 때문에 실제 카닥의 API를 호출해서 데이터를 받았는데, 이 내용을 보고 테이블과 필드명을 짰다. 가장 고민이 되었던 부분은 타이어가 앞, 뒤 두개인데 정규화를 해서 테이블을 나눌지 하나의 테이블로 만들고 name이라는 필드로 앞, 뒤를 구분할지였다. 결국엔 하나의 테이블로 만들긴 했는데 실무에서는 어떻게 설계했는지 궁금하다.</p>
+<p>두번째는 사용자가 소유한 타이어 정보를 저장하는 API를 만들 때, 코드가 너무 길어졌는데 이 부분을 어떻게 재사용 가능한 코드로 쪼갤지가 어려웠다. 구현할 때는 크게 생각을 못했는데 한참 지나고 보니 코드가 지저분해 보였다. 외부 API로부터 데이터를 받아오는 부분을 따로 빼도 괜찮을 것 같다는 생각이 드는데 나중에 리팩토링 해봐야겠다.</p>
+<h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><p>일단 API를 만드는 일은 재밌다. 200코드를 받았을 때의 그 쾌감이란…ㅎㅎ 물론 잘 안될때는 힘들지만 재미를 느끼는 부분이 더 크다. 과제가 끝나고 다른 팀원과 얘기를 하면서 알게 되었는데 외부 API에 의존하는 API일 경우 단위테스트 할 때 <code>Mocking</code> 기법을 사용해야 한다는 것이었다. 과제를 제출할 당시에는 시간이 없어서 수정하지 못했지만 팀원이 참고했던 자료를 공유해줘서 리팩토링 해봐야될 것 같다. (실제로 <a href="https://odreystella.github.io/2021/11/29/TIL_08_%ED%85%8C%EC%8A%A4%ED%8A%B8_%EB%AA%A8%ED%82%B9/">Mocking</a>을 공부하고 리팩토링 했다!)</p>
+<h5 id="마지막-과제-또는-프리온보딩을-무사히-마친-소감"><a href="#마지막-과제-또는-프리온보딩을-무사히-마친-소감" class="headerlink" title="마지막 과제 또는 프리온보딩을 무사히 마친 소감"></a>마지막 과제 또는 프리온보딩을 무사히 마친 소감</h5><p>내 생애 가장 길었던 한달이 아니었나 싶을 정도로 팀 과제를 할때는 시간 압박과 온라인 상에서의 협업으로 정신적, 체력적으로 많이 힘들었었다. 이런게 협업이구나 싶을 정도로 우리가 만든 컨벤션을 잘 지키고 그 외적으로 커밋 메시지, PR 메시지, 에러 메시지 등 신경써야 하는 부분들이 많다는 것을 배웠다. 협업 경험이 가장 필요하다고 생각했을 시점에 떨어질거라고 생각했던 프리온보딩 선발과제가 통과되서 이 기회를 잘 활용해야 겠다는 마음가짐으로 참여했는데, 힘들어도 포기하지 않고 마칠 수 있어서 스스로가 뿌듯했다. 이 코스에 참여할 수 있어서 정말 정말 감사했다. </p>
+<p>이 경험으로 배운 점은 정말 많다. 열거해 보자면..</p>
+<ul>
+<li>자신감이 생겼다.</li>
+<li>온라인 환경에서 협업하는 것에 익숙해졌다.</li>
+<li>Django로 REST API를 구현하는데 익숙해졌다.</li>
+<li>Unit Test, Mocking을 활용해서 테스트 코드를 작성하는데 익숙해졌다.</li>
+<li>git 브랜치 병합 전략으로 <code>Rebase</code>, <code>Squash</code>를 할 수있다.</li>
+<li>PR을 올려서 코드리뷰를 경험해봤다.</li>
+<li>AWS EC2를 사용하여 7번의 배포 경험이 있다.</li>
+<li>Postman, Swagger를 사용해서 API를 테스트하고 문서를 만드는데 익숙해졌다.</li>
+<li>새로운 프레임워크 flask, 새로운 ORM Sqlalchemy를 사용해보면서 새로운 기술에 대해 두려움이 줄었고, 공식 문서 보는데 익숙해졌다.</li>
+<li>사람들과 소통하는 방법, 의견을 명확하게 전달해야 하는 것을 배웠다.</li>
 </ul>
-<h5 id="어려웠던-점은"><a href="#어려웠던-점은" class="headerlink" title="어려웠던 점은?"></a>어려웠던 점은?</h5><ul>
-<li>요구사항 대로 모델링 짜는 부분</li>
-<li>카닥의 API 호출해서 사용하는 부분, 테스트하는 방법 - 테스트 모킹</li>
-</ul>
-<h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><ul>
-<li>재밌다</li>
-</ul>
-<h5 id="마지막-과제를-하고-난-소감"><a href="#마지막-과제를-하고-난-소감" class="headerlink" title="마지막 과제를 하고 난 소감"></a>마지막 과제를 하고 난 소감</h5><ul>
-<li>협업 경험 -&gt; 사람들과 소통하는 방법, 의도를 명확하게 전달해야 함을 배움</li>
-<li>온라인 환경에서 협업하는 것 익숙</li>
-<li>git 병합 전략 Rebase, Squash에 익숙</li>
-<li>유닛테스트 코드 작성에 익숙</li>
-<li>배포 경험</li>
-<li>API 문서 작성(postman, swagger)</li>
-<li>PR 올리면 코드리뷰</li>
-<li>새로운 프레임워크flask, 새로운 ORM sqlalchemy 경험</li>
-<li>django로 rest api 구현 익숙 </li>
-</ul>
+<p>이 정도로 정리할 수 있을 것 같다. 소중한 경험을 바탕으로 얼른 현업에서 멋진 개발자로 일하고 싶다:D</p>
 
             
 
