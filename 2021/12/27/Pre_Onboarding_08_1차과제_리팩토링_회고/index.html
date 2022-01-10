@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n1차 과제 리팩토링을 마치며…\n\n\n\n \n\n1차 과제 리팩토링을 진행하게 된 계기1차 과제의 요구사항을 다시 한번 간략하게 정리해보자과제의 기한과 요구사항은 다음과 같았다.\n\n기한: 21/11/1 16:00 ~ 11/3 10:00 (약 1.5일)\n개발 요구사항:\nDB: mongodb 사용\nREST API 기능\n원티드 지원 과제 내용 포함(게시판 CRUD API)\n게시글 카테고리\n게시글 검색\n대댓글(1depth)\n대댓글 pagination\n\n\n게시글 읽힘 수\n같은 User가 게시글을 읽는 경우 count 수 증가하면 안 됨\n\n\n\n\n유닛테스트 구현\n1000만건 이상의 데이터를 넣고 성능테스트 진행 결과 필요\n\n\n\n어떻게 과제를 해나갔는가\n페어프로그래밍으로 진행\n잘 안되었던 대댓글 부터 구현, 검색은 Request body -&gt; 쿼리 파라미터로 수정(스웨거 사용방법 몰라서 안되었던거), 테스트코드 안되던거 수정  \n도커로 배포\n\n어려웠던 점은?\n스웨거에서 쿼리 파라미터 사용하는 부분\n\n무엇을 느끼고 무엇을 배웠나\n처음 과제가 주어졌던 한달 전 보다 코드가 눈에 더 잘 들어옴\n에러가 발생해도 구글링해서 전보다 더 잘 해결할 수 있음\n자신감이 생김\n\n","dateCreated":"2021-12-27T15:20:34+09:00","dateModified":"2022-01-07T00:43:04+09:00","datePublished":"2021-12-27T15:20:34+09:00","description":"\n1차 과제 리팩토링을 마치며…\n","headline":"Pre_Onboarding) 1차 기업과제 리팩토링 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, 에이모"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n1차 과제 리팩토링을 마치며…\n\n\n\n \n\n1차 과제 리팩토링을 진행하게 된 계기프리온보딩 코스를 이수하고 기능구현도, 배포도 미완이었던 1차 과제에 대해 개인적으로 아쉬움이 많았다. 같이 한 팀원도 코스가 다 끝나면 시간이 좀 여유로울테니 리팩토링해보자고 계속 얘기해왔어서 우리는 하루에 1~2시간 정도 할애하여 1차 과제를 리팩토링하여 완성하기로 했다.\n1차 과제의 요구사항을 다시 한번 간략하게 정리해보자과제의 요구사항은 다음과 같았다.\n\n개발 요구사항:\nDB: mongodb 사용\nREST API 기능\n원티드 지원 과제 내용 포함(게시판 CRUD API)\n게시글 카테고리\n게시글 검색\n대댓글(1depth)\n대댓글 pagination\n\n\n게시글 읽힘 수\n같은 User가 게시글을 읽는 경우 count 수 증가하면 안 됨\n\n\n\n\n유닛테스트 구현\n\n\n\n1차과제의 상태와 우리의 목표1차 과제를 수행하고 한달 이상의 시간이 흘러 지금 과제가 어떤 상태인지 점검했다. 요구사항 중에 게시판 CRUD API와 게시글 카테고리는 작성되어있는 코드로 두기로 했고, 검색 API, 대댓글 API는 리팩토링이 필요했다. 게시글 읽힘 수 API는 새로 코드를 짜야했다. 그리고 mongodb와 연동하면서 유닛테스트를 돌렸을 때, 해결하지 못했던 에러를 해결해서 테스트를 성공시켜야 했고, swagger를 처음 적용하여 Query String을 전달하지 못했던 부분을 성공시켜야 했다. 모든 기능구현과 테스트가 끝난 후에 배포와 README.md를 다시 정리하기로 했고, 더 나아가 우리는 도커로 배포를 해보기로 했다. 정리하자면 검색 API, 대댓글 API 리팩토링, 게시글 읽힘 수 API 구현, 유닛테스트 구현, 도커를 사용하여 배포하는 것이 우리의 목표였다.   \n어떻게 과제를 해나갔는가우리는 문제를 해결해나가면서 공부하는 것이 목적이었기 때문에 각자 업무를 나누는 것보다 페어프로그래밍을 진행하는 것이 의미있을 것이라고 판단했다. 늘 하던대로 깃허브에 이슈를 작성했고, 온라인에서 만나 가능한 하루에 하나씩 해결해 나가기로 했다. 5개의 이슈를 작성했고, 총 일주일정도 걸렸던것 같다.\n어려웠던 점은?인원이 많든 적든 협업할 때 의견을 조율하는 일은 늘 어렵다. 내가 경험한 만큼 이해할 수 있다고 생각하는데, 나와 다른 경험을 가지고 있는 상대방의 의견을 이해할 때는 많은 대화가 필요한 것 같다. 모델에서 사용하지 않는 필드를 지우는 일, 에러 메시지를 작성하는 일, 변수의 이름을 정하는 일, 에러 핸들링의 범위를 정하는 일 등 어떻게 보면 사소할 수 있지만 정답이 없기 때문에 충분히 의견차이가 있을 수 있는 일에서 대화를 통해 서로 설득해가며 의견을 조율했다.     \n무엇을 느끼고 무엇을 배웠나도커로 배포에 성공했을 때 일단 뿌듯했다. 처음 과제가 주어졌던 약 한달 전보다 코드가 눈에 더 잘 들어온다고 느꼈고, 에러가 발생해도 구글링해서 전보다 더 잘 해결할 수 있었다. 한달하고 조금 넘는 시간동안 그래도 성장했다는 것이 느껴져서 기뻤고, 자신감도 생겼다. \n그리고 어떤 경험이든 항상 배울점은 있다. 이번 리팩토링을 통해 지난번에는 못했던 swagger로 Query String을 전달하는 방법을 찾았다. query_serializer와 manual_parameters라는 인자를 사용해서 전달할 수 있었는데 후자를 선택하여 검색 API와 대댓글 조회 API를 잘 구현할 수 있었다. 또한, Query String과 Path Variable의 차이를 공부했고, 도커의 명령어와 실행 흐름에 더욱 익숙해질 수 있었다.   \n","dateCreated":"2021-12-27T15:20:34+09:00","dateModified":"2022-01-10T18:31:50+09:00","datePublished":"2021-12-27T15:20:34+09:00","description":"\n1차 과제 리팩토링을 마치며…\n","headline":"Pre_Onboarding) 1차 기업과제 리팩토링 회고","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/12/27/Pre_Onboarding_08_1%EC%B0%A8%EA%B3%BC%EC%A0%9C_%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81_%ED%9A%8C%EA%B3%A0/","keywords":"위코드, 원티드, 에이모"}</script>
     <meta name="description" content="1차 과제 리팩토링을 마치며…">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Pre_Onboarding) 1차 기업과제 리팩토링 회고">
@@ -20,7 +20,7 @@
 <meta property="og:description" content="1차 과제 리팩토링을 마치며…">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-27T06:20:34.000Z">
-<meta property="article:modified_time" content="2022-01-06T15:43:04.771Z">
+<meta property="article:modified_time" content="2022-01-10T09:31:50.203Z">
 <meta property="article:tag" content="위코드">
 <meta property="article:tag" content="원티드">
 <meta property="article:tag" content="에이모">
@@ -328,11 +328,11 @@
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%EC%B0%A8-%EA%B3%BC%EC%A0%9C-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%EC%9D%84-%EC%A7%84%ED%96%89%ED%95%98%EA%B2%8C-%EB%90%9C-%EA%B3%84%EA%B8%B0"><span class="toc-text">1차 과제 리팩토링을 진행하게 된 계기</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%9D%84-%EB%8B%A4%EC%8B%9C-%ED%95%9C%EB%B2%88-%EA%B0%84%EB%9E%B5%ED%95%98%EA%B2%8C-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90"><span class="toc-text">1차 과제의 요구사항을 다시 한번 간략하게 정리해보자</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%ED%95%B4%EB%82%98%EA%B0%94%EB%8A%94%EA%B0%80"><span class="toc-text">어떻게 과제를 해나갔는가</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%A0%A4%EC%9B%A0%EB%8D%98-%EC%A0%90%EC%9D%80"><span class="toc-text">어려웠던 점은?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B4%EC%97%87%EC%9D%84-%EB%8A%90%EB%81%BC%EA%B3%A0-%EB%AC%B4%EC%97%87%EC%9D%84-%EB%B0%B0%EC%9B%A0%EB%82%98"><span class="toc-text">무엇을 느끼고 무엇을 배웠나</span></a></li></ol> 
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%EC%B0%A8-%EA%B3%BC%EC%A0%9C-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%EC%9D%84-%EC%A7%84%ED%96%89%ED%95%98%EA%B2%8C-%EB%90%9C-%EA%B3%84%EA%B8%B0"><span class="toc-text">1차 과제 리팩토링을 진행하게 된 계기</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1%EC%B0%A8-%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%9D%84-%EB%8B%A4%EC%8B%9C-%ED%95%9C%EB%B2%88-%EA%B0%84%EB%9E%B5%ED%95%98%EA%B2%8C-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90"><span class="toc-text">1차 과제의 요구사항을 다시 한번 간략하게 정리해보자</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1%EC%B0%A8%EA%B3%BC%EC%A0%9C%EC%9D%98-%EC%83%81%ED%83%9C%EC%99%80-%EC%9A%B0%EB%A6%AC%EC%9D%98-%EB%AA%A9%ED%91%9C"><span class="toc-text">1차과제의 상태와 우리의 목표</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%ED%95%B4%EB%82%98%EA%B0%94%EB%8A%94%EA%B0%80"><span class="toc-text">어떻게 과제를 해나갔는가</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B4%EB%A0%A4%EC%9B%A0%EB%8D%98-%EC%A0%90%EC%9D%80"><span class="toc-text">어려웠던 점은?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B4%EC%97%87%EC%9D%84-%EB%8A%90%EB%81%BC%EA%B3%A0-%EB%AC%B4%EC%97%87%EC%9D%84-%EB%B0%B0%EC%9B%A0%EB%82%98"><span class="toc-text">무엇을 느끼고 무엇을 배웠나</span></a></li></ol> 
 
-<h5 id="1차-과제-리팩토링을-진행하게-된-계기"><a href="#1차-과제-리팩토링을-진행하게-된-계기" class="headerlink" title="1차 과제 리팩토링을 진행하게 된 계기"></a>1차 과제 리팩토링을 진행하게 된 계기</h5><h5 id="1차-과제의-요구사항을-다시-한번-간략하게-정리해보자"><a href="#1차-과제의-요구사항을-다시-한번-간략하게-정리해보자" class="headerlink" title="1차 과제의 요구사항을 다시 한번 간략하게 정리해보자"></a>1차 과제의 요구사항을 다시 한번 간략하게 정리해보자</h5><p>과제의 기한과 요구사항은 다음과 같았다.</p>
+<h5 id="1차-과제-리팩토링을-진행하게-된-계기"><a href="#1차-과제-리팩토링을-진행하게-된-계기" class="headerlink" title="1차 과제 리팩토링을 진행하게 된 계기"></a>1차 과제 리팩토링을 진행하게 된 계기</h5><p>프리온보딩 코스를 이수하고 기능구현도, 배포도 미완이었던 1차 과제에 대해 개인적으로 아쉬움이 많았다. 같이 한 팀원도 코스가 다 끝나면 시간이 좀 여유로울테니 리팩토링해보자고 계속 얘기해왔어서 우리는 하루에 1~2시간 정도 할애하여 1차 과제를 리팩토링하여 완성하기로 했다.</p>
+<h5 id="1차-과제의-요구사항을-다시-한번-간략하게-정리해보자"><a href="#1차-과제의-요구사항을-다시-한번-간략하게-정리해보자" class="headerlink" title="1차 과제의 요구사항을 다시 한번 간략하게 정리해보자"></a>1차 과제의 요구사항을 다시 한번 간략하게 정리해보자</h5><p>과제의 요구사항은 다음과 같았다.</p>
 <ul>
-<li>기한: 21/11/1 16:00 ~ 11/3 10:00 (약 1.5일)</li>
 <li>개발 요구사항:<ul>
 <li>DB: mongodb 사용</li>
 <li>REST API 기능<ul>
@@ -350,23 +350,14 @@
 </ul>
 </li>
 <li>유닛테스트 구현</li>
-<li>1000만건 이상의 데이터를 넣고 성능테스트 진행 결과 필요</li>
 </ul>
 </li>
 </ul>
-<h5 id="어떻게-과제를-해나갔는가"><a href="#어떻게-과제를-해나갔는가" class="headerlink" title="어떻게 과제를 해나갔는가"></a>어떻게 과제를 해나갔는가</h5><ul>
-<li>페어프로그래밍으로 진행</li>
-<li>잘 안되었던 대댓글 부터 구현, 검색은 Request body -&gt; 쿼리 파라미터로 수정(스웨거 사용방법 몰라서 안되었던거), 테스트코드 안되던거 수정  </li>
-<li>도커로 배포</li>
-</ul>
-<h5 id="어려웠던-점은"><a href="#어려웠던-점은" class="headerlink" title="어려웠던 점은?"></a>어려웠던 점은?</h5><ul>
-<li>스웨거에서 쿼리 파라미터 사용하는 부분</li>
-</ul>
-<h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><ul>
-<li>처음 과제가 주어졌던 한달 전 보다 코드가 눈에 더 잘 들어옴</li>
-<li>에러가 발생해도 구글링해서 전보다 더 잘 해결할 수 있음</li>
-<li>자신감이 생김</li>
-</ul>
+<h5 id="1차과제의-상태와-우리의-목표"><a href="#1차과제의-상태와-우리의-목표" class="headerlink" title="1차과제의 상태와 우리의 목표"></a>1차과제의 상태와 우리의 목표</h5><p>1차 과제를 수행하고 한달 이상의 시간이 흘러 지금 과제가 어떤 상태인지 점검했다. 요구사항 중에 게시판 CRUD API와 게시글 카테고리는 작성되어있는 코드로 두기로 했고, 검색 API, 대댓글 API는 리팩토링이 필요했다. 게시글 읽힘 수 API는 새로 코드를 짜야했다. 그리고 <code>mongodb</code>와 연동하면서 유닛테스트를 돌렸을 때, 해결하지 못했던 에러를 해결해서 테스트를 성공시켜야 했고, <code>swagger</code>를 처음 적용하여 <code>Query String</code>을 전달하지 못했던 부분을 성공시켜야 했다. 모든 기능구현과 테스트가 끝난 후에 배포와 README.md를 다시 정리하기로 했고, 더 나아가 우리는 도커로 배포를 해보기로 했다. 정리하자면 <strong>검색 API, 대댓글 API 리팩토링, 게시글 읽힘 수 API 구현, 유닛테스트 구현, 도커를 사용하여 배포하는 것이 우리의 목표였다.</strong>   </p>
+<h5 id="어떻게-과제를-해나갔는가"><a href="#어떻게-과제를-해나갔는가" class="headerlink" title="어떻게 과제를 해나갔는가"></a>어떻게 과제를 해나갔는가</h5><p>우리는 문제를 해결해나가면서 <strong>공부하는 것이 목적</strong>이었기 때문에 각자 업무를 나누는 것보다 페어프로그래밍을 진행하는 것이 의미있을 것이라고 판단했다. 늘 하던대로 깃허브에 이슈를 작성했고, 온라인에서 만나 가능한 하루에 하나씩 해결해 나가기로 했다. 5개의 이슈를 작성했고, 총 일주일정도 걸렸던것 같다.</p>
+<h5 id="어려웠던-점은"><a href="#어려웠던-점은" class="headerlink" title="어려웠던 점은?"></a>어려웠던 점은?</h5><p>인원이 많든 적든 협업할 때 의견을 조율하는 일은 늘 어렵다. 내가 경험한 만큼 이해할 수 있다고 생각하는데, 나와 다른 경험을 가지고 있는 상대방의 의견을 이해할 때는 많은 대화가 필요한 것 같다. 모델에서 사용하지 않는 필드를 지우는 일, 에러 메시지를 작성하는 일, 변수의 이름을 정하는 일, 에러 핸들링의 범위를 정하는 일 등 어떻게 보면 사소할 수 있지만 정답이 없기 때문에 충분히 의견차이가 있을 수 있는 일에서 대화를 통해 서로 설득해가며 의견을 조율했다.     </p>
+<h5 id="무엇을-느끼고-무엇을-배웠나"><a href="#무엇을-느끼고-무엇을-배웠나" class="headerlink" title="무엇을 느끼고 무엇을 배웠나"></a>무엇을 느끼고 무엇을 배웠나</h5><p>도커로 배포에 성공했을 때 일단 뿌듯했다. 처음 과제가 주어졌던 약 한달 전보다 코드가 눈에 더 잘 들어온다고 느꼈고, 에러가 발생해도 구글링해서 전보다 더 잘 해결할 수 있었다. 한달하고 조금 넘는 시간동안 그래도 성장했다는 것이 느껴져서 기뻤고, 자신감도 생겼다. </p>
+<p>그리고 어떤 경험이든 항상 배울점은 있다. 이번 리팩토링을 통해 지난번에는 못했던 <code>swagger</code>로 <code>Query String</code>을 전달하는 방법을 찾았다. <code>query_serializer</code>와 <code>manual_parameters</code>라는 인자를 사용해서 전달할 수 있었는데 후자를 선택하여 검색 API와 대댓글 조회 API를 잘 구현할 수 있었다. 또한, <code>Query String</code>과 <code>Path Variable</code>의 차이를 공부했고, 도커의 명령어와 실행 흐름에 더욱 익숙해질 수 있었다.   </p>
 
             
 
