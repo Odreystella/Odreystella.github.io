@@ -6,27 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수 - Dev Odreystella&#39;s Blog</title>
+    <title>네트워크) 2계층(Local Area Network) - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n해시 - 완주하지 못한 선수 문제 풀이\n\n\n\n\n\nChallenge문제 설명수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주하였습니다.\n마라톤에 참여한 선수들의 이름이 담긴 배열 participant와 완주한 선수들의 이름이 담긴 배열 completion이 주어질 때, 완주하지 못한 선수의 이름을 return 하도록 solution 함수를 작성해주세요.\n제한사항\n마라톤 경기에 참여한 선수의 수는 1명 이상 100,000명 이하입니다.\ncompletion의 길이는 participant의 길이보다 1 작습니다.\n참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있습니다.\n참가자 중에는 동명이인이 있을 수 있습니다.\n\n입출력 예\n\n\nparticipant\ncompletion\nreturn\n\n\n\n[“leo”, “kiki”, “eden”]\n[“eden”, “kiki”]\n“leo”\n\n\n[“marina”, “josipa”, “nikola”, “vinko”, “filipa”]\n[“josipa”, “filipa”, “marina”, “nikola”]\n“vinko”\n\n\n[“mislav”, “stanko”, “mislav”, “ana”]\n[“stanko”, “ana”, “mislav”]\n“mislav”\n\n\n입출력 예 설명예제 #1“leo”는 참여자 명단에는 있지만, 완주자 명단에는 없기 때문에 완주하지 못했습니다.\n예제 #2“vinko”는 참여자 명단에는 있지만, 완주자 명단에는 없기 때문에 완주하지 못했습니다.\n예제 #3“mislav”는 참여자 명단에는 두 명이 있지만, 완주자 명단에는 한 명밖에 없기 때문에 한명은 완주하지 못했습니다.\nSolutionon my own(ver.1)1    \n결과(ver.1)\n\n풀이 방법\n\n\n\n\n\nBuilt-in 함수인 Counter을 사용한 코드1\n결과배운 점\n\n\n\n출처","dateCreated":"2022-01-11T19:50:50+09:00","dateModified":"2022-01-11T19:58:12+09:00","datePublished":"2022-01-11T19:50:50+09:00","description":"\n해시 - 완주하지 못한 선수 문제 풀이\n","headline":"알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/","keywords":"algorithm, python, programmers"}</script>
-    <meta name="description" content="해시 - 완주하지 못한 선수 문제 풀이">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n\n\n\n \n\n2계층에서 하는 일\n하나의 네트워크 대역(LAN), 즉 같은 네트워크 상에 존재하는 여러 장비들 중에서 어떤 장비가 어떤 장비에게 데이터를 전달한다\n오류제어(보내는 데이터에 오류가 있는지), 흐름제어(누가 누구에게 데이터를 보내는지)도 수행한다.\n2계층은 LAN에서만 통신할 때 사용한다.\n다른 네트워크와 통신할 때는 항상 3계층(3계층 주소와 3계층의 프로토콜) 이 도와줘야 한다.\n\n2계층에서 사용하는 주소, MAC 주소\nLAN에서 통신할 때 사용하는 주소 체계이다.\n물리적인 장비에 부여된 주소값이기 때문에 물리적인 주소라고 부른다.\n16진수로 표현한다.\n예) 6C:29:95:04:EB:A1 (6Byte)\n6C-29-95: OUI(IEEE에서 부여하는 일종의 제조회사 식별 ID)\n04-EB-A1: 고유번호(제조사에서 부여한 고유번호)\n\n\n전세계에 있는 네트워크 장비들은 서로 다른 주소값을 가지고 있고, 쉽게 바꿀 수 없다.\n\n2계층 프로토콜, Ethernet\n\n\nLAN에서 통신할 때 사용하는 프로토콜이다.\n14Byte를 사용한다.\nDestination Address(6Byte) 에 목적지 MAC 주소가 위치한다.\nSource Address(6Byte) 에 출발지 MAC 주소가 위치한다.\nEthernet Type(2Byte) 에 페이로드에 상위 프로토콜의 타입(3계층 어떤 프로토콜)이 캡슐화되어 있는지 알려준다.\n전기적 신호로 패킷이 전달되서 받는 쪽에서는 목적지가 맞는지 확인한다. 맞으면 데이터를 확인해봐야 하는데 Ethernet Type으로 상위 프로토콜이 뭔지(ARP인지 IPv4인지) 알 수 있어야 분석할 수 있다. 데이터는 2진수(0101 블라블라)로 시작하기 때문에 Ethernet Type이 없으면 분석할 수 없다.\n08 00이 오면 IPv4 프로토콜을 의미한다.\n08 06이 오면 ARP 프로토콜을 의미한다.\n\n\n\n실습\n내 컴퓨터 MAC 주소 확인하기\nUbuntu에서는 ifconfig -a | grep eth 커맨드로 MAC 주소 확인한다.\n내거는 OUI가 dc:71:96 으로 Intel Corp에서 만들었다.\n\n\nEthernet 프로토콜 캡쳐 및 분석하기\nWireshark를 실행하고, 터미널에 ping 8.8.8.8(구글 DNS) 입력하여 통신해보자\nICMP 프로토콜인 것을 클릭하여 패킷을 확인해보면 Ethernet 프로토콜은 아래와 같이 14Byte 인 것을 확인할 수 있다.\n00 23 aa d8 e4 bd dc 71 96 f7 c9 1d 08 00\n목적지 MAC 주소 출발지 MAC 주소 Ethernet Type\nICMP는 IP 프로토콜의 단점(전송상태에 대한 관리가 이루어지지 않아 신뢰할 수 없음)을 보완하는 프로토콜이다.  IP 패킷 전송 중 에러 발생 시 에러 발생 원인을 알려주거나 네트워크 상태를 진단해주는 기능을 제공한다. 통신 유무 확인시 사용하는 ping 명령이 사용하는 프로토콜이다.\n\n\n\n\n\n출처\n따라學IT 03.가까이 있는 컴퓨터끼리는 이렇게 데이터를 주고 받는다\n\n","dateCreated":"2022-01-11T22:02:00+09:00","dateModified":"2022-01-12T19:20:38+09:00","datePublished":"2022-01-11T22:02:00+09:00","description":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n","headline":"네트워크) 2계층(Local Area Network)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/","keywords":"네트워크"}</script>
+    <meta name="description" content="따라學IT강의를 보고 요약 정리한 내용입니다.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수">
-<meta property="og:url" content="https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/index.html">
+<meta property="og:title" content="네트워크) 2계층(Local Area Network)">
+<meta property="og:url" content="https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
-<meta property="og:description" content="해시 - 완주하지 못한 선수 문제 풀이">
+<meta property="og:description" content="따라學IT강의를 보고 요약 정리한 내용입니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://odreystella.github.io/images/algorithm/정렬_k_01.png">
-<meta property="article:published_time" content="2022-01-11T10:50:50.000Z">
-<meta property="article:modified_time" content="2022-01-11T10:58:12.043Z">
-<meta property="article:tag" content="algorithm">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="programmers">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ethernet.png">
+<meta property="article:published_time" content="2022-01-11T13:02:00.000Z">
+<meta property="article:modified_time" content="2022-01-12T10:20:38.503Z">
+<meta property="article:tag" content="네트워크">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://odreystella.github.io/images/algorithm/정렬_k_01.png">
+<meta name="twitter:image" content="https://odreystella.github.io/images/network/ethernet.png">
     
     
         
@@ -300,12 +298,12 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수
+            네트워크) 2계층(Local Area Network)
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2022-01-11T19:50:50+09:00">
+    <time datetime="2022-01-11T22:02:00+09:00">
 	
 		    Jan 11, 2022
     	
@@ -313,7 +311,7 @@
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/Algorithm/">Algorithm</a>
+    <a class="category-link" href="/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/">네트워크</a>
 
 
     
@@ -326,62 +324,64 @@
     <div class="post-content markdown">
         <div class="main-content-wrap">
             <blockquote>
-<p>해시 - 완주하지 못한 선수 문제 풀이</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Av9UFzl_wis&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=1">따라學IT</a>강의를 보고 요약 정리한 내용입니다.</p>
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge"><span class="toc-text">Challenge</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B8%EC%A0%9C-%EC%84%A4%EB%AA%85"><span class="toc-text">문제 설명</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%A0%9C%ED%95%9C%EC%82%AC%ED%95%AD"><span class="toc-text">제한사항</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%9E%85%EC%B6%9C%EB%A0%A5-%EC%98%88"><span class="toc-text">입출력 예</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%9E%85%EC%B6%9C%EB%A0%A5-%EC%98%88-%EC%84%A4%EB%AA%85"><span class="toc-text">입출력 예 설명</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-text">Solution</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#on-my-own-ver-1"><span class="toc-text">on my own(ver.1)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EA%B2%B0%EA%B3%BC-ver-1"><span class="toc-text">결과(ver.1)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%92%80%EC%9D%B4-%EB%B0%A9%EB%B2%95"><span class="toc-text">풀이 방법</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Built-in-%ED%95%A8%EC%88%98%EC%9D%B8-Counter%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%9C-%EC%BD%94%EB%93%9C"><span class="toc-text">Built-in 함수인 Counter을 사용한 코드</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EA%B2%B0%EA%B3%BC"><span class="toc-text">결과</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%B0%B0%EC%9A%B4-%EC%A0%90"><span class="toc-text">배운 점</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol>
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EA%B3%84%EC%B8%B5%EC%97%90%EC%84%9C-%ED%95%98%EB%8A%94-%EC%9D%BC"><span class="toc-text">2계층에서 하는 일</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EA%B3%84%EC%B8%B5%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EC%A3%BC%EC%86%8C-MAC-%EC%A3%BC%EC%86%8C"><span class="toc-text">2계층에서 사용하는 주소, MAC 주소</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EA%B3%84%EC%B8%B5-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C-Ethernet"><span class="toc-text">2계층 프로토콜, Ethernet</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%8B%A4%EC%8A%B5"><span class="toc-text">실습</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol> 
 
-<h2 id="Challenge"><a href="#Challenge" class="headerlink" title="Challenge"></a>Challenge</h2><h5 id="문제-설명"><a href="#문제-설명" class="headerlink" title="문제 설명"></a>문제 설명</h5><p>수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주하였습니다.</p>
-<p>마라톤에 참여한 선수들의 이름이 담긴 배열 participant와 완주한 선수들의 이름이 담긴 배열 completion이 주어질 때, 완주하지 못한 선수의 이름을 return 하도록 solution 함수를 작성해주세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>마라톤 경기에 참여한 선수의 수는 1명 이상 100,000명 이하입니다.</li>
-<li>completion의 길이는 participant의 길이보다 1 작습니다.</li>
-<li>참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있습니다.</li>
-<li>참가자 중에는 동명이인이 있을 수 있습니다.</li>
+<h5 id="2계층에서-하는-일"><a href="#2계층에서-하는-일" class="headerlink" title="2계층에서 하는 일"></a>2계층에서 하는 일</h5><ul>
+<li><strong>하나의 네트워크 대역(LAN)</strong>, 즉 <strong>같은 네트워크</strong> 상에 존재하는 여러 장비들 중에서 <strong>어떤 장비가 어떤 장비에게 데이터를 전달</strong>한다</li>
+<li><strong>오류제어</strong>(보내는 데이터에 오류가 있는지), <strong>흐름제어</strong>(누가 누구에게 데이터를 보내는지)도 수행한다.</li>
+<li>2계층은 <strong>LAN에서만 통신</strong>할 때 사용한다.</li>
+<li><strong>다른 네트워크와 통신</strong>할 때는 항상 <strong>3계층(3계층 주소와 3계층의 프로토콜)</strong> 이 도와줘야 한다.</li>
 </ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th align="center">participant</th>
-<th align="center">completion</th>
-<th align="center">return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">[“leo”, “kiki”, “eden”]</td>
-<td align="center">[“eden”, “kiki”]</td>
-<td align="center">“leo”</td>
-</tr>
-<tr>
-<td align="center">[“marina”, “josipa”, “nikola”, “vinko”, “filipa”]</td>
-<td align="center">[“josipa”, “filipa”, “marina”, “nikola”]</td>
-<td align="center">“vinko”</td>
-</tr>
-<tr>
-<td align="center">[“mislav”, “stanko”, “mislav”, “ana”]</td>
-<td align="center">[“stanko”, “ana”, “mislav”]</td>
-<td align="center">“mislav”</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>예제 #1<br>“leo”는 참여자 명단에는 있지만, 완주자 명단에는 없기 때문에 완주하지 못했습니다.</p>
-<p>예제 #2<br>“vinko”는 참여자 명단에는 있지만, 완주자 명단에는 없기 때문에 완주하지 못했습니다.</p>
-<p>예제 #3<br>“mislav”는 참여자 명단에는 두 명이 있지만, 완주자 명단에는 한 명밖에 없기 때문에 한명은 완주하지 못했습니다.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h5 id="on-my-own-ver-1"><a href="#on-my-own-ver-1" class="headerlink" title="on my own(ver.1)"></a>on my own(ver.1)</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    </span><br></pre></td></tr></table></figure>
-<h5 id="결과-ver-1"><a href="#결과-ver-1" class="headerlink" title="결과(ver.1)"></a>결과(ver.1)</h5><img src="/images/algorithm/정렬_k_01.png"  />
+<h5 id="2계층에서-사용하는-주소-MAC-주소"><a href="#2계층에서-사용하는-주소-MAC-주소" class="headerlink" title="2계층에서 사용하는 주소, MAC 주소"></a>2계층에서 사용하는 주소, MAC 주소</h5><ul>
+<li>LAN에서 통신할 때 사용하는 주소 체계이다.</li>
+<li>물리적인 장비에 부여된 주소값이기 때문에 <strong>물리적인 주소</strong>라고 부른다.</li>
+<li>16진수로 표현한다.<ul>
+<li>예) 6C:29:95:04:EB:A1 (6Byte)</li>
+<li>6C-29-95: <strong>OUI</strong>(IEEE에서 부여하는 일종의 <strong>제조회사 식별 ID)</strong></li>
+<li>04-EB-A1: <strong>고유번호</strong>(제조사에서 부여한 고유번호)</li>
+</ul>
+</li>
+<li>전세계에 있는 네트워크 장비들은 서로 다른 주소값을 가지고 있고, 쉽게 바꿀 수 없다.</li>
+</ul>
+<h5 id="2계층-프로토콜-Ethernet"><a href="#2계층-프로토콜-Ethernet" class="headerlink" title="2계층 프로토콜, Ethernet"></a>2계층 프로토콜, Ethernet</h5><img src="/images/network/ethernet.png" height="400px" />
 
-<h5 id="풀이-방법"><a href="#풀이-방법" class="headerlink" title="풀이 방법"></a>풀이 방법</h5><ol>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
+<ul>
+<li>LAN에서 통신할 때 사용하는 프로토콜이다.</li>
+<li><strong>14Byte</strong>를 사용한다.</li>
+<li><strong>Destination Address(6Byte)</strong> 에 <strong>목적지 MAC 주소</strong>가 위치한다.</li>
+<li><strong>Source Address(6Byte)</strong> 에 <strong>출발지 MAC 주소</strong>가 위치한다.</li>
+<li><strong>Ethernet Type(2Byte)</strong> 에 페이로드에 <strong>상위 프로토콜의 타입</strong>(3계층 어떤 프로토콜)이 캡슐화되어 있는지 알려준다.<ul>
+<li>전기적 신호로 패킷이 전달되서 받는 쪽에서는 목적지가 맞는지 확인한다. 맞으면 데이터를 확인해봐야 하는데 <strong>Ethernet Type</strong>으로 <strong>상위 프로토콜이 뭔지</strong>(ARP인지 IPv4인지) 알 수 있어야 분석할 수 있다. 데이터는 2진수(0101 블라블라)로 시작하기 때문에 Ethernet Type이 없으면 분석할 수 없다.</li>
+<li><code>08 00</code>이 오면 <code>IPv4</code> 프로토콜을 의미한다.</li>
+<li><code>08 06</code>이 오면 <code>ARP</code> 프로토콜을 의미한다.</li>
+</ul>
+</li>
+</ul>
+<h5 id="실습"><a href="#실습" class="headerlink" title="실습"></a>실습</h5><ol>
+<li><strong>내 컴퓨터 MAC 주소 확인하기</strong><ul>
+<li>Ubuntu에서는 <code>ifconfig -a | grep eth</code> 커맨드로 MAC 주소 확인한다.</li>
+<li>내거는 OUI가 <code>dc:71:96</code> 으로 <code>Intel Corp</code>에서 만들었다.</li>
+</ul>
+</li>
+<li><strong>Ethernet 프로토콜 캡쳐 및 분석하기</strong><ul>
+<li><code>Wireshark</code>를 실행하고, 터미널에 <code>ping 8.8.8.8</code>(구글 DNS) 입력하여 통신해보자</li>
+<li><code>ICMP</code> 프로토콜인 것을 클릭하여 패킷을 확인해보면 Ethernet 프로토콜은 아래와 같이 14Byte 인 것을 확인할 수 있다.<ul>
+<li><span style="color:blue">00 23 aa d8 e4 bd</span> <span style="color:red">dc 71 96 f7 c9 1d</span> <span style="color:green">08 00</span></li>
+<li><span style="color:blue">목적지 MAC 주소</span> <span style="color:red">출발지 MAC 주소</span> <span style="color:green">Ethernet Type</span></li>
+<li><code>ICMP</code>는 IP 프로토콜의 단점(전송상태에 대한 관리가 이루어지지 않아 신뢰할 수 없음)을 보완하는 프로토콜이다.  <strong>IP 패킷 전송 중 에러 발생 시 에러 발생 원인을 알려주거나 네트워크 상태를 진단해주는 기능</strong>을 제공한다. 통신 유무 확인시 사용하는 <code>ping</code> 명령이 사용하는 프로토콜이다.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
-<h5 id="Built-in-함수인-Counter을-사용한-코드"><a href="#Built-in-함수인-Counter을-사용한-코드" class="headerlink" title="Built-in 함수인 Counter을 사용한 코드"></a>Built-in 함수인 Counter을 사용한 코드</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<h5 id="결과"><a href="#결과" class="headerlink" title="결과"></a>결과</h5><h2 id="배운-점"><a href="#배운-점" class="headerlink" title="배운 점"></a>배운 점</h2><ul>
-<li></li>
-<li></li>
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HkiOygWMARs&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=5">따라學IT 03.가까이 있는 컴퓨터끼리는 이렇게 데이터를 주고 받는다</a></li>
 </ul>
-<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2>
+
             
 
 
@@ -392,7 +392,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/algorithm/" rel="tag">algorithm</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/programmers/" rel="tag">programmers</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/python/" rel="tag">python</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/" rel="tag">네트워크</a>
 
             </div>
         
@@ -402,14 +402,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
-                    data-tooltip="네트워크) 2계층(Local Area Network)"
-                    aria-label="PREVIOUS: 네트워크) 2계층(Local Area Network)"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -419,9 +416,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/01/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_%EB%AA%A8%EB%8D%B8/"
-                    data-tooltip="네트워크) TCP/IP, OSI 7계층 모델(캡슐화, 역캡슐화)"
-                    aria-label="NEXT: 네트워크) TCP/IP, OSI 7계층 모델(캡슐화, 역캡슐화)"
+                    href="/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
+                    data-tooltip="알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수"
+                    aria-label="NEXT: 알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -446,7 +443,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -459,7 +456,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -472,7 +469,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -517,14 +514,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
-                    data-tooltip="네트워크) 2계층(Local Area Network)"
-                    aria-label="PREVIOUS: 네트워크) 2계층(Local Area Network)"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -534,9 +528,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/01/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_%EB%AA%A8%EB%8D%B8/"
-                    data-tooltip="네트워크) TCP/IP, OSI 7계층 모델(캡슐화, 역캡슐화)"
-                    aria-label="NEXT: 네트워크) TCP/IP, OSI 7계층 모델(캡슐화, 역캡슐화)"
+                    href="/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
+                    data-tooltip="알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수"
+                    aria-label="NEXT: 알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -561,7 +555,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -574,7 +568,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -587,7 +581,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -621,7 +615,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -634,7 +628,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -647,7 +641,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
