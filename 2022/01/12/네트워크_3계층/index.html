@@ -6,25 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>네트워크) 2계층(Local Area Network) - Dev Odreystella&#39;s Blog</title>
+    <title>네트워크) 3계층 - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n\n\n\n \n\n2계층에서 하는 일\n하나의 네트워크 대역(LAN), 즉 같은 네트워크 상에 존재하는 여러 장비들 중에서 어떤 장비가 어떤 장비에게 데이터를 전달한다\n오류제어(보내는 데이터에 오류가 있는지), 흐름제어(누가 누구에게 데이터를 보내는지)도 수행한다.\n2계층은 LAN에서만 통신할 때 사용한다.\n다른 네트워크와 통신할 때는 항상 3계층(3계층 주소와 3계층의 프로토콜) 이 도와줘야 한다.\n\n2계층에서 사용하는 주소, MAC 주소\nLAN에서 통신할 때 사용하는 주소 체계이다.\n물리적인 장비에 부여된 주소값이기 때문에 물리적인 주소라고 부른다.\n16진수로 표현한다.\n예) 6C:29:95:04:EB:A1 (6Byte)\n6C-29-95: OUI(IEEE에서 부여하는 일종의 제조회사 식별 ID)\n04-EB-A1: 고유번호(제조사에서 부여한 고유번호)\n\n\n전세계에 있는 네트워크 장비들은 서로 다른 주소값을 가지고 있고, 쉽게 바꿀 수 없다.\n\n2계층 프로토콜, Ethernet\n\n\nLAN에서 통신할 때 사용하는 프로토콜이다.\n14Byte를 사용한다.\nDestination Address(6Byte) 에 목적지 MAC 주소가 위치한다.\nSource Address(6Byte) 에 출발지 MAC 주소가 위치한다.\nEthernet Type(2Byte) 에 페이로드에 상위 프로토콜의 타입(3계층 어떤 프로토콜)이 캡슐화되어 있는지 알려준다.\n전기적 신호로 패킷이 전달되서 받는 쪽에서는 목적지가 맞는지 확인한다. 맞으면 데이터를 확인해봐야 하는데 Ethernet Type으로 상위 프로토콜이 뭔지(ARP인지 IPv4인지) 알 수 있어야 분석할 수 있다. 데이터는 2진수(0101 블라블라)로 시작하기 때문에 Ethernet Type이 없으면 분석할 수 없다.\n08 00이 오면 IPv4 프로토콜을 의미한다.\n08 06이 오면 ARP 프로토콜을 의미한다.\n\n\n\n실습\n내 컴퓨터 MAC 주소 확인하기\nUbuntu에서는 ifconfig -a | grep eth 커맨드로 MAC 주소 확인한다.\n내거는 OUI가 dc:71:96 으로 Intel Corp에서 만들었다.\n\n\nEthernet 프로토콜 캡쳐 및 분석하기\nWireshark를 실행하고, 터미널에 ping 8.8.8.8(구글 DNS) 입력하여 통신해보자\nICMP 프로토콜인 것을 클릭하여 패킷을 확인해보면 Ethernet 프로토콜은 아래와 같이 14Byte 인 것을 확인할 수 있다.\n00 23 aa d8 e4 bd dc 71 96 f7 c9 1d 08 00\n목적지 MAC 주소 출발지 MAC 주소 Ethernet Type\nICMP는 IP 프로토콜의 단점(전송상태에 대한 관리가 이루어지지 않아 신뢰할 수 없음)을 보완하는 프로토콜이다.  IP 패킷 전송 중 에러 발생 시 에러 발생 원인을 알려주거나 네트워크 상태를 진단해주는 기능을 제공한다. 통신 유무 확인시 사용하는 ping 명령이 사용하는 프로토콜이다.\n\n\n\n\n\n출처\n따라學IT 03.가까이 있는 컴퓨터끼리는 이렇게 데이터를 주고 받는다\n\n","dateCreated":"2022-01-11T22:02:00+09:00","dateModified":"2022-01-12T19:20:38+09:00","datePublished":"2022-01-11T22:02:00+09:00","description":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n","headline":"네트워크) 2계층(Local Area Network)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/","keywords":"네트워크"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n\n\n\n \n\n3계층에서 하는 일\n라우터 라는 장비를 통해 서로 다른 LAN 대역을 연결시켜준다.\n멀리 있는 곳과 통신하기 위해서는 3계층이 필요하다.\n\n3계층에서 사용하는 주소, IP 주소\n10진수로 표기하고, 4Byte를 사용한다.\n4개의 필드가 . 으로 구분되어 있고, 하나의 필드에는 0~255까지의 숫자만 올 수 있다.\n예) 0.0.0.0 ~ 255.255.255.255\n\n\n초기에는 A~E 클래스로 네트워크를 구분하였는데, 낭비가 심한 단점이 있었다.\nA클래스 0. 0.0.0 ~ 127. 255.255.255 첫 번째 필드는 네트워크를 구분, 나머지 필드는 PC를 구분하는데 사용\n일반적으로 C클래스를 많이 썼음\n\n\n이를 보완하기 위해 Classless IP를 사용하고, 서브넷 마스크(IP 주소에 대한 네트워크 대역을 규정)와 함께 사용한다.\n현재는 그래도 IP가 부족하여 사설 IP와 공인 IP를 도입하여 사용한다. IPv6도 사용한다.\n공인 IP: 실제 네트워크 통신망(외부)과 통신할 때 사용하는 IP 주소. 즉, 다른 네트워크 대역으로 갈 때 사설 IP가 공인 IP로 바뀜\n네이버에 내 ip 주소 확인하면 나오는 공인 IP 211.207.75.23\n실제 인터넷 세상에서는 공인 IP로만 통신한다.\n외부에서 볼 때는 사설 IP대역이 없는 것처럼 보인다. 예를 들어 하나의 공유기에 30대의 PC가 묶여 있는 네트워크는 외부에서 볼 때는 하나의 공유기로 본다. 사설 IP는 공유기만 알고 있다. 한 PC가 어떤 요청을 할 때 공유기는 NAT table에 기록하고 응답을 받으면 전달해준다. 요청하지 않았는데 응답을 받았다면 전달되지 않는다.\n공인 IP 1개당 2^32(0.0.0.0 ~ 255.255.255.255)개의 사설 IP를 가질 수 있다.\n\n\n사설 IP: 같은 네크워크 대역에서 사용하는 IP 주소\n실제 내 IP는 192.168.35.172\n\n\nNAT(Network Address Translation): 특정 IP를 특정 IP로 바꿔주는 기술이다.\n특수한 IP 주소\n0.0.0.0/0: 나머지 모든 IP를 의미한다.\n127.0.0.1: localhost(나 자신을 나타내는 주소)\n게이트웨이 주소: 외부와 통신할 때 나가는 게이트를 알려줌(네트워크 대역에서 사용할 수 있는 가장 작거나 큰 주소, 일반적으로 공유기의 IP를 사용)\n\n\n\n3계층 프로토콜\nARP\nIP 주소를 이용해 MAC 주소를 알아온다.\n\n\nIPv4\nWAN에서 통신할 때 사용한다.\n\n\nICMP\n서로가 통신되는지 확인할 때 사용한다.\n\n\n\n출처\n따라學IT 04.실제로 컴퓨터끼리는 IP주소를 사용해 데이터를 주고 받는다\n\n","dateCreated":"2022-01-12T20:02:00+09:00","dateModified":"2022-01-14T02:17:44+09:00","datePublished":"2022-01-12T20:02:00+09:00","description":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n","headline":"네트워크) 3계층","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/","keywords":"네트워크"}</script>
     <meta name="description" content="따라學IT강의를 보고 요약 정리한 내용입니다.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="네트워크) 2계층(Local Area Network)">
-<meta property="og:url" content="https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/index.html">
+<meta property="og:title" content="네트워크) 3계층">
+<meta property="og:url" content="https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
 <meta property="og:description" content="따라學IT강의를 보고 요약 정리한 내용입니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://odreystella.github.io/images/network/ethernet.png">
-<meta property="article:published_time" content="2022-01-11T13:02:00.000Z">
-<meta property="article:modified_time" content="2022-01-12T10:20:38.503Z">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ip_addr.png">
+<meta property="article:published_time" content="2022-01-12T11:02:00.000Z">
+<meta property="article:modified_time" content="2022-01-13T17:17:44.421Z">
 <meta property="article:tag" content="네트워크">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://odreystella.github.io/images/network/ethernet.png">
+<meta name="twitter:image" content="https://odreystella.github.io/images/network/ip_addr.png">
     
     
         
@@ -298,14 +298,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            네트워크) 2계층(Local Area Network)
+            네트워크) 3계층
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2022-01-11T22:02:00+09:00">
+    <time datetime="2022-01-12T20:02:00+09:00">
 	
-		    Jan 11, 2022
+		    Jan 12, 2022
     	
     </time>
     
@@ -328,58 +328,60 @@
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EA%B3%84%EC%B8%B5%EC%97%90%EC%84%9C-%ED%95%98%EB%8A%94-%EC%9D%BC"><span class="toc-text">2계층에서 하는 일</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EA%B3%84%EC%B8%B5%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EC%A3%BC%EC%86%8C-MAC-%EC%A3%BC%EC%86%8C"><span class="toc-text">2계층에서 사용하는 주소, MAC 주소</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EA%B3%84%EC%B8%B5-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C-Ethernet"><span class="toc-text">2계층 프로토콜, Ethernet</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%8B%A4%EC%8A%B5"><span class="toc-text">실습</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol> 
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EA%B3%84%EC%B8%B5%EC%97%90%EC%84%9C-%ED%95%98%EB%8A%94-%EC%9D%BC"><span class="toc-text">3계층에서 하는 일</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EA%B3%84%EC%B8%B5%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EC%A3%BC%EC%86%8C-IP-%EC%A3%BC%EC%86%8C"><span class="toc-text">3계층에서 사용하는 주소, IP 주소</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EA%B3%84%EC%B8%B5-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C"><span class="toc-text">3계층 프로토콜</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol> 
 
-<h5 id="2계층에서-하는-일"><a href="#2계층에서-하는-일" class="headerlink" title="2계층에서 하는 일"></a>2계층에서 하는 일</h5><ul>
-<li><strong>하나의 네트워크 대역(LAN)</strong>, 즉 <strong>같은 네트워크</strong> 상에 존재하는 여러 장비들 중에서 <strong>어떤 장비가 어떤 장비에게 데이터를 전달</strong>한다</li>
-<li><strong>오류제어</strong>(보내는 데이터에 오류가 있는지), <strong>흐름제어</strong>(누가 누구에게 데이터를 보내는지)도 수행한다.</li>
-<li>2계층은 <strong>LAN에서만 통신</strong>할 때 사용한다.</li>
-<li><strong>다른 네트워크와 통신</strong>할 때는 항상 <strong>3계층(3계층 주소와 3계층의 프로토콜)</strong> 이 도와줘야 한다.</li>
+<h5 id="3계층에서-하는-일"><a href="#3계층에서-하는-일" class="headerlink" title="3계층에서 하는 일"></a>3계층에서 하는 일</h5><ul>
+<li><strong>라우터</strong> 라는 장비를 통해 <strong>서로 다른 LAN 대역을 연결</strong>시켜준다.</li>
+<li>멀리 있는 곳과 통신하기 위해서는 3계층이 필요하다.</li>
 </ul>
-<h5 id="2계층에서-사용하는-주소-MAC-주소"><a href="#2계층에서-사용하는-주소-MAC-주소" class="headerlink" title="2계층에서 사용하는 주소, MAC 주소"></a>2계층에서 사용하는 주소, MAC 주소</h5><ul>
-<li>LAN에서 통신할 때 사용하는 주소 체계이다.</li>
-<li>물리적인 장비에 부여된 주소값이기 때문에 <strong>물리적인 주소</strong>라고 부른다.</li>
-<li>16진수로 표현한다.<ul>
-<li>예) 6C:29:95:04:EB:A1 (6Byte)</li>
-<li>6C-29-95: <strong>OUI</strong>(IEEE에서 부여하는 일종의 <strong>제조회사 식별 ID)</strong></li>
-<li>04-EB-A1: <strong>고유번호</strong>(제조사에서 부여한 고유번호)</li>
+<h5 id="3계층에서-사용하는-주소-IP-주소"><a href="#3계층에서-사용하는-주소-IP-주소" class="headerlink" title="3계층에서 사용하는 주소, IP 주소"></a>3계층에서 사용하는 주소, IP 주소</h5><ul>
+<li><strong>10진수</strong>로 표기하고, <strong>4Byte</strong>를 사용한다.</li>
+<li>4개의 필드가 <code>.</code> 으로 구분되어 있고, 하나의 필드에는 0~255까지의 숫자만 올 수 있다.<ul>
+<li>예) 0.0.0.0 ~ 255.255.255.255</li>
 </ul>
 </li>
-<li>전세계에 있는 네트워크 장비들은 서로 다른 주소값을 가지고 있고, 쉽게 바꿀 수 없다.</li>
-</ul>
-<h5 id="2계층-프로토콜-Ethernet"><a href="#2계층-프로토콜-Ethernet" class="headerlink" title="2계층 프로토콜, Ethernet"></a>2계층 프로토콜, Ethernet</h5><img src="/images/network/ethernet.png" height="400px" />
-
-<ul>
-<li>LAN에서 통신할 때 사용하는 프로토콜이다.</li>
-<li><strong>14Byte</strong>를 사용한다.</li>
-<li><strong>Destination Address(6Byte)</strong> 에 <strong>목적지 MAC 주소</strong>가 위치한다.</li>
-<li><strong>Source Address(6Byte)</strong> 에 <strong>출발지 MAC 주소</strong>가 위치한다.</li>
-<li><strong>Ethernet Type(2Byte)</strong> 에 페이로드에 <strong>상위 프로토콜의 타입</strong>(3계층 어떤 프로토콜)이 캡슐화되어 있는지 알려준다.<ul>
-<li>전기적 신호로 패킷이 전달되서 받는 쪽에서는 목적지가 맞는지 확인한다. 맞으면 데이터를 확인해봐야 하는데 <strong>Ethernet Type</strong>으로 <strong>상위 프로토콜이 뭔지</strong>(ARP인지 IPv4인지) 알 수 있어야 분석할 수 있다. 데이터는 2진수(0101 블라블라)로 시작하기 때문에 Ethernet Type이 없으면 분석할 수 없다.</li>
-<li><code>08 00</code>이 오면 <code>IPv4</code> 프로토콜을 의미한다.</li>
-<li><code>08 06</code>이 오면 <code>ARP</code> 프로토콜을 의미한다.</li>
+<li>초기에는 A~E 클래스로 네트워크를 구분하였는데, 낭비가 심한 단점이 있었다.<ul>
+<li>A클래스 0. 0.0.0 ~ 127. 255.255.255 첫 번째 필드는 네트워크를 구분, 나머지 필드는 PC를 구분하는데 사용</li>
+<li>일반적으로 C클래스를 많이 썼음</li>
 </ul>
 </li>
-</ul>
-<h5 id="실습"><a href="#실습" class="headerlink" title="실습"></a>실습</h5><ol>
-<li><strong>내 컴퓨터 MAC 주소 확인하기</strong><ul>
-<li>Ubuntu에서는 <code>ifconfig -a | grep eth</code> 커맨드로 MAC 주소 확인한다.</li>
-<li>내거는 OUI가 <code>dc:71:96</code> 으로 <code>Intel Corp</code>에서 만들었다.</li>
-</ul>
-</li>
-<li><strong>Ethernet 프로토콜 캡쳐 및 분석하기</strong><ul>
-<li><code>Wireshark</code>를 실행하고, 터미널에 <code>ping 8.8.8.8</code>(구글 DNS) 입력하여 통신해보자</li>
-<li><code>ICMP</code> 프로토콜인 것을 클릭하여 패킷을 확인해보면 Ethernet 프로토콜은 아래와 같이 14Byte 인 것을 확인할 수 있다.<ul>
-<li><span style="color:blue">00 23 aa d8 e4 bd</span> <span style="color:red">dc 71 96 f7 c9 1d</span> <span style="color:green">08 00</span></li>
-<li><span style="color:blue">목적지 MAC 주소</span> <span style="color:red">출발지 MAC 주소</span> <span style="color:green">Ethernet Type</span></li>
-<li><code>ICMP</code>는 IP 프로토콜의 단점(전송상태에 대한 관리가 이루어지지 않아 신뢰할 수 없음)을 보완하는 프로토콜이다.  <strong>IP 패킷 전송 중 에러 발생 시 에러 발생 원인을 알려주거나 네트워크 상태를 진단해주는 기능</strong>을 제공한다. 통신 유무 확인시 사용하는 <code>ping</code> 명령이 사용하는 프로토콜이다.</li>
+<li>이를 보완하기 위해 <strong>Classless IP</strong>를 사용하고, <strong>서브넷 마스크</strong>(IP 주소에 대한 네트워크 대역을 규정)와 함께 사용한다.</li>
+<li>현재는 그래도 IP가 부족하여 <strong>사설 IP</strong>와 <strong>공인 IP</strong>를 도입하여 사용한다. <strong>IPv6도 사용</strong>한다.<img src="/images/network/ip_addr.png" height="300px"/></li>
+<li><strong>공인 IP</strong>: <strong>실제 네트워크 통신망(외부)과 통신할 때 사용하는 IP 주소</strong>. 즉, <strong>다른 네트워크 대역으로 갈 때 사설 IP가 공인 IP로 바뀜</strong><ul>
+<li>네이버에 내 ip 주소 확인하면 나오는 공인 IP <code>211.207.75.23</code></li>
+<li>실제 <strong>인터넷</strong> 세상에서는 <strong>공인 IP로만 통신</strong>한다.</li>
+<li>외부에서 볼 때는 사설 IP대역이 없는 것처럼 보인다. 예를 들어 하나의 공유기에 30대의 PC가 묶여 있는 네트워크는 외부에서 볼 때는 하나의 공유기로 본다. 사설 IP는 공유기만 알고 있다. 한 PC가 어떤 요청을 할 때 공유기는 NAT table에 기록하고 응답을 받으면 전달해준다. 요청하지 않았는데 응답을 받았다면 전달되지 않는다.</li>
+<li>공인 IP 1개당 2^32(0.0.0.0 ~ 255.255.255.255)개의 사설 IP를 가질 수 있다.</li>
 </ul>
 </li>
+<li><strong>사설 IP</strong>: <strong>같은 네크워크 대역에서 사용하는 IP 주소</strong><ul>
+<li>실제 내 IP는 <code>192.168.35.172</code></li>
+</ul>
+</li>
+<li><strong>NAT</strong>(Network Address Translation): 특정 IP를 특정 IP로 바꿔주는 기술이다.</li>
+<li><strong>특수한 IP 주소</strong><ol>
+<li>0.0.0.0/0: 나머지 모든 IP를 의미한다.</li>
+<li>127.0.0.1: localhost(나 자신을 나타내는 주소)</li>
+<li>게이트웨이 주소: 외부와 통신할 때 나가는 게이트를 알려줌(네트워크 대역에서 사용할 수 있는 가장 작거나 큰 주소, 일반적으로 공유기의 IP를 사용)</li>
+</ol>
+</li>
+</ul>
+<h5 id="3계층-프로토콜"><a href="#3계층-프로토콜" class="headerlink" title="3계층 프로토콜"></a>3계층 프로토콜</h5><ol>
+<li>ARP<ul>
+<li>IP 주소를 이용해 MAC 주소를 알아온다.</li>
+</ul>
+</li>
+<li>IPv4<ul>
+<li>WAN에서 통신할 때 사용한다.</li>
+</ul>
+</li>
+<li>ICMP<ul>
+<li>서로가 통신되는지 확인할 때 사용한다.</li>
 </ul>
 </li>
 </ol>
 <h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HkiOygWMARs&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=5">따라學IT 03.가까이 있는 컴퓨터끼리는 이렇게 데이터를 주고 받는다</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=s5kIGnaNFvM&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=6">따라學IT 04.실제로 컴퓨터끼리는 IP주소를 사용해 데이터를 주고 받는다</a></li>
 </ul>
 
             
@@ -402,14 +404,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"
-                    data-tooltip="네트워크) 3계층"
-                    aria-label="PREVIOUS: 네트워크) 3계층"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -419,9 +418,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
-                    data-tooltip="알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수"
-                    aria-label="NEXT: 알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수"
+                    href="/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
+                    data-tooltip="네트워크) 2계층(Local Area Network)"
+                    aria-label="NEXT: 네트워크) 2계층(Local Area Network)"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -446,7 +445,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -459,7 +458,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -472,7 +471,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -517,14 +516,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"
-                    data-tooltip="네트워크) 3계층"
-                    aria-label="PREVIOUS: 네트워크) 3계층"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -534,9 +530,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/01/11/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4_%EC%99%84%EC%A3%BC%ED%95%98%EC%A7%80_%EB%AA%BB%ED%95%9C_%EC%84%A0%EC%88%98/"
-                    data-tooltip="알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수"
-                    aria-label="NEXT: 알고리즘) [프로그래머스 Lv1] 해시 - 완주하지 못한 선수"
+                    href="/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
+                    data-tooltip="네트워크) 2계층(Local Area Network)"
+                    aria-label="NEXT: 네트워크) 2계층(Local Area Network)"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -561,7 +557,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -574,7 +570,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -587,7 +583,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -621,7 +617,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -634,7 +630,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -647,7 +643,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/11/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_2%EA%B3%84%EC%B8%B5/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/12/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
