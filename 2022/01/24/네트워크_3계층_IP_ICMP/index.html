@@ -1,0 +1,871 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Dev Odreystella&#39;s Blog">
+    <title>네트워크) 3계층 프로토콜 IPv4, ICMP - Dev Odreystella&#39;s Blog</title>
+    <meta name="author" content="">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n\n\n\n \n\n3계층 프로토콜 IPv4\n하는 일\n\n다른 네트워크상에 있는 곳과 데이터를 교환하기 위한 프로토콜이다.\n데이터가 정확하게 전달되는 것을 보장하지 않기 때문에 데이터가 손상될 수 있다.(신뢰성 있는 통신은 4계층 프로토콜인 TCP에서 보장해줌)\n중복된 패킷을 전달하거나 패킷의 순서를 잘못 전달할 가능성도 있다.\n\n\n구조\n\n\n\n16진수로 표기하고, 20Bytes를 사용한다.\nVersion: 16진수로 항상 4 가 온다. IPv6 의 구조는 아예 다르다.\nIHL: 16진수로 거의 5 가 온다. 길이는 20~60 사이인데 4로 나눈 값을 적는다.\nType of Service: 지금은 사용하지 않는 값으로 00 으로 비워둔다.\nTotal Length: 헤더 + 페이로드를 합한 전체 길이\nIdentification + IP Flags + Fragment Offset\nIdentification: 큰 데이터는 쪼개져서 보내지는데, 받는 쪽에서 원래의 데이터로 합칠 때 동일한 데이터였음을 알아볼 수 있는 id  값\nIP Flags: 3bit로 첫번째 bit는 항상 0 이다.\nD(Don’t Fragment): 1 이면 송신측에서 데이터를 안쪼개겠다는 의미. 최대 전송단위보다 큰 데이터는 안쪼개서 보낼 수 없기 때문에 거의 안쓰이는 값이다.\nM(More Fragment): 1 다른 패킷들이 더 있다는 의미.\n\n\nFragment Offset: 시작점으로 부터 얼마나 떨어져 있는지의 값을 나타냄. 즉, 받는 쪽에서 쪼개진 데이터를 합칠 때, 얘를 보고 순서대로 조립할 수 있다.\n\n\nTime To Live: 패킷의 유효시간. 라우터 장비를 하나씩 거칠때마다 1씩 줄어든다. 윈도우는 128, 리눅스는 64로 설정한다.\nProtocol: 상위 프로토콜에 대한 정의\nICMP는 01  / TCP는 06  /  UDP는 11\n\n\nHeader Checksum: 헤더의 오류 유무를 확인한다.\nSource Address: 4Bytes로 출발지 IP 주소\nDestination Address: 4Bytes로 목적지 IP 주소\n\n\n\n3계층 프로토콜 ICMP(Internet Control Message Protocol)\n하는 일\n\n인터넷 상에서 제어 메시지를 주고 받는다.\n상대방과 통신 유무를 확인할 때 사용한다.\n프로토콜 구조의 Type과 Code를 통해 오류 메시지를 전송받는다.\n\n\n구조\n\n\n\n16진수로 표기하고, 8Byte를 사용한다.\n\nType: 대분류\n\n0 : 통신 유무에 대해 응답한다.\n\n8 : 통신할 수 있는지 확인 요청한다.\n\n3 : 목적지에 도달할 수 없습니다. (주로 경로설정 잘못 했을 때)\n\n11 : 요청시간이 만료되었습니다.(목적지까지 갔는데 응답을 받을 수 없는 경우, 주로 상대방이 방화벽 켜뒀을 때)\n\n\n\n\nCode: 소분류\n\nChecksum: 헤더의 오류 유무를 확인한다.\n\n\n\n\n라우팅 테이블\n목적지까지의 최적의 경로를 지도처럼 저장해둔 테이블\n$ netstat -r 명령어로 확인할 수 있다.\n라우팅 테이블에 등록된 네트워크 대역만 찾아갈 수 있다.\n디폴트로 게이트웨이 0.0.0.0 를 설정함으로써 라우팅 테이블에 등록되지 않은 네트워크도 갈 수 있다.\n\n다른 네트워크와 통신 과정\n목표: 내 컴퓨터에서 보낸 패킷을 다른 네트워크의 컴퓨터까지 전달한다.\n\n\nA와 B가 통신하려고 할 때, A의 라우팅 테이블에 B의 네트워크 대역 192.168.20.0이 등록되어 있는지 확인한다. 192.168.20.0 으로 가기 위해 192.168.10.1 로 가라고 설정되어 있다.\n\nICMP로 통신 확인하기 위해 요청 프로토콜을 작성한다. 요청의 Type은 8 이다.    \n\nIPv4 프로토콜 작성한다.    \n\n이더넷 프로토콜을 작성한다. 이때 목적지 MAC 주소는 192.168.10.1 의 게이트웨이의 MAC 주소를 쓴다. 이더넷은 같은 네트워크 대역에서만 사용되니까 여기서 갈 수 있는 데까지의 MAC 주소를 작성한다.\n\n2계층 장비인 스위치가 이더넷 프로토콜을 확인하고 목적지 MAC 주소까지 패킷을 전달한다.\n\n\n\n공유기가 이더넷 프로토콜 확인해서 나한테 온게 맞으면 IPv4 프로토콜을 확인해본다. 목적지 IP 주소가 다른거니 공유기의 라우팅 테이블을 확인해본다. 192.168.20.0 대역은 192.168.30.2 로 가라고 설정되어 있다.\n\n공유기가 이더넷 프로토콜을 다시 만들어서 MAC 주소가 22 22 22 22 22 22 인 곳으로 보낸다.\n\n\n\n3계층 장비인 라우터는 이더넷 프로토콜 확인하여 목적지 확인 후 맞으면, IPv4 프로토콜까지 확인해본다. 목적지 IP 주소가 다르니 라우터의 라우팅 테이블을 확인해본다. 192.168.20.0 대역은 192.168.40.2 로 가라고 설정되어 있다.\n\n라우터가 이너넷 프로토콜을 다시 만들어서 MAC 주소가 44 44 44 44 44 44 인 곳으로 보낸다. 즉, 이더넷 프로토콜은 네트워크 대역이 바뀔 때마다 새로 작성된다.\n\n\n\n위 과정과 마찬가지로 공유기가 이더넷 프로토콜 목적지 MAC 확인후 IPv4 프로토콜 확인한다. 목적지 IP와 다르니 이더넷 프로토콜 새로 작성해서 보낸다. \n  \n\n\n2계층 장비인 스위치가 이더넷 프토토콜 확인하고 목적지 MAC 주소로 패킷을 전달한다. 이더넷, IPv4, ICMP 프로토콜 확인해서 요청이 온 것을 확인한다.    \n\nB는 ICMP 응답 프로토콜을 작성하여 위와 같은 과ㅡ정으로 A에게 패킷을 전달한다. 응답의 Type은 0 이다.\n\n응답을 받게 되면 A는 B랑 통신이 된 것을 알 수있다.\n\n\n통신 과정 정리하면\nA →B 가 통신하기 위해 A의 라우팅 테이블 확인 후 ICMP 요청 프로토콜, IPv4 프로토콜 작성, 이더넷 프로토콜 작성 \n스위치가 이더넷 확인 후 목적지 MAC 주소로 요청 전달 \n공유기가 이더넷 확인 후, 목적지 MAC 주소가 맞으면 IPv4도 확인\n목적지 IP 주소가 다르면 공유기의 라우팅 테이블 확인 후 이더넷 다시 작성\n라우터가 이더넷 확인 후, 목적지 MAC 주소가 맞으면 Ipv4 확인\n목적지 IP 주소가 다르면 라우터의 라우팅 테이블 확인 후 이더넷 다시 작성\n목적지 IP 주소에 도착할 때까지 라우팅 테이블 확인 -&gt; 이더넷 프로토콜 다시 작성해서 전달의 과정을 반복\n목적지 IP 주소가 패킷을 받으면 디캡슐화해서 확인하고, 위의 과정과 동일하게 응답 전달\n\nIPv4의 조각화\n정의\n\n큰 IP 패킷들이 적은 MTU(최대 전송 단위, Maximum Transmission Unit, 보통 1500Bytes)를 갖는 링크를 통하여 전송되려면 여러 개의 작은 패킷으로 쪼개어/조각화되어 전송되어야 한다.\n목적지까지 패킷을 전달하는 과정에 통과하는 각 라우터마다 전송에 적합한 프레임으로 변환이 필요하다.\n일단 조각화되면, 최종 목적지에 도달할 때까지 재조립되지 않는 것이 일반적이다. 최종 수신지에서만 재조립이 가능하다.\nIPv4에서는 발신지 뿐만 아니라 중간 라우터에서도 IP 조각화가 가능하고, IPv6에서는 IP 단편화가 발신지에서만 가능하다.\n\n\n구조\n\n\n\n보통 First Fragmentation 까지만 조각화를 진행한다.\n보낼 데이터의 크기가 11,980 Bytes\nMTU가 3,300 Bytes인데 IPv4 헤더 20Bytes를 포함해야 하기 때문에 조각화해서 보낼 데이터 크기는 3,280Bytes 이다.\nMF가 1이면 More Fragment로 뒤에 패킷이 더 있다는 의미이다.\nOffset는 데이터의 크기만큼 떨어진 값을 의미하는데 8을 나눈 값을 쓴다.(ex. 3280/8=410)\nFirst Fragmentation에서 4개로 조각화된 패킷의 Identification은 동일한 값이다.\n\n\n패킷 조각화하는 과정\n\n\n\nMTU가 1500 Bytes라 2000Bytes인 데이터를 그냥 보내면 전송되지 않는다. 조각화를 해야한다.\n\n\n\n\n\nIPv4 헤더 20Bytes를 빼고 1480Bytes, 520Bytes로 데이터를 쪼갠다.\nping 명령은 ICMP 프로토콜을 사용하는데 뒤에 데이터에만 붙는다.\n조각화된 각 패킷에 IPv4 헤더가 붙는다.\n전송되고 이더넷 헤더 14Bytes가 붙는다.\n\n\n\nICMP, IPv4 실습\nping 8.8.8.8 요청\n\nICMP 프로토콜의 Type이 8 인 것을 확인할 수 있다.\n\n\nIPv4 프로토콜 구조이다.\n\n\n\n\n8.8.8.8에서 응답\n\nICMP 프로토콜의 Type이 0 인 것을 확인할 수 있다.\n\n\n\n\n\n출처\n따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - IP 프로토콜 구조\n따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - ICMP 프로토콜\n따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - IPv4, ICMP프로토콜 실습\n따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - 라우팅 테이블 및 전송 과정\n따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - 라우팅 테이블 확인 실습\n따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - 조각화 이론\n\n","dateCreated":"2022-01-24T20:58:00+09:00","dateModified":"2022-01-26T01:46:51+09:00","datePublished":"2022-01-24T20:58:00+09:00","description":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n","headline":"네트워크) 3계층 프로토콜 IPv4, ICMP","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/","keywords":"네트워크"}</script>
+    <meta name="description" content="따라學IT강의를 보고 요약 정리한 내용입니다.">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="네트워크) 3계층 프로토콜 IPv4, ICMP">
+<meta property="og:url" content="https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/index.html">
+<meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
+<meta property="og:description" content="따라學IT강의를 보고 요약 정리한 내용입니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/icmp.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/icmp_type.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_1.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_2.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_3.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_4.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_5.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_6.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_7.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_8.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_9.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_10.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_11.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_12.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_13.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_14.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_15.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_16.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_mtu.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_mtu1.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_mtu2.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_mtu3.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/icmp_8.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/ipv4_practice.png">
+<meta property="og:image" content="https://odreystella.github.io/images/network/icmp_0.png">
+<meta property="article:published_time" content="2022-01-24T11:58:00.000Z">
+<meta property="article:modified_time" content="2022-01-25T16:46:51.960Z">
+<meta property="article:tag" content="네트워크">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://odreystella.github.io/images/network/ipv4.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://odreystella.github.io/assets/images/profile.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-s9cubcvh9guwrlo0a7unmtmxvwii0oase98xnhhysjkyxhquqqkxkrhfbdfm.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Dev Odreystella&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name"></h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Odreystella</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            네트워크) 3계층 프로토콜 IPv4, ICMP
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-01-24T20:58:00+09:00">
+	
+		    Jan 24, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/">네트워크</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Av9UFzl_wis&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=1">따라學IT</a>강의를 보고 요약 정리한 내용입니다.</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EA%B3%84%EC%B8%B5-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C-IPv4"><span class="toc-text">3계층 프로토콜 IPv4</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EA%B3%84%EC%B8%B5-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C-ICMP-Internet-Control-Message-Protocol"><span class="toc-text">3계층 프로토콜 ICMP(Internet Control Message Protocol)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%9D%BC%EC%9A%B0%ED%8C%85-%ED%85%8C%EC%9D%B4%EB%B8%94"><span class="toc-text">라우팅 테이블</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%8B%A4%EB%A5%B8-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%EC%99%80-%ED%86%B5%EC%8B%A0-%EA%B3%BC%EC%A0%95"><span class="toc-text">다른 네트워크와 통신 과정</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%ED%86%B5%EC%8B%A0-%EA%B3%BC%EC%A0%95-%EC%A0%95%EB%A6%AC%ED%95%98%EB%A9%B4"><span class="toc-text">통신 과정 정리하면</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IPv4%EC%9D%98-%EC%A1%B0%EA%B0%81%ED%99%94"><span class="toc-text">IPv4의 조각화</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ICMP-IPv4-%EC%8B%A4%EC%8A%B5"><span class="toc-text">ICMP, IPv4 실습</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol> 
+
+<h5 id="3계층-프로토콜-IPv4"><a href="#3계층-프로토콜-IPv4" class="headerlink" title="3계층 프로토콜 IPv4"></a>3계층 프로토콜 IPv4</h5><ul>
+<li><p><strong>하는 일</strong></p>
+<ul>
+<li><strong>다른 네트워크</strong>상에 있는 곳과 <strong>데이터를 교환</strong>하기 위한 프로토콜이다.</li>
+<li>데이터가 정확하게 전달되는 것을 보장하지 않기 때문에 데이터가 손상될 수 있다.(신뢰성 있는 통신은 4계층 프로토콜인 TCP에서 보장해줌)</li>
+<li>중복된 패킷을 전달하거나 패킷의 순서를 잘못 전달할 가능성도 있다.</li>
+</ul>
+</li>
+<li><p><strong>구조</strong></p>
+<img src="/images/network/ipv4.png" />
+
+<ul>
+<li><strong>16진수로 표기</strong>하고, <strong>20Bytes</strong>를 사용한다.</li>
+<li><strong>Version</strong>: 16진수로 항상 <code>4</code> 가 온다. IPv6 의 구조는 아예 다르다.</li>
+<li><strong>IHL</strong>: 16진수로 거의 <code>5</code> 가 온다. 길이는 20~60 사이인데 4로 나눈 값을 적는다.</li>
+<li><strong>Type of Service</strong>: 지금은 사용하지 않는 값으로 <code>00</code> 으로 비워둔다.</li>
+<li><strong>Total Length</strong>: 헤더 + 페이로드를 합한 전체 길이</li>
+<li><strong>Identification + IP Flags + Fragment Offset</strong><ul>
+<li>Identification: 큰 데이터는 쪼개져서 보내지는데, 받는 쪽에서 원래의 데이터로 합칠 때 동일한 데이터였음을 알아볼 수 있는 id  값</li>
+<li>IP Flags: 3bit로 첫번째 bit는 항상 <code>0</code> 이다.<ul>
+<li>D(Don’t Fragment): <code>1</code> 이면 송신측에서 데이터를 안쪼개겠다는 의미. 최대 전송단위보다 큰 데이터는 안쪼개서 보낼 수 없기 때문에 거의 안쓰이는 값이다.</li>
+<li>M(More Fragment): <code>1</code> 다른 패킷들이 더 있다는 의미.</li>
+</ul>
+</li>
+<li>Fragment Offset: 시작점으로 부터 얼마나 떨어져 있는지의 값을 나타냄. 즉, 받는 쪽에서 쪼개진 데이터를 합칠 때, 얘를 보고 순서대로 조립할 수 있다.</li>
+</ul>
+</li>
+<li><strong>Time To Live</strong>: 패킷의 유효시간. 라우터 장비를 하나씩 거칠때마다 1씩 줄어든다. 윈도우는 128, 리눅스는 64로 설정한다.</li>
+<li><strong>Protocol:</strong> 상위 프로토콜에 대한 정의<ul>
+<li>ICMP는 <code>01</code>  / TCP는 <code>06</code>  /  UDP는 <code>11</code></li>
+</ul>
+</li>
+<li><strong>Header Checksum</strong>: 헤더의 오류 유무를 확인한다.</li>
+<li><strong>Source Address</strong>: <strong>4Bytes</strong>로 <strong>출발지 IP 주소</strong></li>
+<li><strong>Destination Address</strong>: <strong>4Bytes</strong>로 <strong>목적지 IP 주소</strong></li>
+</ul>
+</li>
+</ul>
+<h5 id="3계층-프로토콜-ICMP-Internet-Control-Message-Protocol"><a href="#3계층-프로토콜-ICMP-Internet-Control-Message-Protocol" class="headerlink" title="3계층 프로토콜 ICMP(Internet Control Message Protocol)"></a>3계층 프로토콜 ICMP(Internet Control Message Protocol)</h5><ul>
+<li><p><strong>하는 일</strong></p>
+<ul>
+<li>인터넷 상에서 <strong>제어 메시지</strong>를 주고 받는다.</li>
+<li>상대방과 <strong>통신 유무를 확인</strong>할 때 사용한다.</li>
+<li>프로토콜 구조의 <strong>Type</strong>과 <strong>Code</strong>를 통해 <strong>오류 메시지를 전송받는다.</strong></li>
+</ul>
+</li>
+<li><p><strong>구조</strong></p>
+<img src="/images/network/icmp.png" />
+
+<ul>
+<li><p><strong>16진수로 표기</strong>하고, <strong>8Byte</strong>를 사용한다.</p>
+</li>
+<li><p><strong>Type: 대분류</strong></p>
+<ul>
+<li><p><code>0</code> : 통신 유무에 대해 응답한다.</p>
+</li>
+<li><p><code>8</code> : 통신할 수 있는지 확인 요청한다.</p>
+</li>
+<li><p><code>3</code> : 목적지에 도달할 수 없습니다. (주로 경로설정 잘못 했을 때)</p>
+</li>
+<li><p><code>11</code> : 요청시간이 만료되었습니다.(목적지까지 갔는데 응답을 받을 수 없는 경우, 주로 상대방이 방화벽 켜뒀을 때)</p>
+<img src="/images/network/icmp_type.png" />
+</li>
+</ul>
+</li>
+<li><p><strong>Code: 소분류</strong></p>
+</li>
+<li><p><strong>Checksum</strong>: 헤더의 오류 유무를 확인한다.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="라우팅-테이블"><a href="#라우팅-테이블" class="headerlink" title="라우팅 테이블"></a>라우팅 테이블</h5><ul>
+<li><strong>목적지까지의 최적의 경로를 지도처럼 저장해둔 테이블</strong></li>
+<li><code>$ netstat -r</code> 명령어로 확인할 수 있다.</li>
+<li>라우팅 테이블에 등록된 네트워크 대역만 찾아갈 수 있다.</li>
+<li><code>디폴트로 게이트웨이 0.0.0.0</code> 를 설정함으로써 라우팅 테이블에 등록되지 않은 네트워크도 갈 수 있다.</li>
+</ul>
+<h5 id="다른-네트워크와-통신-과정"><a href="#다른-네트워크와-통신-과정" class="headerlink" title="다른 네트워크와 통신 과정"></a>다른 네트워크와 통신 과정</h5><ul>
+<li><strong>목표: 내 컴퓨터에서 보낸 패킷을 다른 네트워크의 컴퓨터까지 전달한다.</strong></li>
+</ul>
+<ol>
+<li><p>A와 B가 통신하려고 할 때, A의 라우팅 테이블에 B의 네트워크 대역 <code>192.168.20.0</code>이 등록되어 있는지 확인한다. <code>192.168.20.0</code> 으로 가기 위해 <code>192.168.10.1</code> 로 가라고 설정되어 있다.<br><img src="/images/network/ipv4_1.png" height="300px"/><br></p>
+</li>
+<li><p>ICMP로 통신 확인하기 위해 요청 프로토콜을 작성한다. 요청의 Type은 <code>8</code> 이다.<br><img src="/images/network/ipv4_2.png" height="300px"/><br>    </p>
+</li>
+<li><p>IPv4 프로토콜 작성한다.<br><img src="/images/network/ipv4_3.png" height="300px"/><br>    </p>
+</li>
+<li><p>이더넷 프로토콜을 작성한다. 이때 목적지 MAC 주소는 <code>192.168.10.1</code> 의 <strong>게이트웨이의 MAC 주소</strong>를 쓴다. 이더넷은 같은 네트워크 대역에서만 사용되니까 여기서 갈 수 있는 데까지의 MAC 주소를 작성한다.<br><img src="/images/network/ipv4_4.png" height="300px"/><br></p>
+</li>
+<li><p>2계층 장비인 스위치가 이더넷 프로토콜을 확인하고 목적지 MAC 주소까지 패킷을 전달한다.</p>
+<img src="/images/network/ipv4_5.png" height="300px"/>
+<img src="/images/network/ipv4_6.png" height="300px"/><br>
+</li>
+<li><p>공유기가 이더넷 프로토콜 확인해서 나한테 온게 맞으면 IPv4 프로토콜을 확인해본다. 목적지 IP 주소가 다른거니 공유기의 라우팅 테이블을 확인해본다. <code>192.168.20.0</code> 대역은 <code>192.168.30.2</code> 로 가라고 설정되어 있다.<br><img src="/images/network/ipv4_7.png" height="300px"/><br></p>
+</li>
+<li><p>공유기가 이더넷 프로토콜을 다시 만들어서 MAC 주소가 <code>22 22 22 22 22 22</code> 인 곳으로 보낸다.</p>
+<img src="/images/network/ipv4_8.png" height="300px"/>
+<img src="/images/network/ipv4_9.png" height="300px"/><br>
+</li>
+<li><p>3계층 장비인 라우터는 이더넷 프로토콜 확인하여 목적지 확인 후 맞으면, IPv4 프로토콜까지 확인해본다. 목적지 IP 주소가 다르니 라우터의 라우팅 테이블을 확인해본다. <code>192.168.20.0</code> 대역은 <code>192.168.40.2</code> 로 가라고 설정되어 있다.<br><img src="/images/network/ipv4_10.png" height="300px"/><br></p>
+</li>
+<li><p>라우터가 이너넷 프로토콜을 다시 만들어서 MAC 주소가 <code>44 44 44 44 44 44</code> 인 곳으로 보낸다. 즉, <strong>이더넷 프로토콜은 네트워크 대역이 바뀔 때마다 새로 작성된다.</strong></p>
+<img src="/images/network/ipv4_11.png" height="300px"/>
+<img src="/images/network/ipv4_12.png" height="300px"/><br>
+</li>
+<li><p>위 과정과 마찬가지로 공유기가 이더넷 프로토콜 목적지 MAC 확인후 IPv4 프로토콜 확인한다. 목적지 IP와 다르니 이더넷 프로토콜 새로 작성해서 보낸다. </p>
+<img src="/images/network/ipv4_13.png" height="300px"/>  
+<img src="/images/network/ipv4_14.png" height="300px"/><br>
+</li>
+<li><p>2계층 장비인 스위치가 이더넷 프토토콜 확인하고 목적지 MAC 주소로 패킷을 전달한다. 이더넷, IPv4, ICMP 프로토콜 확인해서 요청이 온 것을 확인한다.<br><img src="/images/network/ipv4_15.png" height="300px"/><br>    </p>
+</li>
+<li><p>B는 ICMP 응답 프로토콜을 작성하여 위와 같은 과ㅡ정으로 A에게 패킷을 전달한다. 응답의 Type은 <code>0</code> 이다.<br><img src="/images/network/ipv4_16.png" height="300px"/><br></p>
+</li>
+<li><p>응답을 받게 되면 A는 B랑 통신이 된 것을 알 수있다.</p>
+</li>
+</ol>
+<h5 id="통신-과정-정리하면"><a href="#통신-과정-정리하면" class="headerlink" title="통신 과정 정리하면"></a>통신 과정 정리하면</h5><ol>
+<li>A →B 가 통신하기 위해 A의 라우팅 테이블 확인 후 ICMP 요청 프로토콜, IPv4 프로토콜 작성, 이더넷 프로토콜 작성 </li>
+<li>스위치가 이더넷 확인 후 목적지 MAC 주소로 요청 전달 </li>
+<li>공유기가 이더넷 확인 후, 목적지 MAC 주소가 맞으면 IPv4도 확인</li>
+<li>목적지 IP 주소가 다르면 공유기의 라우팅 테이블 확인 후 이더넷 다시 작성</li>
+<li>라우터가 이더넷 확인 후, 목적지 MAC 주소가 맞으면 Ipv4 확인</li>
+<li>목적지 IP 주소가 다르면 라우터의 라우팅 테이블 확인 후 이더넷 다시 작성</li>
+<li>목적지 IP 주소에 도착할 때까지 라우팅 테이블 확인 -&gt; 이더넷 프로토콜 다시 작성해서 전달의 과정을 반복</li>
+<li>목적지 IP 주소가 패킷을 받으면 디캡슐화해서 확인하고, 위의 과정과 동일하게 응답 전달</li>
+</ol>
+<h5 id="IPv4의-조각화"><a href="#IPv4의-조각화" class="headerlink" title="IPv4의 조각화"></a>IPv4의 조각화</h5><ul>
+<li><p><strong>정의</strong></p>
+<ul>
+<li>큰 IP 패킷들이 적은 MTU(최대 전송 단위, Maximum Transmission Unit, <strong>보통 1500Bytes</strong>)를 갖는 링크를 통하여 전송되려면 <strong>여러 개의 작은 패킷으로 쪼개어/조각화되어 전송</strong>되어야 한다.</li>
+<li>목적지까지 패킷을 전달하는 과정에 통과하는 각 라우터마다 전송에 적합한 프레임으로 변환이 필요하다.</li>
+<li>일단 조각화되면, 최종 목적지에 도달할 때까지 재조립되지 않는 것이 일반적이다. <strong>최종 수신지에서만 재조립</strong>이 가능하다.</li>
+<li>IPv4에서는 발신지 뿐만 아니라 중간 라우터에서도 IP 조각화가 가능하고, IPv6에서는 IP 단편화가 발신지에서만 가능하다.</li>
+</ul>
+</li>
+<li><p><strong>구조</strong></p>
+<img src="/images/network/ipv4_mtu.png" />
+
+<ul>
+<li>보통 First Fragmentation 까지만 조각화를 진행한다.</li>
+<li>보낼 데이터의 크기가 11,980 Bytes</li>
+<li>MTU가 3,300 Bytes인데 IPv4 헤더 20Bytes를 포함해야 하기 때문에 조각화해서 보낼 데이터 크기는 3,280Bytes 이다.</li>
+<li>MF가 1이면 More Fragment로 뒤에 패킷이 더 있다는 의미이다.</li>
+<li>Offset는 데이터의 크기만큼 떨어진 값을 의미하는데 8을 나눈 값을 쓴다.(ex. 3280/8=410)</li>
+<li>First Fragmentation에서 4개로 조각화된 패킷의 <strong>Identification은 동일한 값이다.</strong></li>
+</ul>
+</li>
+<li><p><strong>패킷 조각화하는 과정</strong></p>
+<img src="/images/network/ipv4_mtu1.png" height="300px"/>
+
+<ul>
+<li>MTU가 1500 Bytes라 2000Bytes인 데이터를 그냥 보내면 전송되지 않는다. 조각화를 해야한다.</li>
+</ul>
+<img src="/images/network/ipv4_mtu2.png" height="300px"/>
+<img src="/images/network/ipv4_mtu3.png" height="300px"/>
+
+<ol>
+<li>IPv4 헤더 20Bytes를 빼고 1480Bytes, 520Bytes로 데이터를 쪼갠다.</li>
+<li><code>ping</code> 명령은 ICMP 프로토콜을 사용하는데 뒤에 데이터에만 붙는다.</li>
+<li>조각화된 각 패킷에 IPv4 헤더가 붙는다.</li>
+<li>전송되고 이더넷 헤더 14Bytes가 붙는다.</li>
+</ol>
+</li>
+</ul>
+<h5 id="ICMP-IPv4-실습"><a href="#ICMP-IPv4-실습" class="headerlink" title="ICMP, IPv4 실습"></a>ICMP, IPv4 <strong>실습</strong></h5><ul>
+<li><p><code>ping 8.8.8.8</code> 요청</p>
+<ul>
+<li><p>ICMP 프로토콜의 Type이 <code>8</code> 인 것을 확인할 수 있다.</p>
+<img src="/images/network/icmp_8.png" height="300px"/>
+</li>
+<li><p>IPv4 프로토콜 구조이다.</p>
+<img src="/images/network/ipv4_practice.png" height="300px"/>
+</li>
+</ul>
+</li>
+<li><p>8.8.8.8에서 응답</p>
+<ul>
+<li>ICMP 프로토콜의 Type이 <code>0</code> 인 것을 확인할 수 있다.<img src="/images/network/icmp_0.png" height="300px"/>
+
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=_i8O_o2ozlE&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=9">따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - IP 프로토콜 구조</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=JaBCIUsFE74&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=10">따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - ICMP 프로토콜</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8ZwTvTuZlVw&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=11">따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - IPv4, ICMP프로토콜 실습</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=CjnKNIyREHA&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=12">따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - 라우팅 테이블 및 전송 과정</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=tVntagSJctc&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=13">따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - 라우팅 테이블 확인 실습</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=_AONcID7Sc8&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=14">따라學IT 06.멀리 있는 컴퓨터끼리는 이렇게 데이터를 주고받는다 - 조각화 이론</a></li>
+</ul>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/" rel="tag">네트워크</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/01/13/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_ARP/"
+                    data-tooltip="네트워크) 3계층 프로토콜 ARP"
+                    aria-label="NEXT: 네트워크) 3계층 프로토콜 ARP"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 null. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/01/13/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_ARP/"
+                    data-tooltip="네트워크) 3계층 프로토콜 ARP"
+                    aria-label="NEXT: 네트워크) 3계층 프로토콜 ARP"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name"></h4>
+        
+            <div id="about-card-bio"><p>Odreystella</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-buvapuslwfowfkx0w6qhxphbbnwhqezkrxx1dd6puligsitecubmpci0a9cf.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
