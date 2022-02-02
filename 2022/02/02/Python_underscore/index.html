@@ -1,0 +1,724 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Dev Odreystella&#39;s Blog">
+    <title>Python) 언더스코어 - Dev Odreystella&#39;s Blog</title>
+    <meta name="author" content="">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n파이썬 언더스코어에 대해 알아보자\n\n\n\n \n\n언더스코어의 다양한 의미\n인터프리터에서의 마지막 값\n무시하는 값\n숫자 리터럴의 자릿수를 구분하는 역할\n네이밍\n\n인터프리터에서의 마지막 값1234&gt;&gt;&gt; 1 + 12&gt;&gt;&gt; _ + 2     # _는 2를 의미한다.4\n무시하는 값\n튜플 등을 언패킹 할 때 특정 값을 버리는 용도로 사용한다.\n*(Asterisk)를 이용하여 여러개의 값을 무시할 수 있다.\nfor 문에도 응용할 수 있다.\n\n12345678910111213141516171819202122# Unpacking&gt;&gt;&gt; x, _, y = (1, 2, 3)    # 값이 무시된다&gt;&gt;&gt; print(x, y)1 3&gt;&gt;&gt; a, *_, b = (1, 2, 3, 4, 5)  # *_에 2, 3, 4가 담김&gt;&gt;&gt; print(a, b)1, 5&gt;&gt;&gt; for _, val in enumerate(range(10)):        print(val)0123456789\n숫자 리터럴의 자릿수를 구분하는 역할\n말 그대로 숫자의 자릿수를 구분한다.\n\n123&gt;&gt;&gt; number = 100_000_000&gt;&gt;&gt; print(number)100000000\n네이밍\nvariable: public 변수\n일반적으로 사용하는 변수를 의미한다.\n\n\n_variable (앞에 언더바): protected 변수\n해당 모듈내에서만 이 변수/함수를 사용하겠다는 의미이다.\n협업할 때 다른 팀원에게 ‘이 변수/함수는 이 모듈 내부에서만 사용할 거다’ 라고 명시적으로 힌트를 줄 수 있다.\n파이썬은 private와 public의 확실한 구분이 없어 완전한 의미의 private는 아니기 때문에 여전히 해당 변수/함수에 접근하거나 사용할 수 있다.\n외부 모듈에서 해당 모듈을 from module_name import * 식으로 전체 임포트할 때 앞에 _가 붙은 변수/함수는 임포트 하지 않는다.123456789101112131415161718192021# test_module.pydef _hi():    print(&#x27;hi&#x27;)def hello():    print(&#x27;hello&#x27;)# test_module2.pyfrom test_module import *hello()_hi()   # 찾을 수 없다는 에러 발생# test_module3.pyfrom test_module import hello, _hihello()_hi()    # 직접 가져오거나 호출하면 사용할 수 있다.\n\n\nvariable_  ( 뒤에 언더바)\n파이썬 키워드와 변수/함수명의 충돌을 피하기 위해서 사용한다.\n예를 들어, list나 print 같은 키워드를 변수/함수명으로 사용하고 싶을 때 list_, print_와 같이 사용하면 된다.123456789&gt;&gt;&gt; list_ = [1, 2, 3, 4, 5]&gt;&gt;&gt; def print_(args):        print(&#x27;hi&#x27;)        print(args)&gt;&gt;&gt; print_(list_)hi[1, 2, 3, 4, 5]\n\n\n__variable (앞에 언더바 두개): private 변수\n네이밍 룰이라기 보다 문법적인 요소로 이해해야 한다.\n네임 맹글링(name mangling) 을 위한 경우인데, 파이썬이 해당 변수/함수의 이름을 짓이겨서 바꿔버리는 것을 의미한다.\n맹글링(짓이기다라는 의미)을 당한 변수/함수는 본연의 이름으로 접근할 수 없게 된다. 즉 접근이 안되기 때문에 보호가 된다. 그러나 수정은 가능하다\n맹글링 당한 변수/함수는 _클래스명__변수/함수명 형태로 이름이 변경된다 123456789101112131415161718class TestClass():        def __init__(self):            self.name = &quot;벼리&quot;            self.gender = &quot;female&quot;            self.__age = 2&gt;&gt;&gt; woman = TestClass()&gt;&gt;&gt; print(woman.name)    # 벼리&gt;&gt;&gt; print(woman.gender)  # femail&gt;&gt;&gt; print(woman.__age)  # AttributeError 발생&gt;&gt;&gt; print(dir(woman))[&#x27;_TestClass__age&#x27;, &#x27;__class__&#x27;, &#x27;__delattr__&#x27;, &#x27;__dict__&#x27;, &#x27;__dir__&#x27;, &#x27;__doc__&#x27;, &#x27;__eq__&#x27;, &#x27;__format__&#x27;, &#x27;__ge__&#x27;, &#x27;__getattribute__&#x27;, &#x27;__gt__&#x27;, &#x27;__hash__&#x27;, &#x27;__init__&#x27;, &#x27;__init_subclass__&#x27;, &#x27;__le__&#x27;, &#x27;__lt__&#x27;, &#x27;__module__&#x27;, &#x27;__ne__&#x27;, &#x27;__new__&#x27;, &#x27;__reduce__&#x27;, &#x27;__reduce_ex__&#x27;, &#x27;__repr__&#x27;, &#x27;__setattr__&#x27;, &#x27;__sizeof__&#x27;, &#x27;__str__&#x27;, &#x27;__subclasshook__&#x27;, &#x27;__weakref__&#x27;, &#x27;gender&#x27;, &#x27;name&#x27;]&gt;&gt;&gt; print(woman._TestClass__age)   # 2\n\n\n__ variable __ (앞뒤로 언더바 두개씩)\n파이썬이 특별히 정의한 변수나 함수에 사용되는 네이밍 룰이다.\n이 네이밍 룰을 사용해서 직접 함수를 만드는 일은 거의 없고, 대부분 오버라이딩 할 때 사용하게 된다.\n이 룰이 적용된 함수는 매직 메소드(Magic Method)나 던더 메소드(Dunder Method, Double Underscore Method)라고 부른다.\n대표적으로 __init__ 함수가 있다. 클래스의 인스턴스가 생성될 때 가장 처음으로 실행되는 함수로 생성자 역할을 한다.12345class TestClass():    def __init__(self):        print(&quot;Hello World&quot;)&gt;&gt;&gt; test = TestClass()   # Hello World\n\n\n\n\n\n네임 맹글링 사용하는 이유\n클래스의 속성값을 외부에서 접근하기 힘들게 할 때 (private화)\n\n완벽한 private라기보다 외부의 접근을 조금 어렵게 숨기는 역할\n1234567891011121314151617181920212223# 일반적인 클래스 코드class TestClass:    def __init__(self):        self.name = &quot;정우성&quot;        self.age = 30        self.hobby = &quot;인형놀이&quot;&gt;&gt;&gt; man = TestClass()&gt;&gt;&gt; print(man.name, man.age, man.hobby)  # 정우성 30 여행# hobby라는 속성을 숨기고 싶다면?class TestClass1:    def __init__(self):        self.name = &quot;정우성&quot;        self.age = 30        self.__hobby = &quot;인형놀이&quot;&gt;&gt;&gt; man1 = TestClass1()&gt;&gt;&gt; print(man.name, man.age, man.hobby)  # AttributeError: &#x27;TestClass1&#x27; object has no attribute &#x27;__hobby&#x27;&gt;&gt;&gt; print(_TestClass1__hobby)  # 인형놀이\n\n\n\n하위 클래스가 상위 클래스의 속성을 오버라이딩 하는 것을 막을 때\n\n클래스가 확장되면서 속성 이름간의 충돌을 막거나, 특히 오버라이딩을 막고 싶을 때 맹글링을 적용할 수 있다.\n맹글링을 하면 이름이 바뀌기 때문에 오버라이딩 할 수 없다.12345678910111213141516171819202122232425262728293031323334353637# 아무런 제약없이 오버라이딩 할 수 있는 코드class TestClass:    def __init__(self):        self.name = &quot;이정재&quot;        self.age = 30        self.hobby = &quot;인형놀이&quot;class TestClass2(TestClass):    def __init__(self):        super().__init__()        self.name = &quot;정우성&quot;        self.age = 23        self.hobby = &quot;벽 보기&quot;&gt;&gt;&gt; man = TestClass2()&gt;&gt;&gt; print(man.name, man.age, man.hobby) # 정우성 23 벽 보기# 오버라이딩을 막고 싶은 경우class TestClass:    def __init__(self):        self.name = &quot;이정재&quot;        self.age = 30        self.__hobby = &quot;인형놀이&quot;class TestClass2(TestClass):    def __init__(self):        super().__init__()        self.name = &quot;정우성&quot;        self.age = 23        self.__hobby = &quot;벽 보기&quot;&gt;&gt;&gt; man = TestClass2()&gt;&gt;&gt; print(man.name, man.age, man.__hobby)# AttributeError: &#x27;TestClass2&#x27; object has no attribute &#x27;__hobby&#x27;\n\n\n\n\n\n출처\n파이썬(python) - _(언더바, 언더스코어)\n파이썬(python) - 네임 맹글링(name mangling)\n\n","dateCreated":"2022-02-02T22:29:00+09:00","dateModified":"2022-02-02T23:25:30+09:00","datePublished":"2022-02-02T22:29:00+09:00","description":"\n파이썬 언더스코어에 대해 알아보자\n","headline":"Python) 언더스코어","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2022/02/02/Python_underscore/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2022/02/02/Python_underscore/","keywords":"underscore"}</script>
+    <meta name="description" content="파이썬 언더스코어에 대해 알아보자">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Python) 언더스코어">
+<meta property="og:url" content="https://odreystella.github.io/2022/02/02/Python_underscore/index.html">
+<meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
+<meta property="og:description" content="파이썬 언더스코어에 대해 알아보자">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-02T13:29:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T14:25:30.491Z">
+<meta property="article:tag" content="underscore">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://odreystella.github.io/assets/images/profile.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-s9cubcvh9guwrlo0a7unmtmxvwii0oase98xnhhysjkyxhquqqkxkrhfbdfm.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Dev Odreystella&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name"></h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Odreystella</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            Python) 언더스코어
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-02-02T22:29:00+09:00">
+	
+		    Feb 02, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Python/">Python</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <blockquote>
+<p>파이썬 언더스코어에 대해 알아보자</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%96%B8%EB%8D%94%EC%8A%A4%EC%BD%94%EC%96%B4%EC%9D%98-%EB%8B%A4%EC%96%91%ED%95%9C-%EC%9D%98%EB%AF%B8"><span class="toc-text">언더스코어의 다양한 의미</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%9D%B8%ED%84%B0%ED%94%84%EB%A6%AC%ED%84%B0%EC%97%90%EC%84%9C%EC%9D%98-%EB%A7%88%EC%A7%80%EB%A7%89-%EA%B0%92"><span class="toc-text">인터프리터에서의 마지막 값</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%AC%B4%EC%8B%9C%ED%95%98%EB%8A%94-%EA%B0%92"><span class="toc-text">무시하는 값</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%88%AB%EC%9E%90-%EB%A6%AC%ED%84%B0%EB%9F%B4%EC%9D%98-%EC%9E%90%EB%A6%BF%EC%88%98%EB%A5%BC-%EA%B5%AC%EB%B6%84%ED%95%98%EB%8A%94-%EC%97%AD%ED%95%A0"><span class="toc-text">숫자 리터럴의 자릿수를 구분하는 역할</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%84%A4%EC%9D%B4%EB%B0%8D"><span class="toc-text">네이밍</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EB%84%A4%EC%9E%84-%EB%A7%B9%EA%B8%80%EB%A7%81-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0"><span class="toc-text">네임 맹글링 사용하는 이유</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol> 
+
+<h5 id="언더스코어의-다양한-의미"><a href="#언더스코어의-다양한-의미" class="headerlink" title="언더스코어의 다양한 의미"></a>언더스코어의 다양한 의미</h5><ol>
+<li>인터프리터에서의 마지막 값</li>
+<li>무시하는 값</li>
+<li>숫자 리터럴의 자릿수를 구분하는 역할</li>
+<li>네이밍</li>
+</ol>
+<h5 id="인터프리터에서의-마지막-값"><a href="#인터프리터에서의-마지막-값" class="headerlink" title="인터프리터에서의 마지막 값"></a>인터프리터에서의 마지막 값</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span> + <span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>_ + <span class="number">2</span>     <span class="comment"># _는 2를 의미한다.</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h5 id="무시하는-값"><a href="#무시하는-값" class="headerlink" title="무시하는 값"></a>무시하는 값</h5><ul>
+<li>튜플 등을 언패킹 할 때 특정 값을 버리는 용도로 사용한다.</li>
+<li><code>*(Asterisk)</code>를 이용하여 여러개의 값을 무시할 수 있다.</li>
+<li>for 문에도 응용할 수 있다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Unpacking</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x, _, y = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)    <span class="comment"># 값이 무시된다</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(x, y)</span><br><span class="line"><span class="number">1</span> <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a, *_, b = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)  <span class="comment"># *_에 2, 3, 4가 담김</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a, b)</span><br><span class="line"><span class="number">1</span>, <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> _, val <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">range</span>(<span class="number">10</span>)):</span><br><span class="line">        print(val)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
+<h5 id="숫자-리터럴의-자릿수를-구분하는-역할"><a href="#숫자-리터럴의-자릿수를-구분하는-역할" class="headerlink" title="숫자 리터럴의 자릿수를 구분하는 역할"></a>숫자 리터럴의 자릿수를 구분하는 역할</h5><ul>
+<li>말 그대로 숫자의 자릿수를 구분한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>number = <span class="number">100_000_000</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(number)</span><br><span class="line"><span class="number">100000000</span></span><br></pre></td></tr></table></figure>
+<h5 id="네이밍"><a href="#네이밍" class="headerlink" title="네이밍"></a>네이밍</h5><ol>
+<li><strong>variable: public 변수</strong><ul>
+<li>일반적으로 사용하는 변수를 의미한다.</li>
+</ul>
+</li>
+<li><strong>_variable (앞에 언더바): protected 변수</strong><ul>
+<li><strong>해당 모듈내에서만 이 변수/함수를 사용하겠다는 의미이다.</strong></li>
+<li>협업할 때 다른 팀원에게 ‘이 변수/함수는 이 모듈 내부에서만 사용할 거다’ 라고 명시적으로 힌트를 줄 수 있다.</li>
+<li>파이썬은 private와 public의 확실한 구분이 없어 완전한 의미의 private는 아니기 때문에 여전히 <strong>해당 변수/함수에 접근하거나 사용할 수 있다.</strong></li>
+<li>외부 모듈에서 해당 모듈을 <code>from module_name import *</code> 식으로 <strong>전체 임포트</strong>할 때 앞에 <code>_</code>가 붙은 변수/함수는 임포트 하지 않는다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test_module.py</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_hi</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;hi&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># test_module2.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> test_module <span class="keyword">import</span> *</span><br><span class="line">hello()</span><br><span class="line">_hi()   <span class="comment"># 찾을 수 없다는 에러 발생</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># test_module3.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> test_module <span class="keyword">import</span> hello, _hi</span><br><span class="line">hello()</span><br><span class="line">_hi()    <span class="comment"># 직접 가져오거나 호출하면 사용할 수 있다.</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><strong>variable_  ( 뒤에 언더바)</strong><ul>
+<li>파이썬 키워드와 변수/함수명의 충돌을 피하기 위해서 사용한다.</li>
+<li>예를 들어, list나 print 같은 키워드를 변수/함수명으로 사용하고 싶을 때 <code>list_</code>, <code>print_</code>와 같이 사용하면 된다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list_ = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">print_</span>(<span class="params">args</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;hi&#x27;</span>)</span><br><span class="line">        print(args)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print_(list_)</span><br><span class="line">hi</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><strong>__variable (앞에 언더바 두개): private 변수</strong><ul>
+<li>네이밍 룰이라기 보다 <strong>문법적인 요소</strong>로 이해해야 한다.</li>
+<li><strong>네임 맹글링(name mangling)</strong> 을 위한 경우인데, <strong>파이썬이 해당 변수/함수의 이름을 짓이겨서 바꿔버리는 것</strong>을 의미한다.</li>
+<li>맹글링(짓이기다라는 의미)을 당한 변수/함수는 <strong>본연의 이름으로 접근할 수 없게 된다</strong>. 즉 접근이 안되기 때문에 <strong>보호</strong>가 된다. 그러나 수정은 가능하다</li>
+<li>맹글링 당한 변수/함수는 <code>_클래스명__변수/함수명</code> 형태로 이름이 변경된다 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span>():</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">            self.name = <span class="string">&quot;벼리&quot;</span></span><br><span class="line">            self.gender = <span class="string">&quot;female&quot;</span></span><br><span class="line">            self.__age = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>woman = TestClass()</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(woman.name)    <span class="comment"># 벼리</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(woman.gender)  <span class="comment"># femail</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(woman.__age)  <span class="comment"># AttributeError 발생</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="built_in">dir</span>(woman))</span><br><span class="line">[<span class="string">&#x27;_TestClass__age&#x27;</span>, <span class="string">&#x27;__class__&#x27;</span>, <span class="string">&#x27;__delattr__&#x27;</span>, <span class="string">&#x27;__dict__&#x27;</span>, <span class="string">&#x27;__dir__&#x27;</span>, </span><br><span class="line"><span class="string">&#x27;__doc__&#x27;</span>, <span class="string">&#x27;__eq__&#x27;</span>, <span class="string">&#x27;__format__&#x27;</span>, <span class="string">&#x27;__ge__&#x27;</span>, <span class="string">&#x27;__getattribute__&#x27;</span>, <span class="string">&#x27;__gt__&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;__hash__&#x27;</span>, <span class="string">&#x27;__init__&#x27;</span>, <span class="string">&#x27;__init_subclass__&#x27;</span>, <span class="string">&#x27;__le__&#x27;</span>, <span class="string">&#x27;__lt__&#x27;</span>, <span class="string">&#x27;__module__&#x27;</span>, </span><br><span class="line"><span class="string">&#x27;__ne__&#x27;</span>, <span class="string">&#x27;__new__&#x27;</span>, <span class="string">&#x27;__reduce__&#x27;</span>, <span class="string">&#x27;__reduce_ex__&#x27;</span>, <span class="string">&#x27;__repr__&#x27;</span>, <span class="string">&#x27;__setattr__&#x27;</span>, </span><br><span class="line"><span class="string">&#x27;__sizeof__&#x27;</span>, <span class="string">&#x27;__str__&#x27;</span>, <span class="string">&#x27;__subclasshook__&#x27;</span>, <span class="string">&#x27;__weakref__&#x27;</span>, <span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;name&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(woman._TestClass__age)   <span class="comment"># 2</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><strong>__ variable __ (앞뒤로 언더바 두개씩)</strong><ul>
+<li>파이썬이 특별히 정의한 변수나 함수에 사용되는 네이밍 룰이다.</li>
+<li>이 네이밍 룰을 사용해서 직접 함수를 만드는 일은 거의 없고, <strong>대부분 오버라이딩</strong> 할 때 사용하게 된다.</li>
+<li>이 룰이 적용된 함수는 매직 메소드(Magic Method)나 던더 메소드(Dunder Method, Double Underscore Method)라고 부른다.</li>
+<li>대표적으로 <code>__init__</code> 함수가 있다. 클래스의 인스턴스가 생성될 때 가장 처음으로 실행되는 함수로 생성자 역할을 한다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>test = TestClass()   <span class="comment"># Hello World</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="네임-맹글링-사용하는-이유"><a href="#네임-맹글링-사용하는-이유" class="headerlink" title="네임 맹글링 사용하는 이유"></a>네임 맹글링 사용하는 이유</h5><ol>
+<li><p><strong>클래스의 속성값을 외부에서 접근하기 힘들게 할 때 (private화)</strong></p>
+<ul>
+<li><p>완벽한 private라기보다 외부의 접근을 조금 어렵게 숨기는 역할</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 일반적인 클래스 코드</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.name = <span class="string">&quot;정우성&quot;</span></span><br><span class="line">        self.age = <span class="number">30</span></span><br><span class="line">        self.hobby = <span class="string">&quot;인형놀이&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>man = TestClass()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(man.name, man.age, man.hobby)  <span class="comment"># 정우성 30 여행</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># hobby라는 속성을 숨기고 싶다면?</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass1</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.name = <span class="string">&quot;정우성&quot;</span></span><br><span class="line">        self.age = <span class="number">30</span></span><br><span class="line">        self.__hobby = <span class="string">&quot;인형놀이&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>man1 = TestClass1()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(man.name, man.age, man.hobby)  </span><br><span class="line"><span class="comment"># AttributeError: &#x27;TestClass1&#x27; object has no attribute &#x27;__hobby&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(_TestClass1__hobby)  <span class="comment"># 인형놀이</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>하위 클래스가 상위 클래스의 속성을 오버라이딩 하는 것을 막을 때</strong></p>
+<ul>
+<li>클래스가 확장되면서 속성 이름간의 충돌을 막거나, 특히 <strong>오버라이딩을 막고 싶을 때</strong> 맹글링을 적용할 수 있다.</li>
+<li>맹글링을 하면 이름이 바뀌기 때문에 오버라이딩 할 수 없다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 아무런 제약없이 오버라이딩 할 수 있는 코드</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.name = <span class="string">&quot;이정재&quot;</span></span><br><span class="line">        self.age = <span class="number">30</span></span><br><span class="line">        self.hobby = <span class="string">&quot;인형놀이&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass2</span>(<span class="params">TestClass</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.name = <span class="string">&quot;정우성&quot;</span></span><br><span class="line">        self.age = <span class="number">23</span></span><br><span class="line">        self.hobby = <span class="string">&quot;벽 보기&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>man = TestClass2()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(man.name, man.age, man.hobby) <span class="comment"># 정우성 23 벽 보기</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 오버라이딩을 막고 싶은 경우</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.name = <span class="string">&quot;이정재&quot;</span></span><br><span class="line">        self.age = <span class="number">30</span></span><br><span class="line">        self.__hobby = <span class="string">&quot;인형놀이&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass2</span>(<span class="params">TestClass</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.name = <span class="string">&quot;정우성&quot;</span></span><br><span class="line">        self.age = <span class="number">23</span></span><br><span class="line">        self.__hobby = <span class="string">&quot;벽 보기&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>man = TestClass2()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(man.name, man.age, man.__hobby)</span><br><span class="line"><span class="comment"># AttributeError: &#x27;TestClass2&#x27; object has no attribute &#x27;__hobby&#x27;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://tibetsandfox.tistory.com/20">파이썬(python) - _(언더바, 언더스코어)</a></li>
+<li><a target="_blank" rel="noopener" href="https://tibetsandfox.tistory.com/21">파이썬(python) - 네임 맹글링(name mangling)</a></li>
+</ul>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/underscore/" rel="tag">underscore</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"
+                    data-tooltip="네트워크) 3계층 프로토콜 IPv4, ICMP"
+                    aria-label="NEXT: 네트워크) 3계층 프로토콜 IPv4, ICMP"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/02/Python_underscore/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/02/Python_underscore/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/02/Python_underscore/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 null. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/01/24/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_3%EA%B3%84%EC%B8%B5_IP_ICMP/"
+                    data-tooltip="네트워크) 3계층 프로토콜 IPv4, ICMP"
+                    aria-label="NEXT: 네트워크) 3계층 프로토콜 IPv4, ICMP"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/02/Python_underscore/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/02/Python_underscore/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/02/Python_underscore/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/02/Python_underscore/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/02/Python_underscore/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/02/Python_underscore/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name"></h4>
+        
+            <div id="about-card-bio"><p>Odreystella</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-buvapuslwfowfkx0w6qhxphbbnwhqezkrxx1dd6puligsitecubmpci0a9cf.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
