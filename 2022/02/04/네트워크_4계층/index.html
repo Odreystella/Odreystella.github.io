@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Dev Odreystella&#39;s Blog">
+    <title>네트워크) 4계층 - Dev Odreystella&#39;s Blog</title>
+    <meta name="author" content="">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n\n\n\n\n4계층에서 하는 일\n전송 계층(Transport layer)은 송신자의 프로세스와 수신자의 프로세스를 연결하는 통신 서비스를 제공한다.\n전송 계층은 연결 지향 데이터 스트림 지원, 신뢰성, 흐름 제어, 다중화와 같은 편리한 서비스를 제공한다.\n\n4계층에서 사용하는 주소, 포트 번호\n특정 프로세스가 사용하는 주소\n내 컴퓨터 기준으로 하나의 포트는 하나의 프로세스만 사용할 수 있다. 하나의 포트번호로 다른 컴퓨터들의 여러 요청이 들어오는 것은 가능하다.\n특정 프로세스와 특정 프로세스가 통신하기 위해 사용한다.\n포트 번호는 일반적으로 정해져 잇지만 무조건 지켜야 하는 것은 아니다.\n예를 들어 일반적으로 웹 서비스는 80번 포트를 사용하지만 다른 포트번호를 사용해도 된다.\n3가지로 구분될 수 있다.\nWell-Known 포트: 잘 알려진 포트 번호이다.\n\n\n서비스 이름\n포트 번호\n\n\n\nFTP\n20, 21번\n\n\nSSH\n22번\n\n\nTELNET\n23번\n\n\nDNS\n53번\n\n\nHTTP\n80번\n\n\nHTTPS\n443번\n\n\n\nRegistered 포트:  유명한 서비스들이 등록해둔 포트 번호이다.\n\n\n서비스 이름\n포트 번호\n\n\n\n오라클 DB\n1521번\n\n\nMySQL DB\n3306번\n\n\nPostgreSQL DB\n5432번\n\n\n\nDynamic 포트: 49152번 ~ 65535번 사이에서 일반 사용자들이 사용한다. \n\n\n\n4계층 프로토콜 TCP, UDP\nTCP\n안전한 연결을 지향한다. 연결이 된 것을 확인한 후에 데이터를 전송한다.\n\n\nUDP\n비연결 지향으로 빠른 연결을 지향한다. 연결 여부와 상관없이 데이터를 전송한다.\n\n\n\n출처\n따라學IT 07.컴퓨터의 프로그램끼리는 이렇게 데이터를 주고 받는다 - 4계층 이론\n\n","dateCreated":"2022-02-04T23:42:00+09:00","dateModified":"2022-02-04T23:52:05+09:00","datePublished":"2022-02-04T23:42:00+09:00","description":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n","headline":"네트워크) 4계층","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/","keywords":"4계층"}</script>
+    <meta name="description" content="따라學IT강의를 보고 요약 정리한 내용입니다.">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="네트워크) 4계층">
+<meta property="og:url" content="https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/index.html">
+<meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
+<meta property="og:description" content="따라學IT강의를 보고 요약 정리한 내용입니다.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-04T14:42:00.000Z">
+<meta property="article:modified_time" content="2022-02-04T14:52:05.841Z">
+<meta property="article:tag" content="4계층">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://odreystella.github.io/assets/images/profile.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-s9cubcvh9guwrlo0a7unmtmxvwii0oase98xnhhysjkyxhquqqkxkrhfbdfm.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Dev Odreystella&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name"></h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Odreystella</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            네트워크) 4계층
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2022-02-04T23:42:00+09:00">
+	
+		    Feb 04, 2022
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/">네트워크</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Av9UFzl_wis&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=1">따라學IT</a>강의를 보고 요약 정리한 내용입니다.</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#4%EA%B3%84%EC%B8%B5%EC%97%90%EC%84%9C-%ED%95%98%EB%8A%94-%EC%9D%BC"><span class="toc-text">4계층에서 하는 일</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%EA%B3%84%EC%B8%B5%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EC%A3%BC%EC%86%8C-%ED%8F%AC%ED%8A%B8-%EB%B2%88%ED%98%B8"><span class="toc-text">4계층에서 사용하는 주소, 포트 번호</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%EA%B3%84%EC%B8%B5-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C-TCP-UDP"><span class="toc-text">4계층 프로토콜 TCP, UDP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol>
+<h5 id="4계층에서-하는-일"><a href="#4계층에서-하는-일" class="headerlink" title="4계층에서 하는 일"></a>4계층에서 하는 일</h5><ul>
+<li>전송 계층(Transport layer)은 <strong>송신자의 프로세스</strong>와 <strong>수신자의 프로세스</strong>를 연결하는 통신 서비스를 제공한다.</li>
+<li>전송 계층은 <strong>연결 지향 데이터 스트림</strong> 지원, <strong>신뢰성</strong>, <strong>흐름 제어</strong>, <strong>다중화</strong>와 같은 편리한 서비스를 제공한다.</li>
+</ul>
+<h5 id="4계층에서-사용하는-주소-포트-번호"><a href="#4계층에서-사용하는-주소-포트-번호" class="headerlink" title="4계층에서 사용하는 주소, 포트 번호"></a>4계층에서 사용하는 주소, 포트 번호</h5><ul>
+<li><strong>특정 프로세스가 사용하는 주소</strong></li>
+<li>내 컴퓨터 기준으로 <strong>하나의 포트</strong>는 <strong>하나의 프로세스</strong>만 사용할 수 있다. 하나의 포트번호로 다른 컴퓨터들의 여러 요청이 들어오는 것은 가능하다.</li>
+<li><strong>특정 프로세스와 특정 프로세스가 통신</strong>하기 위해 사용한다.</li>
+<li>포트 번호는 일반적으로 정해져 잇지만 <strong>무조건 지켜야 하는 것은 아니다.</strong></li>
+<li>예를 들어 일반적으로 웹 서비스는 80번 포트를 사용하지만 다른 포트번호를 사용해도 된다.</li>
+<li>3가지로 구분될 수 있다.<ul>
+<li><strong>Well-Known 포트</strong>: 잘 알려진 포트 번호이다.<table>
+<thead>
+<tr>
+<th>서비스 이름</th>
+<th>포트 번호</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FTP</td>
+<td>20, 21번</td>
+</tr>
+<tr>
+<td>SSH</td>
+<td>22번</td>
+</tr>
+<tr>
+<td>TELNET</td>
+<td>23번</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>53번</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>80번</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>443번</td>
+</tr>
+</tbody></table>
+</li>
+<li><strong>Registered 포트</strong>:  유명한 서비스들이 등록해둔 포트 번호이다.<table>
+<thead>
+<tr>
+<th>서비스 이름</th>
+<th>포트 번호</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>오라클 DB</td>
+<td>1521번</td>
+</tr>
+<tr>
+<td>MySQL DB</td>
+<td>3306번</td>
+</tr>
+<tr>
+<td>PostgreSQL DB</td>
+<td>5432번</td>
+</tr>
+</tbody></table>
+</li>
+<li><strong>Dynamic 포트</strong>: 49152번 ~ 65535번 사이에서 일반 사용자들이 사용한다. </li>
+</ul>
+</li>
+</ul>
+<h5 id="4계층-프로토콜-TCP-UDP"><a href="#4계층-프로토콜-TCP-UDP" class="headerlink" title="4계층 프로토콜 TCP, UDP"></a>4계층 프로토콜 TCP, UDP</h5><ol>
+<li>TCP<ul>
+<li>안전한 연결을 지향한다. 연결이 된 것을 확인한 후에 데이터를 전송한다.</li>
+</ul>
+</li>
+<li>UDP<ul>
+<li>비연결 지향으로 빠른 연결을 지향한다. 연결 여부와 상관없이 데이터를 전송한다.</li>
+</ul>
+</li>
+</ol>
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=tG0ldt4sBzY&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=16">따라學IT 07.컴퓨터의 프로그램끼리는 이렇게 데이터를 주고 받는다 - 4계층 이론</a></li>
+</ul>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/4%EA%B3%84%EC%B8%B5/" rel="tag">4계층</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/02/02/Python_underscore/"
+                    data-tooltip="Python) 언더스코어"
+                    aria-label="NEXT: Python) 언더스코어"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2022 null. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/02/02/Python_underscore/"
+                    data-tooltip="Python) 언더스코어"
+                    aria-label="NEXT: Python) 언더스코어"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/04/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name"></h4>
+        
+            <div id="about-card-bio"><p>Odreystella</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-buvapuslwfowfkx0w6qhxphbbnwhqezkrxx1dd6puligsitecubmpci0a9cf.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
