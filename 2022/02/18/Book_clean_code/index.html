@@ -6,26 +6,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>네트워크) 4계층 프로토콜 UDP - Dev Odreystella&#39;s Blog</title>
+    <title>Book) 클린코드 0장 - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n\n\n\n \n\n4계층 프로토콜 UDP(User Datagram Protocol)\n하는 일\n\n비연결지향형 프로토콜이다.\n전송방식이 단순하고 비연결지향형이기 때문에 서비스의 신뢰성이 낮다.\n데이터그램 도착 순서가 바뀌거나, 중복되거나, 심지어 통보 없이 누락되기도 한다.\n일반적으로 오류의 검사와 수정이 필요 없는 프로그램에서 사용한다.\n\n\n구조\n\n\n\n16진수로 표기하고, 8Bytes를 사용한다.\n포트 번호 하나는 2Bytes이다.\nLength: UDP 프로토콜 헤더 + 페이로드까지 합한 길이\n\n\n\nUDP 프로토콜을 사용하는 프로그램\nDNS 서버: 도메인을 물으면 IP를 알려준다.\ntftp 서버: UPD로 파일을 공유한다.\nRIP 프로토콜: 라우팅 정보를 공유하여 최신 라우팅 테이블을 알 수 있게 해준다.\n\n출처\n따라學IT 08. 비연결지향형 UDP 프로토콜 - 이론\n\n","dateCreated":"2022-02-10T23:47:00+09:00","dateModified":"2022-02-11T00:48:16+09:00","datePublished":"2022-02-10T23:47:00+09:00","description":"\n따라學IT강의를 보고 요약 정리한 내용입니다.\n","headline":"네트워크) 4계층 프로토콜 UDP","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/","keywords":"4계층, UDP"}</script>
-    <meta name="description" content="따라學IT강의를 보고 요약 정리한 내용입니다.">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n노마드 개발자 북클럽 2기에 참여하여 3주간 클린코드를 읽고 간단하게 TIL을 남기는 미션을 수행합니다.\n\n\n\n \n\nTIL (2022.02.18 금)\nDay 1.오늘 읽은 범위: 0장. 들어가면서\n\n책에서 기억하고 싶은 내용을 써보세요.오늘 읽은 소감은? 떠오르는 생각을 가볍게 적어보세요궁금한 내용이 있거나, 잘 이해되지 않는 내용이 있다면 적어보세요.세줄 요약앞으로 3주간 위와 같은 템플릿으로 책을 읽고 기록을 남기려고 한다.오래전에 책을 사뒀지만 책이 두꺼워서 앞부분만 읽어보고 더이상 진행이 안되었는데.. 자주 사용하는 노마드코더에서 북클럽을 런칭하였길래 2기로 참여하여 이번 기회에 완독하려고 한다. 파이썬이 메인언어라 파이썬에서는 어떻게 적용할 수 있을지 생각하면서 읽을 예정이다.\n","dateCreated":"2022-02-18T17:06:00+09:00","dateModified":"2022-02-18T17:36:05+09:00","datePublished":"2022-02-18T17:06:00+09:00","description":"\n노마드 개발자 북클럽 2기에 참여하여 3주간 클린코드를 읽고 간단하게 TIL을 남기는 미션을 수행합니다.\n","headline":"Book) 클린코드 0장","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2022/02/18/Book_clean_code/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2022/02/18/Book_clean_code/","keywords":"clean_code, 코딩, 개발자, 노마드북클럽, 노개북"}</script>
+    <meta name="description" content="노마드 개발자 북클럽 2기에 참여하여 3주간 클린코드를 읽고 간단하게 TIL을 남기는 미션을 수행합니다.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="네트워크) 4계층 프로토콜 UDP">
-<meta property="og:url" content="https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/index.html">
+<meta property="og:title" content="Book) 클린코드 0장">
+<meta property="og:url" content="https://odreystella.github.io/2022/02/18/Book_clean_code/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
-<meta property="og:description" content="따라學IT강의를 보고 요약 정리한 내용입니다.">
+<meta property="og:description" content="노마드 개발자 북클럽 2기에 참여하여 3주간 클린코드를 읽고 간단하게 TIL을 남기는 미션을 수행합니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://odreystella.github.io/images/network/udp.png">
-<meta property="article:published_time" content="2022-02-10T14:47:00.000Z">
-<meta property="article:modified_time" content="2022-02-10T15:48:16.264Z">
-<meta property="article:tag" content="4계층">
-<meta property="article:tag" content="UDP">
+<meta property="og:image" content="https://odreystella.github.io/images/clean_code/clean_code.jpg">
+<meta property="article:published_time" content="2022-02-18T08:06:00.000Z">
+<meta property="article:modified_time" content="2022-02-18T08:36:05.486Z">
+<meta property="article:tag" content="clean_code">
+<meta property="article:tag" content="코딩">
+<meta property="article:tag" content="개발자">
+<meta property="article:tag" content="노마드북클럽">
+<meta property="article:tag" content="노개북">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://odreystella.github.io/images/network/udp.png">
+<meta name="twitter:image" content="https://odreystella.github.io/images/clean_code/clean_code.jpg">
     
     
         
@@ -299,20 +302,20 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            네트워크) 4계층 프로토콜 UDP
+            Book) 클린코드 0장
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2022-02-10T23:47:00+09:00">
+    <time datetime="2022-02-18T17:06:00+09:00">
 	
-		    Feb 10, 2022
+		    Feb 18, 2022
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/">네트워크</a>
+    <a class="category-link" href="/categories/Book/">Book</a>
 
 
     
@@ -325,39 +328,16 @@
     <div class="post-content markdown">
         <div class="main-content-wrap">
             <blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Av9UFzl_wis&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=1">따라學IT</a>강의를 보고 요약 정리한 내용입니다.</p>
+<p>노마드 개발자 북클럽 2기에 참여하여 3주간 클린코드를 읽고 간단하게 TIL을 남기는 미션을 수행합니다.</p>
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#4%EA%B3%84%EC%B8%B5-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C-UDP-User-Datagram-Protocol"><span class="toc-text">4계층 프로토콜 UDP(User Datagram Protocol)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#UDP-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8"><span class="toc-text">UDP 프로토콜을 사용하는 프로그램</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B6%9C%EC%B2%98"><span class="toc-text">출처</span></a></li></ol> 
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TIL-2022-02-18-%EA%B8%88"><span class="toc-text">TIL (2022.02.18 금)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%B1%85%EC%97%90%EC%84%9C-%EA%B8%B0%EC%96%B5%ED%95%98%EA%B3%A0-%EC%8B%B6%EC%9D%80-%EB%82%B4%EC%9A%A9%EC%9D%84-%EC%8D%A8%EB%B3%B4%EC%84%B8%EC%9A%94"><span class="toc-text">책에서 기억하고 싶은 내용을 써보세요.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%98%A4%EB%8A%98-%EC%9D%BD%EC%9D%80-%EC%86%8C%EA%B0%90%EC%9D%80-%EB%96%A0%EC%98%A4%EB%A5%B4%EB%8A%94-%EC%83%9D%EA%B0%81%EC%9D%84-%EA%B0%80%EB%B3%8D%EA%B2%8C-%EC%A0%81%EC%96%B4%EB%B3%B4%EC%84%B8%EC%9A%94"><span class="toc-text">오늘 읽은 소감은? 떠오르는 생각을 가볍게 적어보세요</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EA%B6%81%EA%B8%88%ED%95%9C-%EB%82%B4%EC%9A%A9%EC%9D%B4-%EC%9E%88%EA%B1%B0%EB%82%98-%EC%9E%98-%EC%9D%B4%ED%95%B4%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%82%B4%EC%9A%A9%EC%9D%B4-%EC%9E%88%EB%8B%A4%EB%A9%B4-%EC%A0%81%EC%96%B4%EB%B3%B4%EC%84%B8%EC%9A%94"><span class="toc-text">궁금한 내용이 있거나, 잘 이해되지 않는 내용이 있다면 적어보세요.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EC%84%B8%EC%A4%84-%EC%9A%94%EC%95%BD"><span class="toc-text">세줄 요약</span></a></li></ol></li></ol></li></ol></li></ol></li></ol> 
 
-<h5 id="4계층-프로토콜-UDP-User-Datagram-Protocol"><a href="#4계층-프로토콜-UDP-User-Datagram-Protocol" class="headerlink" title="4계층 프로토콜 UDP(User Datagram Protocol)"></a>4계층 프로토콜 UDP(User Datagram Protocol)</h5><ul>
-<li><p><strong>하는 일</strong></p>
-<ul>
-<li><strong>비연결지향형</strong> 프로토콜이다.</li>
-<li><strong>전송방식이 단순</strong>하고 비연결지향형이기 때문에 서비스의 <strong>신뢰성이 낮다.</strong></li>
-<li><strong>데이터그램 도착 순서가 바뀌거나, 중복되거나, 심지어 통보 없이 누락되기도 한다.</strong></li>
-<li>일반적으로 오류의 검사와 수정이 필요 없는 프로그램에서 사용한다.</li>
-</ul>
-</li>
-<li><p><strong>구조</strong></p>
-<img src="/images/network/udp.png" />
-
-<ul>
-<li><strong>16진수로 표기</strong>하고, <strong>8Bytes</strong>를 사용한다.</li>
-<li>포트 번호 하나는 2Bytes이다.</li>
-<li><strong>Length</strong>: UDP 프로토콜 헤더 + 페이로드까지 합한 길이</li>
-</ul>
-</li>
-</ul>
-<h5 id="UDP-프로토콜을-사용하는-프로그램"><a href="#UDP-프로토콜을-사용하는-프로그램" class="headerlink" title="UDP 프로토콜을 사용하는 프로그램"></a>UDP 프로토콜을 사용하는 프로그램</h5><ul>
-<li><strong>DNS 서버</strong>: 도메인을 물으면 IP를 알려준다.</li>
-<li><strong>tftp 서버</strong>: UPD로 파일을 공유한다.</li>
-<li><strong>RIP 프로토콜</strong>: 라우팅 정보를 공유하여 최신 라우팅 테이블을 알 수 있게 해준다.</li>
-</ul>
-<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=3MkI3FBFzX8&list=PL0d8NnikouEWcF1jJueLdjRIC4HsUlULi&index=19">따라學IT 08. 비연결지향형 UDP 프로토콜 - 이론</a></li>
-</ul>
+<h1 id="TIL-2022-02-18-금"><a href="#TIL-2022-02-18-금" class="headerlink" title="TIL (2022.02.18 금)"></a>TIL (2022.02.18 금)</h1><blockquote>
+<p>Day 1.<br>오늘 읽은 범위: 0장. 들어가면서</p>
+</blockquote>
+<h5 id="책에서-기억하고-싶은-내용을-써보세요"><a href="#책에서-기억하고-싶은-내용을-써보세요" class="headerlink" title="책에서 기억하고 싶은 내용을 써보세요."></a>책에서 기억하고 싶은 내용을 써보세요.</h5><h5 id="오늘-읽은-소감은-떠오르는-생각을-가볍게-적어보세요"><a href="#오늘-읽은-소감은-떠오르는-생각을-가볍게-적어보세요" class="headerlink" title="오늘 읽은 소감은? 떠오르는 생각을 가볍게 적어보세요"></a>오늘 읽은 소감은? 떠오르는 생각을 가볍게 적어보세요</h5><h5 id="궁금한-내용이-있거나-잘-이해되지-않는-내용이-있다면-적어보세요"><a href="#궁금한-내용이-있거나-잘-이해되지-않는-내용이-있다면-적어보세요" class="headerlink" title="궁금한 내용이 있거나, 잘 이해되지 않는 내용이 있다면 적어보세요."></a>궁금한 내용이 있거나, 잘 이해되지 않는 내용이 있다면 적어보세요.</h5><h5 id="세줄-요약"><a href="#세줄-요약" class="headerlink" title="세줄 요약"></a>세줄 요약</h5><p>앞으로 3주간 위와 같은 템플릿으로 책을 읽고 기록을 남기려고 한다.<br>오래전에 책을 사뒀지만 책이 두꺼워서 앞부분만 읽어보고 더이상 진행이 안되었는데.. 자주 사용하는 <strong>노마드코더</strong>에서 <strong>북클럽</strong>을 런칭하였길래 2기로 참여하여 이번 기회에 완독하려고 한다. 파이썬이 메인언어라 파이썬에서는 어떻게 적용할 수 있을지 생각하면서 읽을 예정이다.<br><img src="/images/clean_code/clean_code.jpg" height="400px"></p>
 
             
 
@@ -369,7 +349,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/4%EA%B3%84%EC%B8%B5/" rel="tag">4계층</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/UDP/" rel="tag">UDP</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/clean-code/" rel="tag">clean_code</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90/" rel="tag">개발자</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/%EB%85%B8%EA%B0%9C%EB%B6%81/" rel="tag">노개북</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/%EB%85%B8%EB%A7%88%EB%93%9C%EB%B6%81%ED%81%B4%EB%9F%BD/" rel="tag">노마드북클럽</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/%EC%BD%94%EB%94%A9/" rel="tag">코딩</a>
 
             </div>
         
@@ -379,14 +359,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/02/18/Book_clean_code/"
-                    data-tooltip="Book) 클린코드 0장"
-                    aria-label="PREVIOUS: Book) 클린코드 0장"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -396,9 +373,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/02/08/Python_getter_setter/"
-                    data-tooltip="Python) Getter, Setter"
-                    aria-label="NEXT: Python) Getter, Setter"
+                    href="/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"
+                    data-tooltip="네트워크) 4계층 프로토콜 UDP"
+                    aria-label="NEXT: 네트워크) 4계층 프로토콜 UDP"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -423,7 +400,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/18/Book_clean_code/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -436,7 +413,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/18/Book_clean_code/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -449,7 +426,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/18/Book_clean_code/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -494,14 +471,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/02/18/Book_clean_code/"
-                    data-tooltip="Book) 클린코드 0장"
-                    aria-label="PREVIOUS: Book) 클린코드 0장"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -511,9 +485,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2022/02/08/Python_getter_setter/"
-                    data-tooltip="Python) Getter, Setter"
-                    aria-label="NEXT: Python) Getter, Setter"
+                    href="/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"
+                    data-tooltip="네트워크) 4계층 프로토콜 UDP"
+                    aria-label="NEXT: 네트워크) 4계층 프로토콜 UDP"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -538,7 +512,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/18/Book_clean_code/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -551,7 +525,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/18/Book_clean_code/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -564,7 +538,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/18/Book_clean_code/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -598,7 +572,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2022/02/18/Book_clean_code/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -611,7 +585,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2022/02/18/Book_clean_code/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -624,7 +598,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_4%EA%B3%84%EC%B8%B5_UDP/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2022/02/18/Book_clean_code/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
