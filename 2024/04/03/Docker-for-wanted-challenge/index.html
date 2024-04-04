@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Dev Odreystella&#39;s Blog">
+    <title>Docker 기초 개념 - Dev Odreystella&#39;s Blog</title>
+    <meta name="author" content="">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n원티드 4월 백엔드 챌린지 1차 세션을 듣고 도커에 대해 정리해보았다.\n\n\n\n\n도커란?\n2013년 3월 Pycon Conference에서 솔로몬 하익스가 “The future of Linux Containers”라는 5분짜리 세션을 발표하면서 처음 알려졌다.\n컨테이너 기반의 오픈소스 가상화 플랫폼이다.\n컨테이너란?\n프로세스를 격리시켜준다. 프로세스 간에 어떠한 영향도 받지 않는다.\n프로세스는 운영체제로부터 자원을 할당받은 작업의 단위이다. 어떤 프로그램을 실행시켜 프로그램이 돌아가고 있는 상태를 말하는데, 이때 운영체제로부터 CPU 자원을 할당받아 메모리에 올라간다. \n프로그램은 *.exe, *.dmg 같은 실행 파일인데, 메모리에 올라가 있지 않은 정적인 상태를 말한다. \n\n\n하나의 물리적인 컴퓨터에 윈도우 OS가 깔려있고, 그 위에 여러 게임, 인터넷 뱅킹을 위한 보안 프로그램, 웹 브라우저를 사용한다고 가정했을 때 무거운 게임이 돌아갈 때 인터넷이 느린걸 경험한 적이 있을 것이다. 느려져서 갑자기 멈추고 다시 껐다 키는 상황도 있었을 것이다. 이건 프로세스가 격리되어 있지 않은 환경이다. 그렇기 때문에 어떤 한 프로세스가 사용중일 때 다른 프로세스에서 성능면에서 영향을 받는다. 호스트의 자원(CPU, 메모리 등)을 같이 공유하기 때문이다.\n도커 이전에 리눅스에서 cgroups와 namespace를 이용한 LXC(Linux container)가 존재했다.\n\n\n가상화란?\n시스템 내에서 물리적 장치 또는 리소스의 가상 버전을 생성하는 기술이다.\n서버 가상화, 스토리지 가상화, 네트워크 가상화, 데스크톱 가상화, 어플리케이션 가상화가 있는데 아래의 블로그에서 설명이 잘 되어있다.\nCS 지식 가상화란\n\n\n도커는 서버 가상화와 관련이 있다.\n\n\n\n\n정리하면 도커는 하나의 서버에서 여러 애플리케이션을 실행할 수 있는데, 이 애플리케이션들이 서로 격리되어 있는 환경을 만들어 주는 기술이다.\n\n\n도커는 기존의 가상화 방식과 어떻게 다를까?\n기존의 가상화 방식은 호스트 OS가 있고, 그 위에 가상환경을 만들 수 있는 소프트웨어(하이퍼바이저)로 가상머신(VM)을 띄우는데 이때 게스트 OS가 생성된다. VM의 갯수만큼 게스트 OS가 생성되기 때문에 성능이 떨어진다. 또한, 게스트 OS는 호스트 OS로부터 독립되어 있다.\n도커는 호스트 OS위에 도커 엔진을 설치하면 그 위에 여러개의 컨테이너를 구성할 수 있다. 하이퍼바이저와 게스트 OS가 필요하지 않아 가볍고 빠르다.\n공통점: 호스트 OS위에 격리된 환경을 구성하여 여러 애플리케이션을 배치할 수 있는 기술이다.\n차이점: 게스트 OS의 존재 유무, 호스트 OS의 공유 여부\n\n\n도커를 쓰는 이유\n컨테이너를 사용하여 개발, 테스트 및 운영 환경을 표준화할 수 있다.\n마이크로 서비스 아키텍처에서 각 서비스를 독립적인 컨테이너로 관리할 수 있다.\n\n\n느낀점\n거의 2년 6개월만에 블로그를 쓰려니 시간도 많이 들고 더 어렵게 느껴진다.\nTIL) 4 Docker 파헤치기 1편 를 지금 와서 다시 보니 다른 사람들이 쓴 글을 다시 한번 정리한 느낌이라 머리에 잘 안남아서 최대한 내가 선택한 단어를 쪼개서 이해하고, 다시 한번 큰 틀을 나의 언어로 정리해보려고 했다.\n역시 기록하고 정리하고 다시 봐야 머리에 남는다는 것을 느낀다.\n취업하기 전에 쓴 글보다 2년 6개월 정도 지난 시점에 쓰는 글이니 전문성이 느껴지게 잘 쓰고 싶은 생각이 크게 든다. 어느 정도 부담을 내려놓자.\n블로깅의 목적은 내 머리에 잘 남게끔 내 언어로 정리하는것, 그리고 꾸준히 공부하는게 중요하다는 것을 기억하자.\n\n\n이 질문에 대해 어떻게 대답할 것인가?\n도커는 무엇이고 왜 사용하는가?\n\n\n참고\nhttps://subicura.com/2017/01/19/docker-guide-for-beginners-1.html\nhttps://www.samsungsds.com/kr/insights/220222_kubernetes1.html\n\n\n\n","dateCreated":"2024-04-03T21:01:31+09:00","dateModified":"2024-04-04T21:37:51+09:00","datePublished":"2024-04-03T21:01:31+09:00","description":"\n원티드 4월 백엔드 챌린지 1차 세션을 듣고 도커에 대해 정리해보았다.\n","headline":"Docker 기초 개념","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/","keywords":"원티드"}</script>
+    <meta name="description" content="원티드 4월 백엔드 챌린지 1차 세션을 듣고 도커에 대해 정리해보았다.">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Docker 기초 개념">
+<meta property="og:url" content="https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/index.html">
+<meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
+<meta property="og:description" content="원티드 4월 백엔드 챌린지 1차 세션을 듣고 도커에 대해 정리해보았다.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-03T12:01:31.000Z">
+<meta property="article:modified_time" content="2024-04-04T12:37:51.740Z">
+<meta property="article:tag" content="원티드">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://odreystella.github.io/assets/images/profile.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-s9cubcvh9guwrlo0a7unmtmxvwii0oase98xnhhysjkyxhquqqkxkrhfbdfm.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Dev Odreystella&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name"></h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Odreystella</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            Docker 기초 개념
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2024-04-03T21:01:31+09:00">
+	
+		    Apr 03, 2024
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Docker/">Docker</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <blockquote>
+<p>원티드 4월 백엔드 챌린지 1차 세션을 듣고 도커에 대해 정리해보았다.</p>
+</blockquote>
+<a id="more"></a>
+
+<ol>
+<li>도커란?<ul>
+<li>2013년 3월 Pycon Conference에서 솔로몬 하익스가 “The future of Linux Containers”라는 5분짜리 세션을 발표하면서 처음 알려졌다.</li>
+<li>컨테이너 기반의 오픈소스 가상화 플랫폼이다.<ol>
+<li>컨테이너란?<ul>
+<li>프로세스를 격리시켜준다. 프로세스 간에 어떠한 영향도 받지 않는다.<ul>
+<li>프로세스는 운영체제로부터 자원을 할당받은 작업의 단위이다. 어떤 프로그램을 <strong>실행</strong>시켜 프로그램이 돌아가고 있는 상태를 말하는데, 이때 운영체제로부터 CPU 자원을 할당받아 메모리에 올라간다. </li>
+<li>프로그램은 <code>*.exe</code>, <code>*.dmg</code> 같은 실행 파일인데, 메모리에 올라가 있지 않은 정적인 상태를 말한다. </li>
+</ul>
+</li>
+<li>하나의 물리적인 컴퓨터에 윈도우 OS가 깔려있고, 그 위에 여러 게임, 인터넷 뱅킹을 위한 보안 프로그램, 웹 브라우저를 사용한다고 가정했을 때 무거운 게임이 돌아갈 때 인터넷이 느린걸 경험한 적이 있을 것이다. 느려져서 갑자기 멈추고 다시 껐다 키는 상황도 있었을 것이다. 이건 프로세스가 격리되어 있지 않은 환경이다. 그렇기 때문에 어떤 한 프로세스가 사용중일 때 다른 프로세스에서 성능면에서 영향을 받는다. 호스트의 자원(CPU, 메모리 등)을 같이 공유하기 때문이다.</li>
+<li>도커 이전에 리눅스에서 <code>cgroups</code>와 <code>namespace</code>를 이용한 LXC(Linux container)가 존재했다.</li>
+</ul>
+</li>
+<li>가상화란?<ul>
+<li>시스템 내에서 물리적 장치 또는 리소스의 가상 버전을 생성하는 기술이다.</li>
+<li>서버 가상화, 스토리지 가상화, 네트워크 가상화, 데스크톱 가상화, 어플리케이션 가상화가 있는데 아래의 블로그에서 설명이 잘 되어있다.<ul>
+<li><a target="_blank" rel="noopener" href="https://somaz.tistory.com/178">CS 지식 가상화란</a></li>
+</ul>
+</li>
+<li>도커는 서버 가상화와 관련이 있다.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>정리하면 도커는 하나의 서버에서 여러 애플리케이션을 실행할 수 있는데, 이 애플리케이션들이 서로 격리되어 있는 환경을 만들어 주는 기술이다.</li>
+</ul>
+</li>
+<li>도커는 기존의 가상화 방식과 어떻게 다를까?<ul>
+<li>기존의 가상화 방식은 호스트 OS가 있고, 그 위에 가상환경을 만들 수 있는 소프트웨어(하이퍼바이저)로 가상머신(VM)을 띄우는데 이때 게스트 OS가 생성된다. VM의 갯수만큼 게스트 OS가 생성되기 때문에 성능이 떨어진다. 또한, 게스트 OS는 호스트 OS로부터 독립되어 있다.</li>
+<li>도커는 호스트 OS위에 도커 엔진을 설치하면 그 위에 여러개의 컨테이너를 구성할 수 있다. 하이퍼바이저와 게스트 OS가 필요하지 않아 가볍고 빠르다.</li>
+<li>공통점: 호스트 OS위에 격리된 환경을 구성하여 여러 애플리케이션을 배치할 수 있는 기술이다.</li>
+<li>차이점: 게스트 OS의 존재 유무, 호스트 OS의 공유 여부</li>
+</ul>
+</li>
+<li>도커를 쓰는 이유<ul>
+<li>컨테이너를 사용하여 개발, 테스트 및 운영 환경을 표준화할 수 있다.</li>
+<li>마이크로 서비스 아키텍처에서 각 서비스를 독립적인 컨테이너로 관리할 수 있다.</li>
+</ul>
+</li>
+<li>느낀점<ul>
+<li>거의 2년 6개월만에 블로그를 쓰려니 시간도 많이 들고 더 어렵게 느껴진다.</li>
+<li><a href="https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/">TIL) 4 Docker 파헤치기 1편</a> 를 지금 와서 다시 보니 다른 사람들이 쓴 글을 다시 한번 정리한 느낌이라 머리에 잘 안남아서 최대한 내가 선택한 단어를 쪼개서 이해하고, 다시 한번 큰 틀을 나의 언어로 정리해보려고 했다.</li>
+<li>역시 기록하고 정리하고 다시 봐야 머리에 남는다는 것을 느낀다.</li>
+<li>취업하기 전에 쓴 글보다 2년 6개월 정도 지난 시점에 쓰는 글이니 전문성이 느껴지게 잘 쓰고 싶은 생각이 크게 든다. 어느 정도 부담을 내려놓자.</li>
+<li>블로깅의 목적은 내 머리에 잘 남게끔 내 언어로 정리하는것, 그리고 꾸준히 공부하는게 중요하다는 것을 기억하자.</li>
+</ul>
+</li>
+<li>이 질문에 대해 어떻게 대답할 것인가?<ul>
+<li>도커는 무엇이고 왜 사용하는가?</li>
+</ul>
+</li>
+<li>참고<ul>
+<li><a target="_blank" rel="noopener" href="https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html">https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.samsungsds.com/kr/insights/220222_kubernetes1.html">https://www.samsungsds.com/kr/insights/220222_kubernetes1.html</a></li>
+</ul>
+</li>
+</ol>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/%EC%9B%90%ED%8B%B0%EB%93%9C/" rel="tag">원티드</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2024/04/04/Hexo-with-mac-os/"
+                    data-tooltip="hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)"
+                    aria-label="PREVIOUS: hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/02/10/%E1%84%82%E1%85%A6%E1%84%90%E1%85%B3%E1%84%8B%E1%85%AF%E1%84%8F%E1%85%B3_4%E1%84%80%E1%85%A8%E1%84%8E%E1%85%B3%E1%86%BC_UDP/"
+                    data-tooltip="네트워크) 4계층 프로토콜 UDP"
+                    aria-label="NEXT: 네트워크) 4계층 프로토콜 UDP"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2024 null. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2024/04/04/Hexo-with-mac-os/"
+                    data-tooltip="hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)"
+                    aria-label="PREVIOUS: hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2022/02/10/%E1%84%82%E1%85%A6%E1%84%90%E1%85%B3%E1%84%8B%E1%85%AF%E1%84%8F%E1%85%B3_4%E1%84%80%E1%85%A8%E1%84%8E%E1%85%B3%E1%86%BC_UDP/"
+                    data-tooltip="네트워크) 4계층 프로토콜 UDP"
+                    aria-label="NEXT: 네트워크) 4계층 프로토콜 UDP"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/03/Docker-for-wanted-challenge/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name"></h4>
+        
+            <div id="about-card-bio"><p>Odreystella</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-buvapuslwfowfkx0w6qhxphbbnwhqezkrxx1dd6puligsitecubmpci0a9cf.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
