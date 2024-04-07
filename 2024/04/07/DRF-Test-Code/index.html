@@ -6,22 +6,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기) - Dev Odreystella&#39;s Blog</title>
+    <title>DRF Test Code - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nmac 환경에서 hexo 블로그 이어서 사용하기결론: 백업해둔 파일이 없으면 새로 시작해야한다.\n\n\n\n\n준비환경 만들기\nhomebrew, git가 설치되어 있는지 확인하기\nnvm 설치하기\nNode Version Manager\n하나의 OS에서 여러 버전의 node.js를 설치하고, 사용할 버전을 쉽게 전환할 수 있게 도와주는 프로그램이다. pyenv와 같은 역할이다.\n\n\nNode.js 설치하기\nHexo 설치하기\n\n\nnvm 설치하기\nbrew install nvm\nnvm -v 했을 때 command not found:nvm이 뜬다.\nzshrc에 환경변수 추가하기\nvi ~/.zshrc\n아래 내용을 추가하고 변경사항을 적용한다.\n이젠 버전확인이 가능할 것이다. 버전 확인해보니 10.5.0이 설치되었다.1234# nvm settingsexport NVM_DIR=&quot;$HOME/.nvm&quot;  [ -s &quot;/opt/homebrew/opt/nvm/nvm.sh&quot; ] &amp;&amp; \\. &quot;/opt/homebrew/opt/nvm/nvm.sh&quot;  # This loads nvm  [ -s &quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot; ] &amp;&amp; \\. &quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot;\n\n\n\n\nNode.js 설치하기\nnvm install --lts v20.12.1이 설치되었다.\nnvm install v18.15.0 으로 특정 버전을 설치할 수도 있다.\n\n\nHexo 설치하기\nnpm install -g hexo-cli -g는 global\nHexo는 정적 사이트 생성기(Static Site Generator)이다.\n\n\n환경 셋팅이 끝났으니 hexo init 을 하고 기존에 블로그 올려둔 내용을 깃허브에서 클론하면 되겠다고 생각했는데, 클론한 폴더 구조가 내가 생각했던 거랑 달라서 검색이 필요했다. 깃허브에 올라가있는 파일들은 *.md 파일들이 아니라 public 폴더에 있는 파일들이었다.\n이쯤에서 hexo의 배포과정에 대한 이해가 필요했다. \nhexo new 커맨드로 새 글을 작성한다. 이때 *.md 파일이 생성된다.\nhexo generate 또는 hexo g 커맨드로 빌드한다. 이때 *.md 파일을 웹사이트(html, css, js)로 만들어준다. 이 결과물이 public 폴더에 저장된다.\nhexo deploy 또는 hexo d 커맨드로 배포한다. github.io 도메인으로 새로 올린 글을 확인할 수 있다. \n결과적으로 내가 작성한 *.md 파일들은 깃허브에 올라가지 않는다. 수정한 템플릿과 설정파일, 테마도 따로 저장되지 않는다. 이런 부분을 위해서는 어딘가에 백업이 필요하다.\n\n\n정말 다행히 나는 예전에 의도치않게 백업해둔 폴더가 있어서 그걸 가져와서 hexo server 를 돌려보니 기존처럼 잘 실행됐다. 백업된 폴더가 없었으면 다시 만들었어야 했을텐데 참 다행이다..열심히 블로깅해야겠다.\n참고\nHexo 배포 원리와 백업하기\n\n\n\n","dateCreated":"2024-04-04T22:27:58+09:00","dateModified":"2024-04-04T22:37:40+09:00","datePublished":"2024-04-04T22:27:58+09:00","description":"\nmac 환경에서 hexo 블로그 이어서 사용하기결론: 백업해둔 파일이 없으면 새로 시작해야한다.\n","headline":"hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/","keywords":"hexo"}</script>
-    <meta name="description" content="mac 환경에서 hexo 블로그 이어서 사용하기결론: 백업해둔 파일이 없으면 새로 시작해야한다.">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nDRF로 REST API를 개발할 때 테스트 코드를 작성하는 이유, 방법에 대하여 알아보자“Code without tests is broken as designed.” by Jacob Kaplan-Moss테스트 없는 코드는 설계 상으로 고장난 것과 같다. Django  공동 창시자 제이콥의 말이다.\n\n\n\n\n\n\n테스트 코드를 작성하는 이유\n여러 버그를 쉽고 빠르게 찾을 수 있다.\n시간과 돈을 절약한다.\nCI하는 과정에서 테스팅이 중요하다.\n테스트를 작성하는 것만으로도 도큐먼테이션의 역할을 한다.\n테스트 코드를 보면서 어떤 기능이 있는지, 무엇을 위한건지 알 수 있다.\n\n\n코드의 신뢰도가 증가한다.\n코드의 성능을 체크할 수 있다.\n코드의 안전성을 보장한다.\n코드의 복잡도를 줄인다.\n\n\n테스트 방법론 TDD(Test Driven Develop)\n소프트웨어를 구현하는데 있어서 필요한 요구사항을 만족하는 작은 테스트코드를 먼저 작성하고, 이를 통과할 수 있는 코드 작성을 반복하면서 개발하는 방법\nTDD에 대해서는 다음에 더 깊게 공부해보자\n\n\n테스트 종류\n기능 테스트(Functional testing)\n사용자와 어플리케이션의 상호작용이 원활하게 이루어지는지 테스트한다.\n프로덕트를 사용자 관점에서 테스트하는 방법이다.\nDB 및 여러 인프라가 갖추어진 상태로 테스트한다.\nE2E(End To End) 테스트, 브라우저 테스트라고 한다.\n높은 복잡성을 가지고 있기 때문에 단위테스트처럼 세밀하게 나누는 것보다 사용자와 앱의 상호작용을 테스트하고 싶을 때 유용하다. 작은 스타트업의 경우 비효율적일 수 있다.\n예를 들어 회원가입에 대한 기능 테스트라고 하면 유저가 필수 값을 다 입력하고, 약관을 동의하여 회원가입을 마쳤을 때 “회원가입을 축하합니다.” 라는 메시지와 로그인 화면으로 상태를 바꾸는 하나의 과정이 제대로 동작하는지 테스트한다.\n좀 더 자세한 내용은 E2E테스트 도입 경험기 참고하면 좋다.\n\n\n통합 테스트(Integration testing)\n서로 다른 시스템들의 상호작용이 잘 이루어지는지 테스트한다.\n예를 들어 애플리케이션과 데이터베이스가 제대로 상호작용하고 있는지 테스트하는 것을 말한다.\n\n\n단위 테스트(Unit testing)\n함수 하나하나와 같이 코드의 작은 부분을 테스트한다.\n테스트를 위한 입력값을 주어서 그에 대한 함수의 출력 값이 정확한지 아닌지를 판단한다.\n네트워크나 데이터베이스같은 외부 리소스가 포함된다면 그것은 유닛테스트가 아니다.\n함수 하나하나 테스트 코드를 작성하는 것이 좋다.\n\n\n\n\nDRF에서 단위 테스트를 작성하는 방법\n기본적으로 python manage.py test 커맨드로 모든 테스트를 돌릴 수 있다. 특정 앱, 특정 앱의 하나의 테스트 클래스, 특정 앱의 하나의 테스트 클래스의 메소드만 따로 실행할 수도 있다. \npython manage.py test animals\npython manage.py test animals.tests.AnimalTestCase\npython manage.py test animals.tests.AnimalTestCase.test_animals_can_speak\n\n\n각 앱 내에 test.py 에서 작성하거나, 테스트 코드가 많을 경우 tests 폳더를 만들어서 관리한다. 테스트 실행 시, test*.py를 검색하여 실행하기 때문에, test_something_something.py 해당 규칙만 지켜 파일을 만들면 된다.\n기본적인 코드 스니펫은 다음과 같다.123456789101112131415161718192021from rest_framework.test import APITestCasefrom .models import Amenityclass TestAmenities(APITestCase):\tNAME = &quot;AMENITY NAME&quot;\tDESC = &quot;AMENITY DESC&quot;\tURL = &quot;/api/v1/rooms/amenities/&quot;\tdef setUp(self):\t\tAmenity.objects.create(name=self.NAME, description=self.DESC)\tdef test_get_all_amenities(self):\t\t# 1. 테스트할 url에 request 보내기\t\t# 2. 반환되는 상태코드를 확인할 지, 데이터 타입을 확인할지 결정함\t\tresponse = self.client.get(self.URL)\t\tdata = response.json()\t\t\t\tself.assertEqual(response.status_code, 200, &quot;Status code is not 200&quot;)\t\tself.assertIsInstance(data, list)\n\n\nsetUp()과 setUpTestData()\n테스트에 사용될 데이터를 선언하는 단계이다.\nsetUp메서드만 사용해봤는데, 두 방법의 차이점을 이해하자 \nsetUp()은 테스트 메소드가 실행될 때 마다 실행된다. 여러번 초기화가 필요할 때 사용한다.\nsetUpTestData()은 클래스 수준에서 실행되고, 클래스 단위로 처음 한번만 실행된다. 한번만 초기화가 필요할 때 사용한다.\n\n\n참고\n유닛테스트, 통합테스트, 기능테스트란?\nE2E테스트 도입 경험기\nE2E 테스트는 그만 테스트 개선기\nDRF에서 테스트코드 작성하기1\n\n\n\n","dateCreated":"2024-04-07T11:59:19+09:00","dateModified":"2024-04-08T00:09:32+09:00","datePublished":"2024-04-07T11:59:19+09:00","description":"\nDRF로 REST API를 개발할 때 테스트 코드를 작성하는 이유, 방법에 대하여 알아보자“Code without tests is broken as designed.” by Jacob Kaplan-Moss테스트 없는 코드는 설계 상으로 고장난 것과 같다. Django  공동 창시자 제이콥의 말이다.\n","headline":"DRF Test Code","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/07/DRF-Test-Code/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/07/DRF-Test-Code/","keywords":"Test"}</script>
+    <meta name="description" content="DRF로 REST API를 개발할 때 테스트 코드를 작성하는 이유, 방법에 대하여 알아보자“Code without tests is broken as designed.” by Jacob Kaplan-Moss테스트 없는 코드는 설계 상으로 고장난 것과 같다. Django  공동 창시자 제이콥의 말이다.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)">
-<meta property="og:url" content="https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/index.html">
+<meta property="og:title" content="DRF Test Code">
+<meta property="og:url" content="https://odreystella.github.io/2024/04/07/DRF-Test-Code/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
-<meta property="og:description" content="mac 환경에서 hexo 블로그 이어서 사용하기결론: 백업해둔 파일이 없으면 새로 시작해야한다.">
+<meta property="og:description" content="DRF로 REST API를 개발할 때 테스트 코드를 작성하는 이유, 방법에 대하여 알아보자“Code without tests is broken as designed.” by Jacob Kaplan-Moss테스트 없는 코드는 설계 상으로 고장난 것과 같다. Django  공동 창시자 제이콥의 말이다.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-04-04T13:27:58.000Z">
-<meta property="article:modified_time" content="2024-04-04T13:37:40.927Z">
-<meta property="article:tag" content="hexo">
+<meta property="article:published_time" content="2024-04-07T02:59:19.000Z">
+<meta property="article:modified_time" content="2024-04-07T15:09:32.048Z">
+<meta property="article:tag" content="Test">
 <meta name="twitter:card" content="summary">
     
     
@@ -296,20 +296,20 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)
+            DRF Test Code
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2024-04-04T22:27:58+09:00">
+    <time datetime="2024-04-07T11:59:19+09:00">
 	
-		    Apr 04, 2024
+		    Apr 07, 2024
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/Study/">Study</a>, <a class="category-link" href="/categories/Study/Hexo/">Hexo</a>
+    <a class="category-link" href="/categories/DRF/">DRF</a>
 
 
     
@@ -322,54 +322,80 @@
     <div class="post-content markdown">
         <div class="main-content-wrap">
             <blockquote>
-<p>mac 환경에서 hexo 블로그 이어서 사용하기<br>결론: 백업해둔 파일이 없으면 새로 시작해야한다.</p>
+<p>DRF로 REST API를 개발할 때 테스트 코드를 작성하는 이유, 방법에 대하여 알아보자<br>“Code without tests is broken as designed.” by Jacob Kaplan-Moss<br>테스트 없는 코드는 설계 상으로 고장난 것과 같다. Django  공동 창시자 제이콥의 말이다.</p>
 </blockquote>
 <a id="more"></a>
 
+
+
 <ol>
-<li>준비환경 만들기<ol>
-<li>homebrew, git가 설치되어 있는지 확인하기</li>
-<li>nvm 설치하기<ul>
-<li>Node Version Manager</li>
-<li>하나의 OS에서 여러 버전의 node.js를 설치하고, 사용할 버전을 쉽게 전환할 수 있게 도와주는 프로그램이다. pyenv와 같은 역할이다.</li>
+<li>테스트 코드를 작성하는 이유<ol>
+<li>여러 버그를 쉽고 빠르게 찾을 수 있다.</li>
+<li>시간과 돈을 절약한다.</li>
+<li>CI하는 과정에서 테스팅이 중요하다.</li>
+<li>테스트를 작성하는 것만으로도 도큐먼테이션의 역할을 한다.<ul>
+<li>테스트 코드를 보면서 어떤 기능이 있는지, 무엇을 위한건지 알 수 있다.</li>
 </ul>
 </li>
-<li>Node.js 설치하기</li>
-<li>Hexo 설치하기</li>
+<li>코드의 신뢰도가 증가한다.</li>
+<li>코드의 성능을 체크할 수 있다.</li>
+<li>코드의 안전성을 보장한다.</li>
+<li>코드의 복잡도를 줄인다.</li>
 </ol>
 </li>
-<li>nvm 설치하기<ul>
-<li><code>brew install nvm</code></li>
-<li><code>nvm -v</code> 했을 때 command not found:nvm이 뜬다.</li>
-<li>zshrc에 환경변수 추가하기<ol>
-<li><code>vi ~/.zshrc</code></li>
-<li>아래 내용을 추가하고 변경사항을 적용한다.</li>
-<li>이젠 버전확인이 가능할 것이다. 버전 확인해보니 10.5.0이 설치되었다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nvm settings</span></span><br><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/.nvm&quot;</span></span><br><span class="line">  [ -s <span class="string">&quot;/opt/homebrew/opt/nvm/nvm.sh&quot;</span> ] &amp;&amp; \. <span class="string">&quot;/opt/homebrew/opt/nvm/nvm.sh&quot;</span>  <span class="comment"># This loads nvm</span></span><br><span class="line">  [ -s <span class="string">&quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot;</span> ] &amp;&amp; \. <span class="string">&quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>테스트 방법론 TDD(Test Driven Develop)<ul>
+<li>소프트웨어를 구현하는데 있어서 필요한 요구사항을 만족하는 <strong>작은 테스트코드를 먼저 작성</strong>하고, 이를 <strong>통과</strong>할 수 있는 코드 작성을 <strong>반복</strong>하면서 개발하는 방법</li>
+<li>TDD에 대해서는 다음에 더 깊게 공부해보자</li>
+</ul>
+</li>
+<li>테스트 종류<ul>
+<li><strong>기능 테스트(Functional testing)</strong><ul>
+<li>사용자와 어플리케이션의 상호작용이 원활하게 이루어지는지 테스트한다.</li>
+<li>프로덕트를 <strong>사용자 관점</strong>에서 테스트하는 방법이다.</li>
+<li>DB 및 여러 인프라가 갖추어진 상태로 테스트한다.</li>
+<li>E2E(End To End) 테스트, 브라우저 테스트라고 한다.</li>
+<li>높은 복잡성을 가지고 있기 때문에 단위테스트처럼 세밀하게 나누는 것보다 사용자와 앱의 상호작용을 테스트하고 싶을 때 유용하다. 작은 스타트업의 경우 비효율적일 수 있다.</li>
+<li>예를 들어 회원가입에 대한 기능 테스트라고 하면 유저가 필수 값을 다 입력하고, 약관을 동의하여 회원가입을 마쳤을 때 “회원가입을 축하합니다.” 라는 메시지와 로그인 화면으로 상태를 바꾸는 하나의 과정이 제대로 동작하는지 테스트한다.</li>
+<li>좀 더 자세한 내용은 <a target="_blank" rel="noopener" href="https://fe-developers.kakaoent.com/2023/230209-e2e/">E2E테스트 도입 경험기</a> 참고하면 좋다.</li>
+</ul>
+</li>
+<li><strong>통합 테스트(Integration testing)</strong><ul>
+<li>서로 다른 시스템들의 상호작용이 잘 이루어지는지 테스트한다.</li>
+<li>예를 들어 애플리케이션과 데이터베이스가 제대로 상호작용하고 있는지 테스트하는 것을 말한다.</li>
+</ul>
+</li>
+<li><strong>단위 테스트(Unit testing)</strong><ul>
+<li>함수 하나하나와 같이 코드의 작은 부분을 테스트한다.</li>
+<li>테스트를 위한 입력값을 주어서 그에 대한 함수의 출력 값이 정확한지 아닌지를 판단한다.</li>
+<li>네트워크나 데이터베이스같은 외부 리소스가 포함된다면 그것은 유닛테스트가 아니다.</li>
+<li>함수 하나하나 테스트 코드를 작성하는 것이 좋다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DRF에서 단위 테스트를 작성하는 방법<ol>
+<li>기본적으로 <code>python manage.py test</code> 커맨드로 모든 테스트를 돌릴 수 있다. 특정 앱, 특정 앱의 하나의 테스트 클래스, 특정 앱의 하나의 테스트 클래스의 메소드만 따로 실행할 수도 있다. <ul>
+<li><code>python manage.py test animals</code></li>
+<li><code>python manage.py test animals.tests.AnimalTestCase</code></li>
+<li><code>python manage.py test animals.tests.AnimalTestCase.test_animals_can_speak</code></li>
+</ul>
+</li>
+<li>각 앱 내에 <code>test.py</code> 에서 작성하거나, 테스트 코드가 많을 경우 <code>tests</code> 폳더를 만들어서 관리한다. 테스트 실행 시, <code>test*.py</code>를 검색하여 실행하기 때문에, <code>test_something_something.py</code> 해당 규칙만 지켜 파일을 만들면 된다.</li>
+<li>기본적인 코드 스니펫은 다음과 같다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.test <span class="keyword">import</span> APITestCase</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Amenity</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestAmenities</span>(<span class="params">APITestCase</span>):</span></span><br><span class="line">	NAME = <span class="string">&quot;AMENITY NAME&quot;</span></span><br><span class="line">	DESC = <span class="string">&quot;AMENITY DESC&quot;</span></span><br><span class="line">	URL = <span class="string">&quot;/api/v1/rooms/amenities/&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">		Amenity.objects.create(name=self.NAME, description=self.DESC)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">test_get_all_amenities</span>(<span class="params">self</span>):</span></span><br><span class="line">		<span class="comment"># 1. 테스트할 url에 request 보내기</span></span><br><span class="line">		<span class="comment"># 2. 반환되는 상태코드를 확인할 지, 데이터 타입을 확인할지 결정함</span></span><br><span class="line"></span><br><span class="line">		response = self.client.get(self.URL)</span><br><span class="line">		data = response.json()</span><br><span class="line">		</span><br><span class="line">		self.assertEqual(response.status_code, <span class="number">200</span>, <span class="string">&quot;Status code is not 200&quot;</span>)</span><br><span class="line">		self.assertIsInstance(data, <span class="built_in">list</span>)</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
+<li>setUp()과 setUpTestData()<ul>
+<li>테스트에 사용될 데이터를 선언하는 단계이다.</li>
+<li>setUp메서드만 사용해봤는데, 두 방법의 차이점을 이해하자 </li>
+<li><strong>setUp</strong>()은 테스트 메소드가 실행될 때 마다 실행된다. 여러번 초기화가 필요할 때 사용한다.</li>
+<li><strong>setUpTestData</strong>()은 클래스 수준에서 실행되고, 클래스 단위로 처음 한번만 실행된다. 한번만 초기화가 필요할 때 사용한다.</li>
 </ul>
 </li>
-<li>Node.js 설치하기<ul>
-<li><code>nvm install --lts</code> v20.12.1이 설치되었다.</li>
-<li><code>nvm install v18.15.0</code> 으로 특정 버전을 설치할 수도 있다.</li>
-</ul>
-</li>
-<li>Hexo 설치하기<ul>
-<li><code>npm install -g hexo-cli</code> -g는 global</li>
-<li>Hexo는 정적 사이트 생성기(Static Site Generator)이다.</li>
-</ul>
-</li>
-<li>환경 셋팅이 끝났으니 <code>hexo init</code> 을 하고 기존에 블로그 올려둔 내용을 깃허브에서 클론하면 되겠다고 생각했는데, 클론한 폴더 구조가 내가 생각했던 거랑 달라서 검색이 필요했다. 깃허브에 올라가있는 파일들은 <code>*.md</code> 파일들이 아니라 public 폴더에 있는 파일들이었다.</li>
-<li>이쯤에서 hexo의 배포과정에 대한 이해가 필요했다. <ol>
-<li><code>hexo new</code> 커맨드로 새 글을 작성한다. 이때 <code>*.md</code> 파일이 생성된다.</li>
-<li><code>hexo generate</code> 또는 <code>hexo g</code> 커맨드로 빌드한다. 이때 <code>*.md</code> 파일을 웹사이트(html, css, js)로 만들어준다. 이 결과물이 public 폴더에 저장된다.</li>
-<li><code>hexo deploy</code> 또는 <code>hexo d</code> 커맨드로 배포한다. <code>github.io</code> 도메인으로 새로 올린 글을 확인할 수 있다. </li>
-<li>결과적으로 내가 작성한 <code>*.md</code> 파일들은 깃허브에 올라가지 않는다. 수정한 템플릿과 설정파일, 테마도 따로 저장되지 않는다. 이런 부분을 위해서는 어딘가에 백업이 필요하다.</li>
-</ol>
-</li>
-<li>정말 다행히 나는 예전에 의도치않게 백업해둔 폴더가 있어서 그걸 가져와서 <code>hexo server</code> 를 돌려보니 기존처럼 잘 실행됐다. 백업된 폴더가 없었으면 다시 만들었어야 했을텐데 참 다행이다..열심히 블로깅해야겠다.</li>
 <li>참고<ul>
-<li><a target="_blank" rel="noopener" href="https://futurecreator.github.io/2018/07/18/hexo-blog-backup/">Hexo 배포 원리와 백업하기</a></li>
+<li><a target="_blank" rel="noopener" href="https://cjwoov.tistory.com/">유닛테스트, 통합테스트, 기능테스트란?</a></li>
+<li><a target="_blank" rel="noopener" href="https://fe-developers.kakaoent.com/2023/230209-e2e/">E2E테스트 도입 경험기</a></li>
+<li><a target="_blank" rel="noopener" href="https://velog.io/@hoonki/E2E-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8A%94-%EA%B7%B8%EB%A7%8C.-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B0%9C%EC%84%A0%EA%B8%B0">E2E 테스트는 그만 테스트 개선기</a></li>
+<li><a target="_blank" rel="noopener" href="https://powerlichen.github.io/posts/drf-test-code-1/">DRF에서 테스트코드 작성하기1</a></li>
 </ul>
 </li>
 </ol>
@@ -384,7 +410,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/hexo/" rel="tag">hexo</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/Test/" rel="tag">Test</a>
 
             </div>
         
@@ -394,14 +420,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/04/07/DRF-Test-Code/"
-                    data-tooltip="DRF Test Code"
-                    aria-label="PREVIOUS: DRF Test Code"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -411,9 +434,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/04/03/Docker-for-wanted-challenge/"
-                    data-tooltip="Docker 기초 개념"
-                    aria-label="NEXT: Docker 기초 개념"
+                    href="/2024/04/04/Hexo-with-mac-os/"
+                    data-tooltip="hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)"
+                    aria-label="NEXT: hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -438,7 +461,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/07/DRF-Test-Code/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -451,7 +474,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/07/DRF-Test-Code/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -464,7 +487,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/07/DRF-Test-Code/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -509,14 +532,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/04/07/DRF-Test-Code/"
-                    data-tooltip="DRF Test Code"
-                    aria-label="PREVIOUS: DRF Test Code"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -526,9 +546,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/04/03/Docker-for-wanted-challenge/"
-                    data-tooltip="Docker 기초 개념"
-                    aria-label="NEXT: Docker 기초 개념"
+                    href="/2024/04/04/Hexo-with-mac-os/"
+                    data-tooltip="hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)"
+                    aria-label="NEXT: hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -553,7 +573,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/07/DRF-Test-Code/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -566,7 +586,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/07/DRF-Test-Code/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -579,7 +599,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/07/DRF-Test-Code/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -613,7 +633,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/07/DRF-Test-Code/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -626,7 +646,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/07/DRF-Test-Code/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -639,7 +659,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/07/DRF-Test-Code/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
