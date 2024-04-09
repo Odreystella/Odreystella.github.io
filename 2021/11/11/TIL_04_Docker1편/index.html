@@ -11,11 +11,11 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nDocker에 대해 알아보자\n\n\n\n \n\n가상화 기술이 나오기 전의 상황\n1대의 서버는 하나의 용도로만 사용한다.\n1대의 서버에 하나의 운영체제, 하나의 프로그램만을 운영한다.\n안정적일 수 있지만 남는 공간은 그대로 방치되고 비효율적이다.\n\n하이퍼바이저 기반의 가상화 등장(Docker 이전 가상화 기술)\n하이퍼바이저?\n호스트 컴퓨터에서 다수의 게스트 OS를 동시에 실행하기 위한 논리적 플랫폼\n가상화 머신 모니터 또는 가상화 머신 매니저 이며 약어로 VMM(Virtual Machine Monitor)\n하드웨어를 가상화하면서 하드웨어와 각각의 VM을 모니터링하는 중간 관리자\n예) VMware나 VirtualBox\n\n\n논리적으로 공간을 분할하여 VM이라는 독립적인 가상 환경의 서버를 구성한다.\n논리적으로 분리되어 있어 한 VM에서 오류가 발생해도 다른 VM에서는 영향이 없다.\n기존 OS위에서 하이퍼바이저를 사용하는 방식이고, 주로 OS를 가상화한다.\n예를 들어, 윈도우 PC에서 VMware를 설치한 후, 그 위에서 ubuntu OS를 설치하는 것\n\n기존 가상화 기술과 도커와의 차이\n\n\nVM\n하이퍼바이저 위에 여러 VM을 구성할 수 있다.\n하나의 VM을 띄우고, 호스트 OS의 자원을 할당한 다음 게스트 OS를 부팅하여 어플리케이션을 실행해야 한다. \nVM 내부에서 실행되는 모든 것은 호스트 OS 또는 하이퍼바이저와 독립되어 있다. \nOS자체가 많이 무겁기 때문에 복잡하게 실행하고 성능도 떨어진다. \n\n\nDocker\n호스트 OS위에 도커 엔진을 설치하여 이미지를 실행하기만 하면 된다. \n도커 컨테이너에서 돌아가는 여러 애플리케이션들은 서로 격리되어 있지만 호스트가 같아 동일한 커널을 공유한다. 하나의 OS에 이미지를 다운받아 사용하기 때문이다. \n하이퍼바이저와 게스트 OS가 필요하지 않아 가볍고 빠르다.\n\n\n공통점: 호스트 OS위에 격리된 환경을 구성하여 여러 애플리케이션을 배치할 수 있는 기술이다.\n차이점: 격리된 환경에 게스트 OS의 존재 유무, 호스트 OS 공유 여부\n\nDocker란?\n컨테이너 기반의 오픈소스 가상화 플랫폼\n컨테이너를 사용하여 응용프로그램을 더 쉽게 만들고, 배포하고, 실행할 수 있도록 설계된 도구이다.\n도커를 사용하지 않는다면 서버의 환경에 따라 응용프로그램 설치 과정이 달라질 수 있다.\n프로세스 실행 환경을 이미지로 만들고, 이 이미지를 기반으로 언제 어디서든 컨테이너로 실행할 수 있다.\n\n컨테이너란?\n리눅스에서 프로세스를 격리하는 방식으로 기존의 가상화 방식보다 성능면에서 훨씬 좋다.\n다양한 화물을 넣어 배에 싣는 네모난 화물 수송용 박스처럼, 다양한 프로그램,  실행환경을 컨테이너로 추상화하고 동일한 인터페이스를 제공하여 프로그램의 배포 및 관리를 단순하게해주는 것이다.\n코드와 모든 종속성을 패키지화하여 응용 프로그램이 한 컴퓨팅 환경에서 다른 컴퓨팅 환경으로 빠르고 안정적을 실행되도록 하는 소프트웨어의 표준 단위이다.\n백엔드 프로그램, 데이터베이스 서버, 메시지 큐 등 어떤 프로그램도 컨테이너로 추상화할 수 있고, 조립 PC, AWS, Azure, Google cloud 등 어디에서등 실행할 수 있다.\n\nDocker 이미지와 컨테이너\nDocker image\n\n\n어떤 환경이 구성되어있는 상태를 저장해놓은 파일 집합, 즉 컨테이너 실행에 필요한 파일과 설정값등을 포함하고 있는 파일집합이고 상태값을 가지지 않고 변하지 않는다.(Immutable)\n생성된 이미지는 Docker hub에 등록하거나 Docker Registry 저장소를 직접만들어 push하여 관리할 수 있다.\n이미지는 빌드되면 메모리에 올라간다.\n\n\nDocker container\n\n메모리에 올라와 있는 이미지를 run을 통해 동작하는 프로세스\n이미지의 인스턴스이며 프로그램을 실행한다.\n이미지를 실행한 상태, 추가되거나 변하는 값은 컨테이너에 저장된다.\n같은 이미지에서 여러개의 컨테이너를 생성할 수 있고, 컨테이너의 상태가 바뀌거나 삭제되더라도 이미지는 변하지 않는다. \n\n\n\nDocker 레이어 저장방식 \n\n기존 이미지에 파일을 추가하거나 수정할 때 레이어라는 개념을 사용한다.\n유니온 파일 시스템을 이용하여 여러개의 레이어를 하나의 파일 시스템으로 사용할 수 있게 해준다.\n이미지는 여러개의 읽기 전용 레이어로 구성되고, 파일이 추가되거나 수정되면 새로운 레이어가 생성된다.\n위 그림에서 ubuntu 이미지가 A + B + C의 집합이라면, ubuntu 이미지를 베이스로 만든 nginx 이미지는 A + B + C + nginx가 된다. \n위 그림에서 webapp 이미지를 nginx 이미지를 기반으로 만들었다면 A + B + C + nginx + source 레이어로 구성되고, webapp 소스를 수정하면 source(v2) 레이어만 다운받으면 되기 때문에 효율적으로 이미지를 관리할 수 있다.\n컨테이너를 생성할 때도 레이어 방식을 사용하여 기존의 이미지 레이어 위에 읽기/쓰기 레이어를 추가하여 컨테이너가 실행중에 생성하는 파일이나 변경된 내용은 읽기/쓰기 레이어에 저장되도록 한다.  \n\nDockerfile12345678910111213# vertx/vertx3 debian versionFROM subicura/vertx3:3.3.1MAINTAINER chungsub.kim@purpleworks.co.krADD build/distributions/app-3.3.1.tar /ADD config.template.json /app-3.3.1/bin/config.jsonADD docker/script/start.sh /usr/local/bin/RUN ln -s /usr/local/bin/start.sh /start.shEXPOSE 8080EXPOSE 7000CMD [&quot;start.sh&quot;]\n\n도커는 이미지를 만들기 위해 Dockerfile이라는 파일을 만들어 자체 언어인 DSL(Domain-specific language)를 이용하여 이미지 생성 과정을 작성한다.\n도커 문법을 공부해야 하는데 직관적이라 쉽게 이해할 수 있을 것이다.\n서버에 어떤 프로그램을 설치하려고 이것저것 의존성 패키지들을 설치하고 설정파일을 만드는 일련의 과정을 도커파일에 작성하면 쉽게 실행환경을 만들 수 있다.\n이미지 파일만 잘 만들어 두면 실제 배포환경에서도 로컬 개발환경과 동일하게 프로젝트를 구동할 수 있다.\n이 파일도 소스와 함께 버전관리가 되고 원한다며 누구나 이미지 생성과정을 보고 수정할 수 있다.\n\nhello-world 이미지를 통해 알아보는 대략적인 Docker 실행 흐름\n\nDocker가 설치되어 있는 터미널에서 sudo docker run hello-world를 입력한다.\n도커 서버가(Docker Daemon) 커맨드를 받아서 작업을 처리하는데, 이미지 캐시 보관 장소에서 해당 이미지가 있는지 확인한다.\n없으면 아래와 같이 Unable to find image &#39;hello-world:latest&#39; locally를 띄우고 Docker hub에서 hello-world 이미지를 pull받은 후에 컨테이너를 실행한다.\nsudo docker images 커맨드로 이미지가 잘 받아졌는지 확인한다.\nsudo docker ps -a 커맨드로 모든 컨테이너를 확인한다.\n이미지가 있는 상태에서 sudo docker run hello-world 커맨드를 다시 한번 입력하면 Hello from Docker! 부터 출력되고, 컨테이너가 하나 더 실행되고 바로 종료되는 모습을 볼 수 있다.\n\n\n\n출처\n초보를 위한 도커 안내서 - 도커란 무엇인가?\nDocker란 무엇이고 왜 사용할까?\n도커 입문편\n하이퍼바이저에 대한 이해\nDocker와 기존 가상화 기술의 차이 알아보기\n\n","dateCreated":"2021-11-11T13:40:57+09:00","dateModified":"2022-02-18T17:33:08+09:00","datePublished":"2021-11-11T13:40:57+09:00","description":"\nDocker에 대해 알아보자\n","headline":"TIL) 4 Docker 파헤치기 1편","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/","keywords":"위코드, 원티드, 원티드랩"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nDocker에 대해 알아보자\n\n\n\n \n\n가상화 기술이 나오기 전의 상황\n1대의 서버는 하나의 용도로만 사용한다.\n1대의 서버에 하나의 운영체제, 하나의 프로그램만을 운영한다.\n안정적일 수 있지만 남는 공간은 그대로 방치되고 비효율적이다.\n\n하이퍼바이저 기반의 가상화 등장(Docker 이전 가상화 기술)\n하이퍼바이저?\n호스트 컴퓨터에서 다수의 게스트 OS를 동시에 실행하기 위한 논리적 플랫폼\n가상화 머신 모니터 또는 가상화 머신 매니저 이며 약어로 VMM(Virtual Machine Monitor)\n하드웨어를 가상화하면서 하드웨어와 각각의 VM을 모니터링하는 중간 관리자\n예) VMware나 VirtualBox\n\n\n논리적으로 공간을 분할하여 VM이라는 독립적인 가상 환경의 서버를 구성한다.\n논리적으로 분리되어 있어 한 VM에서 오류가 발생해도 다른 VM에서는 영향이 없다.\n기존 OS위에서 하이퍼바이저를 사용하는 방식이고, 주로 OS를 가상화한다.\n예를 들어, 윈도우 PC에서 VMware를 설치한 후, 그 위에서 ubuntu OS를 설치하는 것\n\n기존 가상화 기술과 도커와의 차이\n\n\nVM\n하이퍼바이저 위에 여러 VM을 구성할 수 있다.\n하나의 VM을 띄우고, 호스트 OS의 자원을 할당한 다음 게스트 OS를 부팅하여 어플리케이션을 실행해야 한다. \nVM 내부에서 실행되는 모든 것은 호스트 OS 또는 하이퍼바이저와 독립되어 있다. \nOS자체가 많이 무겁기 때문에 복잡하게 실행하고 성능도 떨어진다. \n\n\nDocker\n호스트 OS위에 도커 엔진을 설치하여 이미지를 실행하기만 하면 된다. \n도커 컨테이너에서 돌아가는 여러 애플리케이션들은 서로 격리되어 있지만 호스트가 같아 동일한 커널을 공유한다. 하나의 OS에 이미지를 다운받아 사용하기 때문이다. \n하이퍼바이저와 게스트 OS가 필요하지 않아 가볍고 빠르다.\n\n\n공통점: 호스트 OS위에 격리된 환경을 구성하여 여러 애플리케이션을 배치할 수 있는 기술이다.\n차이점: 격리된 환경에 게스트 OS의 존재 유무, 호스트 OS 공유 여부\n\nDocker란?\n컨테이너 기반의 오픈소스 가상화 플랫폼\n컨테이너를 사용하여 응용프로그램을 더 쉽게 만들고, 배포하고, 실행할 수 있도록 설계된 도구이다.\n도커를 사용하지 않는다면 서버의 환경에 따라 응용프로그램 설치 과정이 달라질 수 있다.\n프로세스 실행 환경을 이미지로 만들고, 이 이미지를 기반으로 언제 어디서든 컨테이너로 실행할 수 있다.\n\n컨테이너란?\n리눅스에서 프로세스를 격리하는 방식으로 기존의 가상화 방식보다 성능면에서 훨씬 좋다.\n다양한 화물을 넣어 배에 싣는 네모난 화물 수송용 박스처럼, 다양한 프로그램,  실행환경을 컨테이너로 추상화하고 동일한 인터페이스를 제공하여 프로그램의 배포 및 관리를 단순하게해주는 것이다.\n코드와 모든 종속성을 패키지화하여 응용 프로그램이 한 컴퓨팅 환경에서 다른 컴퓨팅 환경으로 빠르고 안정적을 실행되도록 하는 소프트웨어의 표준 단위이다.\n백엔드 프로그램, 데이터베이스 서버, 메시지 큐 등 어떤 프로그램도 컨테이너로 추상화할 수 있고, 조립 PC, AWS, Azure, Google cloud 등 어디에서등 실행할 수 있다.\n\nDocker 이미지와 컨테이너\nDocker image\n\n\n어떤 환경이 구성되어있는 상태를 저장해놓은 파일 집합, 즉 컨테이너 실행에 필요한 파일과 설정값등을 포함하고 있는 파일집합이고 상태값을 가지지 않고 변하지 않는다.(Immutable)\n생성된 이미지는 Docker hub에 등록하거나 Docker Registry 저장소를 직접만들어 push하여 관리할 수 있다.\n이미지는 빌드되면 메모리에 올라간다.\n\n\nDocker container\n\n메모리에 올라와 있는 이미지를 run을 통해 동작하는 프로세스\n이미지의 인스턴스이며 프로그램을 실행한다.\n이미지를 실행한 상태, 추가되거나 변하는 값은 컨테이너에 저장된다.\n같은 이미지에서 여러개의 컨테이너를 생성할 수 있고, 컨테이너의 상태가 바뀌거나 삭제되더라도 이미지는 변하지 않는다. \n\n\n\nDocker 레이어 저장방식 \n\n기존 이미지에 파일을 추가하거나 수정할 때 레이어라는 개념을 사용한다.\n유니온 파일 시스템을 이용하여 여러개의 레이어를 하나의 파일 시스템으로 사용할 수 있게 해준다.\n이미지는 여러개의 읽기 전용 레이어로 구성되고, 파일이 추가되거나 수정되면 새로운 레이어가 생성된다.\n위 그림에서 ubuntu 이미지가 A + B + C의 집합이라면, ubuntu 이미지를 베이스로 만든 nginx 이미지는 A + B + C + nginx가 된다. \n위 그림에서 webapp 이미지를 nginx 이미지를 기반으로 만들었다면 A + B + C + nginx + source 레이어로 구성되고, webapp 소스를 수정하면 source(v2) 레이어만 다운받으면 되기 때문에 효율적으로 이미지를 관리할 수 있다.\n컨테이너를 생성할 때도 레이어 방식을 사용하여 기존의 이미지 레이어 위에 읽기/쓰기 레이어를 추가하여 컨테이너가 실행중에 생성하는 파일이나 변경된 내용은 읽기/쓰기 레이어에 저장되도록 한다.  \n\nDockerfile12345678910111213# vertx/vertx3 debian versionFROM subicura/vertx3:3.3.1MAINTAINER chungsub.kim@purpleworks.co.krADD build/distributions/app-3.3.1.tar /ADD config.template.json /app-3.3.1/bin/config.jsonADD docker/script/start.sh /usr/local/bin/RUN ln -s /usr/local/bin/start.sh /start.shEXPOSE 8080EXPOSE 7000CMD [&quot;start.sh&quot;]\n\n도커는 이미지를 만들기 위해 Dockerfile이라는 파일을 만들어 자체 언어인 DSL(Domain-specific language)를 이용하여 이미지 생성 과정을 작성한다.\n도커 문법을 공부해야 하는데 직관적이라 쉽게 이해할 수 있을 것이다.\n서버에 어떤 프로그램을 설치하려고 이것저것 의존성 패키지들을 설치하고 설정파일을 만드는 일련의 과정을 도커파일에 작성하면 쉽게 실행환경을 만들 수 있다.\n이미지 파일만 잘 만들어 두면 실제 배포환경에서도 로컬 개발환경과 동일하게 프로젝트를 구동할 수 있다.\n이 파일도 소스와 함께 버전관리가 되고 원한다며 누구나 이미지 생성과정을 보고 수정할 수 있다.\n\nhello-world 이미지를 통해 알아보는 대략적인 Docker 실행 흐름\n\nDocker가 설치되어 있는 터미널에서 sudo docker run hello-world를 입력한다.\n도커 서버가(Docker Daemon) 커맨드를 받아서 작업을 처리하는데, 이미지 캐시 보관 장소에서 해당 이미지가 있는지 확인한다.\n없으면 아래와 같이 Unable to find image &#39;hello-world:latest&#39; locally를 띄우고 Docker hub에서 hello-world 이미지를 pull받은 후에 컨테이너를 실행한다.\nsudo docker images 커맨드로 이미지가 잘 받아졌는지 확인한다.\nsudo docker ps -a 커맨드로 모든 컨테이너를 확인한다.\n이미지가 있는 상태에서 sudo docker run hello-world 커맨드를 다시 한번 입력하면 Hello from Docker! 부터 출력되고, 컨테이너가 하나 더 실행되고 바로 종료되는 모습을 볼 수 있다.\n\n\n\n출처\n초보를 위한 도커 안내서 - 도커란 무엇인가?\nDocker란 무엇이고 왜 사용할까?\n도커 입문편\n하이퍼바이저에 대한 이해\nDocker와 기존 가상화 기술의 차이 알아보기\n\n","dateCreated":"2021-11-11T13:40:57+09:00","dateModified":"2024-04-09T01:06:01+09:00","datePublished":"2021-11-11T13:40:57+09:00","description":"\nDocker에 대해 알아보자\n","headline":"TIL) 4 Docker 파헤치기 1편","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/","keywords":"위코드, 원티드, 원티드랩"}</script>
     <meta name="description" content="Docker에 대해 알아보자">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="TIL) 4 Docker 파헤치기 1편">
-<meta property="og:url" content="https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/index.html">
+<meta property="og:url" content="https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
 <meta property="og:description" content="Docker에 대해 알아보자">
 <meta property="og:locale" content="en_US">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://odreystella.github.io/images/web/docker_helloworld2.png">
 <meta property="og:image" content="https://odreystella.github.io/images/web/docker_ps_a.png">
 <meta property="article:published_time" content="2021-11-11T04:40:57.000Z">
-<meta property="article:modified_time" content="2022-02-18T08:33:08.852Z">
+<meta property="article:modified_time" content="2024-04-08T16:06:01.786Z">
 <meta property="article:tag" content="위코드">
 <meta property="article:tag" content="원티드">
 <meta property="article:tag" content="원티드랩">
@@ -507,7 +507,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -520,7 +520,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -533,7 +533,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -622,7 +622,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -635,7 +635,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -648,7 +648,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -682,7 +682,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -695,7 +695,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -708,7 +708,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%E1%84%91%E1%85%A7%E1%86%AB/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2021/11/11/TIL_04_Docker1%ED%8E%B8/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
