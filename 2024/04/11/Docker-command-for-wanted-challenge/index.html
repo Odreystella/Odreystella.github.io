@@ -11,11 +11,11 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n원티드 4월 백엔드 챌린지 2차 세션을 듣고 자주 사용하는 도커 명령어에 대해 정리해보았다.\n\n\n\n\nDocker System 명령어\n버전 및 상세정보 조회하기\ndocker version\n\n\n버전 및 빌드 버전 한줄로 조회하기\ndocker -v\n\n\n시스템 전체 정보 확인하기\ndocker system info\n\n\n디스크 사용량 확인하기\ndocker system df\n\n\n도커 허브에 로그인하기\ndocker login -u &#123;유저 ID&#125;\n\n\n\nDocker Image 명령어\n이미지 목록 확인하기\ndocker images 또는 docker image ls\n\n\n이미지 빌드하기\nDockerfile를 이용해서 이미지 만들기\ndocker build -t &#123;이미지명&#125;:&#123;태그명&#125; &#123;도커파일 경로&#125;\n\n\n이미지 상세 정보 확인하기\ndocker image inspect &#123;이미지명&#125;\n도커 이미지가 어떠한 정보로 만들어졌는지 역 추적해 볼 수 있다.\nCreated 생성 날짜, ExposedPorts, Env를 통한 Apache 구성 정보, CMD, ENTRYPOINT와 같은 기동 시점의 실행 정보들, WorkDir, Volume 정보 등을 모두 확인 할 수 있다.\n\n\n도커 허브에서 이미지 검색하기\ndocker search &#123;mysql&#125;\n\n\n도커 허브에서 이미지 가져오기\ndocker pull &#123;이미지명:태그&#125;\ndocker pull ubuntu:20.04\n\n\n이미지 삭제하기\ndocker rmi &#123;이미지 ID&#125;\n\n\n\nDocker Container 명령어\n현재 실행중인 컨테이너 확인하기\ndocker ps\n\n\n모든 컨테이너 확인하기\n정지된 컨테이너도 확인할 수 있다.\ndocker ps -a\n\n\n컨테이너 쉘 접속하기\ndocker exec -it &#123;컨테이너 ID&#125; /bin/bash\n\n\n컨테이너 삭제하기\n컨테이너가 중지된 상황에만 삭제할 수 있다.\ndocker rm &#123;컨테이너 ID&#125;\n\n\n컨테이너 시작/중지/재시작하기\ndocker start &#123;이미지 ID&#125;\ndocker stop &#123;이미지 ID&#125;\ndocker restart &#123;이미지 ID&#125;\n\n\n컨테이너 실행하기\ndocker run --name mydocker -it ubuntu:18.04\ndocker run -d -p 8080:8080 -t spring-helloworld\n\n\n사용중인 컨테이너를 이미지로 만들기\ndocker commit &#123;컨테이너명&#125; &#123;이미지명&#125;\n\n\n호스트에서 컨테이너로 파일 복사하기\ndocker cp &#123;호스트 파일 경로&#125; &#123;컨테이너 이름&#125;:&#123;컨테이너 파일 경로&#125;\n\n\n컨테이너에서 호스트로 파일 복사하기\ndocker cp &#123;컨테이너 이름&#125;:&#123;컨테이너 파일 경로&#125; &#123;호스트 파일 경로&#125;\n\n\n\n참고\ndocker 명령어 뽀개기\nDocker command\n\n","dateCreated":"2024-04-11T17:16:19+09:00","dateModified":"2024-04-12T01:42:24+09:00","datePublished":"2024-04-11T17:16:19+09:00","description":"\n원티드 4월 백엔드 챌린지 2차 세션을 듣고 자주 사용하는 도커 명령어에 대해 정리해보았다.\n","headline":"Docker Command","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/","keywords":"원티드"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n원티드 4월 백엔드 챌린지 2차 세션을 듣고 자주 사용하는 도커 명령어에 대해 정리해보았다.\n\n\n\n\nDocker System 명령어\n버전 및 상세정보 조회하기\ndocker version\n\n\n버전 및 빌드 버전 한줄로 조회하기\ndocker -v\n\n\n시스템 전체 정보 확인하기\ndocker system info\n\n\n디스크 사용량 확인하기\ndocker system df\n\n\n도커 허브에 로그인하기\ndocker login -u &#123;유저 ID&#125;\n\n\n\nDocker Image 명령어\n이미지 목록 확인하기\ndocker images 또는 docker image ls\n\n\n이미지 빌드하기\nDockerfile를 이용해서 이미지 만들기\ndocker build -t &#123;이미지명&#125;:&#123;태그명&#125; &#123;도커파일 경로&#125;\n\n\n이미지 상세 정보 확인하기\ndocker image inspect &#123;이미지명&#125;\n도커 이미지가 어떠한 정보로 만들어졌는지 역 추적해 볼 수 있다.\nCreated 생성 날짜, ExposedPorts, Env를 통한 Apache 구성 정보, CMD, ENTRYPOINT와 같은 기동 시점의 실행 정보들, WorkDir, Volume 정보 등을 모두 확인 할 수 있다.\n\n\n도커 허브에서 이미지 검색하기\ndocker search &#123;mysql&#125;\n\n\n도커 허브에서 이미지 가져오기\ndocker pull &#123;이미지명:태그&#125;\ndocker pull ubuntu:20.04\n\n\n이미지 삭제하기\ndocker rmi &#123;이미지 ID&#125;\n\n\n\nDocker Container 명령어\n현재 실행중인 컨테이너 확인하기\ndocker ps\n\n\n모든 컨테이너 확인하기\n정지된 컨테이너도 확인할 수 있다.\ndocker ps -a\n\n\n컨테이너 쉘 접속하기\ndocker exec -it &#123;컨테이너 ID&#125; /bin/bash\n\n\n컨테이너 삭제하기\n컨테이너가 중지된 상황에만 삭제할 수 있다.\ndocker rm &#123;컨테이너 ID&#125;\n\n\n컨테이너 시작/중지/재시작하기\ndocker start &#123;이미지 ID&#125;\ndocker stop &#123;이미지 ID&#125;\ndocker restart &#123;이미지 ID&#125;\n\n\n컨테이너 실행하기\ndocker run --name mydocker -it ubuntu:18.04\ndocker run -d -p 8080:8080 -t spring-helloworld\n\n\n사용중인 컨테이너를 이미지로 만들기\ndocker commit &#123;컨테이너명&#125; &#123;이미지명&#125;\n\n\n호스트에서 컨테이너로 파일 복사하기\ndocker cp &#123;호스트 파일 경로&#125; &#123;컨테이너 이름&#125;:&#123;컨테이너 파일 경로&#125;\n\n\n컨테이너에서 호스트로 파일 복사하기\ndocker cp &#123;컨테이너 이름&#125;:&#123;컨테이너 파일 경로&#125; &#123;호스트 파일 경로&#125;\n\n\n\n참고\ndocker 명령어 뽀개기\nDocker command\n\n","dateCreated":"2024-04-11T17:16:19+09:00","dateModified":"2024-04-12T01:42:24+09:00","datePublished":"2024-04-11T17:16:19+09:00","description":"\n원티드 4월 백엔드 챌린지 2차 세션을 듣고 자주 사용하는 도커 명령어에 대해 정리해보았다.\n","headline":"Docker Command","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/","keywords":"원티드"}</script>
     <meta name="description" content="원티드 4월 백엔드 챌린지 2차 세션을 듣고 자주 사용하는 도커 명령어에 대해 정리해보았다.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Docker Command">
-<meta property="og:url" content="https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/index.html">
+<meta property="og:url" content="https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
 <meta property="og:description" content="원티드 4월 백엔드 챌린지 2차 세션을 듣고 자주 사용하는 도커 명령어에 대해 정리해보았다.">
 <meta property="og:locale" content="en_US">
@@ -493,7 +493,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -506,7 +506,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -519,7 +519,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -608,7 +608,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -621,7 +621,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -634,7 +634,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -668,7 +668,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -681,7 +681,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -694,7 +694,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/11/Docker-network-for-wanted-challenge/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/11/Docker-command-for-wanted-challenge/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
