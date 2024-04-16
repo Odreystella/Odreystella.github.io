@@ -1,0 +1,704 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Dev Odreystella&#39;s Blog">
+    <title>프로파일링과 silk - Dev Odreystella&#39;s Blog</title>
+    <meta name="author" content="">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n프로파일링과 silk 사용법에 대해 알아보자\n\n\n\n프로파일링(Profiling)\n코드 자체만으로 성능을 예측할 수 없기 때문에 프로그램을 실행하면서 성능과 리소스 사용을 측정하고 분석하는 방법이다.\n소스 레벨에서 실행 속도를 측정하고 개선하기 위한 기술로, 어떤 함수가 얼마나 시간이 걸리는지, 어디서 병목이 발생하는지, CPU/메모리를 얼마나 사용하는지 등의 성능을 측정하여 최적화할 방법을 찾는다.\n성능을 분석하는 툴로 개발 환경에서는 Profiling Tool, 운영 환경에서는 APM Tool 을 사용한다.\n\nAPM Tool\nApplication Performance Monitoring/Management\n안정적인 웹 애플리케이션 운영을 위해 성능 및 장애를 관리한다.\n프론트엔드, 백엔드, 인프라, 네트워크 등 다양하게 모니터링 할 수 있다.\nTop 10 Open Source APM Tools\n\n퍼포먼스 벤치마킹\n주로 경쟁사 분석과 성능 비교를 목적으로 한다.\n여러 제품 또는 서비스 간의 성능을 비교하기 위해 특정 작업이나 시스템의 전반적인 성능을 측정한다.\n여러 가지 표준화된 벤치마킹 도구나 테스트 슈트를 사용하여 성능을 측정하고 결과를 비교한다.\n\n성능 테스트 종류\n\nLoad Testing\n목표로 설정한 부하 상황에서 시스템 성능을 검증한다. \n일반적으로 1시간동안 유지되며, 최대 부하 트래픽을 감당할 수 있는지 확인한다.\n\n\nStress Testing\n일반적인 부하 테스트보다 훨씬 높은 부하 상황에서 시스템 성능을 검증한다.\n일반적으로 부하테스트의 2배를 사용하며, 시스템 장애가 발생하는지, 정상 수준으로 돌아갈 때 복구되는지 확인한다.\n\n\nSoak Testing\nEndurance Testing으로도 불리며 8시간 이상의 기간에 걸쳐 시스템의 안정성을 확인하는 장기적인 테스트이다.\n메모리 누수와 같은 이슈들을 감지한다.\n\n\nSpike Testing\n빅세일, 신제품 출시 등 사용량 급증이 발생할 이벤트 상황에서 시스템의 안정성을 확인한다.\n\n\nBreakpoint Testing\n동시 접속자 수를 증가시켜 시스템의 장애 지점을 결정하는 테스트이다.\n\n\n\n웹 서비스에서 성능 측정 항목\nTPS(Transaction Per Second): 초당 트랜잭션 개수\nTTI(Time To Interactive): 페이지가 완전히 상호작용이 가능하게 되기까지 소요된 시간, 3.8초 이내가 권장된다.\nTTFB(Time To First Byte): 리소스 요청의 응답에 대해 첫번째 바이트를 수신하기까지 소요된 시간, 0.6~0.8초 이내가 권장된다.\nLCP(Largest Contentful Paint): 페이지가 로드되기 시작한 시점부터, 가장 큰 콘텐츠(이미지, 비디오 등)가 렌더링될 때까지의 시간, 2.5초 이내가 권장된다.\nFCP(First Contentful Paint): 페이지가 로드되기 시작한 시점부터, 화면에 처음으로 콘텐츠가 렌더링될 때까지의 시간, 1.8초 이내가 권장된다.\nThroughput(처리량): 시간당 서버가 처리하는 요청의 양\nConcurrent User(동시 사용자 수): 동시에 서버에 접속하여 요청을 보내는 사용자의 수\n\nsilk, Django 프로파일링 툴\nAPM 솔루션이 아니고, 보안 문제 때문에 운영 환경에서 사용하면 안된다.\ndjango-silk\n\n참고\n성능 테스트 유형 알아보기\n웹 사이트 성능 측정, Web Vitals\nDjango - silk 성능 프로파일러\n\n","dateCreated":"2024-04-16T11:54:33+09:00","dateModified":"2024-04-17T03:12:34+09:00","datePublished":"2024-04-16T11:54:33+09:00","description":"\n프로파일링과 silk 사용법에 대해 알아보자\n","headline":"프로파일링과 silk","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/16/Profiling-tool/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/16/Profiling-tool/"}</script>
+    <meta name="description" content="프로파일링과 silk 사용법에 대해 알아보자">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="프로파일링과 silk">
+<meta property="og:url" content="https://odreystella.github.io/2024/04/16/Profiling-tool/index.html">
+<meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
+<meta property="og:description" content="프로파일링과 silk 사용법에 대해 알아보자">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.netsolutions.com/insights/wp-content/uploads/2019/06/Perrformance-vs-load-vs-spike-vs-soak-test.jpg">
+<meta property="article:published_time" content="2024-04-16T02:54:33.000Z">
+<meta property="article:modified_time" content="2024-04-16T18:12:34.723Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.netsolutions.com/insights/wp-content/uploads/2019/06/Perrformance-vs-load-vs-spike-vs-soak-test.jpg">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://odreystella.github.io/assets/images/profile.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-s9cubcvh9guwrlo0a7unmtmxvwii0oase98xnhhysjkyxhquqqkxkrhfbdfm.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            Dev Odreystella&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name"></h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Odreystella</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            프로파일링과 silk
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2024-04-16T11:54:33+09:00">
+	
+		    Apr 16, 2024
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/DRF/">DRF</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <blockquote>
+<p>프로파일링과 silk 사용법에 대해 알아보자</p>
+</blockquote>
+<a id="more"></a>
+
+<h4 id="프로파일링-Profiling"><a href="#프로파일링-Profiling" class="headerlink" title="프로파일링(Profiling)"></a>프로파일링(Profiling)</h4><ul>
+<li>코드 자체만으로 성능을 예측할 수 없기 때문에 프로그램을 실행하면서 성능과 리소스 사용을 측정하고 분석하는 방법이다.</li>
+<li>소스 레벨에서 실행 속도를 측정하고 개선하기 위한 기술로, 어떤 함수가 얼마나 시간이 걸리는지, 어디서 병목이 발생하는지, CPU/메모리를 얼마나 사용하는지 등의 성능을 측정하여 최적화할 방법을 찾는다.</li>
+<li>성능을 분석하는 툴로 개발 환경에서는 <code>Profiling Tool</code>, 운영 환경에서는 <code>APM Tool</code> 을 사용한다.</li>
+</ul>
+<h4 id="APM-Tool"><a href="#APM-Tool" class="headerlink" title="APM Tool"></a>APM Tool</h4><ul>
+<li>Application Performance Monitoring/Management</li>
+<li>안정적인 웹 애플리케이션 운영을 위해 성능 및 장애를 관리한다.</li>
+<li>프론트엔드, 백엔드, 인프라, 네트워크 등 다양하게 모니터링 할 수 있다.</li>
+<li><a target="_blank" rel="noopener" href="https://stackify.com/top-10-open-source-apm-tools/">Top 10 Open Source APM Tools</a></li>
+</ul>
+<h4 id="퍼포먼스-벤치마킹"><a href="#퍼포먼스-벤치마킹" class="headerlink" title="퍼포먼스 벤치마킹"></a>퍼포먼스 벤치마킹</h4><ul>
+<li>주로 경쟁사 분석과 성능 비교를 목적으로 한다.</li>
+<li>여러 제품 또는 서비스 간의 성능을 비교하기 위해 특정 작업이나 시스템의 전반적인 성능을 측정한다.</li>
+<li>여러 가지 표준화된 벤치마킹 도구나 테스트 슈트를 사용하여 성능을 측정하고 결과를 비교한다.</li>
+</ul>
+<h4 id="성능-테스트-종류"><a href="#성능-테스트-종류" class="headerlink" title="성능 테스트 종류"></a>성능 테스트 종류</h4><p><img src="https://www.netsolutions.com/insights/wp-content/uploads/2019/06/Perrformance-vs-load-vs-spike-vs-soak-test.jpg"></p>
+<ol>
+<li>Load Testing<ul>
+<li>목표로 설정한 부하 상황에서 시스템 성능을 검증한다. </li>
+<li>일반적으로 1시간동안 유지되며, 최대 부하 트래픽을 감당할 수 있는지 확인한다.</li>
+</ul>
+</li>
+<li>Stress Testing<ul>
+<li>일반적인 부하 테스트보다 훨씬 높은 부하 상황에서 시스템 성능을 검증한다.</li>
+<li>일반적으로 부하테스트의 2배를 사용하며, 시스템 장애가 발생하는지, 정상 수준으로 돌아갈 때 복구되는지 확인한다.</li>
+</ul>
+</li>
+<li>Soak Testing<ul>
+<li>Endurance Testing으로도 불리며 8시간 이상의 기간에 걸쳐 시스템의 안정성을 확인하는 장기적인 테스트이다.</li>
+<li>메모리 누수와 같은 이슈들을 감지한다.</li>
+</ul>
+</li>
+<li>Spike Testing<ul>
+<li>빅세일, 신제품 출시 등 사용량 급증이 발생할 이벤트 상황에서 시스템의 안정성을 확인한다.</li>
+</ul>
+</li>
+<li>Breakpoint Testing<ul>
+<li>동시 접속자 수를 증가시켜 시스템의 장애 지점을 결정하는 테스트이다.</li>
+</ul>
+</li>
+</ol>
+<h4 id="웹-서비스에서-성능-측정-항목"><a href="#웹-서비스에서-성능-측정-항목" class="headerlink" title="웹 서비스에서 성능 측정 항목"></a>웹 서비스에서 성능 측정 항목</h4><ul>
+<li>TPS(Transaction Per Second): 초당 트랜잭션 개수</li>
+<li>TTI(Time To Interactive): 페이지가 완전히 상호작용이 가능하게 되기까지 소요된 시간, 3.8초 이내가 권장된다.</li>
+<li>TTFB(Time To First Byte): 리소스 요청의 응답에 대해 첫번째 바이트를 수신하기까지 소요된 시간, 0.6~0.8초 이내가 권장된다.</li>
+<li>LCP(Largest Contentful Paint): 페이지가 로드되기 시작한 시점부터, 가장 큰 콘텐츠(이미지, 비디오 등)가 렌더링될 때까지의 시간, 2.5초 이내가 권장된다.</li>
+<li>FCP(First Contentful Paint): 페이지가 로드되기 시작한 시점부터, 화면에 처음으로 콘텐츠가 렌더링될 때까지의 시간, 1.8초 이내가 권장된다.</li>
+<li>Throughput(처리량): 시간당 서버가 처리하는 요청의 양</li>
+<li>Concurrent User(동시 사용자 수): 동시에 서버에 접속하여 요청을 보내는 사용자의 수</li>
+</ul>
+<h4 id="silk-Django-프로파일링-툴"><a href="#silk-Django-프로파일링-툴" class="headerlink" title="silk, Django 프로파일링 툴"></a>silk, Django 프로파일링 툴</h4><ul>
+<li>APM 솔루션이 아니고, 보안 문제 때문에 운영 환경에서 사용하면 안된다.</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jazzband/django-silk">django-silk</a></li>
+</ul>
+<h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://engineering-skcc.github.io/performancetest/Performance-Testing-Terminologies/">성능 테스트 유형 알아보기</a></li>
+<li><a target="_blank" rel="noopener" href="https://velog.io/@sejinkim/%EC%9B%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8-%EC%84%B1%EB%8A%A5-%EC%B8%A1%EC%A0%95-Web-Vitals">웹 사이트 성능 측정, Web Vitals</a></li>
+<li><a target="_blank" rel="noopener" href="https://velog.io/@kim6515516/Django-silk-%EC%84%B1%EB%8A%A5-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EB%9F%AC">Django - silk 성능 프로파일러</a></li>
+</ul>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2024/04/15/Docker-image-build-process-for-wanted-challenge/"
+                    data-tooltip="Docker image 레이어와 이미지 최적화"
+                    aria-label="NEXT: Docker image 레이어와 이미지 최적화"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/16/Profiling-tool/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/16/Profiling-tool/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/16/Profiling-tool/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2024 null. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2024/04/15/Docker-image-build-process-for-wanted-challenge/"
+                    data-tooltip="Docker image 레이어와 이미지 최적화"
+                    aria-label="NEXT: Docker image 레이어와 이미지 최적화"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/16/Profiling-tool/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/16/Profiling-tool/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/16/Profiling-tool/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/16/Profiling-tool/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/16/Profiling-tool/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/16/Profiling-tool/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name"></h4>
+        
+            <div id="about-card-bio"><p>Odreystella</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-buvapuslwfowfkx0w6qhxphbbnwhqezkrxx1dd6puligsitecubmpci0a9cf.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
