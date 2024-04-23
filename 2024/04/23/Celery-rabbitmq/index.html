@@ -11,15 +11,19 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"","dateCreated":"2024-04-23T23:47:40+09:00","dateModified":"2024-04-23T23:50:04+09:00","datePublished":"2024-04-23T23:47:40+09:00","description":"","headline":"Celery와 RabbitMQ","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"}</script>
-    <meta property="og:type" content="blog">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nCelery와 RabbitMQ에 대해 알아보자\n\n\n\nCelery란?\nCelery는 Python 동시성 프로그래밍에서 가장 많이 사용하는 방법 중 하나이며, 분산 메시지 전달을 기반으로 동작하는 비동기 작업 큐이다\n보통 worker 라고 불린다.\nWorker는 웹 서비스에서 백단의 작업을 처리하는 별도의 프레임이며, 사용자에게 즉각적인 반응을 보여줄 필요가 없는 작업들로 인해 사용자가 느끼는 Delay를 최소화하기 위해 사용된다.\n\n동시성 프로그래밍\n논리적인 용어로 동시에 실행되는 것처럼 보이는 것을 말한다.\n싱글 코어에서 멀티 스레드를 동작시키기 위한 방식으로 멀티 태스킹을 위해 여러 스레드를 번갈아 가면서 실행되는 방식이다.\n특정 프로세스의 실행 시간이 다른 프로세스의 흐름과 겹치는 상황에서 동시에 실행한다고 말한다.\n\n비동기 작업\n즉각적인 결과(응답)을 제공하기 어려운 작업을 수행할 때 활용한다.\n예를 들어 대용량 작업을 동시에 처리하거나, 사용자 요청에 무거운 연산이 포함되는 경우에 비동기로 처리한다.\n\n왜 celery를 사용하나?\n장고로 API 서버를 개발하면서, 사용자 요청과 관련없이 매우 무거운 외부 API호출이나 쿼리를 실행해야 하는 기능이 있는데, 이런 무거운 작업들은 Celery Task로 정의해서 Broker(RabbitMQ)와 Consumer(Celery Worker)를 이용해 비동기적으로 처리함으로써 유저에게 빠른 응답을 제공하기 위해서 사용한다.\n\nBroker\nMessage Broker(메시지 브로커)는 Publisher(송신자)로부터 전달받은 메시지를 Subscriber(수신자)로 전달해주는 중간 역할이며 응용 소프트웨어 간에 메시지를 교환한다. 이때 메시지가 적재되는 공간을 메시지 큐 라고 한다.\n메시지 브로커는 송신자가 보낸 메시지를 메시지 큐에 적재하고 이를 수신자가 받아서 사용하는 구조를 띄며, 이러한 구조를 Publisher/Subscribe 패턴이라고 하며, Producer/Consumer 패턴이라고도 한다.\n대표적으로 Redis, RabbitMQ 등이 있다.\n\nCelery 동작 방식\n\n장고에서 발생한 요청을 브로커에서 받아 워커를 이용하여 분산 처리하는 방법이다.\ncelery는 기본적으로 작업을 Prefetch 방식으로 가져와서 처리한다.\n워커가 미리 처리하려는 작업을 특정 사이즈만큼 미리 가져와서 대기시켜놓고, 진행중인 작업이 완료되면 브로커로 요청을 보내지 않고, 미리 대기시켜 두었던 작업을 꺼내와서 처리하는 방식이다.\n\n","dateCreated":"2024-04-23T23:47:40+09:00","dateModified":"2024-04-24T00:27:22+09:00","datePublished":"2024-04-23T23:47:40+09:00","description":"\nCelery와 RabbitMQ에 대해 알아보자\n","headline":"Celery와 RabbitMQ","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"}</script>
+    <meta name="description" content="Celery와 RabbitMQ에 대해 알아보자">
+<meta property="og:type" content="blog">
 <meta property="og:title" content="Celery와 RabbitMQ">
 <meta property="og:url" content="https://odreystella.github.io/2024/04/23/Celery-rabbitmq/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
+<meta property="og:description" content="Celery와 RabbitMQ에 대해 알아보자">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://velog.velcdn.com/images/ssssujini99/post/03179cf5-f7a2-4b54-bab0-471bcf30c276/image.png">
 <meta property="article:published_time" content="2024-04-23T14:47:40.000Z">
-<meta property="article:modified_time" content="2024-04-23T14:50:04.420Z">
+<meta property="article:modified_time" content="2024-04-23T15:27:22.155Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://velog.velcdn.com/images/ssssujini99/post/03179cf5-f7a2-4b54-bab0-471bcf30c276/image.png">
     
     
         
@@ -318,7 +322,40 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            
+            <blockquote>
+<p>Celery와 RabbitMQ에 대해 알아보자</p>
+</blockquote>
+<a id="more"></a>
+
+<h4 id="Celery란"><a href="#Celery란" class="headerlink" title="Celery란?"></a>Celery란?</h4><ul>
+<li>Celery는 Python 동시성 프로그래밍에서 가장 많이 사용하는 방법 중 하나이며, 분산 메시지 전달을 기반으로 동작하는 <strong>비동기 작업 큐</strong>이다</li>
+<li>보통 worker 라고 불린다.</li>
+<li>Worker는 웹 서비스에서 백단의 작업을 처리하는 별도의 프레임이며, 사용자에게 즉각적인 반응을 보여줄 필요가 없는 작업들로 인해 사용자가 느끼는 Delay를 최소화하기 위해 사용된다.</li>
+</ul>
+<h4 id="동시성-프로그래밍"><a href="#동시성-프로그래밍" class="headerlink" title="동시성 프로그래밍"></a>동시성 프로그래밍</h4><ul>
+<li>논리적인 용어로 동시에 실행되는 것처럼 보이는 것을 말한다.</li>
+<li>싱글 코어에서 멀티 스레드를 동작시키기 위한 방식으로 멀티 태스킹을 위해 여러 스레드를 번갈아 가면서 실행되는 방식이다.</li>
+<li>특정 프로세스의 실행 시간이 다른 프로세스의 흐름과 겹치는 상황에서 동시에 실행한다고 말한다.</li>
+</ul>
+<h4 id="비동기-작업"><a href="#비동기-작업" class="headerlink" title="비동기 작업"></a>비동기 작업</h4><ul>
+<li>즉각적인 결과(응답)을 제공하기 어려운 작업을 수행할 때 활용한다.</li>
+<li>예를 들어 대용량 작업을 동시에 처리하거나, 사용자 요청에 무거운 연산이 포함되는 경우에 비동기로 처리한다.</li>
+</ul>
+<h4 id="왜-celery를-사용하나"><a href="#왜-celery를-사용하나" class="headerlink" title="왜 celery를 사용하나?"></a>왜 celery를 사용하나?</h4><ul>
+<li>장고로 API 서버를 개발하면서, 사용자 요청과 관련없이 매우 무거운 외부 API호출이나 쿼리를 실행해야 하는 기능이 있는데, 이런 무거운 작업들은 Celery Task로 정의해서 Broker(RabbitMQ)와 Consumer(Celery Worker)를 이용해 비동기적으로 처리함으로써 유저에게 빠른 응답을 제공하기 위해서 사용한다.</li>
+</ul>
+<h4 id="Broker"><a href="#Broker" class="headerlink" title="Broker"></a>Broker</h4><ul>
+<li>Message Broker(메시지 브로커)는 Publisher(송신자)로부터 전달받은 메시지를 Subscriber(수신자)로 전달해주는 중간 역할이며 응용 소프트웨어 간에 메시지를 교환한다. 이때 메시지가 적재되는 공간을 <strong>메시지 큐</strong> 라고 한다.</li>
+<li>메시지 브로커는 송신자가 보낸 메시지를 메시지 큐에 적재하고 이를 수신자가 받아서 사용하는 구조를 띄며, 이러한 구조를 Publisher/Subscribe 패턴이라고 하며, Producer/Consumer 패턴이라고도 한다.</li>
+<li>대표적으로 Redis, RabbitMQ 등이 있다.</li>
+</ul>
+<h4 id="Celery-동작-방식"><a href="#Celery-동작-방식" class="headerlink" title="Celery 동작 방식"></a>Celery 동작 방식</h4><p><img src="https://velog.velcdn.com/images/ssssujini99/post/03179cf5-f7a2-4b54-bab0-471bcf30c276/image.png"></p>
+<ul>
+<li>장고에서 발생한 요청을 브로커에서 받아 워커를 이용하여 분산 처리하는 방법이다.</li>
+<li>celery는 기본적으로 작업을 Prefetch 방식으로 가져와서 처리한다.</li>
+<li>워커가 미리 처리하려는 작업을 특정 사이즈만큼 미리 가져와서 대기시켜놓고, 진행중인 작업이 완료되면 브로커로 요청을 보내지 않고, 미리 대기시켜 두었던 작업을 꺼내와서 처리하는 방식이다.</li>
+</ul>
+
             
 
 
