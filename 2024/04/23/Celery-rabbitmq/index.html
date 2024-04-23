@@ -6,21 +6,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>Elasticsearch - Dev Odreystella&#39;s Blog</title>
+    <title>Celery와 RabbitMQ - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nElasticsearch에 대해 알아보자\n\n\n\nElasticsearch\napache lucene를 기반으로 한 검색엔진\n텍스트 검색에 매우 뛰어나고, 비교적 저사양의 노드로 구성된 클러스터로도 매우 많은 양의 텍스트를 빠르고 안정적으로 서비스가 가능하다.\nJSON 문서 기반으로 데이터가 작성되며, 데이터 저장 시에 미리 정의하지 않은 컬럼도 인덱싱이 가능하여 스키마의 변경이 자유롭다.\nELK(Elasticsearch / Logstash / Kibana) 스택으로 사용된다.\n\nElasticsearch 장점\n오픈소스이다.\n실시간 분석(real-time)이 가능하다.\n대용량 데이터 분석에 가장 널리 사용되고 있는 것은 하둡 플랫폼 위에서 실행되는 Pig, Hive인데, 하둡은 기본적으로 배치 기반의 분석 시스템이다.\n반면에 Elasticsearch는 클러스터가 실행되고 있는 동안에는 계속해서 데이터가 입력되고, 동시에 실시간에 가까운 속도로 색인된 데이터의 검색 및 집계가 가능하다.\n\n\n전문(full text) 검색 엔진이다.\n루씬은 기본적으로 역파일 색인이라는 구조로 데이터를 저장하는데, 루씬을 기반으로 한 elasticsearch도 마찬가지로 색인된 모든 데이터를 역파일 색인 구조로 저장하여 가공된 텍스트를 검색한다.\n\n\nRESTFul API를 지원한다.\n멀티테넌시\n서로 다른 인덱스들을 별도의 커넥션 없이 하나의 질의로 묶어서 검색하고, 검색 결과들을 하나의 출력으로 도출할 수 있다.\n\n\n정형, 비정형 데이터를 모두 수용할 수 있는 유연성을 가지고 있다.\n\nElasticsearch 단점\n완전 실시간은 아니다. 색인된 데이터는 내부적으로 commit, flush같은 복잡한 과정을 거치기 때문에 1초 뒤에 검색이 가능하다.\nTransaction Rollback를 지원하지 않는다.\n데이터의 업데이트를 제공하지 않는다. 업데이트 명령의 경우 기존 문서를 삭제하고 새로운 문서를 생성하는 방식이다.\n\nRDBMS와 Elasticsearch의 차이\n저장 방식이 다르다.\nRDB는 행을 기반으로 데이터를 저장한다.\nElasticsearch는 단어를 기반(역인덱스)으로 저장한다. 예를 들어, “MSA”를 저장할 때, 해당 단어가 속한 도큐먼트들을 같이 저장하는 것이다. \n\n\n모델링 방식이 다르다.\nRDB는 관계형 데이터베이스이기 때문에 일반적인 정규화 방법록을 기반으로 설계한다.\nElasticsearch는 NoSQL 기반의 문서 지향 데이터베이스이기 때문에 데이터의 유형, 검색 조건, 집계 및 시각화 여부 등에 따라 종류가 다양하다. Parent-Child 모델링, Nested 모델링, Application Side Join 모델링, Denormalization 모델링이 있다.\n\n\n\n역색인 구조\n일반적인 색인의 목적은 “문서의 위치”에 대한 인덱스를 만들어서 빠르게 그 문서에 접근하고자 한다. \n역색인은 반대로 “문서 내의 문자와 같은 내용물”의 맵핑 정보를 색인해 놓는 것이다.\n예를 들어, 일반 색인은 책의 목차와 같은 의미이고, 역색인은 책 가장 뒤의 단어 별 색인 페이지이다.\n\n핵심 개념\n클러스터\nElasticsearch에서 가장 큰 시스템 단위를 의미하여, 최소 하나 이상의 노드로 이루어진 노드들의 집합이다.\n여러 대의 서버가 하나의 클러스터를 구성할 수 있고, 한 서버에 여러 개의 클러스터가 존재할 수 있다.\n\n\n노드\n클러스터에 포함된 단일 서버로서 데이터를 저장하고 클러스터의 색인화 및 검색기능에 참여한다.\n역할에 따라 Master, Data, Coordinating, Ingest 노드로 구분할 수 있다.\nMaster Node: 클러스터 관리, 노드 추가/제거 등 관리\nData Node: 실질적인 데이터를 저장, 데이터가 실제로 분산 저장되는 물리 공간인 샤드가 배치됨, 검색과 통계 등 데이터 관련 작업 수행\nCoordinating Node: 사용자의 요청만 받아서 처리, 클러스터 관련 요청은 Master Node, 데이터 관련 요청은 Data Node\nIngest Node: 문서의 전처리 담당, 인덱스 생성 전 문서의 형식을 다양하게 변경 가능\n\n\n\n\n인덱스\n데이터 저장 공간\nRDBMS에서 database와 대응하는 개념이다.\n하나의 물리 노드에 여러개의 논리 인덱스를 생성\n하나의 인덱스가 여러 노드에 분산 저장\n\n\n타입\n인덱스의 논리적 구조이다.\n\n\n도큐먼트\n데이터가 저장되는 최소 단위\nRDBMS에서 Row와 대응하는 개념이다.\n\n\n샤드\n파티션으로, 색인된 문서는 하나의 인덱스, 인덱스 내부에 색인된 데이터는 여러개의 파티션으로 나뉘어 구성된다. \n\n\n\n참고\nElasthcsearch 가이드북\n엘라스틱서치에서 관계형 데이터 모델링하기\n기본 개념과 특징\n\n","dateCreated":"2024-04-17T11:21:18+09:00","dateModified":"2024-04-18T03:29:37+09:00","datePublished":"2024-04-17T11:21:18+09:00","description":"\nElasticsearch에 대해 알아보자\n","headline":"Elasticsearch","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/17/Elasticsearch/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/17/Elasticsearch/"}</script>
-    <meta name="description" content="Elasticsearch에 대해 알아보자">
-<meta property="og:type" content="blog">
-<meta property="og:title" content="Elasticsearch">
-<meta property="og:url" content="https://odreystella.github.io/2024/04/17/Elasticsearch/index.html">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"","dateCreated":"2024-04-23T23:47:40+09:00","dateModified":"2024-04-23T23:50:04+09:00","datePublished":"2024-04-23T23:47:40+09:00","description":"","headline":"Celery와 RabbitMQ","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"}</script>
+    <meta property="og:type" content="blog">
+<meta property="og:title" content="Celery와 RabbitMQ">
+<meta property="og:url" content="https://odreystella.github.io/2024/04/23/Celery-rabbitmq/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
-<meta property="og:description" content="Elasticsearch에 대해 알아보자">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-04-17T02:21:18.000Z">
-<meta property="article:modified_time" content="2024-04-17T18:29:37.829Z">
+<meta property="article:published_time" content="2024-04-23T14:47:40.000Z">
+<meta property="article:modified_time" content="2024-04-23T14:50:04.420Z">
 <meta name="twitter:card" content="summary">
     
     
@@ -295,20 +293,20 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            Elasticsearch
+            Celery와 RabbitMQ
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2024-04-17T11:21:18+09:00">
+    <time datetime="2024-04-23T23:47:40+09:00">
 	
-		    Apr 17, 2024
+		    Apr 23, 2024
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/Elasticsearch/">Elasticsearch</a>
+    <a class="category-link" href="/categories/Celery/">Celery</a>
 
 
     
@@ -320,101 +318,7 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <blockquote>
-<p>Elasticsearch에 대해 알아보자</p>
-</blockquote>
-<a id="more"></a>
-
-<h4 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h4><ul>
-<li>apache lucene를 기반으로 한 검색엔진</li>
-<li>텍스트 검색에 매우 뛰어나고, 비교적 저사양의 노드로 구성된 클러스터로도 매우 많은 양의 텍스트를 빠르고 안정적으로 서비스가 가능하다.</li>
-<li>JSON 문서 기반으로 데이터가 작성되며, 데이터 저장 시에 미리 정의하지 않은 컬럼도 인덱싱이 가능하여 스키마의 변경이 자유롭다.</li>
-<li>ELK(Elasticsearch / Logstash / Kibana) 스택으로 사용된다.</li>
-</ul>
-<h4 id="Elasticsearch-장점"><a href="#Elasticsearch-장점" class="headerlink" title="Elasticsearch 장점"></a>Elasticsearch 장점</h4><ul>
-<li>오픈소스이다.</li>
-<li>실시간 분석(real-time)이 가능하다.<ul>
-<li>대용량 데이터 분석에 가장 널리 사용되고 있는 것은 하둡 플랫폼 위에서 실행되는 Pig, Hive인데, 하둡은 기본적으로 배치 기반의 분석 시스템이다.</li>
-<li>반면에 Elasticsearch는 클러스터가 실행되고 있는 동안에는 계속해서 데이터가 입력되고, 동시에 실시간에 가까운 속도로 색인된 데이터의 검색 및 집계가 가능하다.</li>
-</ul>
-</li>
-<li>전문(full text) 검색 엔진이다.<ul>
-<li>루씬은 기본적으로 역파일 색인이라는 구조로 데이터를 저장하는데, 루씬을 기반으로 한 elasticsearch도 마찬가지로 색인된 모든 데이터를 역파일 색인 구조로 저장하여 가공된 텍스트를 검색한다.</li>
-</ul>
-</li>
-<li>RESTFul API를 지원한다.</li>
-<li>멀티테넌시<ul>
-<li>서로 다른 인덱스들을 별도의 커넥션 없이 하나의 질의로 묶어서 검색하고, 검색 결과들을 하나의 출력으로 도출할 수 있다.</li>
-</ul>
-</li>
-<li>정형, 비정형 데이터를 모두 수용할 수 있는 유연성을 가지고 있다.</li>
-</ul>
-<h4 id="Elasticsearch-단점"><a href="#Elasticsearch-단점" class="headerlink" title="Elasticsearch 단점"></a>Elasticsearch 단점</h4><ul>
-<li>완전 실시간은 아니다. 색인된 데이터는 내부적으로 commit, flush같은 복잡한 과정을 거치기 때문에 1초 뒤에 검색이 가능하다.</li>
-<li>Transaction Rollback를 지원하지 않는다.</li>
-<li>데이터의 업데이트를 제공하지 않는다. 업데이트 명령의 경우 기존 문서를 삭제하고 새로운 문서를 생성하는 방식이다.</li>
-</ul>
-<h4 id="RDBMS와-Elasticsearch의-차이"><a href="#RDBMS와-Elasticsearch의-차이" class="headerlink" title="RDBMS와 Elasticsearch의 차이"></a>RDBMS와 Elasticsearch의 차이</h4><ul>
-<li>저장 방식이 다르다.<ul>
-<li>RDB는 행을 기반으로 데이터를 저장한다.</li>
-<li>Elasticsearch는 단어를 기반(역인덱스)으로 저장한다. 예를 들어, “MSA”를 저장할 때, 해당 단어가 속한 도큐먼트들을 같이 저장하는 것이다. </li>
-</ul>
-</li>
-<li>모델링 방식이 다르다.<ul>
-<li>RDB는 관계형 데이터베이스이기 때문에 일반적인 정규화 방법록을 기반으로 설계한다.</li>
-<li>Elasticsearch는 NoSQL 기반의 문서 지향 데이터베이스이기 때문에 데이터의 유형, 검색 조건, 집계 및 시각화 여부 등에 따라 종류가 다양하다. Parent-Child 모델링, Nested 모델링, Application Side Join 모델링, Denormalization 모델링이 있다.</li>
-</ul>
-</li>
-</ul>
-<h4 id="역색인-구조"><a href="#역색인-구조" class="headerlink" title="역색인 구조"></a>역색인 구조</h4><ul>
-<li>일반적인 색인의 목적은 “문서의 위치”에 대한 인덱스를 만들어서 빠르게 그 문서에 접근하고자 한다. </li>
-<li>역색인은 반대로 “문서 내의 문자와 같은 내용물”의 맵핑 정보를 색인해 놓는 것이다.</li>
-<li>예를 들어, 일반 색인은 책의 목차와 같은 의미이고, 역색인은 책 가장 뒤의 단어 별 색인 페이지이다.</li>
-</ul>
-<h4 id="핵심-개념"><a href="#핵심-개념" class="headerlink" title="핵심 개념"></a>핵심 개념</h4><ol>
-<li>클러스터<ul>
-<li>Elasticsearch에서 가장 큰 시스템 단위를 의미하여, 최소 하나 이상의 노드로 이루어진 노드들의 집합이다.</li>
-<li>여러 대의 서버가 하나의 클러스터를 구성할 수 있고, 한 서버에 여러 개의 클러스터가 존재할 수 있다.</li>
-</ul>
-</li>
-<li>노드<ul>
-<li>클러스터에 포함된 단일 서버로서 데이터를 저장하고 클러스터의 색인화 및 검색기능에 참여한다.</li>
-<li>역할에 따라 Master, Data, Coordinating, Ingest 노드로 구분할 수 있다.<ul>
-<li>Master Node: 클러스터 관리, 노드 추가/제거 등 관리</li>
-<li>Data Node: 실질적인 데이터를 저장, 데이터가 실제로 분산 저장되는 물리 공간인 샤드가 배치됨, 검색과 통계 등 데이터 관련 작업 수행</li>
-<li>Coordinating Node: 사용자의 요청만 받아서 처리, 클러스터 관련 요청은 Master Node, 데이터 관련 요청은 Data Node</li>
-<li>Ingest Node: 문서의 전처리 담당, 인덱스 생성 전 문서의 형식을 다양하게 변경 가능</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>인덱스<ul>
-<li>데이터 저장 공간</li>
-<li>RDBMS에서 database와 대응하는 개념이다.</li>
-<li>하나의 물리 노드에 여러개의 논리 인덱스를 생성</li>
-<li>하나의 인덱스가 여러 노드에 분산 저장</li>
-</ul>
-</li>
-<li>타입<ul>
-<li>인덱스의 논리적 구조이다.</li>
-</ul>
-</li>
-<li>도큐먼트<ul>
-<li>데이터가 저장되는 최소 단위</li>
-<li>RDBMS에서 Row와 대응하는 개념이다.</li>
-</ul>
-</li>
-<li>샤드<ul>
-<li>파티션으로, 색인된 문서는 하나의 인덱스, 인덱스 내부에 색인된 데이터는 여러개의 파티션으로 나뉘어 구성된다. </li>
-</ul>
-</li>
-</ol>
-<h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://esbook.kimjmin.net/01-overview/1.1-elastic-stack/1.1.1-elasticsearch">Elasthcsearch 가이드북</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.samsungsds.com/kr/insights/elastic_data_modeling.html">엘라스틱서치에서 관계형 데이터 모델링하기</a></li>
-<li><a target="_blank" rel="noopener" href="https://jaemunbro.medium.com/elastic-search-%EA%B8%B0%EC%B4%88-%EC%8A%A4%ED%84%B0%EB%94%94-ff01870094f0">기본 개념과 특징</a></li>
-</ul>
-
+            
             
 
 
@@ -428,14 +332,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/04/23/Celery-rabbitmq/"
-                    data-tooltip="Celery와 RabbitMQ"
-                    aria-label="PREVIOUS: Celery와 RabbitMQ"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -445,9 +346,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/04/16/Profiling-tool/"
-                    data-tooltip="프로파일링과 silk"
-                    aria-label="NEXT: 프로파일링과 silk"
+                    href="/2024/04/17/Elasticsearch/"
+                    data-tooltip="Elasticsearch"
+                    aria-label="NEXT: Elasticsearch"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -472,7 +373,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/17/Elasticsearch/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -485,7 +386,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/17/Elasticsearch/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -498,7 +399,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/17/Elasticsearch/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -543,14 +444,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/04/23/Celery-rabbitmq/"
-                    data-tooltip="Celery와 RabbitMQ"
-                    aria-label="PREVIOUS: Celery와 RabbitMQ"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -560,9 +458,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/04/16/Profiling-tool/"
-                    data-tooltip="프로파일링과 silk"
-                    aria-label="NEXT: 프로파일링과 silk"
+                    href="/2024/04/17/Elasticsearch/"
+                    data-tooltip="Elasticsearch"
+                    aria-label="NEXT: Elasticsearch"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -587,7 +485,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/17/Elasticsearch/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -600,7 +498,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/17/Elasticsearch/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -613,7 +511,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/17/Elasticsearch/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -647,7 +545,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/17/Elasticsearch/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -660,7 +558,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/17/Elasticsearch/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -673,7 +571,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/17/Elasticsearch/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2024/04/23/Celery-rabbitmq/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
