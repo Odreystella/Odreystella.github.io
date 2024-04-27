@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nmac 환경에서 hexo 블로그 이어서 사용하기결론: 백업해둔 파일이 없으면 새로 시작해야한다.\n\n\n\n\n준비환경 만들기\nhomebrew, git가 설치되어 있는지 확인하기\nnvm 설치하기\nNode Version Manager\n하나의 OS에서 여러 버전의 node.js를 설치하고, 사용할 버전을 쉽게 전환할 수 있게 도와주는 프로그램이다. pyenv와 같은 역할이다.\n\n\nNode.js 설치하기\nHexo 설치하기\n\n\nnvm 설치하기\nbrew install nvm\nnvm -v 했을 때 command not found:nvm이 뜬다.\nzshrc에 환경변수 추가하기\nvi ~/.zshrc\n아래 내용을 추가하고 변경사항을 적용한다.\n이젠 버전확인이 가능할 것이다. 버전 확인해보니 10.5.0이 설치되었다.1234# nvm settingsexport NVM_DIR=&quot;$HOME/.nvm&quot;  [ -s &quot;/opt/homebrew/opt/nvm/nvm.sh&quot; ] &amp;&amp; \\. &quot;/opt/homebrew/opt/nvm/nvm.sh&quot;  # This loads nvm  [ -s &quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot; ] &amp;&amp; \\. &quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot;\n\n\n\n\nNode.js 설치하기\nnvm install --lts v20.12.1이 설치되었다.\nnvm install v18.15.0 으로 특정 버전을 설치할 수도 있다.\n\n\nHexo 설치하기\nnpm install -g hexo-cli -g는 global\nHexo는 정적 사이트 생성기(Static Site Generator)이다.\n\n\n환경 셋팅이 끝났으니 hexo init 을 하고 기존에 블로그 올려둔 내용을 깃허브에서 클론하면 되겠다고 생각했는데, 클론한 폴더 구조가 내가 생각했던 거랑 달라서 검색이 필요했다. 깃허브에 올라가있는 파일들은 *.md 파일들이 아니라 public 폴더에 있는 파일들이었다.\n이쯤에서 hexo의 배포과정에 대한 이해가 필요했다. \nhexo new 커맨드로 새 글을 작성한다. 이때 *.md 파일이 생성된다.\nhexo generate 또는 hexo g 커맨드로 빌드한다. 이때 *.md 파일을 웹사이트(html, css, js)로 만들어준다. 이 결과물이 public 폴더에 저장된다.\nhexo deploy 또는 hexo d 커맨드로 배포한다. github.io 도메인으로 새로 올린 글을 확인할 수 있다. \n결과적으로 내가 작성한 *.md 파일들은 깃허브에 올라가지 않는다. 수정한 템플릿과 설정파일, 테마도 따로 저장되지 않는다. 이런 부분을 위해서는 어딘가에 백업이 필요하다.\n\n\n정말 다행히 나는 예전에 의도치않게 백업해둔 폴더가 있어서 그걸 가져와서 hexo server 를 돌려보니 기존처럼 잘 실행됐다. 백업된 폴더가 없었으면 다시 만들었어야 했을텐데 참 다행이다..열심히 블로깅해야겠다.\n참고\nHexo 배포 원리와 백업하기\n\n\n\n","dateCreated":"2024-04-04T22:27:58+09:00","dateModified":"2024-04-04T22:37:40+09:00","datePublished":"2024-04-04T22:27:58+09:00","description":"\nmac 환경에서 hexo 블로그 이어서 사용하기결론: 백업해둔 파일이 없으면 새로 시작해야한다.\n","headline":"hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/","keywords":"hexo"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nmac 환경에서 hexo 블로그 이어서 사용하기결론: 백업해둔 파일이 없으면 새로 시작해야한다.\n\n\n\n\n\n준비환경 만들기\nhomebrew, git가 설치되어 있는지 확인하기\nnvm 설치하기\nNode Version Manager\n하나의 OS에서 여러 버전의 node.js를 설치하고, 사용할 버전을 쉽게 전환할 수 있게 도와주는 프로그램이다. pyenv와 같은 역할이다.\n\n\nNode.js 설치하기\nHexo 설치하기\n\nnvm 설치하기\nbrew install nvm\nnvm -v 했을 때 command not found:nvm이 뜬다.\nzshrc에 환경변수 추가하기\nvi ~/.zshrc\n아래 내용을 추가하고 변경사항을 적용한다.\n이젠 버전확인이 가능할 것이다. 버전 확인해보니 10.5.0이 설치되었다.1234# nvm settingsexport NVM_DIR=&quot;$HOME/.nvm&quot;  [ -s &quot;/opt/homebrew/opt/nvm/nvm.sh&quot; ] &amp;&amp; \\. &quot;/opt/homebrew/opt/nvm/nvm.sh&quot;  # This loads nvm  [ -s &quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot; ] &amp;&amp; \\. &quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot;\n\n\n\n\n\nNode.js 설치하기\nnvm install --lts v20.12.1이 설치되었다.\nnvm install v18.15.0 으로 특정 버전을 설치할 수도 있다.\n\nHexo 설치하기\nnpm install -g hexo-cli -g는 global\nHexo는 정적 사이트 생성기(Static Site Generator)이다.\n환경 셋팅이 끝났으니 hexo init 을 하고 기존에 블로그 올려둔 내용을 깃허브에서 클론하면 되겠다고 생각했는데, 클론한 폴더 구조가 내가 생각했던 거랑 달라서 검색이 필요했다. 깃허브에 올라가있는 파일들은 *.md 파일들이 아니라 public 폴더에 있는 파일들이었다.\n이쯤에서 hexo의 배포과정에 대한 이해가 필요했다. \nhexo new 커맨드로 새 글을 작성한다. 이때 *.md 파일이 생성된다.\nhexo generate 또는 hexo g 커맨드로 빌드한다. 이때 *.md 파일을 웹사이트(html, css, js)로 만들어준다. 이 결과물이 public 폴더에 저장된다.\nhexo deploy 또는 hexo d 커맨드로 배포한다. github.io 도메인으로 새로 올린 글을 확인할 수 있다. \n결과적으로 내가 작성한 *.md 파일들은 깃허브에 올라가지 않는다. 수정한 템플릿과 설정파일, 테마도 따로 저장되지 않는다. 이런 부분을 위해서는 어딘가에 백업이 필요하다.\n\n\n정말 다행히 나는 예전에 백업해둔 폴더가 있어서 그걸 가져와서 hexo server 를 돌려보니 기존처럼 잘 실행됐다. 백업된 폴더가 없었으면 다시 만들었어야 했을텐데 참 다행이다..열심히 블로깅해야겠다.\n\n참고\n Hexo 배포 원리와 백업하기\n\n","dateCreated":"2024-04-04T22:27:58+09:00","dateModified":"2024-04-27T22:55:26+09:00","datePublished":"2024-04-04T22:27:58+09:00","description":"\nmac 환경에서 hexo 블로그 이어서 사용하기결론: 백업해둔 파일이 없으면 새로 시작해야한다.\n","headline":"hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/04/Hexo-with-mac-os/","keywords":"hexo"}</script>
     <meta name="description" content="mac 환경에서 hexo 블로그 이어서 사용하기결론: 백업해둔 파일이 없으면 새로 시작해야한다.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="hexo) mac환경에서 hexo 이어서 블로깅하기(hexo 배포 원리 이해하기)">
@@ -20,7 +20,7 @@
 <meta property="og:description" content="mac 환경에서 hexo 블로그 이어서 사용하기결론: 백업해둔 파일이 없으면 새로 시작해야한다.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-04-04T13:27:58.000Z">
-<meta property="article:modified_time" content="2024-04-04T13:37:40.927Z">
+<meta property="article:modified_time" content="2024-04-27T13:55:26.031Z">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
     
@@ -326,8 +326,9 @@
 </blockquote>
 <a id="more"></a>
 
-<ol>
-<li>준비환경 만들기<ol>
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EC%A4%80%EB%B9%84%ED%99%98%EA%B2%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0"><span class="toc-text">준비환경 만들기</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nvm-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0"><span class="toc-text">nvm 설치하기</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Node-js-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0"><span class="toc-text">Node.js 설치하기</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hexo-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0"><span class="toc-text">Hexo 설치하기</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EC%B0%B8%EA%B3%A0"><span class="toc-text">참고</span></a></li></ol>
+
+<h4 id="준비환경-만들기"><a href="#준비환경-만들기" class="headerlink" title="준비환경 만들기"></a>준비환경 만들기</h4><ol>
 <li>homebrew, git가 설치되어 있는지 확인하기</li>
 <li>nvm 설치하기<ul>
 <li>Node Version Manager</li>
@@ -337,28 +338,25 @@
 <li>Node.js 설치하기</li>
 <li>Hexo 설치하기</li>
 </ol>
-</li>
-<li>nvm 설치하기<ul>
+<h4 id="nvm-설치하기"><a href="#nvm-설치하기" class="headerlink" title="nvm 설치하기"></a>nvm 설치하기</h4><ul>
 <li><code>brew install nvm</code></li>
 <li><code>nvm -v</code> 했을 때 command not found:nvm이 뜬다.</li>
 <li>zshrc에 환경변수 추가하기<ol>
 <li><code>vi ~/.zshrc</code></li>
 <li>아래 내용을 추가하고 변경사항을 적용한다.</li>
-<li>이젠 버전확인이 가능할 것이다. 버전 확인해보니 10.5.0이 설치되었다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nvm settings</span></span><br><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/.nvm&quot;</span></span><br><span class="line">  [ -s <span class="string">&quot;/opt/homebrew/opt/nvm/nvm.sh&quot;</span> ] &amp;&amp; \. <span class="string">&quot;/opt/homebrew/opt/nvm/nvm.sh&quot;</span>  <span class="comment"># This loads nvm</span></span><br><span class="line">  [ -s <span class="string">&quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot;</span> ] &amp;&amp; \. <span class="string">&quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>이젠 버전확인이 가능할 것이다. 버전 확인해보니 10.5.0이 설치되었다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nvm settings</span></span><br><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/.nvm&quot;</span></span><br><span class="line">  [ -s <span class="string">&quot;/opt/homebrew/opt/nvm/nvm.sh&quot;</span> ] &amp;&amp; \. <span class="string">&quot;/opt/homebrew/opt/nvm/nvm.sh&quot;</span>  <span class="comment"># This loads nvm</span></span><br><span class="line">  [ -s <span class="string">&quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot;</span> ] &amp;&amp; \. <span class="string">&quot;/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm&quot;</span></span><br></pre></td></tr></table></figure>
+
+</li>
 </ol>
 </li>
 </ul>
-</li>
-<li>Node.js 설치하기<ul>
+<h4 id="Node-js-설치하기"><a href="#Node-js-설치하기" class="headerlink" title="Node.js 설치하기"></a>Node.js 설치하기</h4><ul>
 <li><code>nvm install --lts</code> v20.12.1이 설치되었다.</li>
 <li><code>nvm install v18.15.0</code> 으로 특정 버전을 설치할 수도 있다.</li>
 </ul>
-</li>
-<li>Hexo 설치하기<ul>
+<h4 id="Hexo-설치하기"><a href="#Hexo-설치하기" class="headerlink" title="Hexo 설치하기"></a>Hexo 설치하기</h4><ul>
 <li><code>npm install -g hexo-cli</code> -g는 global</li>
 <li>Hexo는 정적 사이트 생성기(Static Site Generator)이다.</li>
-</ul>
-</li>
 <li>환경 셋팅이 끝났으니 <code>hexo init</code> 을 하고 기존에 블로그 올려둔 내용을 깃허브에서 클론하면 되겠다고 생각했는데, 클론한 폴더 구조가 내가 생각했던 거랑 달라서 검색이 필요했다. 깃허브에 올라가있는 파일들은 <code>*.md</code> 파일들이 아니라 public 폴더에 있는 파일들이었다.</li>
 <li>이쯤에서 hexo의 배포과정에 대한 이해가 필요했다. <ol>
 <li><code>hexo new</code> 커맨드로 새 글을 작성한다. 이때 <code>*.md</code> 파일이 생성된다.</li>
@@ -367,12 +365,11 @@
 <li>결과적으로 내가 작성한 <code>*.md</code> 파일들은 깃허브에 올라가지 않는다. 수정한 템플릿과 설정파일, 테마도 따로 저장되지 않는다. 이런 부분을 위해서는 어딘가에 백업이 필요하다.</li>
 </ol>
 </li>
-<li>정말 다행히 나는 예전에 의도치않게 백업해둔 폴더가 있어서 그걸 가져와서 <code>hexo server</code> 를 돌려보니 기존처럼 잘 실행됐다. 백업된 폴더가 없었으면 다시 만들었어야 했을텐데 참 다행이다..열심히 블로깅해야겠다.</li>
-<li>참고<ul>
-<li><a target="_blank" rel="noopener" href="https://futurecreator.github.io/2018/07/18/hexo-blog-backup/">Hexo 배포 원리와 백업하기</a></li>
+<li>정말 다행히 나는 예전에 백업해둔 폴더가 있어서 그걸 가져와서 <code>hexo server</code> 를 돌려보니 기존처럼 잘 실행됐다. 백업된 폴더가 없었으면 다시 만들었어야 했을텐데 참 다행이다..열심히 블로깅해야겠다.</li>
 </ul>
-</li>
-</ol>
+<h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><ul>
+<li> <a target="_blank" rel="noopener" href="https://futurecreator.github.io/2018/07/18/hexo-blog-backup/">Hexo 배포 원리와 백업하기</a></li>
+</ul>
 
             
 
@@ -477,7 +474,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
@@ -592,7 +589,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
