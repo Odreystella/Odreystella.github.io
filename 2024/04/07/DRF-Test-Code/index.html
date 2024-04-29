@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nDRF로 REST API를 개발할 때 테스트 코드를 작성하는 이유, 방법에 대하여 알아보자“Code without tests is broken as designed.” by Jacob Kaplan-Moss테스트 없는 코드는 설계 상으로 고장난 것과 같다. Django  공동 창시자 제이콥의 말이다.\n\n\n\n\n\n\n테스트 코드를 작성하는 이유\n여러 버그를 쉽고 빠르게 찾을 수 있다.\n시간과 돈을 절약한다.\nCI하는 과정에서 테스팅이 중요하다.\n테스트를 작성하는 것만으로도 도큐먼테이션의 역할을 한다.\n테스트 코드를 보면서 어떤 기능이 있는지, 무엇을 위한건지 알 수 있다.\n\n\n코드의 신뢰도가 증가한다.\n코드의 성능을 체크할 수 있다.\n코드의 안전성을 보장한다.\n코드의 복잡도를 줄인다.\n\n\n테스트 방법론 TDD(Test Driven Develop)\n소프트웨어를 구현하는데 있어서 필요한 요구사항을 만족하는 작은 테스트코드를 먼저 작성하고, 이를 통과할 수 있는 코드 작성을 반복하면서 개발하는 방법\nTDD에 대해서는 다음에 더 깊게 공부해보자\n\n\n테스트 종류\n기능 테스트(Functional testing)\n사용자와 어플리케이션의 상호작용이 원활하게 이루어지는지 테스트한다.\n프로덕트를 사용자 관점에서 테스트하는 방법이다.\nDB 및 여러 인프라가 갖추어진 상태로 테스트한다.\nE2E(End To End) 테스트, 브라우저 테스트라고 한다.\n높은 복잡성을 가지고 있기 때문에 단위테스트처럼 세밀하게 나누는 것보다 사용자와 앱의 상호작용을 테스트하고 싶을 때 유용하다. 작은 스타트업의 경우 비효율적일 수 있다.\n예를 들어 회원가입에 대한 기능 테스트라고 하면 유저가 필수 값을 다 입력하고, 약관을 동의하여 회원가입을 마쳤을 때 “회원가입을 축하합니다.” 라는 메시지와 로그인 화면으로 상태를 바꾸는 하나의 과정이 제대로 동작하는지 테스트한다.\n좀 더 자세한 내용은 E2E테스트 도입 경험기 참고하면 좋다.\n\n\n통합 테스트(Integration testing)\n서로 다른 시스템들의 상호작용이 잘 이루어지는지 테스트한다.\n예를 들어 애플리케이션과 데이터베이스가 제대로 상호작용하고 있는지 테스트하는 것을 말한다.\n\n\n단위 테스트(Unit testing)\n함수 하나하나와 같이 코드의 작은 부분을 테스트한다.\n테스트를 위한 입력값을 주어서 그에 대한 함수의 출력 값이 정확한지 아닌지를 판단한다.\n네트워크나 데이터베이스같은 외부 리소스가 포함된다면 그것은 유닛테스트가 아니다.\n함수 하나하나 테스트 코드를 작성하는 것이 좋다.\n\n\n\n\nDRF에서 단위 테스트를 작성하는 방법\n기본적으로 python manage.py test 커맨드로 모든 테스트를 돌릴 수 있다. 특정 앱, 특정 앱의 하나의 테스트 클래스, 특정 앱의 하나의 테스트 클래스의 메소드만 따로 실행할 수도 있다. \npython manage.py test animals\npython manage.py test animals.tests.AnimalTestCase\npython manage.py test animals.tests.AnimalTestCase.test_animals_can_speak\n\n\n각 앱 내에 test.py 에서 작성하거나, 테스트 코드가 많을 경우 tests 폳더를 만들어서 관리한다. 테스트 실행 시, test*.py를 검색하여 실행하기 때문에, test_something_something.py 해당 규칙만 지켜 파일을 만들면 된다.\n기본적인 코드 스니펫은 다음과 같다.123456789101112131415161718192021from rest_framework.test import APITestCasefrom .models import Amenityclass TestAmenities(APITestCase):\tNAME = &quot;AMENITY NAME&quot;\tDESC = &quot;AMENITY DESC&quot;\tURL = &quot;/api/v1/rooms/amenities/&quot;\tdef setUp(self):\t\tAmenity.objects.create(name=self.NAME, description=self.DESC)\tdef test_get_all_amenities(self):\t\t# 1. 테스트할 url에 request 보내기\t\t# 2. 반환되는 상태코드를 확인할 지, 데이터 타입을 확인할지 결정함\t\tresponse = self.client.get(self.URL)\t\tdata = response.json()\t\t\t\tself.assertEqual(response.status_code, 200, &quot;Status code is not 200&quot;)\t\tself.assertIsInstance(data, list)\n\n\nsetUp()과 setUpTestData()\n테스트에 사용될 데이터를 선언하는 단계이다.\nsetUp메서드만 사용해봤는데, 두 방법의 차이점을 이해하자 \nsetUp()은 테스트 메소드가 실행될 때 마다 실행된다. 여러번 초기화가 필요할 때 사용한다.\nsetUpTestData()은 클래스 수준에서 실행되고, 클래스 단위로 처음 한번만 실행된다. 한번만 초기화가 필요할 때 사용한다.\n\n\n참고\n유닛테스트, 통합테스트, 기능테스트란?\nE2E테스트 도입 경험기\nE2E 테스트는 그만 테스트 개선기\nDRF에서 테스트코드 작성하기1\n\n\n\n","dateCreated":"2024-04-07T11:59:19+09:00","dateModified":"2024-04-08T00:09:32+09:00","datePublished":"2024-04-07T11:59:19+09:00","description":"\nDRF로 REST API를 개발할 때 테스트 코드를 작성하는 이유, 방법에 대하여 알아보자“Code without tests is broken as designed.” by Jacob Kaplan-Moss테스트 없는 코드는 설계 상으로 고장난 것과 같다. Django  공동 창시자 제이콥의 말이다.\n","headline":"DRF Test Code","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/07/DRF-Test-Code/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/07/DRF-Test-Code/","keywords":"Test"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\nDRF로 REST API를 개발할 때 테스트 코드를 작성하는 이유, 방법에 대하여 알아보자“Code without tests is broken as designed.” by Jacob Kaplan-Moss테스트 없는 코드는 설계 상으로 고장난 것과 같다. Django  공동 창시자 제이콥의 말이다.\n\n\n\n\n\n테스트 코드를 작성하는 이유\n여러 버그를 쉽고 빠르게 찾을 수 있다.\n시간과 돈을 절약한다.\nCI하는 과정에서 테스팅이 중요하다.\n테스트를 작성하는 것만으로도 도큐먼테이션의 역할을 한다.\n테스트 코드를 보면서 어떤 기능이 있는지, 무엇을 위한건지 알 수 있다.\n\n\n코드의 신뢰도가 증가한다.\n코드의 성능을 체크할 수 있다.\n코드의 안전성을 보장한다.\n코드의 복잡도를 줄인다.\n\n테스트 방법론 TDD(Test Driven Develop)\n소프트웨어를 구현하는데 있어서 필요한 요구사항을 만족하는 작은 테스트코드를 먼저 작성하고, 이를 통과할 수 있는 코드 작성을 반복하면서 개발하는 방법\nTDD에 대해서는 다음에 더 깊게 공부해보자\n\n테스트 종류\n기능 테스트(Functional testing)\n사용자와 어플리케이션의 상호작용이 원활하게 이루어지는지 테스트한다.\n프로덕트를 사용자 관점에서 테스트하는 방법이다.\nDB 및 여러 인프라가 갖추어진 상태로 테스트한다.\nE2E(End To End) 테스트, 브라우저 테스트라고 한다.\n높은 복잡성을 가지고 있기 때문에 단위테스트처럼 세밀하게 나누는 것보다 사용자와 앱의 상호작용을 테스트하고 싶을 때 유용하다. 작은 스타트업의 경우 비효율적일 수 있다.\n예를 들어 회원가입에 대한 기능 테스트라고 하면 유저가 필수 값을 다 입력하고, 약관을 동의하여 회원가입을 마쳤을 때 “회원가입을 축하합니다.” 라는 메시지와 로그인 화면으로 상태를 바꾸는 하나의 과정이 제대로 동작하는지 테스트한다.\n좀 더 자세한 내용은 E2E테스트 도입 경험기 참고하면 좋다.\n\n\n통합 테스트(Integration testing)\n서로 다른 시스템들의 상호작용이 잘 이루어지는지 테스트한다.\n예를 들어 애플리케이션과 데이터베이스가 제대로 상호작용하고 있는지 테스트하는 것을 말한다.\n\n\n단위 테스트(Unit testing)\n함수 하나하나와 같이 코드의 작은 부분을 테스트한다.\n테스트를 위한 입력값을 주어서 그에 대한 함수의 출력 값이 정확한지 아닌지를 판단한다.\n네트워크나 데이터베이스같은 외부 리소스가 포함된다면 그것은 유닛테스트가 아니다.\n함수 하나하나 테스트 코드를 작성하는 것이 좋다.\n\n\n\nDRF에서 단위 테스트를 작성하는 방법\n기본적으로 python manage.py test 커맨드로 모든 테스트를 돌릴 수 있다. 특정 앱, 특정 앱의 하나의 테스트 클래스, 특정 앱의 하나의 테스트 클래스의 메소드만 따로 실행할 수도 있다. \npython manage.py test animals\npython manage.py test animals.tests.AnimalTestCase\npython manage.py test animals.tests.AnimalTestCase.test_animals_can_speak\n\n\n각 앱 내에 test.py 에서 작성하거나, 테스트 코드가 많을 경우 tests 폳더를 만들어서 관리한다. 테스트 실행 시, test*.py를 검색하여 실행하기 때문에, test_something_something.py 해당 규칙만 지켜 파일을 만들면 된다.\n기본적인 코드 스니펫은 다음과 같다.123456789101112131415161718192021from rest_framework.test import APITestCasefrom .models import Amenityclass TestAmenities(APITestCase):\tNAME = &quot;AMENITY NAME&quot;\tDESC = &quot;AMENITY DESC&quot;\tURL = &quot;/api/v1/rooms/amenities/&quot;\tdef setUp(self):\t\tAmenity.objects.create(name=self.NAME, description=self.DESC)\tdef test_get_all_amenities(self):\t\t# 1. 테스트할 url에 request 보내기\t\t# 2. 반환되는 상태코드를 확인할 지, 데이터 타입을 확인할지 결정함\t\tresponse = self.client.get(self.URL)\t\tdata = response.json()\t\t\t\tself.assertEqual(response.status_code, 200, &quot;Status code is not 200&quot;)\t\tself.assertIsInstance(data, list)\nsetUp()과 setUpTestData()\n테스트에 사용될 데이터를 선언하는 단계이다.\nsetUp메서드만 사용해봤는데, 두 방법의 차이점을 이해하자 \nsetUp()은 테스트 메소드가 실행될 때 마다 실행된다. 여러번 초기화가 필요할 때 사용한다.\nsetUpTestData()은 클래스 수준에서 실행되고, 클래스 단위로 처음 한번만 실행된다. 한번만 초기화가 필요할 때 사용한다.\n\n\n\n참고\n유닛테스트, 통합테스트, 기능테스트란?\nE2E테스트 도입 경험기\nE2E 테스트는 그만 테스트 개선기\nDRF에서 테스트코드 작성하기1\n\n","dateCreated":"2024-04-07T11:59:19+09:00","dateModified":"2024-04-29T23:40:03+09:00","datePublished":"2024-04-07T11:59:19+09:00","description":"\nDRF로 REST API를 개발할 때 테스트 코드를 작성하는 이유, 방법에 대하여 알아보자“Code without tests is broken as designed.” by Jacob Kaplan-Moss테스트 없는 코드는 설계 상으로 고장난 것과 같다. Django  공동 창시자 제이콥의 말이다.\n","headline":"DRF Test Code","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/04/07/DRF-Test-Code/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/04/07/DRF-Test-Code/","keywords":"Test"}</script>
     <meta name="description" content="DRF로 REST API를 개발할 때 테스트 코드를 작성하는 이유, 방법에 대하여 알아보자“Code without tests is broken as designed.” by Jacob Kaplan-Moss테스트 없는 코드는 설계 상으로 고장난 것과 같다. Django  공동 창시자 제이콥의 말이다.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="DRF Test Code">
@@ -20,7 +20,7 @@
 <meta property="og:description" content="DRF로 REST API를 개발할 때 테스트 코드를 작성하는 이유, 방법에 대하여 알아보자“Code without tests is broken as designed.” by Jacob Kaplan-Moss테스트 없는 코드는 설계 상으로 고장난 것과 같다. Django  공동 창시자 제이콥의 말이다.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-04-07T02:59:19.000Z">
-<meta property="article:modified_time" content="2024-04-07T15:09:32.048Z">
+<meta property="article:modified_time" content="2024-04-29T14:40:03.568Z">
 <meta property="article:tag" content="Test">
 <meta name="twitter:card" content="summary">
     
@@ -326,10 +326,9 @@
 </blockquote>
 <a id="more"></a>
 
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0"><span class="toc-text">테스트 코드를 작성하는 이유</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%ED%85%8C%EC%8A%A4%ED%8A%B8-%EB%B0%A9%EB%B2%95%EB%A1%A0-TDD-Test-Driven-Develop"><span class="toc-text">테스트 방법론 TDD(Test Driven Develop)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A2%85%EB%A5%98"><span class="toc-text">테스트 종류</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DRF%EC%97%90%EC%84%9C-%EB%8B%A8%EC%9C%84-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95"><span class="toc-text">DRF에서 단위 테스트를 작성하는 방법</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EC%B0%B8%EA%B3%A0"><span class="toc-text">참고</span></a></li></ol>
 
-
-<ol>
-<li>테스트 코드를 작성하는 이유<ol>
+<h4 id="테스트-코드를-작성하는-이유"><a href="#테스트-코드를-작성하는-이유" class="headerlink" title="테스트 코드를 작성하는 이유"></a>테스트 코드를 작성하는 이유</h4><ol>
 <li>여러 버그를 쉽고 빠르게 찾을 수 있다.</li>
 <li>시간과 돈을 절약한다.</li>
 <li>CI하는 과정에서 테스팅이 중요하다.</li>
@@ -342,13 +341,11 @@
 <li>코드의 안전성을 보장한다.</li>
 <li>코드의 복잡도를 줄인다.</li>
 </ol>
-</li>
-<li>테스트 방법론 TDD(Test Driven Develop)<ul>
+<h4 id="테스트-방법론-TDD-Test-Driven-Develop"><a href="#테스트-방법론-TDD-Test-Driven-Develop" class="headerlink" title="테스트 방법론 TDD(Test Driven Develop)"></a>테스트 방법론 TDD(Test Driven Develop)</h4><ul>
 <li>소프트웨어를 구현하는데 있어서 필요한 요구사항을 만족하는 <strong>작은 테스트코드를 먼저 작성</strong>하고, 이를 <strong>통과</strong>할 수 있는 코드 작성을 <strong>반복</strong>하면서 개발하는 방법</li>
 <li>TDD에 대해서는 다음에 더 깊게 공부해보자</li>
 </ul>
-</li>
-<li>테스트 종류<ul>
+<h4 id="테스트-종류"><a href="#테스트-종류" class="headerlink" title="테스트 종류"></a>테스트 종류</h4><ul>
 <li><strong>기능 테스트(Functional testing)</strong><ul>
 <li>사용자와 어플리케이션의 상호작용이 원활하게 이루어지는지 테스트한다.</li>
 <li>프로덕트를 <strong>사용자 관점</strong>에서 테스트하는 방법이다.</li>
@@ -372,8 +369,7 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>DRF에서 단위 테스트를 작성하는 방법<ol>
+<h4 id="DRF에서-단위-테스트를-작성하는-방법"><a href="#DRF에서-단위-테스트를-작성하는-방법" class="headerlink" title="DRF에서 단위 테스트를 작성하는 방법"></a>DRF에서 단위 테스트를 작성하는 방법</h4><ol>
 <li>기본적으로 <code>python manage.py test</code> 커맨드로 모든 테스트를 돌릴 수 있다. 특정 앱, 특정 앱의 하나의 테스트 클래스, 특정 앱의 하나의 테스트 클래스의 메소드만 따로 실행할 수도 있다. <ul>
 <li><code>python manage.py test animals</code></li>
 <li><code>python manage.py test animals.tests.AnimalTestCase</code></li>
@@ -382,8 +378,6 @@
 </li>
 <li>각 앱 내에 <code>test.py</code> 에서 작성하거나, 테스트 코드가 많을 경우 <code>tests</code> 폳더를 만들어서 관리한다. 테스트 실행 시, <code>test*.py</code>를 검색하여 실행하기 때문에, <code>test_something_something.py</code> 해당 규칙만 지켜 파일을 만들면 된다.</li>
 <li>기본적인 코드 스니펫은 다음과 같다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.test <span class="keyword">import</span> APITestCase</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Amenity</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestAmenities</span>(<span class="params">APITestCase</span>):</span></span><br><span class="line">	NAME = <span class="string">&quot;AMENITY NAME&quot;</span></span><br><span class="line">	DESC = <span class="string">&quot;AMENITY DESC&quot;</span></span><br><span class="line">	URL = <span class="string">&quot;/api/v1/rooms/amenities/&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">		Amenity.objects.create(name=self.NAME, description=self.DESC)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">test_get_all_amenities</span>(<span class="params">self</span>):</span></span><br><span class="line">		<span class="comment"># 1. 테스트할 url에 request 보내기</span></span><br><span class="line">		<span class="comment"># 2. 반환되는 상태코드를 확인할 지, 데이터 타입을 확인할지 결정함</span></span><br><span class="line"></span><br><span class="line">		response = self.client.get(self.URL)</span><br><span class="line">		data = response.json()</span><br><span class="line">		</span><br><span class="line">		self.assertEqual(response.status_code, <span class="number">200</span>, <span class="string">&quot;Status code is not 200&quot;</span>)</span><br><span class="line">		self.assertIsInstance(data, <span class="built_in">list</span>)</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
 <li>setUp()과 setUpTestData()<ul>
 <li>테스트에 사용될 데이터를 선언하는 단계이다.</li>
 <li>setUp메서드만 사용해봤는데, 두 방법의 차이점을 이해하자 </li>
@@ -391,14 +385,13 @@
 <li><strong>setUpTestData</strong>()은 클래스 수준에서 실행되고, 클래스 단위로 처음 한번만 실행된다. 한번만 초기화가 필요할 때 사용한다.</li>
 </ul>
 </li>
-<li>참고<ul>
+</ol>
+<h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><ul>
 <li><a target="_blank" rel="noopener" href="https://cjwoov.tistory.com/">유닛테스트, 통합테스트, 기능테스트란?</a></li>
 <li><a target="_blank" rel="noopener" href="https://fe-developers.kakaoent.com/2023/230209-e2e/">E2E테스트 도입 경험기</a></li>
 <li><a target="_blank" rel="noopener" href="https://velog.io/@hoonki/E2E-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8A%94-%EA%B7%B8%EB%A7%8C.-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B0%9C%EC%84%A0%EA%B8%B0">E2E 테스트는 그만 테스트 개선기</a></li>
 <li><a target="_blank" rel="noopener" href="https://powerlichen.github.io/posts/drf-test-code-1/">DRF에서 테스트코드 작성하기1</a></li>
 </ul>
-</li>
-</ol>
 
             
 
@@ -503,7 +496,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
@@ -618,7 +611,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
