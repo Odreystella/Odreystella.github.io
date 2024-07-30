@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Dev Odreystella&#39;s Blog">
-    <title>코딩테스트 합격자되기 파이썬편 - 리스트 - Dev Odreystella&#39;s Blog</title>
+    <title>코딩테스트 합격자되기 파이썬편 - 딕셔너리 - Dev Odreystella&#39;s Blog</title>
     <meta name="author" content="">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n“코딩테스트 합격자되기 파이썬편” 저자가 제공한 리스트 강의와 책을 공부하고 정리한 내용입니다.\n\n\n\n\n\n리스트의 특징\n[]를 사용해서 선언한다\n데이터의 순서가 있는 시퀀스 타입이고, 변경 가능한 뮤터블 컬렉션이다.\n순서가 있기 때문에 배열처럼 인덱스로 접근이 가능하다.\n\n\n내부는 동적배열로 구현되어 있다.\n배열의 크기를 내부에서 알아서 관리한다는 의미\nid()로 주소값을 확인해 볼 수 있다.123456&gt;&gt;&gt; lst &#x3D; [&quot;my&quot;, &quot;name&quot;, &quot;is&quot;, &quot;odrey&quot;]&gt;&gt;&gt; [id(l) for l in lst][4342473536, 4355935048, 4342093728, 4343410736]&gt;&gt;&gt; lst[3] &#x3D; &quot;stella&quot;&gt;&gt;&gt; [id(l) for l in lst][4342473536, 4355935048, 4342093728, 4341217488]\n\n\n\n\n\n리스트의 메서드와 시간복잡도\n.append(item): O(1)\n반환값 없음\n\n\n.insert(idx, item): O(N)\n.pop(): O(1)\n마지막 원소 삭제\n삭제한 원소를 반환\n\n\n.pop(idx): O(N)\n인자는 인덱스\n삭제한 원소를 반환\n리스트의 맨 앞에 원소를 삭제하는 경우에는 deque의 popleft()가 시간복잡도가  O(1)이라 이걸 쓰는게 좋음\n\n\n.remove(item): O(N)\n맨 처음 나오는 item을 삭제\n반환값 없음\nitem이 리스트에 존재하지 않는 경우 ValueError\n\n\n.extend(list): O(list) 추가할 리스트의 길이 만큼\n반환값 없음\n\n\nin: O(N)\nBoolean값 반환함\n\n\n.index(item): O(N)\n.sort(): O(NlogN)\n.count(item): O(N)\n.reverse(): O(N)\nmin(lst), max(lst): O(N)\nlst[idx] : O(1)\nlen(lst): O(1)\nlst[i:j] : O(k)\nlst1 + lst2 : O(n+m) n은 lst1의 길이, m은 lst2의 길이\n\ncollections.deque의 메서드와 시간복잡도\n.append(item): O(1)\n반환값 없음\ndeque 오른쪽(끝)에 item 추가\n\n\n.appendleft(item): O(1)\ndeque 왼쪽(앞)에 item 추가\n\n\n.pop(): O(1)\ndeque 오른쪽(끝) 원소 삭제\n삭제한 원소 반환\n원소가 없으면 IndexError\n\n\n.popleft(): O(1)\ndeque 왼쪽(앞) 원소 삭제\n삭제한 원소 반환\n원소가 없으면 IndexError\n\n\n.rotate(k): O(k)\nk수만큼 회전하는데 양수면 오른쪽으로, 음수면 왼쪽으로 회전한다.\n\n\n\n코딩테스트에서 리스트를 사용할 때 주의할 점\n맨 앞에 원소를 삽입하거나, 맨 앞에 원소를 삭제하는 경우\n시간복잡도가 O(N)이다.\ncollections에서 deque를 임포트해서 사용하는 것이 좋음. 시간복잡도가 O(1)이기 때문!\n.appendleft(), .popleft()\n\n\n\n\n특정 원소가 있는지 자주 탐색이 필요한 경우\n배열이기 때문에 어떤 원소가 있는지 없는지 확인하려면 앞에서부터 탐색하는 방법밖에 없는데 시간복잡도가 O(N)이다.\n딕셔너리를 사용하거나 set()을 사용하면 시간복잡도가 O(1)\n\n\n\n프로그래머스 문제\n배열 두 배 만들기\n배열의 유사도\n진료순서 정하기\n\n참고\n코딩테스트 합격자되기 리스트 강의\nPython wiki time complexity\n\n","dateCreated":"2024-05-28T15:49:18+09:00","dateModified":"2024-05-28T15:52:07+09:00","datePublished":"2024-05-28T15:49:18+09:00","description":"\n“코딩테스트 합격자되기 파이썬편” 저자가 제공한 리스트 강의와 책을 공부하고 정리한 내용입니다.\n","headline":"코딩테스트 합격자되기 파이썬편 - 리스트","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/05/28/Coding-test-python-list/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/05/28/Coding-test-python-list/","keywords":"algorithm"}</script>
-    <meta name="description" content="“코딩테스트 합격자되기 파이썬편” 저자가 제공한 리스트 강의와 책을 공부하고 정리한 내용입니다.">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg"},"articleBody":"\n“코딩테스트 합격자되기 파이썬편” 저자가 제공한 딕셔너리 강의와 책을 공부하고 정리한 내용입니다.\n\n\n\n\n\n딕셔너리의 특징\n해시 기반으로 이루어진 자료구조\n&#123;&#125;를 사용해서 선언한다.\n{키1: 값1, 키2: 값2}처럼 키-값 쌍으로 되어 있다.\n\n해시란?\n해시 테이블\n해시 함수값이 같아서 충돌나면?\n해시 함수를 활용해서 키값을 인덱스로 만든다.\n\n딕셔너리 생성\n{}\n\n딕셔너리 접근\n리스트의 경우 어떤 원소를 찾을 때 순차탐색을 하기 때문에 시간 복잡도가 O(N)인데, 딕셔너리는 O(1)을 가짐\ndict.get(key, default): 해당하는 키가 없는 경우 None 반환\ndict[key]: 해당되는 키가 없는 경우, KeyError 발생. 예외처리 해줘야 함\n\n딕셔너리 값 변경\ndic = {‘a’: 1, ‘b’: 2, ‘c’: 3}\ndict[&#39;c&#39;] = 1\n\n딕셔너리 메서드와 시간복잡도\ndict.upadte(dic): 딕셔너리를 추가할 수 있음\n추가할 dic의 크기가 K라면, 시간복잡도 O(K)\n\n\ndict.keys(): 모든 키값을 가져옴\n메서드 자체 시간복잡도는 O(1)\n딕셔너리 크기가 N일 때, 반복문을 돌며 모든 키값을 가져올 때는 시간복잡도 O(N)\n\n\ndict.items(): 모든 키, 값을 가져옴\n메서드 자체 시간복잡도는 O(1)\n딕셔너리 크기가 N일 때, 반복문을 돌며 모든 키, 값을 가져올 때는 시간복잡도 O(N)\n\n\ndel dic[&#39;key&#39;]: 키에 해당하는 버킷 삭제\n시간복잡도 O(1)\n반환값 없음\n\n\ndict.pop(key): 키에 해당하는 버킷 삭제\n시간복잡도 O(1)\n삭제된 키에 해당하는 값 반환함\n\n\n\n코딩테스트에서 딕셔너리를 사용할 때 주의할 점\n뮤터블 객체(list, set, dictionary)는 key가 될 수 없다.\nKeyError 발생\n\n\ndict[&#39;key&#39;] 방식으로 딕셔너리에 접근할 때, key가 존재하지 않으면 KeyError이 발생한다.\ndict.get(key, default) 방식을 사용하자. KeyError가 안나게 디폴트값을 반환하는 것이고, 존재하지 않는 key를 추가하는 것은 아니다.\ndict.setdefault(key, default)는 key가 존재하지 않을 때, 딕셔너리에 새로운 key와 default를 추가하는 메서드이다.\n\n\n중복 key를 허용하지 않는다.\n키에 해싱함수를 적용한 값을 인덱스로 활용하기 때문에 같은 값이 key로 존재한다면 구분할 수가 없음.\n중복 key가 있다면 list, deque, tuple 같은 자료구조를 고려\n\n\n\n프로그래머스 문제\n포켓몬\n완주하지 못한 선수\n전화번호 목록\n\n참고\n 코딩테스트 합격자되기 딕셔너리 강의\n\n","dateCreated":"2024-07-30T23:52:12+09:00","dateModified":"2024-07-30T23:54:51+09:00","datePublished":"2024-07-30T23:52:12+09:00","description":"\n“코딩테스트 합격자되기 파이썬편” 저자가 제공한 딕셔너리 강의와 책을 공부하고 정리한 내용입니다.\n","headline":"코딩테스트 합격자되기 파이썬편 - 딕셔너리","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://odreystella.github.io/2024/07/30/Coding-test-python-dict/"},"publisher":{"@type":"Organization","name":null,"sameAs":["https://github.com/","http://stackoverflow.com/users","https://www.linkedin.com/profile/","mailto"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://odreystella.github.io/2024/07/30/Coding-test-python-dict/","keywords":"algorithm"}</script>
+    <meta name="description" content="“코딩테스트 합격자되기 파이썬편” 저자가 제공한 딕셔너리 강의와 책을 공부하고 정리한 내용입니다.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="코딩테스트 합격자되기 파이썬편 - 리스트">
-<meta property="og:url" content="https://odreystella.github.io/2024/05/28/Coding-test-python-list/index.html">
+<meta property="og:title" content="코딩테스트 합격자되기 파이썬편 - 딕셔너리">
+<meta property="og:url" content="https://odreystella.github.io/2024/07/30/Coding-test-python-dict/index.html">
 <meta property="og:site_name" content="Dev Odreystella&#39;s Blog">
-<meta property="og:description" content="“코딩테스트 합격자되기 파이썬편” 저자가 제공한 리스트 강의와 책을 공부하고 정리한 내용입니다.">
+<meta property="og:description" content="“코딩테스트 합격자되기 파이썬편” 저자가 제공한 딕셔너리 강의와 책을 공부하고 정리한 내용입니다.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-05-28T06:49:18.000Z">
-<meta property="article:modified_time" content="2024-05-28T06:52:07.074Z">
+<meta property="article:published_time" content="2024-07-30T14:52:12.000Z">
+<meta property="article:modified_time" content="2024-07-30T14:54:51.245Z">
 <meta property="article:tag" content="algorithm">
 <meta name="twitter:card" content="summary">
     
@@ -296,14 +296,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            코딩테스트 합격자되기 파이썬편 - 리스트
+            코딩테스트 합격자되기 파이썬편 - 딕셔너리
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2024-05-28T15:49:18+09:00">
+    <time datetime="2024-07-30T23:52:12+09:00">
 	
-		    May 28, 2024
+		    Jul 30, 2024
     	
     </time>
     
@@ -322,117 +322,83 @@
     <div class="post-content markdown">
         <div class="main-content-wrap">
             <blockquote>
-<p>“코딩테스트 합격자되기 파이썬편” 저자가 제공한 리스트 강의와 책을 공부하고 정리한 내용입니다.</p>
+<p>“코딩테스트 합격자되기 파이썬편” 저자가 제공한 딕셔너리 강의와 책을 공부하고 정리한 내용입니다.</p>
 </blockquote>
 <a id="more"></a>
 
-<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EB%A6%AC%EC%8A%A4%ED%8A%B8%EC%9D%98-%ED%8A%B9%EC%A7%95"><span class="toc-text">리스트의 특징</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EB%A6%AC%EC%8A%A4%ED%8A%B8%EC%9D%98-%EB%A9%94%EC%84%9C%EB%93%9C%EC%99%80-%EC%8B%9C%EA%B0%84%EB%B3%B5%EC%9E%A1%EB%8F%84"><span class="toc-text">리스트의 메서드와 시간복잡도</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#collections-deque%EC%9D%98-%EB%A9%94%EC%84%9C%EB%93%9C%EC%99%80-%EC%8B%9C%EA%B0%84%EB%B3%B5%EC%9E%A1%EB%8F%84"><span class="toc-text">collections.deque의 메서드와 시간복잡도</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%97%90%EC%84%9C-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%A0-%EB%95%8C-%EC%A3%BC%EC%9D%98%ED%95%A0-%EC%A0%90"><span class="toc-text">코딩테스트에서 리스트를 사용할 때 주의할 점</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%AC%B8%EC%A0%9C"><span class="toc-text">프로그래머스 문제</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EC%B0%B8%EA%B3%A0"><span class="toc-text">참고</span></a></li></ol>
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EB%94%95%EC%85%94%EB%84%88%EB%A6%AC%EC%9D%98-%ED%8A%B9%EC%A7%95"><span class="toc-text">딕셔너리의 특징</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%ED%95%B4%EC%8B%9C%EB%9E%80"><span class="toc-text">해시란?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EB%94%95%EC%85%94%EB%84%88%EB%A6%AC-%EC%83%9D%EC%84%B1"><span class="toc-text">딕셔너리 생성</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EB%94%95%EC%85%94%EB%84%88%EB%A6%AC-%EC%A0%91%EA%B7%BC"><span class="toc-text">딕셔너리 접근</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EB%94%95%EC%85%94%EB%84%88%EB%A6%AC-%EA%B0%92-%EB%B3%80%EA%B2%BD"><span class="toc-text">딕셔너리 값 변경</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EB%94%95%EC%85%94%EB%84%88%EB%A6%AC-%EB%A9%94%EC%84%9C%EB%93%9C%EC%99%80-%EC%8B%9C%EA%B0%84%EB%B3%B5%EC%9E%A1%EB%8F%84"><span class="toc-text">딕셔너리 메서드와 시간복잡도</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%97%90%EC%84%9C-%EB%94%95%EC%85%94%EB%84%88%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%A0-%EB%95%8C-%EC%A3%BC%EC%9D%98%ED%95%A0-%EC%A0%90"><span class="toc-text">코딩테스트에서 딕셔너리를 사용할 때 주의할 점</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%AC%B8%EC%A0%9C"><span class="toc-text">프로그래머스 문제</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EC%B0%B8%EA%B3%A0"><span class="toc-text">참고</span></a></li></ol>
 
-<h4 id="리스트의-특징"><a href="#리스트의-특징" class="headerlink" title="리스트의 특징"></a>리스트의 특징</h4><ol>
-<li><code>[]</code>를 사용해서 선언한다</li>
-<li>데이터의 순서가 있는 시퀀스 타입이고, 변경 가능한 뮤터블 컬렉션이다.<ul>
-<li>순서가 있기 때문에 배열처럼 인덱스로 접근이 가능하다.</li>
+<h4 id="딕셔너리의-특징"><a href="#딕셔너리의-특징" class="headerlink" title="딕셔너리의 특징"></a>딕셔너리의 특징</h4><ul>
+<li>해시 기반으로 이루어진 자료구조</li>
+<li><code>&#123;&#125;</code>를 사용해서 선언한다.</li>
+<li>{키1: 값1, 키2: 값2}처럼 키-값 쌍으로 되어 있다.</li>
+</ul>
+<h4 id="해시란"><a href="#해시란" class="headerlink" title="해시란?"></a>해시란?</h4><ul>
+<li>해시 테이블</li>
+<li>해시 함수값이 같아서 충돌나면?</li>
+<li>해시 함수를 활용해서 키값을 인덱스로 만든다.</li>
+</ul>
+<h4 id="딕셔너리-생성"><a href="#딕셔너리-생성" class="headerlink" title="딕셔너리 생성"></a>딕셔너리 생성</h4><ul>
+<li>{}</li>
+</ul>
+<h4 id="딕셔너리-접근"><a href="#딕셔너리-접근" class="headerlink" title="딕셔너리 접근"></a>딕셔너리 접근</h4><ul>
+<li>리스트의 경우 어떤 원소를 찾을 때 순차탐색을 하기 때문에 시간 복잡도가 O(N)인데, 딕셔너리는 O(1)을 가짐</li>
+<li><code>dict.get(key, default)</code>: 해당하는 키가 없는 경우 None 반환</li>
+<li><code>dict[key]</code>: 해당되는 키가 없는 경우, KeyError 발생. 예외처리 해줘야 함</li>
+</ul>
+<h4 id="딕셔너리-값-변경"><a href="#딕셔너리-값-변경" class="headerlink" title="딕셔너리 값 변경"></a>딕셔너리 값 변경</h4><ul>
+<li>dic = {‘a’: 1, ‘b’: 2, ‘c’: 3}</li>
+<li><code>dict[&#39;c&#39;]</code> = 1</li>
+</ul>
+<h4 id="딕셔너리-메서드와-시간복잡도"><a href="#딕셔너리-메서드와-시간복잡도" class="headerlink" title="딕셔너리 메서드와 시간복잡도"></a>딕셔너리 메서드와 시간복잡도</h4><ul>
+<li><code>dict.upadte(dic)</code>: 딕셔너리를 추가할 수 있음<ul>
+<li>추가할 dic의 크기가 K라면, 시간복잡도 O(K)</li>
 </ul>
 </li>
-<li>내부는 동적배열로 구현되어 있다.<ul>
-<li>배열의 크기를 내부에서 알아서 관리한다는 의미</li>
-<li><code>id()</code>로 주소값을 확인해 볼 수 있다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; lst &#x3D; [&quot;my&quot;, &quot;name&quot;, &quot;is&quot;, &quot;odrey&quot;]</span><br><span class="line">&gt;&gt;&gt; [id(l) for l in lst]</span><br><span class="line">[4342473536, 4355935048, 4342093728, 4343410736]</span><br><span class="line">&gt;&gt;&gt; lst[3] &#x3D; &quot;stella&quot;</span><br><span class="line">&gt;&gt;&gt; [id(l) for l in lst]</span><br><span class="line">[4342473536, 4355935048, 4342093728, 4341217488]</span><br></pre></td></tr></table></figure>
-
-</li>
+<li><code>dict.keys()</code>: 모든 키값을 가져옴<ul>
+<li>메서드 자체 시간복잡도는 O(1)</li>
+<li>딕셔너리 크기가 N일 때, 반복문을 돌며 모든 키값을 가져올 때는 시간복잡도 O(N)</li>
 </ul>
 </li>
-</ol>
-<h4 id="리스트의-메서드와-시간복잡도"><a href="#리스트의-메서드와-시간복잡도" class="headerlink" title="리스트의 메서드와 시간복잡도"></a>리스트의 메서드와 시간복잡도</h4><ul>
-<li><code>.append(item)</code>: O(1)<ul>
+<li><code>dict.items()</code>: 모든 키, 값을 가져옴<ul>
+<li>메서드 자체 시간복잡도는 O(1)</li>
+<li>딕셔너리 크기가 N일 때, 반복문을 돌며 모든 키, 값을 가져올 때는 시간복잡도 O(N)</li>
+</ul>
+</li>
+<li><code>del dic[&#39;key&#39;]</code>: 키에 해당하는 버킷 삭제<ul>
+<li>시간복잡도 O(1)</li>
 <li>반환값 없음</li>
 </ul>
 </li>
-<li><code>.insert(idx, item)</code>: O(N)</li>
-<li><code>.pop()</code>: O(1)<ul>
-<li>마지막 원소 삭제</li>
-<li>삭제한 원소를 반환</li>
-</ul>
-</li>
-<li><code>.pop(idx)</code>: O(N)<ul>
-<li>인자는 인덱스</li>
-<li>삭제한 원소를 반환</li>
-<li>리스트의 맨 앞에 원소를 삭제하는 경우에는 <code>deque</code>의 <code>popleft()</code>가 시간복잡도가  O(1)이라 이걸 쓰는게 좋음</li>
-</ul>
-</li>
-<li><code>.remove(item)</code>: O(N)<ul>
-<li>맨 처음 나오는 item을 삭제</li>
-<li>반환값 없음</li>
-<li>item이 리스트에 존재하지 않는 경우 ValueError</li>
-</ul>
-</li>
-<li><code>.extend(list)</code>: O(list) 추가할 리스트의 길이 만큼<ul>
-<li>반환값 없음</li>
-</ul>
-</li>
-<li><code>in</code>: O(N)<ul>
-<li>Boolean값 반환함</li>
-</ul>
-</li>
-<li><code>.index(item)</code>: O(N)</li>
-<li><code>.sort()</code>: O(NlogN)</li>
-<li><code>.count(item)</code>: O(N)</li>
-<li><code>.reverse()</code>: O(N)</li>
-<li>min(lst), max(lst): O(N)</li>
-<li>lst[idx] : O(1)</li>
-<li>len(lst): O(1)</li>
-<li>lst[i:j] : O(k)</li>
-<li>lst1 + lst2 : O(n+m) n은 lst1의 길이, m은 lst2의 길이</li>
-</ul>
-<h4 id="collections-deque의-메서드와-시간복잡도"><a href="#collections-deque의-메서드와-시간복잡도" class="headerlink" title="collections.deque의 메서드와 시간복잡도"></a>collections.deque의 메서드와 시간복잡도</h4><ul>
-<li><code>.append(item)</code>: O(1)<ul>
-<li>반환값 없음</li>
-<li>deque 오른쪽(끝)에 item 추가</li>
-</ul>
-</li>
-<li><code>.appendleft(item)</code>: O(1)<ul>
-<li>deque 왼쪽(앞)에 item 추가</li>
-</ul>
-</li>
-<li><code>.pop()</code>: O(1)<ul>
-<li>deque 오른쪽(끝) 원소 삭제</li>
-<li>삭제한 원소 반환</li>
-<li>원소가 없으면 IndexError</li>
-</ul>
-</li>
-<li><code>.popleft()</code>: O(1)<ul>
-<li>deque 왼쪽(앞) 원소 삭제</li>
-<li>삭제한 원소 반환</li>
-<li>원소가 없으면 IndexError</li>
-</ul>
-</li>
-<li><code>.rotate(k)</code>: O(k)<ul>
-<li>k수만큼 회전하는데 양수면 오른쪽으로, 음수면 왼쪽으로 회전한다.</li>
+<li><code>dict.pop(key)</code>: 키에 해당하는 버킷 삭제<ul>
+<li>시간복잡도 O(1)</li>
+<li>삭제된 키에 해당하는 값 반환함</li>
 </ul>
 </li>
 </ul>
-<h4 id="코딩테스트에서-리스트를-사용할-때-주의할-점"><a href="#코딩테스트에서-리스트를-사용할-때-주의할-점" class="headerlink" title="코딩테스트에서 리스트를 사용할 때 주의할 점"></a>코딩테스트에서 리스트를 사용할 때 주의할 점</h4><ul>
-<li>맨 앞에 원소를 삽입하거나, 맨 앞에 원소를 삭제하는 경우<ul>
-<li>시간복잡도가 O(N)이다.</li>
-<li><code>collections</code>에서 <code>deque</code>를 임포트해서 사용하는 것이 좋음. 시간복잡도가 O(1)이기 때문!<ul>
-<li><code>.appendleft()</code>, <code>.popleft()</code></li>
+<h4 id="코딩테스트에서-딕셔너리를-사용할-때-주의할-점"><a href="#코딩테스트에서-딕셔너리를-사용할-때-주의할-점" class="headerlink" title="코딩테스트에서 딕셔너리를 사용할 때 주의할 점"></a>코딩테스트에서 딕셔너리를 사용할 때 주의할 점</h4><ul>
+<li>뮤터블 객체(list, set, dictionary)는 key가 될 수 없다.<ul>
+<li>KeyError 발생</li>
 </ul>
 </li>
+<li><code>dict[&#39;key&#39;]</code> 방식으로 딕셔너리에 접근할 때, key가 존재하지 않으면 KeyError이 발생한다.<ul>
+<li><code>dict.get(key, default)</code> 방식을 사용하자. KeyError가 안나게 디폴트값을 반환하는 것이고, 존재하지 않는 key를 추가하는 것은 아니다.</li>
+<li><code>dict.setdefault(key, default)</code>는 key가 존재하지 않을 때, 딕셔너리에 새로운 key와 default를 추가하는 메서드이다.</li>
 </ul>
 </li>
-<li>특정 원소가 있는지 자주 탐색이 필요한 경우<ul>
-<li>배열이기 때문에 어떤 원소가 있는지 없는지 확인하려면 앞에서부터 탐색하는 방법밖에 없는데 시간복잡도가 O(N)이다.</li>
-<li>딕셔너리를 사용하거나 <code>set()</code>을 사용하면 시간복잡도가 O(1)</li>
+<li>중복 key를 허용하지 않는다.<ul>
+<li>키에 해싱함수를 적용한 값을 인덱스로 활용하기 때문에 같은 값이 key로 존재한다면 구분할 수가 없음.</li>
+<li>중복 key가 있다면 list, deque, tuple 같은 자료구조를 고려</li>
 </ul>
 </li>
 </ul>
 <h4 id="프로그래머스-문제"><a href="#프로그래머스-문제" class="headerlink" title="프로그래머스 문제"></a>프로그래머스 문제</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://school.programmers.co.kr/learn/courses/30/lessons/120809?language=python3">배열 두 배 만들기</a></li>
-<li><a target="_blank" rel="noopener" href="https://school.programmers.co.kr/learn/courses/30/lessons/120903">배열의 유사도</a></li>
-<li><a target="_blank" rel="noopener" href="https://school.programmers.co.kr/learn/courses/30/lessons/120835">진료순서 정하기</a></li>
+<li><a target="_blank" rel="noopener" href="https://school.programmers.co.kr/learn/courses/30/lessons/1845">포켓몬</a></li>
+<li><a target="_blank" rel="noopener" href="https://school.programmers.co.kr/learn/courses/30/lessons/42576">완주하지 못한 선수</a></li>
+<li><a target="_blank" rel="noopener" href="https://school.programmers.co.kr/learn/courses/30/lessons/42577">전화번호 목록</a></li>
 </ul>
 <h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=bObN3U4mWLA">코딩테스트 합격자되기 리스트 강의</a></li>
-<li><a target="_blank" rel="noopener" href="https://wiki.python.org/moin/TimeComplexity">Python wiki time complexity</a></li>
+<li> <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=hbffLlvchyU&t=12s">코딩테스트 합격자되기 딕셔너리 강의</a></li>
 </ul>
 
             
@@ -455,14 +421,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/07/30/Coding-test-python-dict/"
-                    data-tooltip="코딩테스트 합격자되기 파이썬편 - 딕셔너리"
-                    aria-label="PREVIOUS: 코딩테스트 합격자되기 파이썬편 - 딕셔너리"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -472,9 +435,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/05/21/Coding-test-python-time-complexity/"
-                    data-tooltip="코딩테스트 합격자되기 파이썬편 - 시간복잡도"
-                    aria-label="NEXT: 코딩테스트 합격자되기 파이썬편 - 시간복잡도"
+                    href="/2024/05/28/Coding-test-python-list/"
+                    data-tooltip="코딩테스트 합격자되기 파이썬편 - 리스트"
+                    aria-label="NEXT: 코딩테스트 합격자되기 파이썬편 - 리스트"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -499,7 +462,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/05/28/Coding-test-python-list/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/07/30/Coding-test-python-dict/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -512,7 +475,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/05/28/Coding-test-python-list/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/07/30/Coding-test-python-dict/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -525,7 +488,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/05/28/Coding-test-python-list/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/07/30/Coding-test-python-dict/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -570,14 +533,11 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/07/30/Coding-test-python-dict/"
-                    data-tooltip="코딩테스트 합격자되기 파이썬편 - 딕셔너리"
-                    aria-label="PREVIOUS: 코딩테스트 합격자되기 파이썬편 - 딕셔너리"
-                >
-                    
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                         <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                     </a>
@@ -587,9 +547,9 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2024/05/21/Coding-test-python-time-complexity/"
-                    data-tooltip="코딩테스트 합격자되기 파이썬편 - 시간복잡도"
-                    aria-label="NEXT: 코딩테스트 합격자되기 파이썬편 - 시간복잡도"
+                    href="/2024/05/28/Coding-test-python-list/"
+                    data-tooltip="코딩테스트 합격자되기 파이썬편 - 리스트"
+                    aria-label="NEXT: 코딩테스트 합격자되기 파이썬편 - 리스트"
                 >
                     
                         <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
@@ -614,7 +574,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/05/28/Coding-test-python-list/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/07/30/Coding-test-python-dict/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -627,7 +587,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/05/28/Coding-test-python-list/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/07/30/Coding-test-python-dict/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -640,7 +600,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/05/28/Coding-test-python-list/"
+                    target="new" href="https://plus.google.com/share?url=https://odreystella.github.io/2024/07/30/Coding-test-python-dict/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -674,7 +634,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/05/28/Coding-test-python-list/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://odreystella.github.io/2024/07/30/Coding-test-python-dict/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -687,7 +647,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/05/28/Coding-test-python-list/"
+                        href="https://twitter.com/intent/tweet?text=https://odreystella.github.io/2024/07/30/Coding-test-python-dict/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -700,7 +660,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://odreystella.github.io/2024/05/28/Coding-test-python-list/"
+                        href="https://plus.google.com/share?url=https://odreystella.github.io/2024/07/30/Coding-test-python-dict/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
